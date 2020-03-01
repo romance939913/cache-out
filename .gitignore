@@ -1,0 +1,6 @@
+node_modules/
+
+app/assets/javascripts/bundle.js
+
+
+tmp/cache/assets/sprockets
