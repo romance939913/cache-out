@@ -1,16 +1,22 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SplashPageContainer from './splash_page/splash_page_container';
-import Signin from './session/signin';
+import SigninContainer from './session//signin_container';
+import SignupContainer from './session/signup_container';
+import { AuthRoute } from '../util/route_util';
+import MainFeedContainer from './main/feed_container';
+import { ProtectedRoute } from '../util/protect_util';
 
 
-const App = () => (
-  <div>
+const App = (props) => {
+  return(<div>
     <Switch>
-      <Route path="/signin" component={Signin} />
-      <Route path="/" component={SplashPageContainer}/>
+      <ProtectedRoute path="/feed" component={MainFeedContainer} />
+      <AuthRoute path="/signup" component={SignupContainer} />
+      <AuthRoute path="/signin" component={SigninContainer} />
+      <AuthRoute path="/" component={SplashPageContainer}/>
     </Switch>
-  </div>
-);
+  </div>)
+};
 
 export default App;

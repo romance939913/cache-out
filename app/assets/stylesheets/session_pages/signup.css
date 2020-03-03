@@ -1,0 +1,62 @@
+.signup-page-body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    font-size: 30px;
+    line-height: 40px;
+    letter-spacing: .25px;
+    box-sizing: content-box;
+    font-family: sans-serif;
+}
+
+.signup-form {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-basis: 50%;
+    white-space: nowrap;
+    align-items: center;
+    flex-direction: column;
+}
+
+.money-move {
+    display: flex;
+    justify-content: space-between;
+    font-size: 36px;
+    font-weight: 100;
+    font-family: sans-serif;
+}
+
+.signup-description {
+    font-size: 18px;
+    font-weight: 100;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.signup-input-field {
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: solid .5px #cbcbcd;
+    padding: 15px 20px 15px 20px;
+}
+
+.signup-submit {
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #21ce99;
+    border-color: #21ce99;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+.already-a-user {
+    text-decoration: none;
+    color: #21ce99;
+    font-size: 13px;
+}

@@ -3,14 +3,6 @@ import {Link} from 'react-router-dom';
 
 class Header extends React.Component {
 
-    login() {
-        this.props.history.replace('/signin');
-    }
-
-    signup() {
-        this.props.history.replace('/signup');
-    }
-
     render() {
         return (
             <div>
@@ -27,7 +19,7 @@ class Header extends React.Component {
                             to="/signin">Sign in</Link>
                         <Link 
                             className="splash-navigation-sign-up"
-                            to="signup">Sign Up</Link>
+                            to="/signup">Sign Up</Link>
                     </div>
                 </div>
                 

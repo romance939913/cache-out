@@ -1,0 +1,94 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    position: relative;
+    align-items: left;
+    margin-top: 12%;
+    margin-left: 3.9%;
+    margin-right: 22.3%;
+    width: 50%;
+}
+
+.image-login-bg {
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+.signin-container {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    flex: 1 1 50%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50%;
+}
+
+.login-box {
+    box-sizing: border-box;
+    width: 135%;
+}
+
+.login-welcome-header {
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: -0.1px;
+    color: rgb(23, 23, 24);
+    text-decoration: unset;
+}
+
+.login-form-label {
+    /* font-size: 13px;
+    margin-bottom: 15px;
+    font-weight: 340; */
+}
+
+.login-input-field {
+    box-sizing: border-box;
+    padding: 15px 20px 15px 20px;
+    border: 1px solid #fafafa;
+    background-color: #F0F8FF;
+    width: 100%;
+    border-radius: 4px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 30px;
+    font-size: 13px;
+    box-shadow: none;
+    margin-top: 2%;
+    margin-bottom: 2.5%;
+    height: 15.5%;
+}
+
+.signin-submit {
+    width: 100px;
+    box-sizing: content-box;
+    background-color: #21ce99;
+    border-color: #21ce99;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    align-items: center;
+    border: 1px solid transparent;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    min-width: 120px;
+    padding: 0 15px;
+    margin-top: 50px;
+}
+
+.forgot-user-pass {
+    text-decoration: none;
+    color: #21ce99;
+    font-size: 13px;
+}
