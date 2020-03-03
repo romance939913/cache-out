@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './header/header'
+import Cover from './cover/cover'
 
 class SplashPage extends React.Component {
 
@@ -7,7 +8,7 @@ class SplashPage extends React.Component {
         return(
             <div>
                 <Header />
-
+                <Cover />
             </div>
         )
     }

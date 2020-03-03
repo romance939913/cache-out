@@ -1,24 +1,39 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
-export default () => (
-    <div className="splash-navigation-bar">
-        <div className="splash-navigation-bar-left-side">
-            <a href="">Robinhood</a>
-            <ul className="button-ul-nav">
-                <li>
-                    <a href="">Products</a>
-                </li>
-                <li>
-                    <a href="">Learn</a>
-                </li>
-                <li>
-                    <a href="">Support</a>
-                </li>
-            </ul>
-        </div>
-        <div className="splash-navigation-bar-left-side">
-            <button className="splash-navigation-sign-in">Sign in</button>
-            <button className="splash-navigation-sign-up">Sign Up</button>
-        </div>
-    </div>
-);
+class Header extends React.Component {
+
+    login() {
+        this.props.history.replace('/signin');
+    }
+
+    signup() {
+        this.props.history.replace('/signup');
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="splash-navigation-bar">
+                    <div className="splash-navigation-bar-left-side">
+                        <a href=""><img src="assets/logo.png" /></a>
+                        <a href="">Products</a>
+                        <a href="">Learn</a>
+                        <a href="">Support</a>
+                    </div>
+                    <div className="splash-navigation-bar-right-side">
+                        <Link 
+                            className="splash-navigation-sign-in" 
+                            to="/signin">Sign in</Link>
+                        <Link 
+                            className="splash-navigation-sign-up"
+                            to="signup">Sign Up</Link>
+                    </div>
+                </div>
+                
+            </div>
+        )
+    }
+};
+
+export default Header

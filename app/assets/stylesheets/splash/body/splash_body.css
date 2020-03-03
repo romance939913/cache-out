@@ -1,0 +1,42 @@
+.splash-cover-jumbotron {
+    height: 606px;
+    background-color: #21ce99;
+}
+
+.splash-cover-jumbotron-signup {
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 56px;
+    min-width: 162px;
+    background-color: rgb(36, 42, 45);
+    text-decoration: none;
+    overflow: hidden;
+    padding: 0px 16px;
+    border-radius: 8px;
+    border-color: rgb(36, 42, 45);
+}
+
+.splash-cover-jumbotron-left p {
+    font-family: sans-serif;
+    font-style: normal;
+    letter-spacing: -1.44px;
+    text-decoration: unset;
+
+}
+
+.splash-cover-jumbotron-header {
+    font-size: 62px;
+    font-weight: 700;
+    line-height: 72px;
+}
+
+.splash-cover-jumbotron-text {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 36px;
+}
