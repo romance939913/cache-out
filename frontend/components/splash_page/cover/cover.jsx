@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 
 export default () => (
   <div>
-    <div className="splash-cover-jumbotron">
-      <div className="splash-cover-jumbotron-left">
-        <p className="splash-cover-jumbotron-header">It's Time to Do Money</p>
-        <p className="splash-cover-jumbotron-text">Stock Overflow, a pioneer of commission-free investing, gives you more ways to make your money work harder</p>
-        <Link className="splash-cover-jumbotron-signup">Sign up</Link>
+    <div className="splash-jumbotron">
+      <div className="splash-jumbotron-mission">
+        <p className="splash-jumbotron-header">It's Time to Do Money</p>
+        <p className="splash-jumbotron-text">Stock Overflow, a pioneer of commission-free investing, gives you more ways to make your money work harder</p>
+        <Link className="splash-jumbotron-signup" to="/signup">Sign up</Link>
       </div>
       <div className="gif-holder">
         <video autoPlay loop muted preload="auto" className="video-cont">
@@ -26,6 +26,12 @@ export default () => (
           />
         </div>
       </div>
+    </div>
+    <div className="splash-content">
+      <h2 className="splash-content-header">Break Free from Commission Fees</h2>
+      <p className="splash-content-text">Make unlimited commission-free trades in stocks, funds, and options with 
+        Robinhood Financial. The same goes for buying and selling cryptocurrencies 
+        with Robinhood Crypto. Zero commission fees.</p>
     </div>
   </div>
 );

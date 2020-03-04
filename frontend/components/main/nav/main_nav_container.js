@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import MainFeed from './feed';
-import { logoutUser } from '../../actions/session_actions';
+import { logoutUser } from '../../../actions/session_actions';
+import MainNav from './main_nav';
 
 const mapStateToProps = state => ({
     currentUser: state.entities.users[state.session.id]
@@ -10,4 +10,4 @@ const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(logoutUser())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainFeed)
+export default connect(mapStateToProps, mapDispatchToProps)(MainNav);

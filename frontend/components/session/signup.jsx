@@ -24,6 +24,18 @@ class Signup extends React.Component {
     this.props.signup(user);
   }
 
+  renderErrors() {
+    return (
+      <ul>
+        {this.props.errors.map((error, i) => (
+          <li className="session-errors"key={`error-${i}`}>
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     return(
       <div className="signup-page-body">
@@ -60,6 +72,7 @@ class Signup extends React.Component {
             value="Get Started" 
             className="signup-input-field signup-submit"
           />
+          {this.renderErrors()}
           <Link to="/signin" className="already-a-user">already a user? Sign in here</Link>
         </form>
 

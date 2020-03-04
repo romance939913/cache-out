@@ -9,9 +9,15 @@ class Header extends React.Component {
                 <div className="splash-navigation-bar">
                     <div className="splash-navigation-bar-left-side">
                         <a href=""><img src="assets/logo.png" /></a>
-                        <a href="">Products</a>
-                        <a href="">Learn</a>
-                        <a href="">Support</a>
+                        <a href="https://github.com/romance939913/">
+                            <img src="assets/github.jpg" alt=""/>
+                        </a>
+                        <a href="https://www.linkedin.com/in/brennanromance/">
+                            <img src="assets/linkedin.png" alt=""/>
+                        </a>
+                        <a href="">
+                            <img src="assets/info.png" alt=""/>
+                        </a>
                     </div>
                     <div className="splash-navigation-bar-right-side">
                         <Link 

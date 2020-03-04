@@ -27,7 +27,7 @@ class Signin extends React.Component {
     return (
       <ul>
         {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`}>
+          <li className="session-errors" key={`error-${i}`}>
             {error}
           </li>
         ))}
@@ -38,29 +38,31 @@ class Signin extends React.Component {
   render() {
     return(
       <div className="signin-container">
-        <img className="image-login-bg" src="assets/signin_bg.png" alt=""/>
-        <div className="login-form">
-          <form className="login-box" onSubmit={this.handleSubmit}>
-            <h3 className="login-welcome-header">Welcome to Stock Overflow</h3>
+        <img className="image-signin-bg" src="assets/signin_bg.png" alt=""/>
+        <div className="signin-form">
+          <form className="signin-box" onSubmit={this.handleSubmit}>
+            <h3 className="signin-welcome-header">Welcome to Stock Overflow</h3>
             <br/>
-            <label className="login-form-label">username
+            <label className="signin-form-label">username
               <input 
-                className="login-input-field"
+                className="signin-input-field"
                 type="text"
                 value={this.state.username}
                 onChange={this.update('username')}
               />
               <br/>
             </label>
-            <label className="login-form-label">Password
+            <label className="signin-form-label">Password
               <input 
-                className="login-input-field"
+                className="signin-input-field"
                 type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
               />
             </label>
-            {this.renderErrors()}
+            {
+              this.renderErrors()
+            }
             <Link to="/" className="forgot-user-pass">Forgot your username/password?</Link>
             <input type="submit" value="Sign In" className="signin-submit"/>
           </form>

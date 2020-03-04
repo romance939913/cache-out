@@ -1,12 +1,12 @@
 import React from 'react';
+import MainNavContainer from './nav/main_nav_container';
 
 class MainFeed extends React.Component {
     
     render() {
         return (
             <div>
-                <p>YOOO MAIN FEED YO!</p>
-                <button onClick={() => this.props.logout()}>logout</button>
+                <MainNavContainer />
             </div>
         );
     }

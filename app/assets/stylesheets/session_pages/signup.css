@@ -60,3 +60,8 @@
     color: #21ce99;
     font-size: 13px;
 }
+
+.session-errors {
+    font-size: 13px;
+    color: red;
+}

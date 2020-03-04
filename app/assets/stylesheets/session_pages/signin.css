@@ -1,4 +1,4 @@
-.login-form {
+.signin-form {
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
@@ -10,7 +10,7 @@
     width: 50%;
 }
 
-.image-login-bg {
+.image-signin-bg {
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -29,12 +29,12 @@
     flex-basis: 50%;
 }
 
-.login-box {
+.signin-box {
     box-sizing: border-box;
     width: 135%;
 }
 
-.login-welcome-header {
+.signin-welcome-header {
     font-size: 26px;
     font-style: normal;
     font-weight: 700;
@@ -44,13 +44,7 @@
     text-decoration: unset;
 }
 
-.login-form-label {
-    /* font-size: 13px;
-    margin-bottom: 15px;
-    font-weight: 340; */
-}
-
-.login-input-field {
+.signin-input-field {
     box-sizing: border-box;
     padding: 15px 20px 15px 20px;
     border: 1px solid #fafafa;
@@ -65,7 +59,12 @@
     margin-top: 2%;
     margin-bottom: 2.5%;
     height: 15.5%;
+    outline: none
 }
+
+.signin-input-field:focus {
+    border: 3px solid #21ce99
+} 
 
 .signin-submit {
     width: 100px;
