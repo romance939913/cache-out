@@ -21,7 +21,6 @@ const receiveErrors = (errorsArr) => ({
 
 const clearErrors = () => ({
     type: CLEAR_ERRORS,
-    
 })
 
 export const loginUser = (formUser) => dispatch => login(formUser)

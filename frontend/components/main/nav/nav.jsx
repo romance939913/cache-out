@@ -9,12 +9,12 @@ class MainNav extends React.Component {
         <div className="nav-left">
           <img src="assets/logo.png" alt=""/>
           <NavSearchForm />
-          <button onClick={() => this.props.logout()}>logout</button>
         </div>
         <div className="nav-right">
-          <a href="">Home</a>
+          <a  className=""href="">Home</a>
           <a href="">Messages</a>
-          <a href=""className="account-dropdown">Account</a>
+          <a onClick={() => this.props.logout()}>logout</a>
+          {/* <a href=""className="account-dropdown">Account</a> */}
         </div>
       </div>
     );
