@@ -60,9 +60,7 @@ class Signin extends React.Component {
                 onChange={this.update('password')}
               />
             </label>
-            {
-              this.renderErrors()
-            }
+            {this.renderErrors()}
             <Link to="/" className="forgot-user-pass">Forgot your username/password?</Link>
             <input type="submit" value="Sign In" className="signin-submit"/>
           </form>

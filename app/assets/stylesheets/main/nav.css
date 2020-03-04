@@ -1,0 +1,17 @@
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.nav-left {
+    display: flex;
+    margin-left: 5vw;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    margin-right: 5vw;
+    align-items: center;
+}

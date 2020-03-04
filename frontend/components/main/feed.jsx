@@ -1,5 +1,5 @@
 import React from 'react';
-import MainNavContainer from './nav/main_nav_container';
+import MainNavContainer from './nav/nav_container';
 
 class MainFeed extends React.Component {
     
