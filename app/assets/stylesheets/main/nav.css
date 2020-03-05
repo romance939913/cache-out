@@ -20,3 +20,11 @@
 .nav-right:hover {
     color: #21ce99
 }
+
+.cheesy-marquee {
+    display: flex;
+}
+
+.marquee-item {
+    padding-right: 20px
+}

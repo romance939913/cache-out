@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import Root from './components/root'
 // import { signup, login } from "./util/session_api_util";
 import configureStore from "./store/store";
-import { fetchNYSE, fetchNasdaq } from "./util/securities_api_util";
+import { fetchNYSE, fetchNasdaq, fetchIndexes } from "./util/securities_api_util";
+
 
 document.addEventListener("DOMContentLoaded", () => {
     let store;
@@ -24,8 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     // testing end
-    window.fetchNasdaq = fetchNasdaq
+    window.fetchNasdaq = fetchNasdaq;
     window.fetchNYSE = fetchNYSE;
+    window.fetchIndexes = fetchIndexes;
     const root = document.getElementById("root");
     ReactDOM.render(<Root store={store}/>, root);
 });

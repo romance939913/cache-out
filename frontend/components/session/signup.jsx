@@ -41,7 +41,7 @@ class Signup extends React.Component {
       <div className="signup-page-body">
         <form className="signup-form" onSubmit={this.handleSubmit}>
           <div className="money-move">
-            <img src="assets/logo.png" alt=""/>
+            <img src={window.logo_pic} alt=""/>
             <h3>Make your Money Move</h3>
           </div>
           <p className="signup-description">Stock Overflow lets you invest 

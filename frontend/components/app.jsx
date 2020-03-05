@@ -11,6 +11,7 @@ MainFeed
 const App = (props) => {
   return(<div>
     <Switch>
+      
       <ProtectedRoute path="/feed" component={MainFeed} />
       <AuthRoute path="/signup" component={SignupContainer} />
       <AuthRoute path="/signin" component={SigninContainer} />
