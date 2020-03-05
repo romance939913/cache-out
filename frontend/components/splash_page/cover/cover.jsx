@@ -20,7 +20,7 @@ export default () => (
         <div className="iphone-img-holder">
           <img 
             className="img-iphone" 
-            src={window.iphone_splash.png}
+            src={window.iphone_splash_pic}
             role="presentation" 
             draggable="false"
           />
