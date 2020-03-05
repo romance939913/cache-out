@@ -13,14 +13,14 @@ export default () => (
         <video autoPlay loop muted preload="auto" className="video-cont">
           <source 
             className="gif-iphone" 
-            src="assets/iphone.mp4" 
+            src={window.iphone_vid}
             type="video/mp4"
           />
         </video>
         <div className="iphone-img-holder">
           <img 
             className="img-iphone" 
-            src="assets/iphone_splash.png" 
+            src={window.iphone_splash.png}
             role="presentation" 
             draggable="false"
           />
