@@ -1,6 +1,23 @@
+/tmp/*
+!/tmp/.keep
+
 node_modules/
+/bundle.js*
+bundle.js.map
+
+.byebug_history
+.DS_store
+
+npm-debug.log
+/config/master.key
+/storage/*
+/yarn-error.log/public/assets
+
+/log/*
+/log/.keep
+
+
 
 app/assets/javascripts/bundle.js
-
 
 tmp/cache/assets/sprockets
