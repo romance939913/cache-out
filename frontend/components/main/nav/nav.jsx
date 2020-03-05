@@ -7,7 +7,7 @@ class MainNav extends React.Component {
     return (
       <div className="nav-bar">
         <div className="nav-left">
-          <img src="assets/logo.png" alt=""/>
+          <img src={window.logo_pic} alt=""/>
           <NavSearchForm />
         </div>
         <div className="nav-right">
