@@ -38,7 +38,7 @@ class Signin extends React.Component {
   render() {
     return(
       <div className="signin-container">
-        <img className="image-signin-bg" src="assets/signin_bg.png" alt=""/>
+        <img className="image-signin-bg" src={window.signin_bg_pic} alt=""/>
         <div className="signin-form">
           <form className="signin-box" onSubmit={this.handleSubmit}>
             <h3 className="signin-welcome-header">Welcome to Stock Overflow</h3>
