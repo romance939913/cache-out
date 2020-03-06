@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 class NavSearchForm extends React.Component {
     constructor(props) {
@@ -40,7 +41,12 @@ class NavSearchForm extends React.Component {
             companies.forEach((ticker) => {
                 if(userInput.length > 0) {
                     if (ticker.symbol.startsWith(userInput) || (ticker.name !== null && ticker.name.toUpperCase().startsWith(userInput))) {
-                        suggestions.push(<li className="suggestion-item" key={ticker.symbol}>{ticker.symbol}    {ticker.name}</li>)
+                        suggestions.push(<li><Link 
+                                                className="suggestion-item" 
+                                                to={`/show/${ticker.symbol}`}
+                                                key={ticker.symbol}>
+                                                    {ticker.symbol}{ticker.name}
+                                                    </Link></li>)
                     }
                 }
             })

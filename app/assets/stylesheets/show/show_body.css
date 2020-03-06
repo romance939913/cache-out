@@ -1,0 +1,24 @@
+.company-profile {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.company-attr-item {
+    list-style: none;
+    border: solid black 1px;
+}
+
+ /* CEO
+Employees
+Headquarters
+Founded
+Market Cap
+Price-Earnings Ratio
+Dividend Yield
+Average Volume */
+
+/*
+CEO
+Industry
+
+*/

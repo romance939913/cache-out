@@ -33,3 +33,10 @@ export const fetchStockDay = (ticker) => (
         method: "GET"
     })
 )
+
+export const fetchProfile = (company) => (
+    $.ajax({
+        url: `https://financialmodelingprep.com/api/v3/company/profile/${company}`,
+        method: "GET"
+    })
+)

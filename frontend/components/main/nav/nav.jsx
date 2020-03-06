@@ -1,5 +1,6 @@
 import React from 'react';
 import NavFormContainer from './nav_form_container';
+import { Link } from 'react-router-dom';
 
 class MainNav extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class MainNav extends React.Component {
 
   componentDidMount() {
     this.props.receiveIndexes()
+    
   }
 
   render() {
@@ -29,9 +31,9 @@ class MainNav extends React.Component {
             <NavFormContainer />
           </div>
           <div className="nav-right">
-            <a className=""href="">Home</a>
-            <a href="">Messages</a>
-            <a onClick={() => this.props.logout()}>logout</a>
+            <Link to="/feed" className="nav-right-ele">Home</Link>
+            <a href="" className="nav-right-ele">Messages</a>
+            <a className="nav-right-ele" onClick={() => this.props.logout()}>logout</a>
           </div>
         </div>
 
