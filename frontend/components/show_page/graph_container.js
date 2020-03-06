@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
     dayPrices: state.entities.showDayPrices
 })
 
+
 const mapDispatchToProps = dispatch => ({
     receiveDay: (ticker) => dispatch(receiveDay(ticker)),
     receiveHistorical: (ticker) => dispatch(receiveHistorical(ticker))

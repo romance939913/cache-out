@@ -1,6 +1,6 @@
 import { RECEIVE_DAY } from "../../actions/security_actions";
 
-export const dayShowReducer = (state = {}, action) => {
+export const dayShowReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_DAY:

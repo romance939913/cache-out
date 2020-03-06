@@ -29,7 +29,7 @@ export const fetchstockHistorical = (ticker) => {
 
 export const fetchStockDay = (ticker) => (
     $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/historical-chart/1min/${ticker}`,
+        url: `https://financialmodelingprep.com/api/v3/historical-chart/5min/${ticker}`,
         method: "GET"
     })
 )

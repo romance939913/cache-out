@@ -21,10 +21,17 @@ class ShowPageGraph extends React.Component {
 
     render() {
         let data;
-        if (!this.props.receiveDay) {
+        if (this.props.dayPrices.length === 0) {
             return null;
         } else {
             data = this.props.dayPrices;
+            let d = new Date()
+            let date = d.getDate().toString()
+            data.filter(obj => {
+                let oDate = obj.date.split(" ");
+                let oday = oDate[0].split("-");
+                
+            })
         }
 
         const renderLineChart = (
@@ -36,6 +43,7 @@ class ShowPageGraph extends React.Component {
                 <Tooltip />
             </LineChart>
         );
+
         return (
             <div>
                 {renderLineChart}
