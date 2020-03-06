@@ -1,4 +1,4 @@
-import { RECEIVE_INDEXES } from "../actions/security_actions";
+import { RECEIVE_INDEXES } from "../../actions/security_actions";
 
 export const indexesReducer = (state = {}, action) => {
     Object.freeze(state);
