@@ -14,13 +14,9 @@ const logoutCurrentUser = () => ({
     type: LOGOUT_CURRENT_USER,
 })
 
-const receiveErrors = (errorsArr) => ({
+export const receiveErrors = (errorsArr) => ({
     type: RECEIVE_ERRORS,
     errorsArr
-})
-
-const clearErrors = () => ({
-    type: CLEAR_ERRORS,
 })
 
 export const loginUser = (formUser) => dispatch => login(formUser)
