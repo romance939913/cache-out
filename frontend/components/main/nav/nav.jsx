@@ -1,5 +1,5 @@
 import React from 'react';
-import NavFormContainer from './nav_form_container';
+import NavFormContainer from './nav_search_container';
 import { Link } from 'react-router-dom';
 
 class MainNav extends React.Component {
@@ -12,7 +12,6 @@ class MainNav extends React.Component {
 
   componentDidMount() {
     this.props.receiveIndexes()
-    
   }
 
   render() {

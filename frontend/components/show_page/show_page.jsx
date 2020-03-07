@@ -5,17 +5,17 @@ import ShowPageGraph from './graph_container';
 
 class ShowPage extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = this.props.profile
+        super(props);
+        this.state = this.props.profile;
     }
 
     componentDidMount() {
-        this.props.receiveProfile(this.props.ticker)
+        this.props.receiveProfile(this.props.ticker);
     }
 
     componentDidUpdate(previousProps) {
         if (previousProps.match.params.ticker !== this.props.match.params.ticker) {
-            this.props.receiveProfile(this.props.ticker)
+            this.props.receiveProfile(this.props.ticker);
         }
     }
 
@@ -37,7 +37,7 @@ class ShowPage extends React.Component {
             })
         }
         
-        return (
+        return (    
             <div>
                 <NavContainer />
                 <br/>

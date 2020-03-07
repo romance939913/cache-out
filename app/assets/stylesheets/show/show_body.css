@@ -8,6 +8,11 @@
     border: solid black 1px;
 }
 
+.stock-time-frames {
+    display: flex;
+    justify-content: space-evenly;
+}
+
  /* CEO
 Employees
 Headquarters

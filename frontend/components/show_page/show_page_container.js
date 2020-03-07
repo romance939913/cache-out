@@ -12,4 +12,4 @@ const mapDispatchToProps = dispatch => ({
     receiveProfile: (company) => dispatch(receiveProfile(company))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);

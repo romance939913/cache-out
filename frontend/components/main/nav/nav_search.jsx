@@ -56,11 +56,11 @@ class NavSearchForm extends React.Component {
         return (
             <form className="search-form" onSubmit={this.handleSubmit}>
                 <input 
+                    className="search-field"
                     type="search"
-                    placeholder="search securities"
+                    placeholder="Search"
                     onChange={this.update('query')}
                 />
-                <input type="submit" value="submit"/>
                 <ul className="suggestion-box">
                     {suggestions}
                 </ul>

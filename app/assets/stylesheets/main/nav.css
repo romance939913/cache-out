@@ -28,3 +28,16 @@
 .marquee-item {
     padding-right: 20px
 }
+
+.search-field {
+    border: 1px solid lightgray;
+    font-size: 15px;
+}
+
+.search-field:hover {
+    box-shadow: 2px 2px 4px #21ce99;
+}
+.search-field:focus {
+    outline: none;
+    box-shadow: 2px 2px 4px #21ce99;
+}
