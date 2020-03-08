@@ -1,6 +1,6 @@
 import React from 'react';
 import NavContainer from '../main/nav/nav_container';
-import ShowPageGraph from './graph_container';
+import ShowPageGraph from './day_graph/day_graph_container';
 
 
 class ShowPage extends React.Component {
@@ -21,16 +21,17 @@ class ShowPage extends React.Component {
 
     render() {
         let about;
-        let prof_attributes = [];
-        if(!this.props.profile) {
+        let profile_attributes = [];
+        let name;
+        if(!this.props.profile.description) {
             return null; 
         } else {
-            // debugger
-            let about = (<li>{this.props.profile.description}</li>)
+            about = (<li>{this.props.profile.description}</li>)
+            name = (<li>{this.props.profile.companyName}</li>)
             // delete this.props.profile.description;
             let attributes = Object.keys(this.props.profile)
             attributes.forEach(attr => {
-            prof_attributes.push(<div className="company-attr-item">
+            profile_attributes.push(<div className="company-attr-item">
                                     <li className="company-attr-key">{attr}</li> 
                                     <li className="company-attr-value">{this.props.profile[attr]}</li>
                                 </div>)
@@ -41,6 +42,7 @@ class ShowPage extends React.Component {
             <div>
                 <NavContainer />
                 <br/>
+                <h1>{name}</h1>
                 <ShowPageGraph ticker={this.props.ticker}/>
                 <br/>
                 <ul className="company-profile">
@@ -48,7 +50,7 @@ class ShowPage extends React.Component {
                         <li>about</li>
                         <li>{about}</li>
                     </div>
-                    {prof_attributes}
+                    {profile_attributes}
                 </ul>
                 <li>{this.props.profile.description}</li>
             </div>

@@ -40,3 +40,10 @@ export const fetchProfile = (company) => (
         method: "GET"
     })
 )
+
+export const fetchRealTimePrice = (company) => (
+    $.ajax({
+        url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${company}`,
+        method: "GET"
+    })
+)

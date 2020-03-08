@@ -10,6 +10,7 @@ class NavSearchForm extends React.Component {
         }
         
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleClearForm = this.handleClearForm.bind(this)
     }
 
     componentDidMount() {
@@ -21,6 +22,10 @@ class NavSearchForm extends React.Component {
         let str = this.state.query.toUpperCase()
         console.log(this.props.stocks[str])
     }
+    
+    handleClearForm() {
+        this.setState({ query: ''})
+    }
 
     update(field) {
         return e => {
@@ -30,6 +35,7 @@ class NavSearchForm extends React.Component {
             })
         }
     }
+
 
     render() {
         let suggestions = [(<li></li>)]
@@ -41,9 +47,10 @@ class NavSearchForm extends React.Component {
             companies.forEach((ticker) => {
                 if(userInput.length > 0) {
                     if (ticker.symbol.startsWith(userInput) || (ticker.name !== null && ticker.name.toUpperCase().startsWith(userInput))) {
-                        suggestions.push(<li><Link 
-                                                className="suggestion-item" 
+                        suggestions.push(<li className="suggestion-item" ><Link 
                                                 to={`/show/${ticker.symbol}`}
+                                                className="suggestion-item-link"
+                                                onClick={this.handleClearForm}
                                                 key={ticker.symbol}>
                                                     {ticker.symbol}{ticker.name}
                                                     </Link></li>)
@@ -59,6 +66,7 @@ class NavSearchForm extends React.Component {
                     className="search-field"
                     type="search"
                     placeholder="Search"
+                    value={this.state.query}
                     onChange={this.update('query')}
                 />
                 <ul className="suggestion-box">

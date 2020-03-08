@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { receiveDay, receiveHistorical } from '../../actions/security_actions';
-import ShowPageGraph from './graph';
+import { receiveDay, receiveHistorical } from '../../../actions/security_actions';
+import ShowPageGraph from './day_graph';
 
 
 const mapStateToProps = (state) => ({

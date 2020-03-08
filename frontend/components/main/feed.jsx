@@ -7,6 +7,7 @@ class MainFeed extends React.Component {
         return (
             <div>
                 <MainNavContainer />
+                
             </div>
         );
     }

@@ -63,7 +63,8 @@
 }
 
 .signin-input-field:focus {
-    border: 3px solid #21ce99
+    border: 3px solid #21ce99;
+    outline: none;
 } 
 
 .signin-submit {

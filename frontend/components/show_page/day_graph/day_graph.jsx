@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip} from 'recharts';
+import { LineChart, Line, CartesianGrid, YAxis, Tooltip} from 'recharts';
 
 class ShowPageGraph extends React.Component {
     constructor(props) {
@@ -33,11 +33,11 @@ class ShowPageGraph extends React.Component {
             let d = new Date();
             let date = d.getDate().toString();
             let dateFix = date.padStart(2, "0");
-            data = data.filter(obj => {
-                let oDate = obj.date.split(" ");
-                let oday = oDate[0].split("-");
-                return oday[2] === dateFix;
-            });
+            // data = data.filter(obj => {
+            //     let oDate = obj.date.split(" ");
+            //     let oday = oDate[0].split("-");
+            //     return oday[2] === dateFix;
+            // });
         }
 
         const renderLineChart = (
@@ -51,9 +51,9 @@ class ShowPageGraph extends React.Component {
 
         return (
             <div>
-                actual css variables google: dark mode css themes
+                {/* actual css variables google: dark mode css themes */}
                 {/* custom tooltip Ronil's gh */}
-                <li>{/* vanilla js here */}</li>
+                <li>{this.state.price}</li>
                 {renderLineChart}
                 <ul className="stock-time-frames">
                     {/* classname ternary for active link (state) */}
