@@ -5,6 +5,8 @@ import { indexesReducer } from './securities/indexes_reducer';
 import { profileReducer } from './securities/profile_show_reducer';
 import { dayShowReducer } from './securities/day_show_reducer';
 import { realTimePriceReducer } from './securities/realtime_price_reducer';
+import { historicalShowReducer } from './securities/historical_show_reducer';
+import { weekShowReducer } from './securities/week_show_reducer';
 
 const entitiesReducer = combineReducers({
     users: usersReducer,
@@ -12,6 +14,8 @@ const entitiesReducer = combineReducers({
     indexes: indexesReducer,
     profile: profileReducer,
     showDayPrices: dayShowReducer,
+    showWeekPrices: weekShowReducer,    
+    showHistoricalPrices: historicalShowReducer,
     price: realTimePriceReducer
 });
 

@@ -52,7 +52,7 @@ class NavSearchForm extends React.Component {
                                                 className="suggestion-item-link"
                                                 onClick={this.handleClearForm}
                                                 key={ticker.symbol}>
-                                                    {ticker.symbol}{ticker.name}
+                                                    {ticker.symbol}  {ticker.name}
                                                     </Link></li>)
                     }
                 }

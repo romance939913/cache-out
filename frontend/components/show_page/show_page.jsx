@@ -1,6 +1,6 @@
 import React from 'react';
 import NavContainer from '../main/nav/nav_container';
-import ShowPageGraph from './day_graph/day_graph_container';
+import ShowPageGraph from './graph_container';
 
 
 class ShowPage extends React.Component {
@@ -41,18 +41,18 @@ class ShowPage extends React.Component {
         return (    
             <div>
                 <NavContainer />
-                <br/>
-                <h1>{name}</h1>
-                <ShowPageGraph ticker={this.props.ticker}/>
-                <br/>
-                <ul className="company-profile">
-                    <div>
-                        <li>about</li>
-                        <li>{about}</li>
-                    </div>
-                    {profile_attributes}
-                </ul>
-                <li>{this.props.profile.description}</li>
+                <div className="show-page-body-wrapper">
+                    <h1 className="show-company-name">{name}</h1>
+                    <ShowPageGraph ticker={this.props.ticker}/>
+                    <ul className="company-profile">
+                        <div>
+                            <li>about</li>
+                            <li>{about}</li>
+                        </div>
+                        {profile_attributes}
+                    </ul>
+                    <li>{this.props.profile.description}</li>
+                </div>
             </div>
         );
     }

@@ -1,4 +1,4 @@
-import { RECEIVE_DAY } from "../../actions/security_actions";
+import { RECEIVE_DAY } from "../../actions/graph_actions";
 
 export const dayShowReducer = (state = [], action) => {
     Object.freeze(state);

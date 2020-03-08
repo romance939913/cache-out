@@ -1,3 +1,7 @@
+.show-page-body-wrapper {
+    margin-left: 5vw;
+}
+
 .company-profile {
     display: flex;
     flex-wrap: wrap;
@@ -11,7 +15,38 @@
 .stock-time-frames {
     display: flex;
     justify-content: space-evenly;
+    width: 800px;  
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: lightgray solid 1px;
 }
+
+.stock-time-frame {
+    cursor: pointer;
+}
+
+.stock-time-frame:hover {
+    color: #21ce99;
+}
+
+.show-company-name {
+    font-size: 36px;
+    font-weight: 500;
+    padding-top: 20px;
+    text-decoration: none;
+    list-style: none;
+}
+
+.show-stock-price {
+    font-size: 22px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    list-style: none;
+
+}
+
+
 
  /* CEO
 Employees

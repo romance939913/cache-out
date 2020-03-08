@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     padding-top: 10px;
+    padding-bottom: 10px;;
 }
 
 .nav-left {
@@ -79,7 +80,9 @@
 .marquee-item {
     list-style: none;
     color: white;
-    padding: 15px;
+    padding-left: 80px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-family: 'Orbitron', sans-serif;
 }
 

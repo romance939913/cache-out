@@ -38,6 +38,13 @@ class MainNav extends React.Component {
 
     return (
       <div className="nav_plus_quotron">
+        <div className="marquee-wrapper">
+          <marquee>
+            <div className="cheesy-marquee">
+              {lis}
+            </div>
+          </marquee>
+        </div>
         <div className="nav-bar">
           <div className="nav-left">
             <img src={window.logo_pic} alt=""/>
@@ -48,13 +55,6 @@ class MainNav extends React.Component {
             <a href="" className="nav-right-ele">Messages</a>
             <a className="nav-right-ele" onClick={() => this.props.logout()}>logout</a>
           </div>
-        </div>
-        <div className="marquee-wrapper">
-          <marquee>
-            <div className="cheesy-marquee">
-              {lis}
-            </div>
-          </marquee>
         </div>
       </div>
     );

@@ -1,15 +1,15 @@
 import { fetchIndexes,
     fetchNYSE,
     fetchNasdaq,
-    fetchStockDay,
-    fetchstockHistorical, 
     fetchRealTimePrice,
     fetchProfile} from "../util/securities_api_util";
+import { fetchstockHistorical, 
+    fetchStockDay,
+    fetchStockWeek} from "../util/graph_api_util";
+
 
 export const RECEIVE_STOCKS = "RECEIVE_STOCKS"
 export const RECEIVE_INDEXES = "RECEIVE_INDEXES"
-export const RECEIVE_HISTORICAL = "RECEIVE_HISTORICAL"
-export const RECEIVE_DAY = "RECEIVE_DAY"
 export const RECEIVE_PROFILE = "RECEIVE_PROFILE"
 export const RECEIVE_REALTIME = "RECEIVE_REALTIME"
 
@@ -48,12 +48,6 @@ export const receiveStocks = () => dispatch => Promise.all([fetchNYSE(), fetchNa
 
 export const receiveIndexes = () => dispatch => fetchIndexes()
     .then(indexes => dispatch(receiveTheIndexes(indexes)))
-
-export const receiveHistorical = (ticker) => dispatch => fetchstockHistorical(ticker)
-    .then(prices => dispatch(receiveTheHistorical(prices)))
-
-export const receiveDay = (ticker) => dispatch => fetchStockDay(ticker)
-    .then(prices => dispatch(receiveTheDay(prices)))
 
 export const receiveProfile = (company) => dispatch => fetchProfile(company)
     .then(profile => dispatch(receiveTheProfile(profile)))
