@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_02_191814) do
+ActiveRecord::Schema.define(version: 2020_03_09_181035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "holdings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ticker", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
@@ -22,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_191814) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "buying_power"
+    t.float "buying_power", null: false
   end
 
 end

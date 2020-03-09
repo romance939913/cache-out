@@ -3,10 +3,6 @@ import { fetchIndexes,
     fetchNasdaq,
     fetchRealTimePrice,
     fetchProfile} from "../util/securities_api_util";
-import { fetchstockHistorical, 
-    fetchStockDay,
-    fetchStockWeek} from "../util/graph_api_util";
-
 
 export const RECEIVE_STOCKS = "RECEIVE_STOCKS"
 export const RECEIVE_INDEXES = "RECEIVE_INDEXES"
@@ -23,15 +19,6 @@ const receiveTheIndexes = (indexes) => ({
     indexes
 })
 
-const receiveTheHistorical = (prices) => ({
-    type: RECEIVE_HISTORICAL,
-    prices
-})
-
-const receiveTheDay = prices => ({
-    type: RECEIVE_DAY,
-    prices
-})
 
 const receiveTheProfile = profile => ({
     type: RECEIVE_PROFILE,

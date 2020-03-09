@@ -1,6 +1,7 @@
 import React from 'react';
 import NavContainer from '../main/nav/nav_container';
 import ShowPageGraph from './graph_container';
+import TransactionContainer from './transaction_container';
 
 
 class ShowPage extends React.Component {
@@ -30,9 +31,9 @@ class ShowPage extends React.Component {
             name = (<li>{this.props.profile.companyName}</li>)
             // delete this.props.profile.description;
             let attributes = Object.keys(this.props.profile)
-            attributes.forEach(attr => {
+            attributes.forEach((attr, idx) => {
             profile_attributes.push(<div className="company-attr-item">
-                                    <li className="company-attr-key">{attr}</li> 
+                                    <li key={idx} className="company-attr-key">{attr}</li> 
                                     <li className="company-attr-value">{this.props.profile[attr]}</li>
                                 </div>)
             })
@@ -42,11 +43,16 @@ class ShowPage extends React.Component {
             <div>
                 <NavContainer />
                 <div className="show-page-body-wrapper">
-                    <h1 className="show-company-name">{name}</h1>
-                    <ShowPageGraph ticker={this.props.ticker}/>
+                    <div className="graph-transaction-wrapper">
+                        <div className="graph-and-title-wrapper">
+                            <h1 className="show-company-name">{name}</h1>
+                            <ShowPageGraph ticker={this.props.ticker}/>
+                        </div>
+                        <TransactionContainer ticker={this.props.ticker} />
+                    </div>
                     <ul className="company-profile">
                         <div>
-                            <li>about</li>
+                            <h2>about</h2>
                             <li>{about}</li>
                         </div>
                         {profile_attributes}

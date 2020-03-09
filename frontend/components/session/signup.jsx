@@ -7,7 +7,8 @@ class Signup extends React.Component {
     this.state = {
         username: '',
         email: '',
-        password: ''
+        password: '',
+        buying_power: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -62,7 +63,7 @@ class Signup extends React.Component {
           placeholder="email address"
           className="signup-input-field"
           value={this.state.email}
-            onChange={this.update('email')}
+          onChange={this.update('email')}
           />
           <input 
           type="password"
@@ -70,6 +71,14 @@ class Signup extends React.Component {
           className="signup-input-field"
           value={this.state.password}
           onChange={this.update('password')}
+          />
+          <input 
+          type="number"
+          placeholder="Initial buying power (up to ten million)"
+          min="0"
+          max="10000000"
+          className="quantity-chooser signup-input-field"
+          onChange={this.update('buying_power')}
           />
           <input 
             type="submit" 

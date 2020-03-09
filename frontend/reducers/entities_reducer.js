@@ -7,6 +7,8 @@ import { dayShowReducer } from './securities/day_show_reducer';
 import { realTimePriceReducer } from './securities/realtime_price_reducer';
 import { historicalShowReducer } from './securities/historical_show_reducer';
 import { weekShowReducer } from './securities/week_show_reducer';
+import { holdingsReducer } from './holdings_transactions/holdings_reducer';
+
 
 const entitiesReducer = combineReducers({
     users: usersReducer,
@@ -16,7 +18,8 @@ const entitiesReducer = combineReducers({
     showDayPrices: dayShowReducer,
     showWeekPrices: weekShowReducer,    
     showHistoricalPrices: historicalShowReducer,
-    price: realTimePriceReducer
+    price: realTimePriceReducer,
+    holdings: holdingsReducer
 });
 
 export default entitiesReducer;

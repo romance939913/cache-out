@@ -4,7 +4,7 @@ export const historicalShowReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_HISTORICAL:
-            return action.prices;
+            return action.prices.historical;
         default:
             return state;
     }

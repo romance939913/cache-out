@@ -38,14 +38,24 @@
 }
 
 .show-stock-price {
-    font-size: 22px;
+    font-size: 32px;
     padding-top: 15px;
     padding-bottom: 15px;
     text-decoration: none;
     list-style: none;
-
 }
 
+.graph-transaction-wrapper {
+    display: flex;
+}
+
+.transaction-form-wrapper {
+    margin-top: 50px;
+    margin-left: 150px;
+    border: solid black 1px;
+    height: 400px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.6);
+}
 
 
  /* CEO

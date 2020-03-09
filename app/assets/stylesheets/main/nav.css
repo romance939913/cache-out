@@ -34,22 +34,24 @@
     position: relative;
 }
 .search-field:focus {
-    box-shadow: 2px 2px 4px #21ce99;
+    box-shadow: 0 0 4px #21ce99;
+    outline: none;
 }
 
 .search-field:hover {
-    box-shadow: 2px 2px 4px #21ce99;
+    box-shadow: 0 0 4px #21ce99;
+    outline: none;
 }
 
 .search-form:hover ul{
     display: block;
     background-color: white;
-    box-shadow: 2px 2px 4px #21ce99;
+    box-shadow: 0 0 4px #21ce99;
 }
 .search-field:focus + ul{
     display: block;
     background-color: white;
-    box-shadow: 2px 2px 4px #21ce99;
+    box-shadow: 0 0 4px #21ce99;
 }
 
 .suggestion-box {

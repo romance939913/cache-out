@@ -7,7 +7,7 @@ class ShowPageGraph extends React.Component {
         this.handleHover = this.handleHover.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this)
         this.changeTimeFrames = this.changeTimeFrames.bind(this)
-        this.state = { time: '' }
+        this.state = { time: '1d' }
     }
 
     componentDidMount() {
@@ -20,11 +20,14 @@ class ShowPageGraph extends React.Component {
     componentDidUpdate(previousProps) {
         if (previousProps.ticker !== this.props.ticker) {
             this.props.receiveDay(`${this.props.ticker}`);
+            this.props.receiveWeek(`${this.props.ticker}`)
+            this.props.receiveRealTimePrice(`${this.props.ticker}`)
+            this.props.receiveHistorical(`${this.props.ticker}`)
+            this.setState({ time: '1d'})
         }
     }
 
     handleHover(e) {
-        // console.log(e);
         const ele = document.getElementById("real-time-price");
         ele.textContent = `$${e.activePayload[0].value}`
     }
@@ -39,9 +42,8 @@ class ShowPageGraph extends React.Component {
     }
     
     render() {
-        console.log(this.state.time)
         let data;
-        if (this.props.dayPrices.length === 0) {
+        if (this.props.dayPrices.length === 0 || this.props.historicalPrices.length === 0 || this.props.weekPrices.length === 0) {
             return null;
         } else {
             let d = new Date();
@@ -56,8 +58,29 @@ class ShowPageGraph extends React.Component {
                         return oday[2] === dateFix;
                     });                    
                     break;
-                default:
+                case "1w":
+                    data = this.props.weekPrices;                
                     break;
+                case "1m":
+                    data = this.props.historicalPrices.slice(-31)
+                    break
+                case "3m":
+                    data = this.props.historicalPrices.slice(-93)
+                    break
+                case "1y":
+                    data = this.props.historicalPrices.slice(-261)
+                    break
+                case "1y":
+                    data = this.props.historicalPrices.slice(-261)
+                    break
+                case "5y":
+                    data = this.props.historicalPrices;
+                    data = data.reverse();
+                    data = data.filter((ele, idx) => {
+                            return idx % 5 === 0;
+                        });
+                    data = data.reverse()
+                    break
             }
         }
 
