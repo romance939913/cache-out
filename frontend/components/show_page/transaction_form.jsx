@@ -4,33 +4,48 @@ class TransactionForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            user_id: this.props.currentUser,
-            ticker: this.props.ticker,
-            quantity: ''
+            holding: {
+                user_id: this.props.currentUser.id,
+                ticker: this.props.ticker,
+                quantity: ''
+            },
+            buying_power: 0
+            // slice state to update user and holdings seperately
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    componentDidMount() {
-        this.props.receiveHolding
-    }
+    // componentDidMount() {
+    //     this.props.getHolding({holding: {}})
+    // }
 
     update(field) {
         return e => {
-            this.setState({ 
-                user_id: this.props.currentUser,
-                ticker: this.props.ticker,
-                [field]: e.currentTarget.value
+            this.setState({
+                holding: {
+                    user_id: this.props.currentUser.id,
+                    ticker: this.props.ticker,
+                    [field]: parseInt(e.currentTarget.value)
+                },
+                buying_power: {}
             })
         }
     }
 
     handleSubmit(e) {
+        // debugger
         e.preventDefault()
-
+        const holding = Object.assign({}, this.state.holding);
+        this.props.receiveHolding(holding)
     }
 
     render() {
+        let estimatedCost;
+        if(this.state.holding.quantity === '') {
+            estimatedCost = 0;
+        } else {
+            estimatedCost = parseInt(`${this.state.holding.quantity}`) * this.props.price;
+        }
         return (
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
                 <p>Buy {`${this.props.ticker}`}</p>
@@ -40,10 +55,12 @@ class TransactionForm extends React.Component {
                     onChange={this.update('quantity')}
                     placeholder="Shares quantity"
                 />
-                <p>Market Price: </p>
-                <p>estimated Cost: </p>
+                <p>Market Price: ${`${this.props.price}`}</p>
+                <p>estimated Cost: ${estimatedCost}</p>
                 <input type="submit" value="Submit Buy"/>
-                <p>Buying Power: ${`${this.props.currentUser.buying_power}`}</p>
+                <p className="buying-power-label">
+                    Buying Power: ${`${this.props.currentUser.buying_power}`}
+                </p>
             </form>
         )
     }

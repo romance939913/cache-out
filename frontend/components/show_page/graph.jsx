@@ -8,13 +8,15 @@ class ShowPageGraph extends React.Component {
         this.handleMouseLeave = this.handleMouseLeave.bind(this)
         this.changeTimeFrames = this.changeTimeFrames.bind(this)
         this.state = { time: '1d' }
+        this.handleTimeFrameSelect = this.handleTimeFrameSelect.bind(this)
     }
 
     componentDidMount() {
-        this.props.receiveDay(`${this.props.ticker}`);
-        this.props.receiveWeek(`${this.props.ticker}`)
+        // debugger
+        this.props.receiveDay(`${this.props.ticker}`)
+        // this.props.receiveWeek(`${this.props.ticker}`)
         this.props.receiveRealTimePrice(`${this.props.ticker}`)
-        this.props.receiveHistorical(`${this.props.ticker}`)
+        // this.props.receiveHistorical(`${this.props.ticker}`)
     }
 
     componentDidUpdate(previousProps) {
@@ -23,7 +25,6 @@ class ShowPageGraph extends React.Component {
             this.props.receiveWeek(`${this.props.ticker}`)
             this.props.receiveRealTimePrice(`${this.props.ticker}`)
             this.props.receiveHistorical(`${this.props.ticker}`)
-            this.setState({ time: '1d'})
         }
     }
 
@@ -37,51 +38,62 @@ class ShowPageGraph extends React.Component {
         ele.textContent=`$${this.props.price.price}`
     }
 
-    changeTimeFrames(newTime) {
-        this.setState({ time: `${newTime}` })
+    changeTimeFrames(newFrame) {
+        this.handleTimeFrameSelect(newFrame)
+    }
+
+    // ?????????? week and day data are reversed
+    handleTimeFrameSelect(arg) {
+        switch (arg) {
+            case "1d":
+                this.props.receiveDay(`${this.props.ticker}`)
+
+                // data = data.filter(obj => {
+                //     let oDate = obj.date.split(" ");
+                //     let oday = oDate[0].split("-");
+                //     return oday[2] === dateFix;
+                // });
+                break;
+            case "1w":
+                this.props.receiveWeek(`${this.props.ticker}`)
+                break;
+            case "1m":
+                this.props.receiveHistorical(`${this.props.ticker}`)
+                // data = this.props.historicalPrices.slice(-31)
+                break
+            case "3m":
+                this.props.receiveHistorical(`${this.props.ticker}`)
+                // data = this.props.historicalPrices.slice(-93)
+                break
+            // case "1y":
+            //     this.props.receiveHistorical(`${this.props.ticker}`)
+            //     // data = this.props.historicalPrices.slice(-261)
+            //     break
+            case "1y":
+                this.props.receiveHistorical(`${this.props.ticker}`)
+                // data = this.props.historicalPrices.slice(-261)
+                break
+            case "5y":
+                this.props.receiveHistorical(`${this.props.ticker}`)
+                // data = this.props.historicalPrices;
+                // data = data.reverse();
+                // data = data.filter((ele, idx) => {
+                //     return idx % 5 === 0;
+                // });
+                // data = data.reverse()
+                break
+        }
     }
     
     render() {
         let data;
-        if (this.props.dayPrices.length === 0 || this.props.historicalPrices.length === 0 || this.props.weekPrices.length === 0) {
+        let d = new Date();
+        let date = d.getDate().toString();
+        let dateFix = date.padStart(2, "0");
+        if (this.props.graphPrices.length === 0) {
             return null;
         } else {
-            let d = new Date();
-            let date = d.getDate().toString();
-            let dateFix = date.padStart(2, "0");
-            switch (this.state.time) {
-                case "1d":
-                    data = this.props.dayPrices;
-                    data = data.filter(obj => {
-                        let oDate = obj.date.split(" ");
-                        let oday = oDate[0].split("-");
-                        return oday[2] === dateFix;
-                    });                    
-                    break;
-                case "1w":
-                    data = this.props.weekPrices;                
-                    break;
-                case "1m":
-                    data = this.props.historicalPrices.slice(-31)
-                    break
-                case "3m":
-                    data = this.props.historicalPrices.slice(-93)
-                    break
-                case "1y":
-                    data = this.props.historicalPrices.slice(-261)
-                    break
-                case "1y":
-                    data = this.props.historicalPrices.slice(-261)
-                    break
-                case "5y":
-                    data = this.props.historicalPrices;
-                    data = data.reverse();
-                    data = data.filter((ele, idx) => {
-                            return idx % 5 === 0;
-                        });
-                    data = data.reverse()
-                    break
-            }
+            data = this.props.graphPrices
         }
 
         const renderLineChart = (

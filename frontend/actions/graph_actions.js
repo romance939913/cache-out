@@ -2,13 +2,16 @@ import { fetchStockWeek, fetchStockDay, fetchstockHistorical } from "../util/gra
 
 export const RECEIVE_HISTORICAL = "RECEIVE_HISTORICAL"
 export const RECEIVE_DAY = "RECEIVE_DAY"
-export const RECEIVE_wEEK = "RECEIVE_WEEK"
+export const RECEIVE_WEEK = "RECEIVE_WEEK"
 
 
-const receiveTheHistorical = (prices) => ({
-    type: RECEIVE_HISTORICAL,
-    prices
-})
+const receiveTheHistorical = (prices) => {
+    return {
+        type: RECEIVE_HISTORICAL,
+        prices
+    }
+
+}
 
 const receiveTheDay = prices => ({
     type: RECEIVE_DAY,
@@ -16,7 +19,7 @@ const receiveTheDay = prices => ({
 })
 
 const receiveTheWeek = prices => ({
-    type: RECEIVE_wEEK,
+    type: RECEIVE_WEEK,
     prices
 })
 

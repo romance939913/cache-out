@@ -5,6 +5,7 @@ import Root from './components/root'
 import configureStore from "./store/store";
 import { fetchNYSE, fetchNasdaq, fetchIndexes, fetchProfile } from "./util/securities_api_util";
 import { fetchstockHistorical, fetchStockWeek, fetchStockDay } from "./util/graph_api_util";
+import { receiveHistorical } from "./actions/graph_actions";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     // testing end
+    window.receiveHistorical = receiveHistorical
     window.fetchstockHistorical = fetchstockHistorical;
     window.fetchStockWeek = fetchStockWeek;
     window.fetchStockDay = fetchStockDay;

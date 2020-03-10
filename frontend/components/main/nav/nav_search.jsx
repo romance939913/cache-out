@@ -13,10 +13,6 @@ class NavSearchForm extends React.Component {
         this.handleClearForm = this.handleClearForm.bind(this)
     }
 
-    componentDidMount() {
-        this.props.receiveStocks()
-    }
-
     handleSubmit(e) {
         e.preventDefault();
         let str = this.state.query.toUpperCase()
@@ -38,7 +34,7 @@ class NavSearchForm extends React.Component {
 
 
     render() {
-        let suggestions = [(<li></li>)]
+        let suggestions = []
         if(!this.props.stocks) {
             return null;
         } else {
@@ -49,6 +45,7 @@ class NavSearchForm extends React.Component {
                     if (ticker.symbol.startsWith(userInput) || (ticker.name !== null && ticker.name.toUpperCase().startsWith(userInput))) {
                         suggestions.push(<li key={idx} className="suggestion-item"><Link 
                                                 to={`/show/${ticker.symbol}`}
+                                                key={idx}
                                                 className="suggestion-item-link"
                                                 onClick={this.handleClearForm}>
                                                     {ticker.symbol}  {ticker.name}
