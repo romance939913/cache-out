@@ -1,19 +1,16 @@
 class Api::HoldingsController < ApplicationController
     def create
-        @user_records = Holding.where(user_id: params[:holding][:user_id])
-        @update_record = @user_records.find_by(ticker: params[:holding][:ticker])
-        if @update_record
-            new_amt = @update_record.quantity + params[:holding][:quantity].to_i
-            @update_record.update(quantity: new_amt)
-        else
-            @holding = Holding.new(holdings_params)
-            if @holding.save
-                render :show
+        if params[:holding][:buying_power].to_f >= 0
+            @user_records = Holding.where(user_id: params[:holding][:user_id])
+            @update_record = @user_records.find_by(ticker: params[:holding][:ticker])
+            if @update_record
+                new_amt = @update_record.quantity + params[:holding][:quantity].to_i
+                @update_record.update(quantity: new_amt)
             else
-                render json: @holding.errors.full_messages, status: 422
+                @holding = Holding.new(holdings_params)
+                @holding.save
+                render :show
             end
-            # check for column that already exists
-            ## update user buying power in here as well
         end
     end
 

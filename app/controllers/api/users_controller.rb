@@ -8,16 +8,20 @@ class Api::UsersController < ApplicationController
     else
       render json: @user.errors.full_messages, status: 422
     end
-  end//
+  end
 
   def show
     @user = User.find_by(id: params[:id])
   end
 
   def update
-    @user = User.find_by(id: params[:id])
-    # thunk action takes in teh userID and updated buying power and api util call will be a patch and that 
-    #update
+    if params[:holding][:buying_power].to_f >= 0
+      @user = User.find_by(id: params[:holding][:user_id])
+      @user.update(buying_power: params[:holding][:buying_power].to_f)
+      render :show
+    else
+      render json: ['not enough cash'], status: 404
+    end
   end
 
   private

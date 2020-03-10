@@ -7,7 +7,7 @@ class ShowPageGraph extends React.Component {
         this.handleHover = this.handleHover.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this)
         this.changeTimeFrames = this.changeTimeFrames.bind(this)
-        this.state = { time: '1d' }
+        // this.state = { time: '1d' }
         this.handleTimeFrameSelect = this.handleTimeFrameSelect.bind(this)
     }
 
@@ -35,7 +35,7 @@ class ShowPageGraph extends React.Component {
 
     handleMouseLeave() {
         const ele = document.getElementById("real-time-price");
-        ele.textContent=`$${this.props.price.price}`
+        ele.textContent=`$${this.props.price}`
     }
 
     changeTimeFrames(newFrame) {
@@ -109,12 +109,12 @@ class ShowPageGraph extends React.Component {
                 <Tooltip />
             </LineChart>
         );
-
+        // debugger
         return (
             <div className="graph-wrapper">
                 {/* actual css variables google: dark mode css themes */}
                 {/* custom tooltip Ronil's gh */}
-                <li className="show-stock-price" id="real-time-price">${this.props.price.price}</li>
+                <li className="show-stock-price" id="real-time-price">${`${this.props.price}`}</li>
                 {renderLineChart}
                 <ul className="stock-time-frames">
                     {/* classname ternary for active link (state) */}

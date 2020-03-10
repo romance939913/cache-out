@@ -13,10 +13,10 @@ export const showHolding = (holding) => (
     })
 )
 
-export const updateUserBuyingPower = (user_id, buying_power) => (
-    $.ajax({
-        url: `/api/users/${user_id}`,
+export const updateUserBuyingPower = (holding) => {
+    return $.ajax({
+        url: `/api/users/${holding.user_id}`,
         method: "PATCH",
-        data: { buying_power }
+        data: { holding }
     })
-)
+}

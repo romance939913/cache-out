@@ -4,7 +4,7 @@ export const realTimePriceReducer = (state = {}, action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_REALTIME:
-            return action.price;
+            return action.price.price;
         default:
             return state;
     }
