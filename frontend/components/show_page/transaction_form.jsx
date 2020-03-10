@@ -7,16 +7,30 @@ class TransactionForm extends React.Component {
             holding: {
                 user_id: this.props.currentUser.id,
                 ticker: this.props.ticker,
-                quantity: '',
-                cost:  0
+                quantity: 0,
+                cost:  0,
+                buySell: 'BUY'
             },
         }
+        this.handleClick = this.handleClick.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     // componentDidMount() {
     //     this.props.getHolding({holding: {}})
     // }
+
+    handleClick(value) {
+        this.setState({
+            holding: {
+                user_id: this.props.currentUser.id,
+                ticker: this.props.ticker,
+                quantity: 0,
+                cost: 0,
+                buySell: value
+            },
+        })
+    }
 
     update(field) {
         return e => {
@@ -34,28 +48,44 @@ class TransactionForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
         const holding = Object.assign({}, this.state.holding);
-        holding['buying_power'] = this.props.currentUser.buying_power - this.state.holding.cost;
-        debugger
-        this.props.receiveHolding(holding);
-        this.props.updateUser(holding)
+        if (this.state.holding.buySell === 'BUY') {
+            holding['buying_power'] = this.props.currentUser.buying_power - this.state.holding.cost;
+            this.props.receiveHolding(holding);
+            this.props.updateUser(holding)
+        } else {
+            holding['buying_power'] = this.props.currentUser.buying_power + this.state.holding.cost;
+            holding['quantity'] = holding['quantity'] * (-1)
+            debugger
+        }
     }
 
     render() {
         return (
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
-                <p>Buy {`${this.props.ticker}`}</p>
-                <p>sell {this.props.ticker}</p>
-                <input
-                    type="number"
-                    onChange={this.update('quantity')}
-                    placeholder="Shares quantity"
-                />
-                <p>Market Price: ${`${this.props.price}`}</p>
-                <p>estimated Cost: ${`${this.state.holding.cost}`}</p>
-                <input type="submit" value="Submit Buy"/>
-                <p className="buying-power-label">
-                    Buying Power: ${`${this.props.currentUser.buying_power}`}
-                </p>
+                <div className="buy-sell-button-wrapper">
+                    <p onClick={() => this.handleClick('BUY')}>Buy {`${this.props.ticker}`}</p>
+                    <p onClick={() => this.handleClick('SELL')}>Sell {`${this.props.ticker}`}</p>
+                </div>
+                <div className="share-quantity-wrapper">
+                    <label>Shares</label>
+                    <input
+                        type="number"
+                        className="share-quantity-input"
+                        value={this.state.holding.quantity}
+                        onChange={this.update('quantity')}
+                        placeholder="quantity"
+                    />
+                </div>
+                <div className="transaction-price">
+                    <p>Market Price: ${`${this.props.price}`}</p>
+                    <p>Estimated Cost: ${`${this.state.holding.cost}`}</p>
+                </div>
+                <div className="transaction-submit-info">
+                    <input type="submit" value={this.state.holding.buySell} className="buy-sell-submit"/>
+                    <p className="buying-power-label">
+                        Buying Power: ${`${this.props.currentUser.buying_power}`}
+                    </p>
+                </div>
             </form>
         )
     }

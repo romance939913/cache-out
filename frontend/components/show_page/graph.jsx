@@ -12,7 +12,6 @@ class ShowPageGraph extends React.Component {
     }
 
     componentDidMount() {
-        // debugger
         this.props.receiveDay(`${this.props.ticker}`)
         // this.props.receiveWeek(`${this.props.ticker}`)
         this.props.receiveRealTimePrice(`${this.props.ticker}`)

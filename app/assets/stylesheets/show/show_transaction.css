@@ -1,0 +1,79 @@
+.transaction-form-wrapper {
+    margin-top: 50px;
+    margin-left: 10vw;
+    border: solid black 1px;
+    height: 400px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.6);
+}
+
+.buy-sell-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buy-sell-button-wrapper p {
+    margin: 10px;
+    font-size: 20px;
+}
+
+.buy-sell-button-wrapper p:hover {
+    color: #21ce99;
+    cursor: pointer;
+}
+
+.share-quantity-wrapper {
+    margin: 10px;
+}
+
+.share-quantity-input {
+    padding: 10px;
+    font-size: 15px;
+    width: 100px;
+    margin-left: 30px;
+}
+
+.share-quantity-input:focus {
+    outline: none;
+    border: solid 2px #21ce99;
+}
+
+.share-quantity-input:hover {
+    outline: none;
+    border: solid 2px #21ce99;
+}
+
+.transaction-price p {
+    margin: 10px;
+}
+.transaction-price {
+    margin-bottom: 170px;
+}
+
+.transaction-submit-info {
+    text-align: center;
+}
+
+.transaction-submit-info * {
+    margin: 10px;
+}
+
+.buy-sell-submit {
+    margin-left: 38px;
+    width: 100px;
+    box-sizing: content-box;
+    background-color: #21ce99;
+    border-color: #21ce99;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    align-items: center;
+    border: 1px solid transparent;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    min-width: 120px;
+    padding: 0 15px;
+    margin-top: 50px;
+}
