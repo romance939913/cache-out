@@ -57,6 +57,17 @@ class TransactionForm extends React.Component {
     }
 
     render() {
+        let bottomMessage = '';
+        if(this.state.buySell === 'BUY') {
+            bottomMessage = `Buying Power: $${this.props.currentUser.buying_power}`
+        } else {
+            let symbol = this.props.ticker
+            if(this.props.holdings[symbol] === undefined) {
+                bottomMessage = '0 Shares Available'
+            } else {
+                bottomMessage = `${this.props.holdings[symbol].quantity} shares available`
+            }
+        }
         return (
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
                 <div className="buy-sell-button-wrapper">
@@ -80,7 +91,7 @@ class TransactionForm extends React.Component {
                 <div className="transaction-submit-info">
                     <input type="submit" value={this.state.buySell} className="buy-sell-submit"/>
                     <p className="buying-power-label">
-                        Buying Power: ${`${this.props.currentUser.buying_power}`}
+                        {bottomMessage}
                     </p>
                 </div>
             </form>

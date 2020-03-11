@@ -4,12 +4,11 @@ import { receiveHistorical, receiveDay, receiveWeek } from '../../actions/graph_
 import GraphMain from './graph_main';
 
 const mapStateToProps = (state) => {
-    // debugger
     return {
         currentUser: state.entities.users[state.session.id],
         graphPrices: state.entities.graphPrices,
         holdings: state.entities.holdings,
-        price: state.entities.price
+        price: state.entities.price,
     }
 }
 

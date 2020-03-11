@@ -7,10 +7,16 @@ class GraphMain extends React.Component {
 
     }
 
-
-    render() {
-        
-
+    render() {  
+        let cash = this.props.currentUser.buying_power;
+        let tickers = Object.keys(this.props.holdings);
+        let equityBalance = 0;
+        tickers.forEach((ticker, idx) => {
+            // debugger
+            let price = this.props.receiveRealTimePrice(ticker)
+            equityBalance = equityBalance + price
+            // debugger
+        })
         const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 },];
         const renderLineChart = (
             <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
@@ -22,7 +28,8 @@ class GraphMain extends React.Component {
         );
         return (
             <div>
-
+                <h2></h2>
+                <h2 className ="main-page-buying-power">Current Cash Balance: {`$${cash}`}</h2>
                 {renderLineChart}
             </div>
         )
