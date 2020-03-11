@@ -1,0 +1,27 @@
+.main-page-wrapper {
+    display: flex;
+}
+
+.holdings-portfolio {
+    margin-left: 150px;
+    width: 150px;
+    border: solid black 1px;
+}
+
+.holding-portfolio-ele-wrapper {
+    list-style: none;
+}
+
+.holding-portfolio-ele {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    border-bottom: 1px solid black;
+    align-items: center;
+}
+
+.portfolio-header {
+    margin: 5px;
+    font-size: 22px;
+
+}

@@ -2,9 +2,15 @@ import React from 'react';
 import { LineChart, Line, CartesianGrid, YAxis, Tooltip } from 'recharts';
 
 class GraphMain extends React.Component {
+    constructor(props) {
+        super(props)
+
+    }
 
 
     render() {
+        
+
         const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 },];
         const renderLineChart = (
             <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
@@ -16,6 +22,7 @@ class GraphMain extends React.Component {
         );
         return (
             <div>
+
                 {renderLineChart}
             </div>
         )
