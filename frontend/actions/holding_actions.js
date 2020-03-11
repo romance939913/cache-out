@@ -11,13 +11,16 @@ const receiveTheHolding = (holding) => {
     return {
         type: RECEIVE_HOLDING,
         holding
-    }
+    };
 };
 
-const getTheHoldings = (holdings) => ({
-    type: GET_HOLDINGS,
-    holdings
-});
+const getTheHoldings = (holdings) => {
+    // debugger
+    return {
+        type: GET_HOLDINGS,
+        holdings
+    }
+};
 
 const updateTheUser = user => ({
     type: UPDATE_BUYING_POWER,
