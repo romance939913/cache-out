@@ -8,6 +8,7 @@ export const GET_HOLDINGS = "GET_HOLDING";
 export const UPDATE_BUYING_POWER = "UPDATE_BUYING_POWER"
 
 const receiveTheHolding = (holding) => {
+    debugger
     return {
         type: RECEIVE_HOLDING,
         holding

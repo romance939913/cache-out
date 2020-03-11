@@ -7,6 +7,7 @@ export const holdingReducer = (state = {}, action) => {
         case GET_HOLDINGS:
             return action.holdings;
         case RECEIVE_HOLDING:
+            debugger
             nextState[Object.keys(action.holding)[0]] = action.holding;
             return nextState;
         default:

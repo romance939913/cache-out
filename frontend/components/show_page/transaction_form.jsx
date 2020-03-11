@@ -14,6 +14,12 @@ class TransactionForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidUpdate(previousProps) {
+        if (previousProps.ticker !== this.props.ticker) {
+            this.props.getHoldings(this.state)
+        }
+    }
+
     componentDidMount() {
         let obj = Object.assign({}, this.state);
         this.props.getHoldings(this.state);
@@ -36,6 +42,7 @@ class TransactionForm extends React.Component {
         e.preventDefault();
         const holding = Object.assign({}, this.state);
         if (this.state.buySell === 'BUY') {
+            
             holding['buying_power'] = this.props.currentUser.buying_power - this.state.cost;
             this.props.receiveHolding(holding);
             this.props.updateUser(holding);
