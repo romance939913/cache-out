@@ -16,7 +16,7 @@ class NavSearchForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         let str = this.state.query.toUpperCase()
-        console.log(this.props.stocks[str])
+        // console.log(this.props.stocks[str])
     }
     
     handleClearForm() {

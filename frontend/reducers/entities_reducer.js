@@ -5,7 +5,7 @@ import { indexesReducer } from './securities/indexes_reducer';
 import { profileReducer } from './securities/profile_show_reducer';
 import { realTimePriceReducer } from './securities/realtime_price_reducer';
 import { graphPricesReducer } from './securities/graph_prices_reducer';
-import { cashReducer } from './securities/holdings_reducer';
+import { holdingReducer } from './securities/holding_reducer';
 
 
 const entitiesReducer = combineReducers({
@@ -15,7 +15,7 @@ const entitiesReducer = combineReducers({
     profile: profileReducer,
     price: realTimePriceReducer,
     graphPrices: graphPricesReducer,
-    cash: cashReducer
+    holdings: holdingReducer
 });
 
 export default entitiesReducer;

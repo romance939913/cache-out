@@ -4,19 +4,22 @@ export const createNewHolding = holding => (
         method: "POST",
         data: { holding }
     })
-)
+);
 
-export const showHolding = (holding) => (
+export const indexHoldings = (holding) => (
     $.ajax({
-        url: `/api/holdings/${holding.id}`,
-        method: "GET"
+        url: `/api/holdings/`,
+        method: "GET",
+        data: { holding }
     })
-)
+);
 
-export const updateUserBuyingPower = (holding) => {
-    return $.ajax({
+
+
+export const updateUserBuyingPower = (holding) => (
+    $.ajax({
         url: `/api/users/${holding.user_id}`,
         method: "PATCH",
         data: { holding }
     })
-}
+);

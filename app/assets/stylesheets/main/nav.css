@@ -18,8 +18,12 @@
     cursor: pointer;
 }
 
+.nav-right-ele {
+    font-family: sans-serif;
+}
+
 .nav-right-ele:hover {
-    color: #21ce99
+    color: #21ce99;
 }
 
 
@@ -29,7 +33,7 @@
 }
 
 .search-field {
-    font-size: 15px;
+    font-size: 18px;
     width: 50vw;
     position: relative;
 }

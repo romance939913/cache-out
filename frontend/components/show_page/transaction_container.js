@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { receiveProfile } from '../../actions/security_actions';
 import TransactionForm from './transaction_form';
-import { receiveHolding, getHolding, updateUser } from '../../actions/holding_actions';
+import { receiveHolding, getHoldings, updateUser } from '../../actions/holding_actions';
 
 const mapStateToProps = state => ({
     currentUser: state.entities.users[state.session.id],
@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     receiveProfile: (company) => dispatch(receiveProfile(company)),
     receiveHolding: (holding) => dispatch(receiveHolding(holding)),
-    getHolding: (holding) => dispatch(getHolding(holding)),
+    getHoldings: (holding) => dispatch(getHoldings(holding)),
     updateUser: (user) => dispatch(updateUser(user))
 })
 

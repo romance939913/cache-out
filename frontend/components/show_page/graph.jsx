@@ -108,7 +108,6 @@ class ShowPageGraph extends React.Component {
                 <Tooltip />
             </LineChart>
         );
-        // debugger
         return (
             <div className="graph-wrapper">
                 {/* actual css variables google: dark mode css themes */}

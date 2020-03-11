@@ -6,7 +6,6 @@ import { receiveHistorical, receiveDay, receiveWeek } from '../../actions/graph_
 
 
 const mapStateToProps = (state) => {
-    // debugger
     return {
         currentUser: state.entities.users[state.session.id],
         profile: state.entities.profile,

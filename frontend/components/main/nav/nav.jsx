@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 class MainNav extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       indexes: ''
-    }
+    };
   }
 
   componentDidMount() {
@@ -16,7 +16,7 @@ class MainNav extends React.Component {
   }
 
   render() {
-    let stocksList
+    let stocksList;
     let lis;
     if(JSON.stringify(this.props.stocks) === '{}') {
       return null

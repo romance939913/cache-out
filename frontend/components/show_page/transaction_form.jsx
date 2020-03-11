@@ -2,60 +2,48 @@ import React from 'react';
 
 class TransactionForm extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            holding: {
                 user_id: this.props.currentUser.id,
                 ticker: this.props.ticker,
                 quantity: 0,
                 cost:  0,
                 buySell: 'BUY'
-            },
-        }
-        this.handleClick = this.handleClick.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        };
+        this.handleClick = this.handleClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.props.getHolding({holding: {}})
-    // }
+    componentDidMount() {
+        let obj = Object.assign({}, this.state);
+        this.props.getHoldings(this.state);
+    }
 
     handleClick(value) {
-        this.setState({
-            holding: {
-                user_id: this.props.currentUser.id,
-                ticker: this.props.ticker,
-                quantity: 0,
-                cost: 0,
-                buySell: value
-            },
-        })
+        this.setState({ buySell: value });
     }
 
     update(field) {
         return e => {
             this.setState({
-                holding: {
-                    user_id: this.props.currentUser.id,
-                    ticker: this.props.ticker,
-                    [field]: parseInt(e.currentTarget.value),
-                    cost: parseInt(e.currentTarget.value) * this.props.price,
-                },
-            })
-        }
+                [field]: parseInt(e.currentTarget.value),
+                cost: parseInt(e.currentTarget.value) * this.props.price,
+            });
+        };
     }
 
     handleSubmit(e) {
-        e.preventDefault()
-        const holding = Object.assign({}, this.state.holding);
-        if (this.state.holding.buySell === 'BUY') {
-            holding['buying_power'] = this.props.currentUser.buying_power - this.state.holding.cost;
+        e.preventDefault();
+        const holding = Object.assign({}, this.state);
+        if (this.state.buySell === 'BUY') {
+            holding['buying_power'] = this.props.currentUser.buying_power - this.state.cost;
             this.props.receiveHolding(holding);
-            this.props.updateUser(holding)
+            this.props.updateUser(holding);
         } else {
-            holding['buying_power'] = this.props.currentUser.buying_power + this.state.holding.cost;
-            holding['quantity'] = holding['quantity'] * (-1)
-            debugger
+            holding['buying_power'] = this.props.currentUser.buying_power + this.state.cost;
+            holding.quantity = holding.quantity * (-1);
+            this.props.receiveHolding(holding);
+            this.props.updateUser(holding);
         }
     }
 
@@ -71,17 +59,17 @@ class TransactionForm extends React.Component {
                     <input
                         type="number"
                         className="share-quantity-input"
-                        value={this.state.holding.quantity}
+                        value={this.state.quantity}
                         onChange={this.update('quantity')}
                         placeholder="quantity"
                     />
                 </div>
                 <div className="transaction-price">
                     <p>Market Price: ${`${this.props.price}`}</p>
-                    <p>Estimated Cost: ${`${this.state.holding.cost}`}</p>
+                    <p>Estimated Cost: ${`${this.state.cost}`}</p>
                 </div>
                 <div className="transaction-submit-info">
-                    <input type="submit" value={this.state.holding.buySell} className="buy-sell-submit"/>
+                    <input type="submit" value={this.state.buySell} className="buy-sell-submit"/>
                     <p className="buying-power-label">
                         Buying Power: ${`${this.props.currentUser.buying_power}`}
                     </p>
