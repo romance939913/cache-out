@@ -1,25 +1,25 @@
 import React from 'react';
 import MainNavContainer from './nav/nav_container';
-import GraphMainContainer from './graph_main_container';
 import { Link } from 'react-router-dom'
+import GraphMain from './graph_main';
+
 
 class MainFeed extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             user_id: this.props.currentUser.id
         }
     }
 
     componentDidMount() {
-        this.props.getHoldings(this.state)
+        this.props.getHoldings(this.state);
     }
     
     render() {
-        let tickerArr = []
-        // debugger
+        let tickerArr = [];
         if (this.props.holdings.length === 0) {
-            return null
+            return null;
         } else {
             Object.values(this.props.holdings).forEach((ticker, idx) => {
                 if (ticker.quantity !== 0) {
@@ -35,22 +35,26 @@ class MainFeed extends React.Component {
                     </Link>)
                 }
             })
-        }
-        return (
-            <div>
-                <MainNavContainer />
-                <div className="main-page-wrapper">
-                    <div className="graph-valuation-wrapper">
-
-                    </div>
-                    <GraphMainContainer />
-                    <div className="holdings-portfolio">
-                        <p className="portfolio-header">Portfolio</p>
-                        {tickerArr}
+            return (
+                <div>
+                    <MainNavContainer />
+                    <div className="main-page-wrapper">
+                        <div className="graph-valuation-wrapper">
+    
+                        </div>
+                        <GraphMain 
+                            tickers={Object.keys(this.props.holdings)} 
+                            currentUser={this.props.currentUser}
+                            receiveRealTimePrice={this.props.receiveRealTimePrice}
+                        />
+                        <div className="holdings-portfolio">
+                            <p className="portfolio-header">Portfolio</p>
+                            {tickerArr}
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 

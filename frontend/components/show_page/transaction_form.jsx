@@ -34,7 +34,7 @@ class TransactionForm extends React.Component {
         return e => {
             this.setState({
                 [field]: parseInt(e.currentTarget.value),
-                cost: parseInt(e.currentTarget.value) * this.props.price,
+                cost: parseInt(e.currentTarget.value) * this.props.price[this.props.ticker].price,
             });
         };
     }
@@ -42,30 +42,35 @@ class TransactionForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const holding = Object.assign({}, this.state);
-        debugger
+        // debugger
         if (this.state.buySell === 'BUY') {
-            
             holding['buying_power'] = this.props.currentUser.buying_power - this.state.cost;
-            this.props.receiveHolding(holding);
-            this.props.updateUser(holding);
+            if(holding.buying_power >= 0) {
+                this.props.receiveHolding(holding);
+                this.props.updateUser(holding);
+            }
         } else {
             holding['buying_power'] = this.props.currentUser.buying_power + this.state.cost;
-            holding.quantity = holding.quantity * (-1);
-            this.props.receiveHolding(holding);
-            this.props.updateUser(holding);
+            if (this.props.holdings[this.props.ticker].quantity - holding.quantity >= 0) {
+                this.props.receiveHolding(holding);
+                this.props.updateUser(holding);
+            }
         }
     }
 
     render() {
+        if (this.props.price[this.props.ticker] === undefined) {
+            return null
+        } 
         let bottomMessage = '';
         if(this.state.buySell === 'BUY') {
-            bottomMessage = `Buying Power: $${this.props.currentUser.buying_power}`
+            bottomMessage = `Buying Power: $${this.props.currentUser.buying_power.toFixed(2)}`;
         } else {
-            let symbol = this.props.ticker
+            let symbol = this.props.ticker;
             if(this.props.holdings[symbol] === undefined) {
-                bottomMessage = '0 Shares Available'
+                bottomMessage = '0 Shares Available';
             } else {
-                bottomMessage = `${this.props.holdings[symbol].quantity} shares available`
+                bottomMessage = `${this.props.holdings[symbol].quantity} shares available`;
             }
         }
         return (
@@ -85,7 +90,7 @@ class TransactionForm extends React.Component {
                     />
                 </div>
                 <div className="transaction-price">
-                    <p>Market Price: ${`${this.props.price}`}</p>
+                    <p>Market Price: ${`${this.props.price[this.props.ticker].price}`}</p>
                     <p>Estimated Cost: ${`${this.state.cost}`}</p>
                 </div>
                 <div className="transaction-submit-info">

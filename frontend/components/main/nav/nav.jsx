@@ -52,7 +52,7 @@ class MainNav extends React.Component {
           </div>
           <div className="nav-right">
             <Link to="/feed" className="nav-right-ele">Home</Link>
-            <a href="" className="nav-right-ele">Messages</a>
+            <a className="nav-right-ele">Messages</a>
             <a className="nav-right-ele" onClick={() => this.props.logout()}>logout</a>
           </div>
         </div>

@@ -4,11 +4,10 @@ import { createNewHolding,
     } from "../util/holding_api_util";
 
 export const RECEIVE_HOLDING = "RECEIVE_HOLDING";
-export const GET_HOLDINGS = "GET_HOLDING";
+export const GET_HOLDINGS = "GET_HOLDINGS";
 export const UPDATE_BUYING_POWER = "UPDATE_BUYING_POWER"
 
 const receiveTheHolding = (holding) => {
-    debugger
     return {
         type: RECEIVE_HOLDING,
         holding
@@ -16,7 +15,6 @@ const receiveTheHolding = (holding) => {
 };
 
 const getTheHoldings = (holdings) => {
-    // debugger
     return {
         type: GET_HOLDINGS,
         holdings

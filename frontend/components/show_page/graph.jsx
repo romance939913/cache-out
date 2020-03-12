@@ -14,7 +14,6 @@ class ShowPageGraph extends React.Component {
     componentDidMount() {
         this.props.receiveDay(`${this.props.ticker}`)
         // this.props.receiveWeek(`${this.props.ticker}`)
-        this.props.receiveRealTimePrice(`${this.props.ticker}`)
         // this.props.receiveHistorical(`${this.props.ticker}`)
     }
 
@@ -22,7 +21,6 @@ class ShowPageGraph extends React.Component {
         if (previousProps.ticker !== this.props.ticker) {
             this.props.receiveDay(`${this.props.ticker}`);
             this.props.receiveWeek(`${this.props.ticker}`)
-            this.props.receiveRealTimePrice(`${this.props.ticker}`)
             this.props.receiveHistorical(`${this.props.ticker}`)
         }
     }
@@ -34,11 +32,12 @@ class ShowPageGraph extends React.Component {
 
     handleMouseLeave() {
         const ele = document.getElementById("real-time-price");
-        ele.textContent=`$${this.props.price}`
+        let symbol = this.props.ticker;
+        ele.textContent= `$${this.props.price[symbol].price}`
     }
 
     changeTimeFrames(newFrame) {
-        this.handleTimeFrameSelect(newFrame)
+        this.handleTimeFrameSelect(newFrame);
     }
 
     // ?????????? week and day data are reversed
@@ -95,6 +94,10 @@ class ShowPageGraph extends React.Component {
             data = this.props.graphPrices
         }
 
+        if (this.props.price[this.props.ticker] === undefined) {
+            return null
+        } 
+
         const renderLineChart = (
             <LineChart 
                 width={800} 
@@ -108,11 +111,13 @@ class ShowPageGraph extends React.Component {
                 <Tooltip />
             </LineChart>
         );
+
+        
         return (
             <div className="graph-wrapper">
                 {/* actual css variables google: dark mode css themes */}
                 {/* custom tooltip Ronil's gh */}
-                <li className="show-stock-price" id="real-time-price">${`${this.props.price}`}</li>
+                <li className="show-stock-price" id="real-time-price">${`${this.props.price[this.props.ticker].price}`}</li>
                 {renderLineChart}
                 <ul className="stock-time-frames">
                     {/* classname ternary for active link (state) */}

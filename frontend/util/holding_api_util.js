@@ -14,8 +14,6 @@ export const indexHoldings = (holding) => (
     })
 );
 
-
-
 export const updateUserBuyingPower = (holding) => (
     $.ajax({
         url: `/api/users/${holding.user_id}`,

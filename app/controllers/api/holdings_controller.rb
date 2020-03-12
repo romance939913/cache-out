@@ -6,13 +6,21 @@ class Api::HoldingsController < ApplicationController
 
             if @update_record
                 new_amt = @update_record.quantity + params[:holding][:quantity].to_i
-                @update_record.update(quantity: new_amt)
-                @holding = @update_record
-                render :show
+                if new_amt >= 0
+                    @update_record.update(quantity: new_amt)
+                    @holding = @update_record
+                    render :show
+                else
+                    render :json ["not enough equity"], status: 422
+                end
             else
                 @holding = Holding.new(holdings_params)
-                @holding.save
-                render :show
+                if @holding.quantity >= 0
+                    @holding.save
+                    render :show
+                else
+                    render :json["not enough shares"]
+                end
             end
         end
     end

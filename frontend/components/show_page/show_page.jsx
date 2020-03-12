@@ -12,11 +12,13 @@ class ShowPage extends React.Component {
 
     componentDidMount() {
         this.props.receiveProfile(this.props.ticker);
+        this.props.receiveRealTimePrice(this.props.ticker);
     }
 
     componentDidUpdate(previousProps) {
         if (previousProps.match.params.ticker !== this.props.match.params.ticker) {
             this.props.receiveProfile(this.props.ticker);
+            this.props.receiveRealTimePrice(this.props.ticker);
         }
     }
 
@@ -24,7 +26,7 @@ class ShowPage extends React.Component {
         let about;
         let profile_attributes = [];
         let name;
-        if(!this.props.profile.description) {
+        if(!this.props.profile.description || JSON.stringify(this.props.price) === '{}') {
             return null; 
         } else {
             about = (<li>{this.props.profile.description}</li>)
@@ -38,7 +40,6 @@ class ShowPage extends React.Component {
                                 </div>)
             })
         }
-        
         return (    
             <div>
                 <NavContainer />
@@ -46,9 +47,15 @@ class ShowPage extends React.Component {
                     <div className="graph-transaction-wrapper">
                         <div className="graph-and-title-wrapper">
                             <h1 className="show-company-name">{name}</h1>
-                            <ShowPageGraph ticker={this.props.ticker}/>
+                            <ShowPageGraph 
+                                ticker={this.props.ticker}
+                                price={this.props.price}
+                            />
                         </div>
-                        <TransactionContainer ticker={this.props.ticker} />
+                        <TransactionContainer 
+                            ticker={this.props.ticker}
+                            price={this.props.price} 
+                        />
                     </div>
                     <ul className="company-profile">
                         <div>
