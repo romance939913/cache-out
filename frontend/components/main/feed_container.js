@@ -8,18 +8,10 @@ const mapStateToProps = state => ({
     currentUser: state.entities.users[state.session.id],
     holdings: state.entities.holdings,
     price: state.entities.price,
-    graphPrices: state.entities.graphPrices,
-
 });
 
 const mapDispatchToProps = dispatch => ({
-    receiveProfile: (company) => dispatch(receiveProfile(company)),
     getHoldings: (holding) => dispatch(getHoldings(holding)),
-    updateUser: (user) => dispatch(updateUser(user)),
-    receiveDay: (ticker) => dispatch(receiveDay(ticker)),
-    receiveHistorical: (ticker) => dispatch(receiveHistorical(ticker)),
-    receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
-    receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainFeed);

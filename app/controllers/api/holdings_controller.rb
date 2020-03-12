@@ -10,6 +10,8 @@ class Api::HoldingsController < ApplicationController
                     @update_record.update(quantity: new_amt)
                     @holding = @update_record
                     render :show
+                elsif new_amt == 0
+                    @update_record.destroy
                 else
                     render :json ["not enough equity"], status: 422
                 end

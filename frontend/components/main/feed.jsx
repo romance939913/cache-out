@@ -1,8 +1,7 @@
 import React from 'react';
 import MainNavContainer from './nav/nav_container';
 import { Link } from 'react-router-dom'
-import GraphMain from './graph_main';
-
+import GraphMainContainer from './graph_main_container';
 
 class MainFeed extends React.Component {
     constructor(props) {
@@ -40,13 +39,8 @@ class MainFeed extends React.Component {
                     <MainNavContainer />
                     <div className="main-page-wrapper">
                         <div className="graph-valuation-wrapper">
-    
+                            <GraphMainContainer tickers={Object.keys(this.props.holdings)} />
                         </div>
-                        <GraphMain 
-                            tickers={Object.keys(this.props.holdings)} 
-                            currentUser={this.props.currentUser}
-                            receiveRealTimePrice={this.props.receiveRealTimePrice}
-                        />
                         <div className="holdings-portfolio">
                             <p className="portfolio-header">Portfolio</p>
                             {tickerArr}

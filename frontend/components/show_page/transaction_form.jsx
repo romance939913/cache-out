@@ -42,7 +42,6 @@ class TransactionForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const holding = Object.assign({}, this.state);
-        // debugger
         if (this.state.buySell === 'BUY') {
             holding['buying_power'] = this.props.currentUser.buying_power - this.state.cost;
             if(holding.buying_power >= 0) {
@@ -51,6 +50,7 @@ class TransactionForm extends React.Component {
             }
         } else {
             holding['buying_power'] = this.props.currentUser.buying_power + this.state.cost;
+            holding.quantity = holding.quantity * (-1)
             if (this.props.holdings[this.props.ticker].quantity - holding.quantity >= 0) {
                 this.props.receiveHolding(holding);
                 this.props.updateUser(holding);
@@ -91,7 +91,7 @@ class TransactionForm extends React.Component {
                 </div>
                 <div className="transaction-price">
                     <p>Market Price: ${`${this.props.price[this.props.ticker].price}`}</p>
-                    <p>Estimated Cost: ${`${this.state.cost}`}</p>
+                    <p>Estimated Cost: ${`${this.state.cost.toFixed(2)}`}</p>
                 </div>
                 <div className="transaction-submit-info">
                     <input type="submit" value={this.state.buySell} className="buy-sell-submit"/>

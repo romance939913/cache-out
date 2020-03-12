@@ -23,5 +23,18 @@
 .portfolio-header {
     margin: 5px;
     font-size: 22px;
+}
 
+.graph-valuation-wrapper {
+    margin-left: 10vw;
+}
+
+.main-page-total-assets {
+    font-size: 32px;
+    margin: 15px;
+}
+
+.main-page-buying-power {
+    margin-left: 25px;
+    margin-bottom: 10px
 }

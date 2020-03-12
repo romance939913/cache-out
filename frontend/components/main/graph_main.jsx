@@ -15,12 +15,22 @@ class GraphMain extends React.Component {
         tickers.forEach((ticker, idx) => {
             this.props.receiveRealTimePrice(ticker);
         });
+        this.props.receiveIndexes()
     }
     
     render() {  
-        if(Object.keys(this.props.prices).length >= Objct.keys(this.props.holdings).length) {
-            
+        let totalEquity = 0
+        if(Object.keys(this.props.price).length !== this.props.tickers.length) {
+            return null
         }
+
+        this.props.tickers.forEach((ticker, idx) => {
+            if(this.props.holdings[ticker].quantity !== 0) {
+                let value = this.props.holdings[ticker].quantity * this.props.price[ticker].price;
+                totalEquity = totalEquity + value;
+            }
+        })
+
         let cash = this.props.currentUser.buying_power;
         const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 },];
         const renderLineChart = (
@@ -34,8 +44,8 @@ class GraphMain extends React.Component {
 
         return (
             <div>
-                <h2></h2>
-                <h2 className ="main-page-buying-power">Current Cash Balance: {`$${cash.toFixed(2)}`}</h2>
+                <h2 className="main-page-total-assets">{`$${(cash + totalEquity).toFixed(2)}`}</h2>
+                <h2 className ="main-page-buying-power">Cash balance: {`$${(cash).toFixed(2)}`}</h2>
                 {renderLineChart}
             </div>
         )

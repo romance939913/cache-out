@@ -12,7 +12,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(logoutUser()),
     receiveStocks: () => dispatch(receiveStocks()),
-    receiveIndexes: () => dispatch(receiveIndexes()),
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker))
 })
 

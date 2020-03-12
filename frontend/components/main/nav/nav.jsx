@@ -12,7 +12,6 @@ class MainNav extends React.Component {
 
   componentDidMount() {
     this.props.receiveStocks()
-    // this.props.recieveRealTimePrice LOOP!!!
   }
 
   render() {
