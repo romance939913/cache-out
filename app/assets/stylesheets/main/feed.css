@@ -3,21 +3,34 @@
 }
 
 .holdings-portfolio {
-    margin-left: 150px;
-    width: 150px;
+    margin-left: 10vw;
+    width: 230px;
     border: solid black 1px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.6);
+    margin-top: 25px;
+    height: 800px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
-.holding-portfolio-ele-wrapper {
+.holding-portfolio-li-wrapper {
     list-style: none;
 }
 
-.holding-portfolio-ele {
+.holding-portfolio-li {
     display: flex;
     justify-content: space-between;
     margin: 10px;
     border-bottom: 1px solid black;
     align-items: center;
+}
+
+.holding-portfolio-li:hover {
+    color: #21ce99;
+}
+
+.portfolio-ele p {
+    margin: 10px;
 }
 
 .portfolio-header {
@@ -31,7 +44,7 @@
 
 .main-page-total-assets {
     font-size: 40px;
-    margin: 15px;
+    margin: 25px;
 }
 
 .main-page-buying-power {

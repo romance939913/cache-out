@@ -23,7 +23,6 @@ class ShowPage extends React.Component {
     }
 
     render() {
-
         if(this.props.profile.description === undefined || JSON.stringify(this.props.price) === '{}') {
             return null; 
         } 
@@ -72,7 +71,7 @@ class ShowPage extends React.Component {
                                 <li>{this.props.profile.mktCap}</li>
                             </div>
                             <div className="show-page-attr-item">
-                                <li>Last Divident</li>
+                                <li>Last Dividend</li>
                                <li>{this.props.profile.lastDiv}</li> 
                             </div>
                             <div className="show-page-attr-item">

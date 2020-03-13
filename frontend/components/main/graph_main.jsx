@@ -16,7 +16,6 @@ class GraphMain extends React.Component {
         tickers.forEach((ticker, idx) => {
             this.props.receiveRealTimePrice(ticker);
         });
-        // this.props.receiveIndexes();
         this.props.receiveIndexPrices("^DJI");
     }
     

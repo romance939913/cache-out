@@ -1,7 +1,7 @@
 import React from 'react';
 import MainNavContainer from './nav/nav_container';
-import { Link } from 'react-router-dom'
 import GraphMainContainer from './graph_main_container';
+import PortfolioContainer from './portfolio_container';
 
 class MainFeed extends React.Component {
     constructor(props) {
@@ -16,39 +16,24 @@ class MainFeed extends React.Component {
     }
     
     render() {
-        let tickerArr = [];
+
         if (this.props.holdings.length === 0) {
             return null;
-        } else {
-            Object.values(this.props.holdings).forEach((ticker, idx) => {
-                if (ticker.quantity !== 0) {
-                    tickerArr.push(<Link
-                        to={`/show/${ticker.ticker}`}
-                        key={idx}>
-                        <li key={idx} className="holding-portfolio-ele-wrapper">
-                            <div className="holding-portfolio-ele">
-                                <p>{ticker.ticker}</p>      
-                                <p>{ticker.quantity}</p>
-                            </div>
-                        </li>
-                    </Link>)
-                }
-            })
-            return (
-                <div>
-                    <MainNavContainer />
-                    <div className="main-page-wrapper">
-                        <div className="graph-valuation-wrapper">
-                            <GraphMainContainer tickers={Object.keys(this.props.holdings)} />
-                        </div>
-                        <div className="holdings-portfolio">
-                            <p className="portfolio-header">Portfolio</p>
-                            {tickerArr}
-                        </div>
+        }
+
+        return (
+            <div>
+                <MainNavContainer />
+                <div className="main-page-wrapper">
+                    <div className="graph-valuation-wrapper">
+                        <GraphMainContainer tickers={Object.keys(this.props.holdings)} />
+                    </div>
+                    <div className="holdings-portfolio">
+                        <PortfolioContainer tickers={Object.keys(this.props.holdings)}/>
                     </div>
                 </div>
-            );
-        }
+            </div>
+        );
     }
 }
 
