@@ -1,4 +1,5 @@
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
     context: __dirname,
@@ -7,6 +8,14 @@ module.exports = {
         path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
         filename: 'bundle.js'
     },
+    plugins: [
+        new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+            ecma: 6,
+        },
+    })
+    ],
     module: {
         rules: [
             {
