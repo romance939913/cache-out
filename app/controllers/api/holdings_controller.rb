@@ -29,7 +29,6 @@ class Api::HoldingsController < ApplicationController
 
     def index
         @holdings = Holding.where(user_id: params[:holding][:user_id])
-        # debugger
         if @holdings
             render :index
         else

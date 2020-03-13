@@ -11,7 +11,6 @@ class Portfolio extends React.Component {
 
     componentDidMount() {
         let tickers = this.props.tickers;
-        debugger
         tickers.forEach((ticker, idx) => {
             this.props.receiveRealTimePrice(ticker);
         });
@@ -22,7 +21,6 @@ class Portfolio extends React.Component {
         if (Object.keys(this.props.price).length !== this.props.tickers.length) {
             return null;
         }
-        debugger
         Object.values(this.props.holdings).forEach((ticker, idx) => {
             if (ticker.quantity !== 0) {
                 tickerArr.push(<Link

@@ -39,7 +39,6 @@ class GraphMain extends React.Component {
         let d = new Date();
         let date = d.getDate().toString();
         let dateFix = date.padStart(2, "0");
-        // debugger
         if (this.state.time === "1d") {
             data = data.filter(obj => {
                 let oDate = obj.date.split(" ");
