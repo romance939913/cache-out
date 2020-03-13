@@ -45,7 +45,8 @@ class Portfolio extends React.Component {
         })
 
         return (
-            <div>
+            <div className="holdings-portfolio">
+                <p className="portfolio-header">portfolio</p>
                 {tickerArr}
             </div>
         );

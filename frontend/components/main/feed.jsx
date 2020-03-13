@@ -28,9 +28,7 @@ class MainFeed extends React.Component {
                     <div className="graph-valuation-wrapper">
                         <GraphMainContainer tickers={Object.keys(this.props.holdings)} />
                     </div>
-                    <div className="holdings-portfolio">
-                        <PortfolioContainer tickers={Object.keys(this.props.holdings)}/>
-                    </div>
+                    <PortfolioContainer tickers={Object.keys(this.props.holdings)}/>
                 </div>
             </div>
         );
