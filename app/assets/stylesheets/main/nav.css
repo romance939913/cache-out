@@ -84,14 +84,24 @@
 }
 
 .marquee-item {
+    display: flex;
     list-style: none;
     color: white;
     padding-left: 80px;
     padding-top: 5px;
     padding-bottom: 5px;
     font-family: 'Orbitron', sans-serif;
+    animation-iteration-count: infinite;
+    animation-duration: 75s;
+}
+
+.marquee-item-data {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .marquee-wrapper {
     background-color: black;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }

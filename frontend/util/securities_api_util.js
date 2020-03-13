@@ -19,6 +19,13 @@ export const fetchIndexes = () => (
     })
 )
 
+export const fetchIndexPrices = (index) => (
+    $.ajax({
+        url: `https://financialmodelingprep.com/api/v3/historical-chart/5min/${index}`,
+        method: "GET"
+    })
+);
+
 export const fetchProfile = (company) => (
     $.ajax({
         url: `https://financialmodelingprep.com/api/v3/company/profile/${company}`,

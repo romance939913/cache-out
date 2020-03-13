@@ -5,98 +5,92 @@ class ShowPageGraph extends React.Component {
     constructor(props) {
         super(props);
         this.handleHover = this.handleHover.bind(this);
-        this.handleMouseLeave = this.handleMouseLeave.bind(this)
-        this.changeTimeFrames = this.changeTimeFrames.bind(this)
-        // this.state = { time: '1d' }
-        this.handleTimeFrameSelect = this.handleTimeFrameSelect.bind(this)
+        this.handleMouseLeave = this.handleMouseLeave.bind(this);
+        this.changeTimeFrames = this.changeTimeFrames.bind(this);
+        this.handleTimeFrameSelect = this.handleTimeFrameSelect.bind(this);
+        this.state = { 
+            time: '1d',
+            color: "red"
+        };
     }
 
     componentDidMount() {
         this.props.receiveDay(`${this.props.ticker}`)
-        // this.props.receiveWeek(`${this.props.ticker}`)
-        // this.props.receiveHistorical(`${this.props.ticker}`)
     }
 
     componentDidUpdate(previousProps) {
         if (previousProps.ticker !== this.props.ticker) {
             this.props.receiveDay(`${this.props.ticker}`);
-            this.props.receiveWeek(`${this.props.ticker}`)
-            this.props.receiveHistorical(`${this.props.ticker}`)
         }
     }
 
     handleHover(e) {
         const ele = document.getElementById("real-time-price");
-        ele.textContent = `$${e.activePayload[0].value}`
+        ele.textContent = `$${e.activePayload[0].value}`;
     }
 
     handleMouseLeave() {
         const ele = document.getElementById("real-time-price");
         let symbol = this.props.ticker;
-        ele.textContent= `$${this.props.price[symbol].price}`
+        ele.textContent= `$${this.props.price[symbol].price}`;
     }
 
     changeTimeFrames(newFrame) {
+        this.setState({ time: newFrame });
         this.handleTimeFrameSelect(newFrame);
     }
 
-    // ?????????? week and day data are reversed
-    handleTimeFrameSelect(arg) {
-        switch (arg) {
+    handleTimeFrameSelect(time) {
+        switch (time) {
             case "1d":
-                this.props.receiveDay(`${this.props.ticker}`)
-
-                // data = data.filter(obj => {
-                //     let oDate = obj.date.split(" ");
-                //     let oday = oDate[0].split("-");
-                //     return oday[2] === dateFix;
-                // });
+                this.props.receiveDay(`${this.props.ticker}`);
                 break;
             case "1w":
-                this.props.receiveWeek(`${this.props.ticker}`)
+                this.props.receiveWeek(`${this.props.ticker}`);
                 break;
             case "1m":
-                this.props.receiveHistorical(`${this.props.ticker}`)
-                // data = this.props.historicalPrices.slice(-31)
-                break
+                this.props.receiveHistorical(`${this.props.ticker}`);
+                break;
             case "3m":
-                this.props.receiveHistorical(`${this.props.ticker}`)
-                // data = this.props.historicalPrices.slice(-93)
-                break
-            // case "1y":
-            //     this.props.receiveHistorical(`${this.props.ticker}`)
-            //     // data = this.props.historicalPrices.slice(-261)
-            //     break
+                this.props.receiveHistorical(`${this.props.ticker}`);
+                break;
             case "1y":
-                this.props.receiveHistorical(`${this.props.ticker}`)
-                // data = this.props.historicalPrices.slice(-261)
-                break
+                this.props.receiveHistorical(`${this.props.ticker}`);
+                break;
             case "5y":
-                this.props.receiveHistorical(`${this.props.ticker}`)
-                // data = this.props.historicalPrices;
-                // data = data.reverse();
-                // data = data.filter((ele, idx) => {
-                //     return idx % 5 === 0;
-                // });
-                // data = data.reverse()
-                break
+                this.props.receiveHistorical(`${this.props.ticker}`);
+                break;
         }
     }
     
     render() {
         let data;
-        let d = new Date();
-        let date = d.getDate().toString();
-        let dateFix = date.padStart(2, "0");
-        if (this.props.graphPrices.length === 0) {
+        if (this.props.graphPrices.length === 0 || this.props.price[this.props.ticker] === undefined) {
             return null;
         } else {
-            data = this.props.graphPrices
+            data = this.props.graphPrices;
+            let d = new Date();
+            let date = d.getDate().toString();
+            let dateFix = date.padStart(2, "0");
+            if (this.state.time === "1d") {
+                    data = data.filter(obj => {
+                    let oDate = obj.date.split(" ");
+                    let oday = oDate[0].split("-");
+                    return oday[2] === dateFix;
+                });
+                data = data.reverse();
+                data = data.slice(1);
+            } else if (this.state.time === "1w") {
+                data = data.slice();
+                data = data.reverse();
+            } else if (this.state.time === "1m") {
+                data = this.props.graphPrices.slice(-31);
+            } else if (this.state.time === "3m") {
+                data = this.props.graphPrices.slice(-93);
+            } else if (this.state.time === "1y") {
+                data = this.props.graphPrices.slice(-261);
+            }
         }
-
-        if (this.props.price[this.props.ticker] === undefined) {
-            return null
-        } 
 
         const renderLineChart = (
             <LineChart 

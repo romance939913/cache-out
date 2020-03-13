@@ -2,16 +2,6 @@
     margin-left: 5vw;
 }
 
-.company-profile {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.company-attr-item {
-    list-style: none;
-    border: solid black 1px;
-}
-
 .stock-time-frames {
     display: flex;
     justify-content: space-evenly;
@@ -49,17 +39,28 @@
     display: flex;
 }
 
- /* CEO
-Employees
-Headquarters
-Founded
-Market Cap
-Price-Earnings Ratio
-Dividend Yield
-Average Volume */
+.show-page-about-header {
+    font-size: 25px;
+    border-bottom: 1px solid lightgray;
+    width: 800px; 
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 
-/*
-CEO
-Industry
+.show-page-about-description {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 800px;
+}
 
-*/
+.show-page-attr-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 800px;
+}
+
+.show-page-attr-item {
+    width: 120px;
+    margin: 30px;
+    font-size: 14px;
+}

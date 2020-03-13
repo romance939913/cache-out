@@ -23,30 +23,18 @@ class ShowPage extends React.Component {
     }
 
     render() {
-        let about;
-        let profile_attributes = [];
-        let name;
-        if(!this.props.profile.description || JSON.stringify(this.props.price) === '{}') {
+
+        if(this.props.profile.description === undefined || JSON.stringify(this.props.price) === '{}') {
             return null; 
-        } else {
-            about = (<li>{this.props.profile.description}</li>)
-            name = (<li>{this.props.profile.companyName}</li>)
-            // delete this.props.profile.description;
-            let attributes = Object.keys(this.props.profile)
-            attributes.forEach((attr, idx) => {
-            profile_attributes.push(<div className="company-attr-item">
-                                    <li key={idx} className="company-attr-key">{attr}</li> 
-                                    <li className="company-attr-value">{this.props.profile[attr]}</li>
-                                </div>)
-            })
-        }
+        } 
+
         return (    
             <div>
                 <NavContainer />
                 <div className="show-page-body-wrapper">
                     <div className="graph-transaction-wrapper">
                         <div className="graph-and-title-wrapper">
-                            <h1 className="show-company-name">{name}</h1>
+                            <h1 className="show-company-name">{this.props.profile.companyName}</h1>
                             <ShowPageGraph 
                                 ticker={this.props.ticker}
                                 price={this.props.price}
@@ -59,12 +47,45 @@ class ShowPage extends React.Component {
                     </div>
                     <ul className="company-profile">
                         <div>
-                            <h2>about</h2>
-                            <li>{about}</li>
+                            <li className="show-page-about-header">About</li>
+                            <li className="show-page-about-description">{this.props.profile.description}</li>
                         </div>
-                        {profile_attributes}
+                        <div className="show-page-attr-wrapper">
+                            <div className="show-page-attr-item">
+                                <li>CEO</li>
+                                <li>{this.props.profile.ceo}</li>
+                            </div>
+                            <div className="show-page-attr-item">
+                                <li>Sector</li>
+                                <li>{this.props.profile.sector}</li>
+                            </div>
+                            <div className="show-page-attr-item">
+                                <li>Industry</li>
+                                <li>{this.props.profile.industry}</li>
+                            </div>
+                            <div className="show-page-attr-item">
+                                <li>exchange</li>
+                                <li>{this.props.profile.exchange}</li>
+                            </div>
+                            <div className="show-page-attr-item">
+                                <li>Market Cap</li>
+                                <li>{this.props.profile.mktCap}</li>
+                            </div>
+                            <div className="show-page-attr-item">
+                                <li>Last Divident</li>
+                               <li>{this.props.profile.lastDiv}</li> 
+                            </div>
+                            <div className="show-page-attr-item">
+                                <li>Volume Average</li>
+                                <li>{this.props.profile.volAvg}</li>
+                            </div>
+                            <div className="show-page-attr-item">
+                                <li>Day change</li> 
+                                <li>{this.props.profile.changes}</li>
+                            </div>
+                            <div className="show-page-attr-item"></div>
+                        </div>
                     </ul>
-                    <li>{this.props.profile.description}</li>
                 </div>
             </div>
         );

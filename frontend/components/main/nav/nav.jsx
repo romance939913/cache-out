@@ -11,15 +11,16 @@ class MainNav extends React.Component {
   }
 
   componentDidMount() {
-    this.props.receiveStocks()
+    this.props.receiveStocks();
+    this.props.receiveIndexes();
   }
 
   render() {
-    let stocksList;
-    let lis;
-    if(JSON.stringify(this.props.stocks) === '{}') {
+    let lis = [];
+    if (JSON.stringify(this.props.stocks) === '{}' || this.props.indexes.majorIndexesList === undefined) {
       return null
     } else {
+      // console.log(this.props.indexes.majorIndexesList[0].ticker)
       let shuffle = (a) => {
         let j, x, i;
         for (i = a.length - 1; i > 0; i--) {
@@ -30,9 +31,24 @@ class MainNav extends React.Component {
         }
         return a;
       }
-      stocksList = Object.keys(this.props.stocks);
-      let stocksArray = shuffle(stocksList)
-      lis = stocksArray.map((stock, idx) => <li key={idx} className="marquee-item">{stock}</li>)
+      let indexList = Object.keys(this.props.indexes.majorIndexesList);
+      let indexes = shuffle(indexList);    
+      while (lis.length < 300) {
+        lis.push(indexes.map((index, idx) => <li 
+                                              key={idx} 
+                                              className="marquee-item">
+                                              <div className="marquee-item-data">
+                                                {this.props.indexes.majorIndexesList[index].indexName}
+                                              </div>
+                                              <div className="marquee-item-data">
+                                                {this.props.indexes.majorIndexesList[index].price}
+                                              </div>
+                                              <div className="marquee-item-data">
+                                                {`${this.props.indexes.majorIndexesList[index].changes}`}
+                                              </div>
+                                          </li>))
+
+      }
     }
 
     return (

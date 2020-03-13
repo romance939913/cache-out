@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import { receiveProfile, receiveRealTimePrice } from '../../actions/security_actions';
-// import TransactionForm from './transaction_form';
-import { receiveHolding, getHoldings, updateUser } from '../../actions/holding_actions';
+import { getHoldings } from '../../actions/holding_actions';
 import MainFeed from './feed';
 
 const mapStateToProps = state => ({
