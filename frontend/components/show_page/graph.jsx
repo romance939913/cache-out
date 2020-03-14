@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, CartesianGrid, YAxis, Tooltip} from 'recharts';
+import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip} from 'recharts';
 
 class ShowPageGraph extends React.Component {
     constructor(props) {
@@ -10,7 +10,6 @@ class ShowPageGraph extends React.Component {
         this.handleTimeFrameSelect = this.handleTimeFrameSelect.bind(this);
         this.state = { 
             time: '1d',
-            color: "red"
         };
     }
 
@@ -26,13 +25,13 @@ class ShowPageGraph extends React.Component {
 
     handleHover(e) {
         const ele = document.getElementById("real-time-price");
-        ele.textContent = `$${e.activePayload[0].value}`;
+        ele.textContent = `$${e.activePayload[0].value.toFixed(2)}`;
     }
 
     handleMouseLeave() {
         const ele = document.getElementById("real-time-price");
         let symbol = this.props.ticker;
-        ele.textContent= `$${this.props.price[symbol].price}`;
+        ele.textContent= `$${this.props.price[symbol].price.toFixed(2)}`;
     }
 
     changeTimeFrames(newFrame) {
@@ -64,32 +63,41 @@ class ShowPageGraph extends React.Component {
     }
     
     render() {
-        let data;
+
         if (this.props.graphPrices.length === 0 || this.props.price[this.props.ticker] === undefined) {
-            return null;
+            return null
+        }
+        
+        let data = this.props.graphPrices;
+        data = data.slice()
+        let d = new Date();
+        let date = d.getDate().toString();
+        let dateFix = date.padStart(2, "0");
+        if (this.state.time === "1d") {
+            //     data = data.filter(obj => {
+            //     let oDate = obj.date.split(" ");
+            //     let oday = oDate[0].split("-");
+            //     return oday[2] === dateFix;
+            // });
+            data = data.reverse();
+            data = data.slice(1);
+        } else if (this.state.time === "1w") {
+            data = data.slice();
+            data = data.reverse();
+        } else if (this.state.time === "1m") {
+            data = this.props.graphPrices.slice(-31);
+        } else if (this.state.time === "3m") {
+            data = this.props.graphPrices.slice(-93);
+        } else if (this.state.time === "1y") {
+            data = this.props.graphPrices.slice(-261);
+        }
+
+        let color
+
+        if (data[0] !== undefined && data[0].close > data.slice(-1)[0].close) {
+            color = '#ff0000';
         } else {
-            data = this.props.graphPrices;
-            let d = new Date();
-            let date = d.getDate().toString();
-            let dateFix = date.padStart(2, "0");
-            if (this.state.time === "1d") {
-                    data = data.filter(obj => {
-                    let oDate = obj.date.split(" ");
-                    let oday = oDate[0].split("-");
-                    return oday[2] === dateFix;
-                });
-                data = data.reverse();
-                data = data.slice(1);
-            } else if (this.state.time === "1w") {
-                data = data.slice();
-                data = data.reverse();
-            } else if (this.state.time === "1m") {
-                data = this.props.graphPrices.slice(-31);
-            } else if (this.state.time === "3m") {
-                data = this.props.graphPrices.slice(-93);
-            } else if (this.state.time === "1y") {
-                data = this.props.graphPrices.slice(-261);
-            }
+            color = '#21ce99';
         }
 
         const renderLineChart = (
@@ -97,11 +105,12 @@ class ShowPageGraph extends React.Component {
                 width={800} 
                 height={400} 
                 data={data} 
-                onMouseOver={this.handleHover} 
+                onMouseMove={this.handleHover} 
                 onMouseLeave={this.handleMouseLeave}>
-                <Line type="monotone" dataKey="close" stroke="#21ce99"/>
+                <Line type="monotone" dataKey="close" stroke={color}/>
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
-                <YAxis domain={['dataMin', 'dataMax']}/>
+                <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
+                <XAxis dataKey='date' hide={true}/>
                 <Tooltip />
             </LineChart>
         );
@@ -111,7 +120,7 @@ class ShowPageGraph extends React.Component {
             <div className="graph-wrapper">
                 {/* actual css variables google: dark mode css themes */}
                 {/* custom tooltip Ronil's gh */}
-                <li className="show-stock-price" id="real-time-price">${`${this.props.price[this.props.ticker].price}`}</li>
+                <li className="show-stock-price" id="real-time-price">${`${this.props.price[this.props.ticker].price.toFixed(2)}`}</li>
                 {renderLineChart}
                 <ul className="stock-time-frames">
                     {/* classname ternary for active link (state) */}

@@ -8,22 +8,24 @@ class TransactionForm extends React.Component {
                 ticker: this.props.ticker,
                 quantity: 0,
                 cost:  0,
-                buySell: 'BUY'
+                buySell: 'BUY',
+                buying_power: this.props.buying_power
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidUpdate(previousProps) {
-        if (previousProps.ticker !== this.props.ticker) {
+        if (previousProps.ticker !== this.props.ticker || previousProps.holdings.quantity !== this.props.holdings.quantity) {
             this.props.getHoldings(this.state)
+            this.props.buying_power
             this.setState({ ticker: this.props.ticker })
         }
     }
 
     componentDidMount() {
         let obj = Object.assign({}, this.state);
-        this.props.getHoldings(this.state);
+        this.props.getHoldings(obj);
     }
 
     handleClick(value) {
@@ -48,6 +50,7 @@ class TransactionForm extends React.Component {
                 this.props.receiveHolding(holding);
                 this.props.updateUser(holding);
             }
+            
         } else {
             holding['buying_power'] = this.props.currentUser.buying_power + this.state.cost;
             holding.quantity = holding.quantity * (-1)

@@ -17,6 +17,7 @@ class MainNav extends React.Component {
 
   render() {
     let lis = [];
+
     if (JSON.stringify(this.props.stocks) === '{}' || this.props.indexes.majorIndexesList === undefined) {
       return null
     } else {
@@ -63,7 +64,7 @@ class MainNav extends React.Component {
         <div className="nav-bar">
           <div className="nav-left">
             <img src={window.logo_pic} alt=""/>
-            <NavSearchContainer />
+            <NavSearchContainer stocks={this.props.stocks}/>
           </div>
           <div className="nav-right">
             <Link to="/feed" className="nav-right-ele">Home</Link>

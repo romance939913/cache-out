@@ -1,0 +1,5014 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+
+/*! ../../../actions/security_actions */
+
+/*! ../../../actions/session_actions */
+
+/*! ../../actions/graph_actions */
+
+/*! ../../actions/holding_actions */
+
+/*! ../../actions/security_actions */
+
+/*! ../../actions/session_actions */
+
+/*! ../../internals/path */
+
+/*! ../../modules/es.math.acosh */
+
+/*! ../../modules/es.math.asinh */
+
+/*! ../../modules/es.math.atanh */
+
+/*! ../../modules/es.math.cbrt */
+
+/*! ../../modules/es.math.clz32 */
+
+/*! ../../modules/es.math.cosh */
+
+/*! ../../modules/es.math.expm1 */
+
+/*! ../../modules/es.math.fround */
+
+/*! ../../modules/es.math.hypot */
+
+/*! ../../modules/es.math.imul */
+
+/*! ../../modules/es.math.log10 */
+
+/*! ../../modules/es.math.log1p */
+
+/*! ../../modules/es.math.log2 */
+
+/*! ../../modules/es.math.sign */
+
+/*! ../../modules/es.math.sinh */
+
+/*! ../../modules/es.math.tanh */
+
+/*! ../../modules/es.math.to-string-tag */
+
+/*! ../../modules/es.math.trunc */
+
+/*! ../../modules/es.number.constructor */
+
+/*! ../../modules/es.number.epsilon */
+
+/*! ../../modules/es.number.is-finite */
+
+/*! ../../modules/es.number.is-integer */
+
+/*! ../../modules/es.number.is-nan */
+
+/*! ../../modules/es.number.is-safe-integer */
+
+/*! ../../modules/es.number.max-safe-integer */
+
+/*! ../../modules/es.number.min-safe-integer */
+
+/*! ../../modules/es.number.parse-float */
+
+/*! ../../modules/es.number.parse-int */
+
+/*! ../../modules/es.number.to-fixed */
+
+/*! ../../modules/es.number.to-precision */
+
+/*! ../actions/session_actions */
+
+/*! ../array.js */
+
+/*! ../cartesian/Area */
+
+/*! ../cartesian/Bar */
+
+/*! ../cartesian/Brush */
+
+/*! ../cartesian/CartesianAxis */
+
+/*! ../cartesian/Line */
+
+/*! ../cartesian/ReferenceArea */
+
+/*! ../cartesian/ReferenceDot */
+
+/*! ../cartesian/ReferenceLine */
+
+/*! ../cartesian/Scatter */
+
+/*! ../cartesian/XAxis */
+
+/*! ../cartesian/YAxis */
+
+/*! ../cartesian/ZAxis */
+
+/*! ../component/Cell */
+
+/*! ../component/Label */
+
+/*! ../component/LabelList */
+
+/*! ../component/Legend */
+
+/*! ../component/Text */
+
+/*! ../component/Tooltip */
+
+/*! ../components/Context */
+
+/*! ../components/ResizeDetector */
+
+/*! ../components/connectAdvanced */
+
+/*! ../constant.js */
+
+/*! ../container/Layer */
+
+/*! ../container/Surface */
+
+/*! ../count.js */
+
+/*! ../deviation.js */
+
+/*! ../internals/a-possible-prototype */
+
+/*! ../internals/an-object */
+
+/*! ../internals/array-includes */
+
+/*! ../internals/classof-raw */
+
+/*! ../internals/copy-constructor-properties */
+
+/*! ../internals/create-non-enumerable-property */
+
+/*! ../internals/create-property-descriptor */
+
+/*! ../internals/descriptors */
+
+/*! ../internals/document-create-element */
+
+/*! ../internals/enum-bug-keys */
+
+/*! ../internals/export */
+
+/*! ../internals/fails */
+
+/*! ../internals/get-built-in */
+
+/*! ../internals/global */
+
+/*! ../internals/has */
+
+/*! ../internals/hidden-keys */
+
+/*! ../internals/html */
+
+/*! ../internals/ie8-dom-define */
+
+/*! ../internals/indexed-object */
+
+/*! ../internals/inherit-if-required */
+
+/*! ../internals/inspect-source */
+
+/*! ../internals/internal-state */
+
+/*! ../internals/is-forced */
+
+/*! ../internals/is-integer */
+
+/*! ../internals/is-object */
+
+/*! ../internals/is-pure */
+
+/*! ../internals/math-expm1 */
+
+/*! ../internals/math-fround */
+
+/*! ../internals/math-log1p */
+
+/*! ../internals/math-sign */
+
+/*! ../internals/native-symbol */
+
+/*! ../internals/native-weak-map */
+
+/*! ../internals/number-is-finite */
+
+/*! ../internals/number-parse-float */
+
+/*! ../internals/number-parse-int */
+
+/*! ../internals/object-create */
+
+/*! ../internals/object-define-properties */
+
+/*! ../internals/object-define-property */
+
+/*! ../internals/object-get-own-property-descriptor */
+
+/*! ../internals/object-get-own-property-names */
+
+/*! ../internals/object-get-own-property-symbols */
+
+/*! ../internals/object-keys */
+
+/*! ../internals/object-keys-internal */
+
+/*! ../internals/object-property-is-enumerable */
+
+/*! ../internals/object-set-prototype-of */
+
+/*! ../internals/own-keys */
+
+/*! ../internals/path */
+
+/*! ../internals/redefine */
+
+/*! ../internals/require-object-coercible */
+
+/*! ../internals/set-global */
+
+/*! ../internals/set-to-string-tag */
+
+/*! ../internals/shared */
+
+/*! ../internals/shared-key */
+
+/*! ../internals/shared-store */
+
+/*! ../internals/string-repeat */
+
+/*! ../internals/string-trim */
+
+/*! ../internals/this-number-value */
+
+/*! ../internals/to-absolute-index */
+
+/*! ../internals/to-indexed-object */
+
+/*! ../internals/to-integer */
+
+/*! ../internals/to-length */
+
+/*! ../internals/to-primitive */
+
+/*! ../internals/uid */
+
+/*! ../internals/use-symbol-as-uid */
+
+/*! ../internals/well-known-symbol */
+
+/*! ../internals/whitespaces */
+
+/*! ../lib/utils */
+
+/*! ../main/nav/nav_container */
+
+/*! ../math.js */
+
+/*! ../noop.js */
+
+/*! ../number.js */
+
+/*! ../numberAxis/Funnel */
+
+/*! ../point.js */
+
+/*! ../pointRadial.js */
+
+/*! ../polar/Pie */
+
+/*! ../polar/PolarAngleAxis */
+
+/*! ../polar/PolarRadiusAxis */
+
+/*! ../polar/Radar */
+
+/*! ../polar/RadialBar */
+
+/*! ../quantile.js */
+
+/*! ../reducers/root_reducer */
+
+/*! ../shape/Cross */
+
+/*! ../shape/Curve */
+
+/*! ../shape/Dot */
+
+/*! ../shape/Polygon */
+
+/*! ../shape/Rectangle */
+
+/*! ../shape/Sector */
+
+/*! ../shape/Symbols */
+
+/*! ../shape/Trapezoid */
+
+/*! ../util/CartesianUtils */
+
+/*! ../util/ChartUtils */
+
+/*! ../util/Constants */
+
+/*! ../util/CssPrefixUtils */
+
+/*! ../util/DOMUtils */
+
+/*! ../util/DataUtils */
+
+/*! ../util/DetectReferenceElementsDomain */
+
+/*! ../util/Events */
+
+/*! ../util/IfOverflowMatches */
+
+/*! ../util/LogUtils */
+
+/*! ../util/PolarUtils */
+
+/*! ../util/ReactUtils */
+
+/*! ../util/ShallowEqual */
+
+/*! ../util/graph_api_util */
+
+/*! ../util/holding_api_util */
+
+/*! ../util/protect_util */
+
+/*! ../util/route_util */
+
+/*! ../util/securities_api_util */
+
+/*! ../util/session_api_util */
+
+/*! ../util/types */
+
+/*! ../utils/Subscription */
+
+/*! ../utils/shallowEqual */
+
+/*! ../utils/useIsomorphicLayoutEffect */
+
+/*! ../utils/verifyPlainObject */
+
+/*! ../utils/warning */
+
+/*! ./../../process/browser.js */
+
+/*! ./../../webpack/buildin/global.js */
+
+/*! ./../../webpack/buildin/harmony-module.js */
+
+/*! ./../webpack/buildin/global.js */
+
+/*! ./../webpack/buildin/module.js */
+
+/*! ./Animate */
+
+/*! ./AnimateGroup */
+
+/*! ./AnimateGroupChild */
+
+/*! ./AnimateManager */
+
+/*! ./CSSTransition */
+
+/*! ./ChartUtils */
+
+/*! ./ChildWrapper */
+
+/*! ./Context */
+
+/*! ./DataUtils */
+
+/*! ./DefaultLegendContent */
+
+/*! ./DefaultTooltipContent */
+
+/*! ./ErrorBar */
+
+/*! ./IfOverflowMatches */
+
+/*! ./Label */
+
+/*! ./ReactUtils */
+
+/*! ./ReplaceTransition */
+
+/*! ./ShallowEqual */
+
+/*! ./Text */
+
+/*! ./Transition */
+
+/*! ./TransitionGroup */
+
+/*! ./ZAxis */
+
+/*! ./_DataView */
+
+/*! ./_Hash */
+
+/*! ./_ListCache */
+
+/*! ./_Map */
+
+/*! ./_MapCache */
+
+/*! ./_Promise */
+
+/*! ./_Set */
+
+/*! ./_SetCache */
+
+/*! ./_Stack */
+
+/*! ./_Symbol */
+
+/*! ./_Symbol.js */
+
+/*! ./_Uint8Array */
+
+/*! ./_WeakMap */
+
+/*! ./_apply */
+
+/*! ./_arrayEach */
+
+/*! ./_arrayEvery */
+
+/*! ./_arrayFilter */
+
+/*! ./_arrayIncludes */
+
+/*! ./_arrayIncludesWith */
+
+/*! ./_arrayLikeKeys */
+
+/*! ./_arrayMap */
+
+/*! ./_arrayPush */
+
+/*! ./_arraySome */
+
+/*! ./_assignValue */
+
+/*! ./_assocIndexOf */
+
+/*! ./_baseAssign */
+
+/*! ./_baseAssignIn */
+
+/*! ./_baseAssignValue */
+
+/*! ./_baseClone */
+
+/*! ./_baseCreate */
+
+/*! ./_baseEach */
+
+/*! ./_baseEvery */
+
+/*! ./_baseExtremum */
+
+/*! ./_baseFilter */
+
+/*! ./_baseFindIndex */
+
+/*! ./_baseFlatten */
+
+/*! ./_baseFor */
+
+/*! ./_baseForOwn */
+
+/*! ./_baseGet */
+
+/*! ./_baseGetAllKeys */
+
+/*! ./_baseGetTag */
+
+/*! ./_baseGetTag.js */
+
+/*! ./_baseGt */
+
+/*! ./_baseHasIn */
+
+/*! ./_baseIndexOf */
+
+/*! ./_baseIntersection */
+
+/*! ./_baseIsArguments */
+
+/*! ./_baseIsEqual */
+
+/*! ./_baseIsEqualDeep */
+
+/*! ./_baseIsMap */
+
+/*! ./_baseIsMatch */
+
+/*! ./_baseIsNaN */
+
+/*! ./_baseIsNative */
+
+/*! ./_baseIsSet */
+
+/*! ./_baseIsTypedArray */
+
+/*! ./_baseIteratee */
+
+/*! ./_baseKeys */
+
+/*! ./_baseKeysIn */
+
+/*! ./_baseLt */
+
+/*! ./_baseMap */
+
+/*! ./_baseMatches */
+
+/*! ./_baseMatchesProperty */
+
+/*! ./_baseOrderBy */
+
+/*! ./_baseProperty */
+
+/*! ./_basePropertyDeep */
+
+/*! ./_baseRange */
+
+/*! ./_baseRest */
+
+/*! ./_baseSetToString */
+
+/*! ./_baseSlice */
+
+/*! ./_baseSome */
+
+/*! ./_baseSortBy */
+
+/*! ./_baseSum */
+
+/*! ./_baseTimes */
+
+/*! ./_baseToString */
+
+/*! ./_baseUnary */
+
+/*! ./_baseUniq */
+
+/*! ./_baseUnset */
+
+/*! ./_cacheHas */
+
+/*! ./_castArrayLikeObject */
+
+/*! ./_castPath */
+
+/*! ./_cloneArrayBuffer */
+
+/*! ./_cloneBuffer */
+
+/*! ./_cloneDataView */
+
+/*! ./_cloneRegExp */
+
+/*! ./_cloneSymbol */
+
+/*! ./_cloneTypedArray */
+
+/*! ./_compareAscending */
+
+/*! ./_compareMultiple */
+
+/*! ./_copyArray */
+
+/*! ./_copyObject */
+
+/*! ./_copySymbols */
+
+/*! ./_copySymbolsIn */
+
+/*! ./_coreJsData */
+
+/*! ./_createBaseEach */
+
+/*! ./_createBaseFor */
+
+/*! ./_createFind */
+
+/*! ./_createRange */
+
+/*! ./_createSet */
+
+/*! ./_customOmitClone */
+
+/*! ./_defineProperty */
+
+/*! ./_equalArrays */
+
+/*! ./_equalByTag */
+
+/*! ./_equalObjects */
+
+/*! ./_flatRest */
+
+/*! ./_freeGlobal */
+
+/*! ./_freeGlobal.js */
+
+/*! ./_getAllKeys */
+
+/*! ./_getAllKeysIn */
+
+/*! ./_getMapData */
+
+/*! ./_getMatchData */
+
+/*! ./_getNative */
+
+/*! ./_getPrototype */
+
+/*! ./_getRawTag */
+
+/*! ./_getRawTag.js */
+
+/*! ./_getSymbols */
+
+/*! ./_getSymbolsIn */
+
+/*! ./_getTag */
+
+/*! ./_getValue */
+
+/*! ./_hasPath */
+
+/*! ./_hashClear */
+
+/*! ./_hashDelete */
+
+/*! ./_hashGet */
+
+/*! ./_hashHas */
+
+/*! ./_hashSet */
+
+/*! ./_initCloneArray */
+
+/*! ./_initCloneByTag */
+
+/*! ./_initCloneObject */
+
+/*! ./_isFlattenable */
+
+/*! ./_isIndex */
+
+/*! ./_isIterateeCall */
+
+/*! ./_isKey */
+
+/*! ./_isKeyable */
+
+/*! ./_isMasked */
+
+/*! ./_isPrototype */
+
+/*! ./_isStrictComparable */
+
+/*! ./_listCacheClear */
+
+/*! ./_listCacheDelete */
+
+/*! ./_listCacheGet */
+
+/*! ./_listCacheHas */
+
+/*! ./_listCacheSet */
+
+/*! ./_mapCacheClear */
+
+/*! ./_mapCacheDelete */
+
+/*! ./_mapCacheGet */
+
+/*! ./_mapCacheHas */
+
+/*! ./_mapCacheSet */
+
+/*! ./_mapToArray */
+
+/*! ./_matchesStrictComparable */
+
+/*! ./_memoizeCapped */
+
+/*! ./_nativeCreate */
+
+/*! ./_nativeKeys */
+
+/*! ./_nativeKeysIn */
+
+/*! ./_nodeUtil */
+
+/*! ./_objectToString */
+
+/*! ./_objectToString.js */
+
+/*! ./_overArg */
+
+/*! ./_overRest */
+
+/*! ./_parent */
+
+/*! ./_root */
+
+/*! ./_root.js */
+
+/*! ./_setCacheAdd */
+
+/*! ./_setCacheHas */
+
+/*! ./_setToArray */
+
+/*! ./_setToString */
+
+/*! ./_shortOut */
+
+/*! ./_stackClear */
+
+/*! ./_stackDelete */
+
+/*! ./_stackGet */
+
+/*! ./_stackHas */
+
+/*! ./_stackSet */
+
+/*! ./_strictIndexOf */
+
+/*! ./_stringToPath */
+
+/*! ./_toKey */
+
+/*! ./_toSource */
+
+/*! ./actions/graph_actions */
+
+/*! ./app */
+
+/*! ./appearance.js */
+
+/*! ./arc.js */
+
+/*! ./area.js */
+
+/*! ./areaRadial.js */
+
+/*! ./array.js */
+
+/*! ./ascending.js */
+
+/*! ./band.js */
+
+/*! ./basis.js */
+
+/*! ./basisClosed.js */
+
+/*! ./batch */
+
+/*! ./bin.js */
+
+/*! ./bisect.js */
+
+/*! ./bisector.js */
+
+/*! ./cardinal.js */
+
+/*! ./cardinalClosed.js */
+
+/*! ./cardinalOpen.js */
+
+/*! ./cartesian/Area */
+
+/*! ./cartesian/Bar */
+
+/*! ./cartesian/Brush */
+
+/*! ./cartesian/CartesianAxis */
+
+/*! ./cartesian/CartesianGrid */
+
+/*! ./cartesian/ErrorBar */
+
+/*! ./cartesian/Line */
+
+/*! ./cartesian/ReferenceArea */
+
+/*! ./cartesian/ReferenceDot */
+
+/*! ./cartesian/ReferenceLine */
+
+/*! ./cartesian/Scatter */
+
+/*! ./cartesian/XAxis */
+
+/*! ./cartesian/YAxis */
+
+/*! ./cartesian/ZAxis */
+
+/*! ./catmullRom.js */
+
+/*! ./chart/AreaChart */
+
+/*! ./chart/BarChart */
+
+/*! ./chart/ComposedChart */
+
+/*! ./chart/FunnelChart */
+
+/*! ./chart/LineChart */
+
+/*! ./chart/PieChart */
+
+/*! ./chart/RadarChart */
+
+/*! ./chart/RadialBarChart */
+
+/*! ./chart/Sankey */
+
+/*! ./chart/ScatterChart */
+
+/*! ./chart/Treemap */
+
+/*! ./checkPropTypes */
+
+/*! ./cjs/react-dom.development.js */
+
+/*! ./cjs/react-is.development.js */
+
+/*! ./cjs/react.development.js */
+
+/*! ./cjs/scheduler-tracing.development.js */
+
+/*! ./cjs/scheduler.development.js */
+
+/*! ./color.js */
+
+/*! ./component/Cell */
+
+/*! ./component/Customized */
+
+/*! ./component/Label */
+
+/*! ./component/LabelList */
+
+/*! ./component/Legend */
+
+/*! ./component/ResponsiveContainer */
+
+/*! ./component/Text */
+
+/*! ./component/Tooltip */
+
+/*! ./components/Context */
+
+/*! ./components/Provider */
+
+/*! ./components/ResizeDetector */
+
+/*! ./components/connectAdvanced */
+
+/*! ./components/root */
+
+/*! ./configUpdate */
+
+/*! ./connect/connect */
+
+/*! ./constant */
+
+/*! ./constant.js */
+
+/*! ./container/Layer */
+
+/*! ./container/Surface */
+
+/*! ./content_and_footer/content_and_footer */
+
+/*! ./continuous.js */
+
+/*! ./count.js */
+
+/*! ./cover/cover */
+
+/*! ./cross.js */
+
+/*! ./cubehelix.js */
+
+/*! ./cumsum.js */
+
+/*! ./curve/basis.js */
+
+/*! ./curve/basisClosed.js */
+
+/*! ./curve/basisOpen.js */
+
+/*! ./curve/bundle.js */
+
+/*! ./curve/cardinal.js */
+
+/*! ./curve/cardinalClosed.js */
+
+/*! ./curve/cardinalOpen.js */
+
+/*! ./curve/catmullRom.js */
+
+/*! ./curve/catmullRomClosed.js */
+
+/*! ./curve/catmullRomOpen.js */
+
+/*! ./curve/linear.js */
+
+/*! ./curve/linearClosed.js */
+
+/*! ./curve/monotone.js */
+
+/*! ./curve/natural.js */
+
+/*! ./curve/radial.js */
+
+/*! ./curve/step.js */
+
+/*! ./date.js */
+
+/*! ./day.js */
+
+/*! ./debounce */
+
+/*! ./debounce.js */
+
+/*! ./decompose.js */
+
+/*! ./defaultLocale.js */
+
+/*! ./define.js */
+
+/*! ./descending.js */
+
+/*! ./deviation.js */
+
+/*! ./discrete.js */
+
+/*! ./diverging.js */
+
+/*! ./duration.js */
+
+/*! ./easing */
+
+/*! ./entities_reducer */
+
+/*! ./eq */
+
+/*! ./errors_reducer */
+
+/*! ./exponent.js */
+
+/*! ./extent.js */
+
+/*! ./factoryWithTypeCheckers */
+
+/*! ./feed */
+
+/*! ./findIndex */
+
+/*! ./flatten */
+
+/*! ./formatDecimal.js */
+
+/*! ./formatGroup.js */
+
+/*! ./formatNumerals.js */
+
+/*! ./formatPrefixAuto.js */
+
+/*! ./formatRounded.js */
+
+/*! ./formatSpecifier.js */
+
+/*! ./formatTrim.js */
+
+/*! ./formatTypes.js */
+
+/*! ./generateCategoricalChart */
+
+/*! ./get */
+
+/*! ./getNiceTickValues */
+
+/*! ./graph */
+
+/*! ./graph_container */
+
+/*! ./graph_main */
+
+/*! ./graph_main_container */
+
+/*! ./greatest.js */
+
+/*! ./greatestIndex.js */
+
+/*! ./group.js */
+
+/*! ./hasClass */
+
+/*! ./hasIn */
+
+/*! ./hcl.js */
+
+/*! ./header/header */
+
+/*! ./hoc/withResizeDetector */
+
+/*! ./hooks/useDispatch */
+
+/*! ./hooks/useSelector */
+
+/*! ./hooks/useStore */
+
+/*! ./hour.js */
+
+/*! ./hsl.js */
+
+/*! ./hue.js */
+
+/*! ./identity */
+
+/*! ./identity.js */
+
+/*! ./init.js */
+
+/*! ./interval.js */
+
+/*! ./isArguments */
+
+/*! ./isArray */
+
+/*! ./isArrayLike */
+
+/*! ./isArrayLikeObject */
+
+/*! ./isBuffer */
+
+/*! ./isFunction */
+
+/*! ./isLength */
+
+/*! ./isMap */
+
+/*! ./isNumber */
+
+/*! ./isObject */
+
+/*! ./isObject.js */
+
+/*! ./isObjectLike */
+
+/*! ./isObjectLike.js */
+
+/*! ./isPlainObject */
+
+/*! ./isSet */
+
+/*! ./isSymbol */
+
+/*! ./isSymbol.js */
+
+/*! ./isTypedArray */
+
+/*! ./isoFormat.js */
+
+/*! ./isoParse.js */
+
+/*! ./keys */
+
+/*! ./keysIn */
+
+/*! ./lab.js */
+
+/*! ./last */
+
+/*! ./least.js */
+
+/*! ./leastIndex.js */
+
+/*! ./lexer.js */
+
+/*! ./lib/ReactPropTypesSecret */
+
+/*! ./line.js */
+
+/*! ./lineRadial.js */
+
+/*! ./linear.js */
+
+/*! ./link/index.js */
+
+/*! ./locale.js */
+
+/*! ./log.js */
+
+/*! ./main/feed */
+
+/*! ./main/feed_container */
+
+/*! ./map */
+
+/*! ./mapDispatchToProps */
+
+/*! ./mapStateToProps */
+
+/*! ./math.js */
+
+/*! ./math_function.js */
+
+/*! ./max.js */
+
+/*! ./maxIndex.js */
+
+/*! ./mean.js */
+
+/*! ./median.js */
+
+/*! ./memoize */
+
+/*! ./merge.js */
+
+/*! ./mergeProps */
+
+/*! ./millisecond.js */
+
+/*! ./min.js */
+
+/*! ./minIndex.js */
+
+/*! ./minute.js */
+
+/*! ./month.js */
+
+/*! ./nav */
+
+/*! ./nav/nav_container */
+
+/*! ./nav_search */
+
+/*! ./nav_search_container */
+
+/*! ./nice.js */
+
+/*! ./none.js */
+
+/*! ./noop */
+
+/*! ./now */
+
+/*! ./now.js */
+
+/*! ./number.js */
+
+/*! ./numberArray.js */
+
+/*! ./numberAxis/Funnel */
+
+/*! ./object.js */
+
+/*! ./offset/diverging.js */
+
+/*! ./offset/expand.js */
+
+/*! ./offset/none.js */
+
+/*! ./offset/silhouette.js */
+
+/*! ./offset/wiggle.js */
+
+/*! ./order/appearance.js */
+
+/*! ./order/ascending.js */
+
+/*! ./order/descending.js */
+
+/*! ./order/insideOut.js */
+
+/*! ./order/none.js */
+
+/*! ./order/reverse.js */
+
+/*! ./ordinal.js */
+
+/*! ./pairs.js */
+
+/*! ./parse.js */
+
+/*! ./path.js */
+
+/*! ./permute.js */
+
+/*! ./pie.js */
+
+/*! ./piecewise.js */
+
+/*! ./point.js */
+
+/*! ./pointRadial.js */
+
+/*! ./polar/Pie */
+
+/*! ./polar/PolarAngleAxis */
+
+/*! ./polar/PolarGrid */
+
+/*! ./polar/PolarRadiusAxis */
+
+/*! ./polar/Radar */
+
+/*! ./polar/RadialBar */
+
+/*! ./polyfill */
+
+/*! ./ponyfill.js */
+
+/*! ./portfolio */
+
+/*! ./portfolio_container */
+
+/*! ./postfix.js */
+
+/*! ./postfix_evaluator.js */
+
+/*! ./pow.js */
+
+/*! ./precisionFixed.js */
+
+/*! ./precisionPrefix.js */
+
+/*! ./precisionRound.js */
+
+/*! ./property */
+
+/*! ./quantile.js */
+
+/*! ./quantize.js */
+
+/*! ./quickselect.js */
+
+/*! ./radial.js */
+
+/*! ./range.js */
+
+/*! ./rgb.js */
+
+/*! ./round.js */
+
+/*! ./scan.js */
+
+/*! ./second.js */
+
+/*! ./securities/graph_prices_reducer */
+
+/*! ./securities/holding_reducer */
+
+/*! ./securities/index_prices_reducer */
+
+/*! ./securities/indexes_reducer */
+
+/*! ./securities/profile_show_reducer */
+
+/*! ./securities/realtime_price_reducer */
+
+/*! ./securities/securities_reducer */
+
+/*! ./selectorFactory */
+
+/*! ./sequential.js */
+
+/*! ./sequentialQuantile.js */
+
+/*! ./session//signin_container */
+
+/*! ./session/signup_container */
+
+/*! ./session_errors_reducer */
+
+/*! ./session_reducer */
+
+/*! ./setRafTimeout */
+
+/*! ./shape/Cross */
+
+/*! ./shape/Curve */
+
+/*! ./shape/Dot */
+
+/*! ./shape/Polygon */
+
+/*! ./shape/Rectangle */
+
+/*! ./shape/Sector */
+
+/*! ./shape/Symbols */
+
+/*! ./shape/Trapezoid */
+
+/*! ./show_page */
+
+/*! ./show_page/show_page_container */
+
+/*! ./shuffle.js */
+
+/*! ./signin */
+
+/*! ./signup */
+
+/*! ./splash_page */
+
+/*! ./splash_page/splash_page_container */
+
+/*! ./stack.js */
+
+/*! ./store/store */
+
+/*! ./string.js */
+
+/*! ./stubArray */
+
+/*! ./stubFalse */
+
+/*! ./sum.js */
+
+/*! ./symbol.js */
+
+/*! ./symbol/circle.js */
+
+/*! ./symbol/cross.js */
+
+/*! ./symbol/diamond.js */
+
+/*! ./symbol/square.js */
+
+/*! ./symbol/star.js */
+
+/*! ./symbol/triangle.js */
+
+/*! ./symbol/wye.js */
+
+/*! ./symlog.js */
+
+/*! ./threshold.js */
+
+/*! ./threshold/freedmanDiaconis.js */
+
+/*! ./threshold/scott.js */
+
+/*! ./threshold/sturges.js */
+
+/*! ./tickFormat.js */
+
+/*! ./ticks.js */
+
+/*! ./time.js */
+
+/*! ./toFinite */
+
+/*! ./toInteger */
+
+/*! ./toNumber */
+
+/*! ./toNumber.js */
+
+/*! ./toString */
+
+/*! ./transaction_container */
+
+/*! ./transaction_form */
+
+/*! ./transform/index.js */
+
+/*! ./transpose.js */
+
+/*! ./useReduxContext */
+
+/*! ./useStore */
+
+/*! ./users_reducer */
+
+/*! ./utcDay.js */
+
+/*! ./utcHour.js */
+
+/*! ./utcMinute.js */
+
+/*! ./utcMonth.js */
+
+/*! ./utcTime.js */
+
+/*! ./utcWeek.js */
+
+/*! ./utcYear.js */
+
+/*! ./util */
+
+/*! ./util/arithmetic */
+
+/*! ./util/graph_api_util */
+
+/*! ./util/securities_api_util */
+
+/*! ./util/utils */
+
+/*! ./utils */
+
+/*! ./utils/ChildMapping */
+
+/*! ./utils/PropTypes */
+
+/*! ./utils/batch */
+
+/*! ./utils/reactBatchedUpdates */
+
+/*! ./utils/shallowEqual */
+
+/*! ./value.js */
+
+/*! ./variance.js */
+
+/*! ./verifySubselectors */
+
+/*! ./warning */
+
+/*! ./week.js */
+
+/*! ./wrapMapToProps */
+
+/*! ./year.js */
+
+/*! ./zip.js */
+
+/*! ./zoom.js */
+
+/*! @babel/runtime/helpers/esm/extends */
+
+/*! @babel/runtime/helpers/esm/inheritsLoose */
+
+/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */
+
+/*! @babel/runtime/helpers/inheritsLoose */
+
+/*! @babel/runtime/helpers/interopRequireDefault */
+
+/*! balanced-match */
+
+/*! classnames */
+
+/*! core-js/es/math */
+
+/*! core-js/es/number */
+
+/*! d3-array */
+
+/*! d3-color */
+
+/*! d3-format */
+
+/*! d3-interpolate */
+
+/*! d3-path */
+
+/*! d3-scale */
+
+/*! d3-shape */
+
+/*! d3-time */
+
+/*! d3-time-format */
+
+/*! decimal.js-light */
+
+/*! decimal.js-light v2.5.0 https://github.com/MikeMcl/decimal.js-light/LICENCE */
+
+/*! dom-helpers/class/addClass */
+
+/*! dom-helpers/class/removeClass */
+
+/*! events */
+
+/*! exports provided: AuthRoute */
+
+/*! exports provided: COLOR_PANEL */
+
+/*! exports provided: CardinalClosed, default */
+
+/*! exports provided: CardinalOpen, default */
+
+/*! exports provided: Color, darker, brighter, default, rgbConvert, rgb, Rgb, hslConvert, hsl */
+
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+
+/*! exports provided: ProtectedRoute */
+
+/*! exports provided: Provider, connectAdvanced, ReactReduxContext, connect, batch, useDispatch, createDispatchHook, useSelector, createSelectorHook, useStore, createStoreHook, shallowEqual */
+
+/*! exports provided: RADIAN, degreeToRadian, radianToDegree, polarToCartesian, getMaxRadius, formatAxisMap, distanceBetweenPoints, getAngleOfPoint, formatAngleOfSector, inRangeOfSector */
+
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_ERRORS, CLEAR_ERRORS, receiveErrors, loginUser, logoutUser, signupUser */
+
+/*! exports provided: RECEIVE_HISTORICAL, RECEIVE_DAY, RECEIVE_WEEK, receiveHistorical, receiveDay, receiveWeek */
+
+/*! exports provided: RECEIVE_HOLDING, GET_HOLDINGS, UPDATE_BUYING_POWER, receiveHolding, getHoldings, updateUser */
+
+/*! exports provided: RECEIVE_STOCKS, RECEIVE_INDEXES, RECEIVE_PROFILE, RECEIVE_REALTIME, RECEIVE_INDEX_PRICES, receiveStocks, receiveIndexes, receiveProfile, receiveRealTimePrice, receiveIndexPrices */
+
+/*! exports provided: ReactReduxContext, default */
+
+/*! exports provided: SCALE_TYPES, LEGEND_TYPES, TOOLTIP_TYPES, getDisplayName, findAllByType, findChildByType, withoutType, validateWidthHeight, isSsr, filterSvgElements, isSingleChildEqual, isChildrenEqual, renderByOrder, getReactEventByType, parseChildIndex */
+
+/*! exports provided: Surface, Layer, Legend, Tooltip, ResponsiveContainer, Cell, Text, Label, LabelList, Customized, Sector, Curve, Rectangle, Polygon, Dot, Cross, Symbols, PolarGrid, PolarRadiusAxis, PolarAngleAxis, Pie, Radar, RadialBar, Brush, ReferenceLine, ReferenceDot, ReferenceArea, CartesianAxis, CartesianGrid, Line, Area, Bar, Scatter, XAxis, YAxis, ZAxis, ErrorBar, LineChart, BarChart, PieChart, Treemap, Sankey, RadarChart, ScatterChart, AreaChart, RadialBarChart, ComposedChart, Funnel, FunnelChart, Trapezoid */
+
+/*! exports provided: __DO_NOT_USE__ActionTypes, applyMiddleware, bindActionCreators, combineReducers, compose, createStore */
+
+/*! exports provided: abs, atan2, cos, max, min, sin, sqrt, epsilon, pi, halfPi, tau, acos, asin */
+
+/*! exports provided: arc, area, line, pie, areaRadial, radialArea, lineRadial, radialLine, pointRadial, linkHorizontal, linkVertical, linkRadial, symbol, symbols, symbolCircle, symbolCross, symbolDiamond, symbolSquare, symbolStar, symbolTriangle, symbolWye, curveBasisClosed, curveBasisOpen, curveBasis, curveBundle, curveCardinalClosed, curveCardinalOpen, curveCardinal, curveCatmullRomClosed, curveCatmullRomOpen, curveCatmullRom, curveLinearClosed, curveLinear, curveMonotoneX, curveMonotoneY, curveNatural, curveStep, curveStepAfter, curveStepBefore, stack, stackOffsetExpand, stackOffsetDiverging, stackOffsetNone, stackOffsetSilhouette, stackOffsetWiggle, stackOrderAppearance, stackOrderAscending, stackOrderDescending, stackOrderInsideOut, stackOrderNone, stackOrderReverse */
+
+/*! exports provided: basis, default */
+
+/*! exports provided: bisect, bisectRight, bisectLeft, ascending, bisector, count, cross, cumsum, descending, deviation, extent, group, groups, rollup, rollups, bin, histogram, thresholdFreedmanDiaconis, thresholdScott, thresholdSturges, max, maxIndex, mean, median, merge, min, minIndex, pairs, permute, quantile, quantileSorted, quickselect, range, least, leastIndex, greatest, greatestIndex, scan, shuffle, sum, ticks, tickIncrement, tickStep, transpose, variance, zip */
+
+/*! exports provided: bisectRight, bisectLeft, default */
+
+/*! exports provided: calendar, default */
+
+/*! exports provided: color, rgb, hsl, lab, hcl, lch, gray, cubehelix */
+
+/*! exports provided: configBezier, configSpring, configEasing */
+
+/*! exports provided: configSpring, configBezier, AnimateGroup, translateStyle, default */
+
+/*! exports provided: copy, default, sequentialLog, sequentialSymlog, sequentialPow, sequentialSqrt */
+
+/*! exports provided: createBrowserHistory, createHashHistory, createMemoryHistory, createLocation, locationsAreEqual, parsePath, createPath */
+
+/*! exports provided: createConnect, default */
+
+/*! exports provided: createDispatchHook, useDispatch */
+
+/*! exports provided: createNewHolding, indexHoldings, updateUserBuyingPower */
+
+/*! exports provided: createSelectorHook, useSelector */
+
+/*! exports provided: createStoreHook, useStore */
+
+/*! exports provided: curveRadialLinear, default */
+
+/*! exports provided: default */
+
+/*! exports provided: default, Cubehelix */
+
+/*! exports provided: default, FormatSpecifier */
+
+/*! exports provided: default, cubehelixLong */
+
+/*! exports provided: default, days */
+
+/*! exports provided: default, divergingLog, divergingSymlog, divergingPow, divergingSqrt */
+
+/*! exports provided: default, extend */
+
+/*! exports provided: default, genericArray */
+
+/*! exports provided: default, groups, rollup, rollups */
+
+/*! exports provided: default, hclLong */
+
+/*! exports provided: default, hours */
+
+/*! exports provided: default, hslLong */
+
+/*! exports provided: default, isNumberArray */
+
+/*! exports provided: default, milliseconds */
+
+/*! exports provided: default, minutes */
+
+/*! exports provided: default, months */
+
+/*! exports provided: default, numbers */
+
+/*! exports provided: default, pair */
+
+/*! exports provided: default, point */
+
+/*! exports provided: default, quantileSorted */
+
+/*! exports provided: default, rgbBasis, rgbBasisClosed */
+
+/*! exports provided: default, seconds */
+
+/*! exports provided: default, stepBefore, stepAfter */
+
+/*! exports provided: default, sum */
+
+/*! exports provided: default, tickIncrement, tickStep */
+
+/*! exports provided: default, utcDays */
+
+/*! exports provided: default, utcHours */
+
+/*! exports provided: default, utcMinutes */
+
+/*! exports provided: default, utcMonths */
+
+/*! exports provided: default, utcYears */
+
+/*! exports provided: default, years */
+
+/*! exports provided: defaultMergeProps, wrapMergePropsFunc, whenMergePropsIsFunction, whenMergePropsIsOmitted, default */
+
+/*! exports provided: deg2rad, rad2deg */
+
+/*! exports provided: detectReferenceElementsDomain */
+
+/*! exports provided: durationSecond, durationMinute, durationHour, durationDay, durationWeek */
+
+/*! exports provided: eventCenter, SYNC_EVENT */
+
+/*! exports provided: fetchNasdaq, fetchNYSE, fetchIndexes, fetchIndexPrices, fetchProfile, fetchRealTimePrice */
+
+/*! exports provided: fetchstockHistorical, fetchStockDay, fetchStockWeek */
+
+/*! exports provided: filterProps, adaptEventHandlers, adaptEventsOfChild */
+
+/*! exports provided: format, formatPrefix, default */
+
+/*! exports provided: formatAxisMap, rectWithPoints, rectWithCoords, ScaleHelper, createLabeldScales */
+
+/*! exports provided: formatDefaultLocale, format, formatPrefix, formatLocale, formatSpecifier, FormatSpecifier, precisionFixed, precisionPrefix, precisionRound */
+
+/*! exports provided: generatePrefixStyle */
+
+/*! exports provided: getIntersectionKeys, identity, getDashCase, generatePrefixStyle, log, debug, debugf, mapObject, translateStyle, compose, getTransitionVal, warn */
+
+/*! exports provided: getStyleString, getStringSize, getOffset, calculateChartCoordinate */
+
+/*! exports provided: getValueByDataKey, getDomainOfDataByKey, calculateActiveTickIndex, getMainColorOfGraphicItem, getLegendProps, getBarSizeList, getBarPosition, appendOffsetOfLegend, getDomainOfErrorBars, parseErrorBarsOfAxis, getDomainOfItemsWithSameAxis, isCategorialAxis, getCoordinatesOfGrid, getTicksOfAxis, combineEventHandlers, parseScale, checkDomainOfScale, findPositionOfBar, truncateByDomain, offsetSign, getStackedData, getStackGroupsByAxisId, calculateDomainOfTicks, getTicksOfScale, getCateCoordinateOfLine, getCateCoordinateOfBar, getBaseValueOfBar, getStackedDataOfItem, getDomainOfStackGroups, MIN_VALUE_REG, MAX_VALUE_REG, parseSpecifiedDomain, getBandSizeOfAxis, parseDomainOfCategoryAxis */
+
+/*! exports provided: graphPricesReducer */
+
+/*! exports provided: gray, default, Lab, lch, hcl, Hcl */
+
+/*! exports provided: holdingReducer */
+
+/*! exports provided: hue, gamma, default */
+
+/*! exports provided: identity, copy, transformer, default */
+
+/*! exports provided: identity, default */
+
+/*! exports provided: ifOverflowMatches */
+
+/*! exports provided: implicit, default */
+
+/*! exports provided: impureFinalPropsSelectorFactory, pureFinalPropsSelectorFactory, default */
+
+/*! exports provided: indexPricesReducer */
+
+/*! exports provided: indexesReducer */
+
+/*! exports provided: initRange, initInterpolator */
+
+/*! exports provided: interpolate, interpolateArray, interpolateBasis, interpolateBasisClosed, interpolateDate, interpolateDiscrete, interpolateHue, interpolateNumber, interpolateNumberArray, interpolateObject, interpolateRound, interpolateString, interpolateTransformCss, interpolateTransformSvg, interpolateZoom, interpolateRgb, interpolateRgbBasis, interpolateRgbBasisClosed, interpolateHsl, interpolateHslLong, interpolateLab, interpolateHcl, interpolateHclLong, interpolateCubehelix, interpolateCubehelixLong, piecewise, quantize */
+
+/*! exports provided: interpolateTransformCss, interpolateTransformSvg */
+
+/*! exports provided: isoSpecifier, default */
+
+/*! exports provided: lineRadial, default */
+
+/*! exports provided: linearish, default */
+
+/*! exports provided: linkHorizontal, linkVertical, linkRadial */
+
+/*! exports provided: listHandle, getHandle, isFunction, isSSR, isDOMElement */
+
+/*! exports provided: loggish, default */
+
+/*! exports provided: mathSign, isPercent, isNumber, isNumOrStr, uniqueId, getPercentValue, getAnyElementOfObject, hasDuplicate, interpolateNumber, findEntryInArray, getLinearRegression */
+
+/*! exports provided: monotoneX, monotoneY */
+
+/*! exports provided: parseCss, parseSvg */
+
+/*! exports provided: path */
+
+/*! exports provided: point, Basis, default */
+
+/*! exports provided: point, Cardinal, default */
+
+/*! exports provided: point, default */
+
+/*! exports provided: polyfill */
+
+/*! exports provided: powish, default, sqrt */
+
+/*! exports provided: prefixExponent, default */
+
+/*! exports provided: profileReducer */
+
+/*! exports provided: realTimePriceReducer */
+
+/*! exports provided: scaleBand, scalePoint, scaleIdentity, scaleLinear, scaleLog, scaleSymlog, scaleOrdinal, scaleImplicit, scalePow, scaleSqrt, scaleRadial, scaleQuantile, scaleQuantize, scaleThreshold, scaleTime, scaleUtc, scaleSequential, scaleSequentialLog, scaleSequentialPow, scaleSequentialSqrt, scaleSequentialSymlog, scaleSequentialQuantile, scaleDiverging, scaleDivergingLog, scaleDivergingPow, scaleDivergingSqrt, scaleDivergingSymlog, tickFormat */
+
+/*! exports provided: securitiesReducer */
+
+/*! exports provided: sessionErrorsReducer */
+
+/*! exports provided: sessionReducer */
+
+/*! exports provided: setBatch, getBatch */
+
+/*! exports provided: shallowEqual */
+
+/*! exports provided: signup, login, logout */
+
+/*! exports provided: slice */
+
+/*! exports provided: slice, map */
+
+/*! exports provided: sunday, monday, tuesday, wednesday, thursday, friday, saturday, sundays, mondays, tuesdays, wednesdays, thursdays, fridays, saturdays */
+
+/*! exports provided: symbols, default */
+
+/*! exports provided: symlogish, default */
+
+/*! exports provided: timeFormat, timeParse, utcFormat, utcParse, default */
+
+/*! exports provided: timeFormatDefaultLocale, timeFormat, timeParse, utcFormat, utcParse, timeFormatLocale, isoFormat, isoParse */
+
+/*! exports provided: timeInterval, timeMillisecond, timeMilliseconds, utcMillisecond, utcMilliseconds, timeSecond, timeSeconds, utcSecond, utcSeconds, timeMinute, timeMinutes, timeHour, timeHours, timeDay, timeDays, timeWeek, timeWeeks, timeSunday, timeSundays, timeMonday, timeMondays, timeTuesday, timeTuesdays, timeWednesday, timeWednesdays, timeThursday, timeThursdays, timeFriday, timeFridays, timeSaturday, timeSaturdays, timeMonth, timeMonths, timeYear, timeYears, utcMinute, utcMinutes, utcHour, utcHours, utcDay, utcDays, utcWeek, utcWeeks, utcSunday, utcSundays, utcMonday, utcMondays, utcTuesday, utcTuesdays, utcWednesday, utcWednesdays, utcThursday, utcThursdays, utcFriday, utcFridays, utcSaturday, utcSaturdays, utcMonth, utcMonths, utcYear, utcYears */
+
+/*! exports provided: unstable_batchedUpdates */
+
+/*! exports provided: useIsomorphicLayoutEffect */
+
+/*! exports provided: useReduxContext */
+
+/*! exports provided: usersReducer */
+
+/*! exports provided: utcSunday, utcMonday, utcTuesday, utcWednesday, utcThursday, utcFriday, utcSaturday, utcSundays, utcMondays, utcTuesdays, utcWednesdays, utcThursdays, utcFridays, utcSaturdays */
+
+/*! exports provided: warn */
+
+/*! exports provided: whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject, default */
+
+/*! exports provided: whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing, default */
+
+/*! exports provided: withResizeDetector, default */
+
+/*! exports provided: wrapMapToPropsConstant, getDependsOnOwnProps, wrapMapToPropsFunc */
+
+/*! exports provided: x, y */
+
+/*! gud */
+
+/*! history */
+
+/*! hoist-non-react-statics */
+
+/*! isarray */
+
+/*! lodash-es/debounce */
+
+/*! lodash-es/throttle */
+
+/*! lodash/debounce */
+
+/*! lodash/every */
+
+/*! lodash/filter */
+
+/*! lodash/find */
+
+/*! lodash/flatMap */
+
+/*! lodash/get */
+
+/*! lodash/intersection */
+
+/*! lodash/isArray */
+
+/*! lodash/isEqual */
+
+/*! lodash/isFunction */
+
+/*! lodash/isNaN */
+
+/*! lodash/isNil */
+
+/*! lodash/isNumber */
+
+/*! lodash/isObject */
+
+/*! lodash/isPlainObject */
+
+/*! lodash/isString */
+
+/*! lodash/last */
+
+/*! lodash/mapValues */
+
+/*! lodash/max */
+
+/*! lodash/maxBy */
+
+/*! lodash/min */
+
+/*! lodash/minBy */
+
+/*! lodash/omit */
+
+/*! lodash/range */
+
+/*! lodash/some */
+
+/*! lodash/sortBy */
+
+/*! lodash/sumBy */
+
+/*! lodash/throttle */
+
+/*! lodash/uniqBy */
+
+/*! math-expression-evaluator */
+
+/*! mini-create-react-context */
+
+/*! no exports provided */
+
+/*! no static exports found */
+
+/*! object-assign */
+
+/*! path-to-regexp */
+
+/*! performance-now */
+
+/*! prop-types */
+
+/*! prop-types/checkPropTypes */
+
+/*! raf */
+
+/*! raf-schd */
+
+/*! react */
+
+/*! react-dom */
+
+/*! react-is */
+
+/*! react-lifecycles-compat */
+
+/*! react-redux */
+
+/*! react-resize-detector */
+
+/*! react-router */
+
+/*! react-router-dom */
+
+/*! react-smooth */
+
+/*! react-transition-group */
+
+/*! recharts */
+
+/*! recharts-scale */
+
+/*! reduce-css-calc */
+
+/*! reduce-function-call */
+
+/*! redux */
+
+/*! redux-logger */
+
+/*! redux-thunk */
+
+/*! resize-observer-polyfill */
+
+/*! resolve-pathname */
+
+/*! scheduler */
+
+/*! scheduler/tracing */
+
+/*! symbol-observable */
+
+/*! tiny-invariant */
+
+/*! tiny-warning */
+
+/*! value-equal */
+
+/*!********************************!*\
+  !*** ./frontend/robinhood.jsx ***!
+  \********************************/
+
+/*!*********************************!*\
+  !*** ./frontend/store/store.js ***!
+  \*********************************/
+
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** (webpack)/buildin/module.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** ./node_modules/gud/index.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** ./node_modules/lodash/eq.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** ./node_modules/raf/index.js ***!
+  \***********************************/
+
+/*!************************************!*\
+  !*** ./node_modules/lodash/get.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./node_modules/lodash/map.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./node_modules/lodash/max.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./node_modules/lodash/min.js ***!
+  \************************************/
+
+/*!************************************!*\
+  !*** ./node_modules/lodash/now.js ***!
+  \************************************/
+
+/*!*************************************!*\
+  !*** ./frontend/components/app.jsx ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/lodash/_Map.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/lodash/_Set.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/lodash/find.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/lodash/keys.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/lodash/last.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/lodash/noop.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/lodash/omit.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/lodash/some.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./node_modules/react/index.js ***!
+  \*************************************/
+
+/*!**************************************!*\
+  !*** ./frontend/components/root.jsx ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./frontend/util/route_util.jsx ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_Hash.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_root.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/every.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/hasIn.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/isMap.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/isNaN.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/isNil.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/isSet.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/maxBy.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/minBy.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/range.js ***!
+  \**************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/lodash/sumBy.js ***!
+  \**************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/events/events.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash-es/now.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_Stack.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_apply.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_isKey.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_toKey.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/filter.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/keysIn.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/sortBy.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/uniqBy.js ***!
+  \***************************************/
+
+/*!****************************************!*\
+  !*** ./frontend/util/protect_util.jsx ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_Symbol.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_baseGt.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_baseLt.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_getTag.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_parent.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/flatMap.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/flatten.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/isArray.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/isEqual.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/lodash/memoize.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/react-is/index.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/redux/es/redux.js ***!
+  \****************************************/
+
+/*!*****************************************!*\
+  !*** ./frontend/util/graph_api_util.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/d3-time/src/day.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash-es/_root.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_Promise.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_WeakMap.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseFor.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseGet.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseMap.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseSum.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hasPath.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashGet.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashHas.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashSet.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_isIndex.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_overArg.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/constant.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/debounce.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/identity.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isBuffer.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isLength.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isNumber.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isObject.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isString.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isSymbol.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/property.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/throttle.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toFinite.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toNumber.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toString.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/process/browser.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/react-dom/index.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/scheduler/index.js ***!
+  \*****************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-array/src/bin.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-array/src/max.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-array/src/min.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-array/src/sum.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-array/src/zip.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-color/src/lab.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-path/src/path.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-scale/src/log.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-scale/src/pow.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-shape/src/arc.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-shape/src/pie.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-time/src/hour.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-time/src/week.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/d3-time/src/year.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_DataView.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_MapCache.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_SetCache.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_arrayMap.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseEach.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseKeys.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseRest.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseSome.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseUniq.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_cacheHas.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_castPath.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_flatRest.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_getValue.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_isMasked.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_nodeUtil.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_overRest.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_shortOut.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackGet.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackHas.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackSet.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_toSource.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/findIndex.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/mapValues.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/stubArray.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/stubFalse.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/lodash/toInteger.js ***!
+  \******************************************/
+
+/*!******************************************!*\
+  !*** ./node_modules/prop-types/index.js ***!
+  \******************************************/
+
+/*!*******************************************!*\
+  !*** (webpack)/buildin/harmony-module.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./frontend/actions/graph_actions.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./frontend/components/main/feed.jsx ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./frontend/reducers/root_reducer.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./frontend/util/holding_api_util.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./frontend/util/session_api_util.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-array/src/mean.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-array/src/scan.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-color/src/math.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-path/src/index.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-scale/src/band.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-scale/src/init.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-scale/src/nice.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-scale/src/time.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-shape/src/area.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-shape/src/line.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-shape/src/math.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-shape/src/noop.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-time/src/index.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/d3-time/src/month.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash-es/_Symbol.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_ListCache.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arrayEach.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arrayPush.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arraySome.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseClone.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseEvery.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseHasIn.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseIsMap.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseIsNaN.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseIsSet.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseRange.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseSlice.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseTimes.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseUnary.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseUnset.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_copyArray.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_createSet.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getNative.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getRawTag.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_hashClear.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_isKeyable.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/isFunction.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./node_modules/scheduler/tracing.js ***!
+  \*******************************************/
+
+/*!********************************************!*\
+  !*** ./frontend/reducers/users_reducer.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/array.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/count.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/cross.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/group.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/index.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/least.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/merge.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/pairs.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/range.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-array/src/ticks.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-color/src/color.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-color/src/index.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-scale/src/index.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-shape/src/array.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-shape/src/index.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-shape/src/point.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-shape/src/stack.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-time/src/minute.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-time/src/second.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/d3-time/src/utcDay.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash-es/debounce.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash-es/isObject.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash-es/isSymbol.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash-es/throttle.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash-es/toNumber.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_Uint8Array.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_arrayEvery.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseAssign.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseCreate.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseFilter.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseForOwn.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseGetTag.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseKeysIn.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseSortBy.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_copyObject.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_coreJsData.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_createFind.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_equalByTag.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_freeGlobal.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getAllKeys.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getMapData.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getSymbols.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_hashDelete.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_mapToArray.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_nativeKeys.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_setToArray.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_stackClear.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/isArguments.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/lodash/isArrayLike.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/recharts/es6/index.js ***!
+  \********************************************/
+
+/*!*********************************************!*\
+  !*** ./frontend/actions/holding_actions.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./frontend/actions/session_actions.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./frontend/reducers/errors_reducer.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-array/src/bisect.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-array/src/cumsum.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-array/src/extent.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-array/src/median.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-array/src/number.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-color/src/define.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-format/src/index.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-scale/src/linear.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-scale/src/number.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-scale/src/radial.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-scale/src/symlog.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-shape/src/symbol.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-time/src/utcHour.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-time/src/utcWeek.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/d3-time/src/utcYear.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/history/esm/history.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_arrayFilter.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_assignValue.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseFlatten.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIndexOf.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIsEqual.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIsMatch.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseMatches.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseOrderBy.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_cloneBuffer.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_cloneRegExp.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_cloneSymbol.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_copySymbols.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_createRange.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_equalArrays.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_isPrototype.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheGet.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheHas.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheSet.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setCacheAdd.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setCacheHas.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setToString.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_stackDelete.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/intersection.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isObjectLike.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isTypedArray.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/object-assign/index.js ***!
+  \*********************************************/
+
+/*!**********************************************!*\
+  !*** ./frontend/actions/security_actions.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./frontend/components/main/nav/nav.jsx ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./frontend/reducers/session_reducer.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./frontend/util/securities_api_util.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/balanced-match/index.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/d3-array/src/permute.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/d3-array/src/shuffle.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/d3-format/src/locale.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/d3-scale/src/ordinal.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/d3-scale/src/utcTime.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/d3-time/src/duration.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/d3-time/src/interval.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/d3-time/src/utcMonth.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash-es/_getRawTag.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_assocIndexOf.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseAssignIn.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseExtremum.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseIsNative.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseIteratee.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseProperty.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseToString.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_equalObjects.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_getAllKeysIn.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_getMatchData.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_getPrototype.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_getSymbolsIn.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheGet.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheHas.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheSet.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_nativeCreate.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_nativeKeysIn.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_stringToPath.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/isPlainObject.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/path-to-regexp/index.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/react-redux/es/index.js ***!
+  \**********************************************/
+
+/*!**********************************************!*\
+  !*** ./node_modules/redux-thunk/es/index.js ***!
+  \**********************************************/
+
+/*!***********************************************!*\
+  !*** ./frontend/reducers/entities_reducer.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/core-js/es/math/index.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/core-js/internals/has.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/core-js/internals/uid.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-array/src/bisector.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-array/src/constant.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-array/src/greatest.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-array/src/identity.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-array/src/maxIndex.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-array/src/minIndex.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-array/src/quantile.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-array/src/variance.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-scale/src/constant.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-scale/src/identity.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-scale/src/quantile.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-scale/src/quantize.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-shape/src/constant.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-shape/src/identity.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/d3-time/src/utcMinute.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash-es/_baseGetTag.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash-es/_freeGlobal.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_arrayIncludes.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_arrayLikeKeys.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_baseFindIndex.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_cloneDataView.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_copySymbolsIn.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_createBaseFor.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_isFlattenable.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheClear.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_memoizeCapped.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_strictIndexOf.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/react-smooth/es6/util.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/recharts/es6/polyfill.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/reduce-css-calc/index.js ***!
+  \***********************************************/
+
+/*!************************************************!*\
+  !*** ./frontend/components/main/portfolio.jsx ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./frontend/components/session/signin.jsx ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./frontend/components/session/signup.jsx ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/core-js/internals/html.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/core-js/internals/path.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-array/src/ascending.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-array/src/deviation.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-array/src/transpose.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-color/src/cubehelix.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-format/src/exponent.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-format/src/identity.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/hcl.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/hsl.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/hue.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/lab.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/rgb.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-scale/src/diverging.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/d3-scale/src/threshold.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash-es/isObjectLike.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_baseGetAllKeys.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_createBaseEach.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_defineProperty.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_initCloneArray.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_initCloneByTag.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_isIterateeCall.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_listCacheClear.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_mapCacheDelete.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_objectToString.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/react-smooth/es6/index.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/recharts/es6/polar/Pie.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/recharts/es6/shape/Dot.js ***!
+  \************************************************/
+
+/*!*************************************************!*\
+  !*** ./frontend/components/main/graph_main.jsx ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./frontend/components/show_page/graph.jsx ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/core-js/es/number/index.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/core-js/internals/fails.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-array/src/descending.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-array/src/leastIndex.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/date.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/zoom.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-scale/src/continuous.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-scale/src/sequential.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-scale/src/tickFormat.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-shape/src/areaRadial.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/step.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-shape/src/descending.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-shape/src/lineRadial.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-shape/src/link/index.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-shape/src/order/none.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-shape/src/symbol/wye.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/d3-time/src/millisecond.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseAssignValue.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseIsArguments.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseIsEqualDeep.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseSetToString.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_cloneTypedArray.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_compareMultiple.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_customOmitClone.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_initCloneObject.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_listCacheDelete.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/react-smooth/es6/easing.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/recharts/es6/util/types.js ***!
+  \*************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/core-js/internals/export.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/core-js/internals/global.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/core-js/internals/shared.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-array/src/quickselect.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-format/src/formatTrim.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/array.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/basis.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/color.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/index.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/round.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/value.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/basis.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-shape/src/offset/none.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-shape/src/pointRadial.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-shape/src/symbol/star.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/d3-time-format/src/index.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/decimal.js-light/decimal.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_baseIntersection.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_baseIsTypedArray.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_basePropertyDeep.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_cloneArrayBuffer.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_compareAscending.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/isArrayLikeObject.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/react-smooth/es6/Animate.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/recharts-scale/lib/index.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/recharts/es6/polar/Radar.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/recharts/es6/shape/Cross.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/recharts/es6/shape/Curve.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/recharts/es6/util/Events.js ***!
+  \**************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/core-js/internals/is-pure.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-format/src/formatGroup.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-format/src/formatTypes.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/number.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/object.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/string.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/bundle.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/linear.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/radial.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-shape/src/symbol/cross.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/d3-time-format/src/locale.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/lodash-es/_objectToString.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/lodash/_arrayIncludesWith.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/prop-types/checkPropTypes.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/Sankey.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/recharts/es6/shape/Sector.js ***!
+  \***************************************************/
+
+/*!****************************************************!*\
+  !*** ./frontend/components/main/feed_container.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/internals/own-keys.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/internals/redefine.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/d3-array/src/greatestIndex.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/natural.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/d3-shape/src/offset/expand.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/d3-shape/src/offset/wiggle.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/d3-shape/src/order/reverse.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/d3-shape/src/symbol/circle.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/d3-shape/src/symbol/square.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/dom-helpers/class/addClass.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/dom-helpers/class/hasClass.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/lodash/_isStrictComparable.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/raf-schd/dist/raf-schd.esm.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/batch.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/Bar.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/Treemap.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/recharts/es6/shape/Polygon.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/recharts/es6/shape/Symbols.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/recharts/es6/util/DOMUtils.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/recharts/es6/util/LogUtils.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/reduce-function-call/index.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/symbol-observable/es/index.js ***!
+  \****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./frontend/components/main/nav/nav_search.jsx ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./frontend/components/show_page/show_page.jsx ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./frontend/reducers/session_errors_reducer.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/an-object.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-forced.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-object.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/math-sign.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/to-length.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-format/src/defaultLocale.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-format/src/formatDecimal.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-format/src/formatRounded.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/constant.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/discrete.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/quantize.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/cardinal.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/monotone.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-shape/src/symbol/diamond.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/d3-time-format/src/isoParse.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/lodash/_baseMatchesProperty.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/lodash/_castArrayLikeObject.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/react/cjs/react.development.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/Area.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/Line.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/BarChart.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/PieChart.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/recharts/es6/component/Cell.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/recharts/es6/component/Text.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/recharts/es6/util/Constants.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/recharts/es6/util/DataUtils.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/value-equal/esm/value-equal.js ***!
+  \*****************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/is-integer.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/math-expm1.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/math-log1p.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/set-global.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/shared-key.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/to-integer.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.cbrt.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.cosh.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.imul.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.log2.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.sign.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.sinh.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.tanh.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-array/src/threshold/scott.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-format/src/formatNumerals.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-format/src/precisionFixed.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-format/src/precisionRound.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/cubehelix.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/piecewise.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/basisOpen.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-shape/src/order/ascending.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-shape/src/order/insideOut.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-shape/src/symbol/triangle.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/d3-time-format/src/isoFormat.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/warning.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/react-transition-group/index.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/Brush.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/XAxis.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/YAxis.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/ZAxis.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/AreaChart.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/LineChart.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/component/Label.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/container/Layer.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/polar/PolarGrid.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/polar/RadialBar.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/shape/Rectangle.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/shape/Trapezoid.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/util/ChartUtils.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/util/PolarUtils.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/recharts/es6/util/ReactUtils.js ***!
+  \******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./frontend/components/main/nav/nav_container.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/classof-raw.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/descriptors.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/hidden-keys.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/math-fround.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/object-keys.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/string-trim.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/whitespaces.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.acosh.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.asinh.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.atanh.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.clz32.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.expm1.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.hypot.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.log10.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.log1p.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.trunc.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/d3-format/src/formatSpecifier.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/d3-format/src/precisionPrefix.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/catmullRom.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/d3-shape/src/offset/diverging.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/d3-shape/src/order/appearance.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/d3-shape/src/order/descending.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/dom-helpers/class/removeClass.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/react-redux/es/hooks/useStore.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/react-router/esm/react-router.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/react-smooth/es6/AnimateGroup.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/react-smooth/es6/configUpdate.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/recharts-scale/lib/util/utils.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/RadarChart.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/recharts/es6/component/Legend.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/symbol-observable/es/ponyfill.js ***!
+  \*******************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/get-built-in.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/shared-store.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/to-primitive.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.fround.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/d3-array/src/threshold/sturges.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/d3-format/src/formatPrefixAuto.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/basisClosed.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/numberArray.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/basisClosed.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/d3-shape/src/offset/silhouette.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/react-redux/es/connect/connect.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/react-smooth/es6/setRafTimeout.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/Scatter.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/FunnelChart.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/recharts/es6/component/Tooltip.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/recharts/es6/container/Surface.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/recharts/es6/numberAxis/Funnel.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/recharts/es6/util/ShallowEqual.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/redux-logger/dist/redux-logger.js ***!
+  \********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./frontend/components/main/portfolio_container.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./frontend/components/session/signin_container.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./frontend/components/session/signup_container.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./frontend/components/splash_page/cover/cover.jsx ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./frontend/components/splash_page/splash_page.jsx ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./frontend/reducers/securities/holding_reducer.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./frontend/reducers/securities/indexes_reducer.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/enum-bug-keys.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/native-symbol.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/object-create.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/string-repeat.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/d3-scale/src/sequentialQuantile.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/cardinalOpen.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/linearClosed.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/lodash/_matchesStrictComparable.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/react-smooth/es6/AnimateManager.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/ErrorBar.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/ScatterChart.js ***!
+  \*********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./frontend/components/main/graph_main_container.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./frontend/components/show_page/graph_container.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/array-includes.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/ie8-dom-define.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/indexed-object.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/inspect-source.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/internal-state.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.is-nan.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/d3-time-format/src/defaultLocale.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/react-redux/es/hooks/useDispatch.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/react-redux/es/hooks/useSelector.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/ComposedChart.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/recharts/es6/component/LabelList.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/recharts/es6/util/CartesianUtils.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/recharts/es6/util/CssPrefixUtils.js ***!
+  \**********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./frontend/components/splash_page/header/header.jsx ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/native-weak-map.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.epsilon.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/cardinalClosed.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/catmullRomOpen.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/react-is/cjs/react-is.development.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/react-redux/es/components/Context.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/react-redux/es/connect/mergeProps.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/Subscription.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/shallowEqual.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/react-transition-group/Transition.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/RadialBarChart.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/recharts/es6/component/Customized.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/recharts/es6/polar/PolarAngleAxis.js ***!
+  \***********************************************************/
+
+/*!************************************************************!*\
+  !*** ./frontend/components/show_page/transaction_form.jsx ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./frontend/reducers/securities/securities_reducer.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/number-is-finite.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/number-parse-int.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.to-fixed.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/transform/index.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/transform/parse.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/react-redux/es/components/Provider.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/isPlainObject.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/react-smooth/es6/AnimateGroupChild.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/recharts-scale/lib/util/arithmetic.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/recharts/es6/polar/PolarRadiusAxis.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/tiny-warning/dist/tiny-warning.esm.js ***!
+  \************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/set-to-string-tag.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/this-number-value.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/to-absolute-index.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/to-indexed-object.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/use-symbol-as-uid.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/well-known-symbol.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.is-finite.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.parse-int.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/d3-shape/src/curve/catmullRomClosed.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/math-expression-evaluator/src/lexer.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/performance-now/lib/performance-now.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/react-dom/cjs/react-dom.development.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/react-resize-detector/lib/esm/index.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/ReferenceDot.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/recharts/es6/util/IfOverflowMatches.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/scheduler/cjs/scheduler.development.js ***!
+  \*************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./frontend/components/main/nav/nav_search_container.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./frontend/components/show_page/show_page_container.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./frontend/reducers/securities/graph_prices_reducer.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./frontend/reducers/securities/index_prices_reducer.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./frontend/reducers/securities/profile_show_reducer.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/inheritsLoose.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/number-parse-float.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.is-integer.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/react-redux/es/hooks/useReduxContext.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/react-transition-group/CSSTransition.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/recharts-scale/lib/getNiceTickValues.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/CartesianAxis.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/CartesianGrid.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/ReferenceArea.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/recharts/es6/cartesian/ReferenceLine.js ***!
+  \**************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/internals/inherit-if-required.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.math.to-string-tag.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.constructor.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.parse-float.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/math-expression-evaluator/src/postfix.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/react-redux/es/connect/wrapMapToProps.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/resolve-pathname/esm/resolve-pathname.js ***!
+  \***************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./frontend/components/show_page/transaction_container.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./frontend/reducers/securities/realtime_price_reducer.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/a-possible-prototype.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-keys-internal.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.to-precision.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/d3-interpolate/src/transform/decompose.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/react-redux/es/connect/mapStateToProps.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/react-redux/es/connect/selectorFactory.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/verifyPlainObject.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/react-transition-group/TransitionGroup.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/react-transition-group/utils/PropTypes.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/tiny-invariant/dist/tiny-invariant.esm.js ***!
+  \****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/d3-array/src/threshold/freedmanDiaconis.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-resize-detector/lib/esm/lib/utils.js ***!
+  \*****************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./frontend/components/splash_page/splash_page_container.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-define-property.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/mini-create-react-context/dist/esm/index.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/reactBatchedUpdates.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/react-transition-group/ReplaceTransition.js ***!
+  \******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/internals/document-create-element.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-set-prototype-of.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.is-safe-integer.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/path-to-regexp/node_modules/isarray/index.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/react-redux/es/components/connectAdvanced.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/react-redux/es/connect/mapDispatchToProps.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/react-redux/es/connect/verifySubselectors.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/react-transition-group/utils/ChildMapping.js ***!
+  \*******************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-define-properties.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/require-object-coercible.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.max-safe-integer.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.min-safe-integer.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/recharts/es6/component/ResponsiveContainer.js ***!
+  \********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/math-expression-evaluator/src/math_function.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/recharts/es6/chart/generateCategoricalChart.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/recharts/es6/component/DefaultLegendContent.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
+  \*********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/internals/create-property-descriptor.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/recharts/es6/component/DefaultTooltipContent.js ***!
+  \**********************************************************************/
+
+/*!***********************************************************************!*\
+  !*** ./node_modules/core-js/internals/copy-constructor-properties.js ***!
+  \***********************************************************************/
+
+/*!************************************************************************!*\
+  !*** ./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js ***!
+  \************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-get-own-property-names.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-property-is-enumerable.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/math-expression-evaluator/src/formula_evaluator.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/math-expression-evaluator/src/postfix_evaluator.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/recharts/es6/util/DetectReferenceElementsDomain.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js ***!
+  \*************************************************************************/
+
+/*!**************************************************************************!*\
+  !*** ./node_modules/core-js/internals/create-non-enumerable-property.js ***!
+  \**************************************************************************/
+
+/*!***************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-get-own-property-symbols.js ***!
+  \***************************************************************************/
+
+/*!***************************************************************************!*\
+  !*** ./node_modules/reduce-css-calc/node_modules/balanced-match/index.js ***!
+  \***************************************************************************/
+
+/*!****************************************************************************!*\
+  !*** ./node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js ***!
+  \****************************************************************************/
+
+/*!******************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-get-own-property-descriptor.js ***!
+  \******************************************************************************/
+
+/*!******************************************************************************!*\
+  !*** ./node_modules/react-resize-detector/lib/esm/hoc/withResizeDetector.js ***!
+  \******************************************************************************/
+
+/*!*******************************************************************************!*\
+  !*** ./node_modules/react-resize-detector/lib/esm/components/ChildWrapper.js ***!
+  \*******************************************************************************/
+
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
+  \*********************************************************************************/
+
+/*!*********************************************************************************!*\
+  !*** ./node_modules/react-resize-detector/lib/esm/components/ResizeDetector.js ***!
+  \*********************************************************************************/
+
+/*!**********************************************************************************!*\
+  !*** ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
+  \**********************************************************************************/
+
+/*!***********************************************************************************!*\
+  !*** ./frontend/components/splash_page/content_and_footer/content_and_footer.jsx ***!
+  \***********************************************************************************/
+
+/**
+ * Checks if an event is supported in the current execution environment.
+ *
+ * NOTE: This will not work correctly for non-generic events such as `change`,
+ * `reset`, `load`, `error`, and `select`.
+ *
+ * Borrows from Modernizr.
+ *
+ * @param {string} eventNameSuffix Event name, e.g. "click".
+ * @return {boolean} True if the event is supported.
+ * @internal
+ * @license Modernizr 3.0.0pre (Custom Build) | MIT
+ */
+
+/** @license React v0.19.0
+ * scheduler-tracing.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v0.19.0
+ * scheduler.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.13.0
+ * react-dom.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.13.0
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.13.0
+ * react.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
