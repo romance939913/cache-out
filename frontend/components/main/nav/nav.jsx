@@ -48,7 +48,6 @@ class MainNav extends React.Component {
                                                 {`${this.props.indexes.majorIndexesList[index].changes}`}
                                               </div>
                                           </li>))
-
       }
     }
 

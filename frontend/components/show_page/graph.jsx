@@ -31,7 +31,7 @@ class ShowPageGraph extends React.Component {
     handleMouseLeave() {
         const ele = document.getElementById("real-time-price");
         let symbol = this.props.ticker;
-        ele.textContent= `$${this.props.price[symbol].price.toFixed(2)}`;
+        ele.textContent = `$${this.props.price[symbol].price.toFixed(2)}`;
     }
 
     changeTimeFrames(newFrame) {
@@ -93,7 +93,6 @@ class ShowPageGraph extends React.Component {
         }
 
         let color
-
         if (data[0] !== undefined && data[0].close > data.slice(-1)[0].close) {
             color = '#ff0000';
         } else {

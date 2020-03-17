@@ -46,6 +46,7 @@ class TransactionForm extends React.Component {
         const holding = Object.assign({}, this.state);
         if (this.state.buySell === 'BUY') {
             holding['buying_power'] = this.props.currentUser.buying_power - this.state.cost;
+            debugger
             if(holding.buying_power >= 0) {
                 this.props.receiveHolding(holding);
                 this.props.updateUser(holding);

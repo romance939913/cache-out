@@ -104,5 +104,32 @@
     line-height: 30px;
     text-align: center;
     margin: 0px 150px 0px 150px;
-    /* vertical-align: middle; */
+    padding: 25px;
+}
+
+.carousel-wrapper {
+    background-color: black;
+    height: 300px;
+}
+
+.marquee {
+  background-color: white;
+  background-image: url(https://cdn.robinhood.com/assets/robinhood/brand_uk_2/ac5925bd9898526358ad0a45791d1de6-3x.png);
+  background-size: 1900px;
+  width: 100%;
+  height: 100px;
+  animation: marquee 50s infinite linear;
+  margin: auto;
+  border-top: white solid 25px;
+  border-bottom: white solid 25px;
+}
+
+@-webkit-keyframes marquee {
+  0% {
+    background-position: 1890px;
+  }
+
+  100% {
+    background-position: 0px;
+  }
 }
