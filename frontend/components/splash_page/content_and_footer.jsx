@@ -6,7 +6,7 @@ class ContentAndFooter extends React.Component {
 
   handleClick(buttonName) {
     return e => {
-      console.log(buttonName)
+      // console.log(buttonName)
     }
   }
 

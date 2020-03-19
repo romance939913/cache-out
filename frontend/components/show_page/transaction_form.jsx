@@ -2,7 +2,6 @@ import React from 'react';
 
 class TransactionForm extends React.Component {
     constructor(props) {
-        debugger
         super(props);
         this.state = {
                 user_id: this.props.currentUser.id,

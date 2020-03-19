@@ -28,7 +28,6 @@ class NavSearchForm extends React.Component {
 
     render() {
         let suggestions = []
-        debugger
         if(!this.props.stocks) {
             return null;
         }
