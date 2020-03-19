@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         store = configureStore();
     }
-
+    
     // testing start
     window.getState = store.getState;
     window.dispatch = store.dispatch;

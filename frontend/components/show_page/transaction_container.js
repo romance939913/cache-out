@@ -5,10 +5,10 @@ import { receiveHolding, getHoldings, updateUser } from '../../actions/holding_a
 
 const mapStateToProps = state => ({
     currentUser: state.entities.users[state.session.id],
-    buying_power: state.entities.users.buying_power,
     profile: state.entities.profile,
     holdings: state.entities.holdings,
-    price: state.entities.price
+    price: state.entities.price,
+    cash: state.entities.buyingPower
 });
 
 const mapDispatchToProps = dispatch => ({

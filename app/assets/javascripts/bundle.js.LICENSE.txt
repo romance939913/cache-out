@@ -1286,6 +1286,8 @@ object-assign
 
 /*! ./second.js */
 
+/*! ./securities/cash_reducer */
+
 /*! ./securities/graph_prices_reducer */
 
 /*! ./securities/holding_reducer */
@@ -1561,6 +1563,8 @@ object-assign
 /*! exports provided: bisectRight, bisectLeft, default */
 
 /*! exports provided: calendar, default */
+
+/*! exports provided: cashReducer */
 
 /*! exports provided: color, rgb, hsl, lab, hcl, lch, gray, cubehelix */
 
@@ -3949,6 +3953,10 @@ object-assign
 /*!*****************************************************!*\
   !*** ./node_modules/value-equal/esm/value-equal.js ***!
   \*****************************************************/
+
+/*!******************************************************!*\
+  !*** ./frontend/reducers/securities/cash_reducer.js ***!
+  \******************************************************/
 
 /*!******************************************************!*\
   !*** ./node_modules/core-js/internals/is-integer.js ***!

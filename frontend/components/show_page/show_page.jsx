@@ -23,11 +23,12 @@ class ShowPage extends React.Component {
     }
 
     render() {
+
         if(this.props.profile.description === undefined || JSON.stringify(this.props.price) === '{}') {
             return null; 
         } 
-
-        return (    
+        
+        return (
             <div>
                 <NavContainer />
                 <div className="show-page-body-wrapper">

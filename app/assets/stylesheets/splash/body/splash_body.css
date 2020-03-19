@@ -109,7 +109,33 @@
 
 .carousel-wrapper {
     background-color: black;
-    height: 300px;
+    height: 600px;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.carousel-slide {
+    position: absolute;
+    justify-content: center;
+}
+
+.carousel-pic {
+    height: auto;
+    width: auto;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.carousel-nav {
+    margin: 60px;
 }
 
 .marquee {

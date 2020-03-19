@@ -8,10 +8,11 @@ import { ProtectedRoute } from '../util/protect_util';
 import MainFeed from './main/feed';
 import ShowPageContainer from './show_page/show_page_container';
 import MainFeedContainer from './main/feed_container';
-
+// import TransactionContainer from './show_page/transaction_container';
 
 const App = (props) => {
   return(<div>
+
     <Switch>
       <ProtectedRoute path="/show/:ticker" component={ShowPageContainer} />
       <ProtectedRoute path="/feed" component={MainFeedContainer} />

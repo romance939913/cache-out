@@ -35,19 +35,20 @@ class MainNav extends React.Component {
       let indexList = Object.keys(this.props.indexes.majorIndexesList);
       let indexes = shuffle(indexList);    
       while (lis.length < 300) {
-        lis.push(indexes.map((index, idx) => <li 
-                                              key={idx} 
-                                              className="marquee-item">
-                                              <div className="marquee-item-data">
-                                                {this.props.indexes.majorIndexesList[index].indexName}
-                                              </div>
-                                              <div className="marquee-item-data">
-                                                {this.props.indexes.majorIndexesList[index].price}
-                                              </div>
-                                              <div className="marquee-item-data">
-                                                {`${this.props.indexes.majorIndexesList[index].changes}`}
-                                              </div>
-                                          </li>))
+        lis.push(indexes.map((index, idx) => 
+          <li 
+            key={idx} 
+            className="marquee-item">
+            <div className="marquee-item-data">
+              {this.props.indexes.majorIndexesList[index].indexName}
+            </div>
+            <div className="marquee-item-data">
+              {this.props.indexes.majorIndexesList[index].price}
+            </div>
+            <div className="marquee-item-data">
+              {`${this.props.indexes.majorIndexesList[index].changes}`}
+            </div>
+          </li>))
       }
     }
 

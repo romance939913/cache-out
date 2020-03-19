@@ -2,6 +2,7 @@ import React from 'react';
 
 class TransactionForm extends React.Component {
     constructor(props) {
+        debugger
         super(props);
         this.state = {
                 user_id: this.props.currentUser.id,
@@ -46,7 +47,6 @@ class TransactionForm extends React.Component {
         const holding = Object.assign({}, this.state);
         if (this.state.buySell === 'BUY') {
             holding['buying_power'] = this.props.currentUser.buying_power - this.state.cost;
-            debugger
             if(holding.buying_power >= 0) {
                 this.props.receiveHolding(holding);
                 this.props.updateUser(holding);
@@ -63,9 +63,11 @@ class TransactionForm extends React.Component {
     }
 
     render() {
+
         if (this.props.price[this.props.ticker] === undefined) {
             return null
-        } 
+        }
+
         let bottomMessage = '';
         if(this.state.buySell === 'BUY') {
             bottomMessage = `Buying Power: $${this.props.currentUser.buying_power.toFixed(2)}`;
@@ -77,6 +79,7 @@ class TransactionForm extends React.Component {
                 bottomMessage = `${this.props.holdings[symbol].quantity} shares available`;
             }
         }
+        
         return (
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
                 <div className="buy-sell-button-wrapper">
