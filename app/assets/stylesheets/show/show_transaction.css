@@ -77,3 +77,7 @@
     padding: 0 15px;
     margin-top: 50px;
 }
+
+.buy-sell-submit:focus {
+    outline: none;
+}

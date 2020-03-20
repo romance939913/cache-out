@@ -7,8 +7,11 @@ export const holdingReducer = (state = [], action) => {
         case GET_HOLDINGS:
             return action.holdings;
         case RECEIVE_HOLDING:
-            nextState[Object.keys(action.holding)[0]] = Object.values(action.holding)[0]
-            return nextState;
+            if (action.holding !== undefined) {
+                nextState[Object.keys(action.holding)[0]] = Object.values(action.holding)[0]
+            } else {
+                return nextState;
+            }
         default:
             return state;
     }

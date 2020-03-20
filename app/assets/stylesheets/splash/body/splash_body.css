@@ -9,6 +9,7 @@
 
 .splash-jumbotron-signup {
     color: white;
+    font-family: sans-serif;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -103,8 +104,8 @@
     font-weight: 300;
     line-height: 30px;
     text-align: center;
-    margin: 0px 150px 0px 150px;
-    padding: 25px;
+    margin: 0px 20vw 80px 20vw;
+
 }
 
 .carousel-wrapper {
@@ -113,11 +114,7 @@
     position: relative;
     display: flex;
     justify-content: space-evenly;
-}
-
-.carousel-slide {
-    position: absolute;
-    justify-content: center;
+    align-items: center;
 }
 
 .carousel-pic {
@@ -125,17 +122,28 @@
     width: auto;
 }
 
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: 0;
+.carousel-slide-indicator {
+    color: white;
+    font-size: 18px;;
     cursor: pointer;
 }
 
-.carousel-nav {
-    margin: 60px;
+.carousel-slide-indicator:hover {
+    color: #21ce99;
+}
+
+.carousel-nav li {
+    padding: 15px;
+}
+
+.carousel-slide-description {
+    color: white;
+    max-width: 40vw;
+}
+
+.carousel-slide-description h1 {
+    font-size: 50px;
+    padding-bottom: 25px;
 }
 
 .marquee {

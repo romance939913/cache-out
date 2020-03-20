@@ -1,12 +1,23 @@
 import React from 'react';
 
 class ContentAndFooter extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+    this.state = {
+      picture: window.manage_pic
+    }
+  }
 
-
-
-  handleClick(buttonName) {
+  handleClick(picture_name) {
     return e => {
-      // console.log(buttonName)
+      if (picture_name === "learn") {
+        this.setState({ picture: window.learn_pic })
+      } else if (picture_name === "manage") {
+        this.setState({ picture: window.manage_pic })
+      } else {
+        this.setState({ picture: window.customize_pic})
+      }
     }
   }
 
@@ -14,22 +25,24 @@ class ContentAndFooter extends React.Component {
     return (
       <div>
         <div className="carousel-wrapper">
-          <ul className="carousel-track" id="carousel-track">
+          <div className="carousel-track">
             <li className="carousel-slide">
               <img className="carousel-pic" src={window.learn_pic}/>
             </li>
-            <li className="carousel-slide">
-              <img className="carousel-pic" src={window.manage_pic}/>
-            </li>
-            <li className="carousel-slide">
-              <img className="carousel-pic" src={window.customize_pic}/>
-            </li>
-          </ul>
+          </div>
           <ul className="carousel-nav">
-            <button onClick={() => this.handleClick("Learn")} className="carousel-slide-indicator">Learn</button>
-            <button onClick={() => this.handleClick("Manage")} className="carousel-slide-indicator">Manage</button>
-            <button onClick={() => this.handleClick("Customize")} className="carousel-slide-indicator">Customize</button>
+            <li onClick={() => this.handleClick("learn")} className="carousel-slide-indicator">Learn</li>
+            <li onClick={() => this.handleClick("manage")} className="carousel-slide-indicator">Manage</li>
+            <li onClick={() => this.handleClick("customize")} className="carousel-slide-indicator">Customize</li>
           </ul>
+          <div className="carousel-slide-description">
+            <h1>
+              Learn as you grow
+            </h1>
+            <p>
+              Keep your portfolio in your pocket. Everything you need to manage your assets is available in a single app.
+            </p>
+          </div>
         </div>
         <div className="marquee">
         </div>

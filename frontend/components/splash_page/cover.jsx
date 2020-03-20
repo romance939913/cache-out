@@ -7,7 +7,7 @@ export default () => (
       <div className="splash-jumbotron-mission">
         <p className="splash-jumbotron-header">It's Time to Do Money</p>
         <p className="splash-jumbotron-text">Stock Overflow, a pioneer of commission-free investing, gives you more ways to make your money work harder</p>
-        <Link className="splash-jumbotron-signup" to="/signup">Sign up</Link>
+        <Link className="splash-jumbotron-signup" to="/signup">Demo</Link>
       </div>
       <div className="gif-holder">
         <video autoPlay loop muted preload="auto" className="video-cont">

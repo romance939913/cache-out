@@ -51,4 +51,8 @@ export const receiveRealTimePrice = (company) => dispatch => fetchRealTimePrice(
 
 export const receiveIndexPrices = (index) => dispatch => fetchIndexPrices(index)
     .then(prices => dispatch(receiveTheIndexPrices(prices)))
+
+// export const loginUser = (formUser) => dispatch => login(formUser)
+//     .then(user => dispatch(receiveCurrentUser(user)), pojo => dispatch(receiveErrors(pojo.responseJSON)))
+
     

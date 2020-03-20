@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
     profile: state.entities.profile,
     holdings: state.entities.holdings,
     price: state.entities.price,
-    cash: state.entities.buyingPower
+    cash: state.entities.buyingPower,
+    errors: state.errors.transaction
 });
 
 const mapDispatchToProps = dispatch => ({
