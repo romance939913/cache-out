@@ -17,7 +17,6 @@ class TransactionForm extends React.Component {
 
     componentDidUpdate(previousProps) {
         if (previousProps.ticker !== this.props.ticker || previousProps.holdings.quantity !== this.props.holdings.quantity) {
-            this.props.getHoldings(this.state)
             this.props.buying_power
             this.setState({ ticker: this.props.ticker })
         }
