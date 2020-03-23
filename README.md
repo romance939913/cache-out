@@ -1,24 +1,4 @@
-# README
+f# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Cache Out is my own rendition of the popular financial asset trading app Robinhood. A great app for "practice investing", as new users can start with up to 10 million in cash. Track the valuation of your portfolio over time and make informed decisions with interactive company graphs and metrics.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
