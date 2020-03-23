@@ -6,9 +6,18 @@ export const createNewHolding = holding => (
     })
 );
 
-export const indexHoldings = (holding) => (
-    $.ajax({
+export const indexHoldings = (holding) => {
+    // debugger
+    return $.ajax({
         url: `/api/holdings/`,
+        method: "GET",
+        data: { holding }
+    })
+};
+
+export const showHolding = (holding) => (
+    $.ajax({
+        url: `/api/holdings/:id`,
         method: "GET",
         data: { holding }
     })

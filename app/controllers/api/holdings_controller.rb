@@ -3,7 +3,6 @@ class Api::HoldingsController < ApplicationController
         if params[:holding][:buying_power].to_f >= 0
             @user_records = Holding.where(user_id: params[:holding][:user_id])
             @update_record = @user_records.find_by(ticker: params[:holding][:ticker])
-
             if @update_record
                 new_amt = @update_record.quantity + params[:holding][:quantity].to_i
                 if new_amt >= 0
@@ -28,9 +27,19 @@ class Api::HoldingsController < ApplicationController
     end
 
     def index
-        @holdings = Holding.where(user_id: params[:holding][:user_id])
+        @holdings = Holding.where(user_id: params[:holding][:user_id].to_i)
         if @holdings
             render :index
+        else
+            render json: ['something went wrong'], status: 404
+        end
+    end
+
+    def show
+        @holdings = Holding.where(user_id: params[:holding][:user_id].to_i)
+        @holding = @holdings.find_by(ticker: params[:holding][:ticker])
+        if @holding
+            render :show
         else
             render json: ['something went wrong'], status: 404
         end

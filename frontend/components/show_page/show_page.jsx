@@ -43,6 +43,7 @@ class ShowPage extends React.Component {
                         <TransactionContainer 
                             ticker={this.props.ticker}
                             price={this.props.price} 
+                            currentUser={this.props.currentUser}
                         />
                     </div>
                     <ul className="company-profile">

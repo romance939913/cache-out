@@ -16,15 +16,15 @@ class TransactionForm extends React.Component {
     }
 
     componentDidUpdate(previousProps) {
-        if (previousProps.ticker !== this.props.ticker || previousProps.holdings.quantity !== this.props.holdings.quantity) {
-            this.props.buying_power
-            this.setState({ ticker: this.props.ticker })
+        if (previousProps.ticker !== this.props.ticker) {
+            debugger
+            this.props.getHolding(this.state)
         }
     }
 
     componentDidMount() {
         let obj = Object.assign({}, this.state);
-        this.props.getHoldings(obj);
+        this.props.getHolding(obj)
     }
 
     handleClick(value) {
@@ -56,9 +56,7 @@ class TransactionForm extends React.Component {
     }
 
     render() {
-        if (this.props.price[this.props.ticker] === undefined) {
-            return null
-        }
+        if (this.props.price[this.props.ticker] === undefined) return null;
 
         let bottomMessage = '';
         if(this.state.buySell === 'BUY') {
