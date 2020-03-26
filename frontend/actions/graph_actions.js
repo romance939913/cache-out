@@ -5,13 +5,10 @@ export const RECEIVE_DAY = "RECEIVE_DAY"
 export const RECEIVE_WEEK = "RECEIVE_WEEK"
 
 
-const receiveTheHistorical = (prices) => {
-    return {
-        type: RECEIVE_HISTORICAL,
-        prices
-    }
-
-}
+const receiveTheHistorical = (prices) => ({
+    type: RECEIVE_HISTORICAL,
+    prices
+})
 
 const receiveTheDay = prices => ({
     type: RECEIVE_DAY,

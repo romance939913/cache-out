@@ -21,7 +21,6 @@ class GraphMain extends React.Component {
     
     render() {  
         let totalEquity = 0;
-
         if (Object.keys(this.props.price).length !== this.props.tickers.length || this.props.indexPrices.prices === undefined) {
             return null
         }
@@ -32,8 +31,6 @@ class GraphMain extends React.Component {
                 totalEquity = totalEquity + value;
             }
         });
-
-        let cash = this.props.currentUser.buying_power;
 
         let data = this.props.indexPrices.prices;
         let d = new Date();
@@ -67,8 +64,8 @@ class GraphMain extends React.Component {
 
         return (
             <div>
-                <h2 className="main-page-total-assets">{`$${(cash + totalEquity).toFixed(2)}`}</h2>
-                <p className ="main-page-buying-power">Cash balance: {`$${(cash).toFixed(2)}`}</p>
+                <h2 className="main-page-total-assets">{`$${(this.props.cash + totalEquity).toFixed(2)}`}</h2>
+                <p className ="main-page-buying-power">Cash balance: {`$${(this.props.cash).toFixed(2)}`}</p>
                 <div className="portfolio-graph-div">
                     {renderLineChart}
                 </div>
