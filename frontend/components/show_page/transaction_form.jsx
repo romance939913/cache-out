@@ -62,7 +62,7 @@ class TransactionForm extends React.Component {
     }
 
     render() {
-        console.log(this.props.holdings)
+        // console.log(this.props.holdings)
         if (this.props.cash.length === 0) return null;
         if (this.props.price[this.props.ticker] === undefined) return null;
 
