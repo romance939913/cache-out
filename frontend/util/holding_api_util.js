@@ -7,7 +7,6 @@ export const createNewHolding = holding => (
 );
 
 export const indexHoldings = (holding) => {
-    // debugger
     return $.ajax({
         url: `/api/holdings/`,
         method: "GET",
@@ -30,3 +29,10 @@ export const updateUserBuyingPower = (holding) => (
         data: { holding }
     })
 );
+
+export const showUser = (userId) => (
+    $.ajax({
+        url: `api/users/${userId}`,
+        data: { userId }
+    })
+)

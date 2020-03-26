@@ -7,11 +7,10 @@ export const holdingReducer = (state = [], action) => {
         case GET_HOLDINGS:
             return action.holdings;
         case GET_HOLDING:
-            debugger
             return action.holding;
         case RECEIVE_HOLDING:
             if (action.holding !== undefined) {
-                nextState[Object.keys(action.holding)[0]] = Object.values(action.holding)[0]
+                return action.holding
             } else {
                 return nextState;
             }

@@ -17,14 +17,20 @@ class TransactionForm extends React.Component {
 
     componentDidUpdate(previousProps) {
         if (previousProps.ticker !== this.props.ticker) {
-            debugger
-            this.props.getHolding(this.state)
+            let holding = {
+                user_id: this.props.currentUser.id,
+                ticker: this.props.ticker
+            }
         }
     }
 
     componentDidMount() {
-        let obj = Object.assign({}, this.state);
-        this.props.getHolding(obj)
+        let holding = {
+            user_id: this.props.currentUser.id,
+            ticker: this.props.ticker
+        }
+        this.props.getHolding(holding)
+        this.props.getUserBP(this.props.currentUser.id)
     }
 
     handleClick(value) {
@@ -44,11 +50,11 @@ class TransactionForm extends React.Component {
         e.preventDefault();
         const holding = Object.assign({}, this.state);
         if (this.state.buySell === 'BUY') {
-            holding['buying_power'] = this.props.currentUser.buying_power - this.state.cost;
+            holding['buying_power'] = this.props.cash - this.state.cost;
             this.props.receiveHolding(holding);
             this.props.updateUser(holding);
         } else {
-            holding['buying_power'] = this.props.currentUser.buying_power + this.state.cost;
+            holding['buying_power'] = this.props.cash + this.state.cost;
             holding.quantity = holding.quantity * (-1)
             this.props.receiveHolding(holding);
             this.props.updateUser(holding);
@@ -56,11 +62,13 @@ class TransactionForm extends React.Component {
     }
 
     render() {
+        console.log(this.props.holdings)
+        if (this.props.cash.length === 0) return null;
         if (this.props.price[this.props.ticker] === undefined) return null;
 
         let bottomMessage = '';
         if(this.state.buySell === 'BUY') {
-            bottomMessage = `Buying Power: $${this.props.currentUser.buying_power.toFixed(2)}`;
+            bottomMessage = `Buying Power: $${this.props.cash.toFixed(2)}`;
         } else {
             let symbol = this.props.ticker;
             if(this.props.holdings[symbol] === undefined) {

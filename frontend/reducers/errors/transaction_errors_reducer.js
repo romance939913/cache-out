@@ -6,7 +6,6 @@ export const transactionErrorsReducer = (state = [], action) => {
         case GET_HOLDINGS:
             return [];
         case GET_HOLDING:
-            debugger
             return [];
         case RECEIVE_HOLDING_ERRORS:
             if (action.errorsArr !== undefined) return action.errorsArr;  
