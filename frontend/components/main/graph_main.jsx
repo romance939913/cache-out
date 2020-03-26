@@ -8,7 +8,9 @@ class GraphMain extends React.Component {
         this.state = {
             equityBalance: [],
             time: "1d"
+
         };
+        this.brennan = "brennan"
     }
 
     componentDidMount() {
