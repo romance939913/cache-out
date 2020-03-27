@@ -10,7 +10,6 @@ class GraphMain extends React.Component {
             time: "1d"
 
         };
-        this.brennan = "brennan"
     }
 
     componentDidMount() {
