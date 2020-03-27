@@ -4,8 +4,6 @@ class TransactionForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-                user_id: this.props.currentUser.id,
-                ticker: this.props.ticker,
                 quantity: 0,
                 cost:  0,
                 buySell: 'BUY',
@@ -21,6 +19,10 @@ class TransactionForm extends React.Component {
                 user_id: this.props.currentUser.id,
                 ticker: this.props.ticker
             }
+            this.props.getHolding(holding);
+            this.props.getUserBP(this.props.currentUser.id);
+            this.state.quantity = 0;
+            this.state.cost = 0;
         }
     }
 
@@ -39,16 +41,28 @@ class TransactionForm extends React.Component {
 
     update(field) {
         return e => {
+            let cost;
+            if (e.currentTarget.value === '') {
+                cost = 0;
+            } else {
+                cost = parseInt(e.currentTarget.value) * this.props.price[this.props.ticker].price;
+            }
+
             this.setState({
                 [field]: parseInt(e.currentTarget.value),
-                cost: parseInt(e.currentTarget.value) * this.props.price[this.props.ticker].price,
+                cost
             });
         };
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const holding = Object.assign({}, this.state);
+        const holding = {
+            user_id: this.props.currentUser.id,
+            ticker: this.props.ticker,
+            quantity: this.state.quantity,
+            cost: this.state.cost
+        }
         if (this.state.buySell === 'BUY') {
             holding['buying_power'] = this.props.cash - this.state.cost;
             this.props.receiveHolding(holding);
@@ -62,7 +76,6 @@ class TransactionForm extends React.Component {
     }
 
     render() {
-        // console.log(this.props.holdings)
         if (this.props.cash.length === 0) return null;
         if (this.props.price[this.props.ticker] === undefined) return null;
 
@@ -70,14 +83,13 @@ class TransactionForm extends React.Component {
         if(this.state.buySell === 'BUY') {
             bottomMessage = `Buying Power: $${this.props.cash.toFixed(2)}`;
         } else {
-            let symbol = this.props.ticker;
-            if(this.props.holdings[symbol] === undefined) {
+            if(this.props.holdings[this.props.ticker] === undefined) {
                 bottomMessage = '0 Shares Available';
             } else {
-                bottomMessage = `${this.props.holdings[symbol].quantity} shares available`;
+                bottomMessage = `${this.props.holdings[this.props.ticker].quantity} shares available`;
             }
         }
-        
+
         return (
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
                 <div className="buy-sell-button-wrapper">
@@ -89,7 +101,6 @@ class TransactionForm extends React.Component {
                     <input
                         type="number"
                         className="share-quantity-input"
-                        value={this.state.quantity}
                         onChange={this.update('quantity')}
                         placeholder="quantity"
                     />
