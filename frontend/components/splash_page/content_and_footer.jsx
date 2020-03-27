@@ -46,6 +46,40 @@ class ContentAndFooter extends React.Component {
         </div>
         <div className="marquee">
         </div>
+        <div className="footer">
+          <div className="contact-info">
+            <div className="contact-information">
+              <p>Creator: Brennan Romance</p>
+              <p>brennan.romance@gmail.com</p>
+              <p>cell: 954-531-3051</p>
+            </div>
+            <div className="my-profiles">
+              <a href="https://github.com/romance939913/">
+                <img className="info-icon" src={window.github_pic} alt="" />
+              </a>
+              <a href="https://www.linkedin.com/in/brennanromance/">
+                <img className="info-icon" src={window.linkedin_pic} alt="" />
+              </a>
+              <a href="https://www.linkedin.com/in/brennanromance/">
+                <img className="info-icon" src={window.angellist_pic} alt="" />
+              </a>
+              <a href="">
+                <img className="info-icon" src={window.info_pic} alt="" />
+              </a>
+            </div>
+          </div>
+          <div className="feedback-section">
+            <p>Please Leave Feedback!</p>
+            <p>I'm always improving this site</p>
+            <p>Link to Google Form</p>
+          </div>
+          <div className="help-section">
+            <p>privacy</p>
+            <p>About</p>
+            <p>Terms and Conditions</p>
+            <p>Disclosure Library</p>
+          </div>
+        </div>
       </div>
     )
   }

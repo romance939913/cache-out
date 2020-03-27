@@ -1,113 +1,3 @@
-.splash-jumbotron {
-    height: 100%;
-    width: 100%;
-    background-color: #21ce99;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-.splash-jumbotron-signup {
-    color: white;
-    font-family: sans-serif;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    cursor: pointer;
-    height: 56px;
-    min-width: 162px;
-    background-color: rgb(36, 42, 45);
-    text-decoration: none;
-    overflow: hidden;
-    padding: 0px 16px;
-    border-radius: 8px;
-    border-color: rgb(36, 42, 45);
-}
-
-.splash-jumbotron-mission {
-    margin-left: 10vw
-}
-
-.splash-jumbotron-header {
-    font-size: 62px;
-    font-weight: 700;
-    line-height: 72px;
-}
-
-.splash-jumbotron-text {
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 36px;
-    margin: 15px 0px 15px 0px;
-}
-
-.gif-holder {
-    width: 100%;
-    height: 606px;
-    position: relative;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.iphone-img-holder {
-    position: absolute;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.img-iphone {
-    max-width: 100%;
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    user-select: none;
-}
-
-.video-cont {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    position: absolute;
-    border: 1px solid transparent;
-    box-sizing: border-box;
-}
-
-.gif-iphone {
-    pointer-events: none;
-}
-
-.splash-content {
-    display: block;
-    text-align: center;
-}
-
-.splash-content-header {
-    margin: 80px 0px 30px 0px;
-    font-size: 36px;
-}
-
-.splash-content-text {
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 30px;
-    text-align: center;
-    margin: 0px 20vw 80px 20vw;
-
-}
-
 .carousel-wrapper {
     background-color: black;
     height: 600px;
@@ -124,16 +14,13 @@
 
 .carousel-slide-indicator {
     color: white;
-    font-size: 18px;;
+    font-size: 25px;
     cursor: pointer;
+    padding: 15px;
 }
 
 .carousel-slide-indicator:hover {
     color: #21ce99;
-}
-
-.carousel-nav li {
-    padding: 15px;
 }
 
 .carousel-slide-description {
@@ -166,4 +53,64 @@
   100% {
     background-position: 0px;
   }
+}
+
+.footer {
+    background-color: black;
+    height: 250px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-icon {
+    height: 35px;
+    width: 35px;
+    margin: 10px 10px 10px 10px;
+}
+
+.contact-info h1 {
+    color: white;
+    margin: 10px;
+}
+
+.contact-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-information p {
+    color: white;
+    margin: 5px;
+}
+
+.feedback-section {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+.feedback-section p {
+    margin: 10px 0px 10px 0px;
+}
+
+.help-section {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.help-section p {
+    margin: 10px 0px 10px 0px;
 }

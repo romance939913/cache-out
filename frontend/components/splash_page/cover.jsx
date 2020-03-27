@@ -6,7 +6,7 @@ export default () => (
     <div className="splash-jumbotron">
       <div className="splash-jumbotron-mission">
         <p className="splash-jumbotron-header">It's Time to Do Money</p>
-        <p className="splash-jumbotron-text">Stock Overflow, a pioneer of commission-free investing, gives you more ways to make your money work harder</p>
+        <p className="splash-jumbotron-text">Cache Out lets you practice investing in the stock market, consequence free!</p>
         <Link className="splash-jumbotron-signup" to="/signup">Demo</Link>
       </div>
       <div className="gif-holder">
@@ -28,7 +28,7 @@ export default () => (
       </div>
     </div>
     <div className="splash-content">
-      <h2 className="splash-content-header">Break Free from Commission Fees</h2>
+      <h2 className="splash-content-header">Sharpen your skills and track your portfolio</h2>
       <p className="splash-content-text">Make unlimited commission-free trades in stocks, funds, and options with 
         Robinhood Financial. The same goes for buying and selling cryptocurrencies 
         with Robinhood Crypto. Zero commission fees.</p>

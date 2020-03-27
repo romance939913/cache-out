@@ -7,7 +7,6 @@
 
 div > a {
     text-decoration: none;
-    padding-left: 40px;
     font-family: "sans-serif";
     color: rgb(4, 13, 20);
 }
@@ -56,7 +55,17 @@ div > a {
     color: white;
 }
 
-img {
-    height: 45px;
-    width: 55px;
+.splash-navigation-bar-left-side {
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    height: 60px;
+    width: 60px;
+}
+
+.website-title {
+    font-size: 25px;
+    color: rgb(33, 206, 153);
 }
