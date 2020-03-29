@@ -21,3 +21,5 @@ npm-debug.log
 app/assets/javascripts/bundle.js
 
 tmp/cache/assets/sprockets
+# Ignore application configuration
+/config/application.yml

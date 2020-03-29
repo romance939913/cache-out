@@ -45,7 +45,7 @@ class Signin extends React.Component {
         <img className="image-signin-bg" src={window.signin_bg_pic} alt=""/>
         <div className="signin-form">
           <form className="signin-box" onSubmit={this.handleSubmit}>
-            <h3 className="signin-welcome-header">Welcome to Stock Overflow</h3>
+            <h3 className="signin-welcome-header">Welcome to Cache Out</h3>
             <br/>
             <label className="signin-form-label">username
               <input 

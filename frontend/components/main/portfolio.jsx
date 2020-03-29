@@ -18,9 +18,16 @@ class Portfolio extends React.Component {
     
     render() {
         let tickerArr = [];
-        if (Object.keys(this.props.price).length !== this.props.tickers.length) {
-            return null;
+        if (Object.keys(this.props.price).length !== this.props.tickers.length) return null;
+        if (this.props.tickers.length === 0) {
+            return (
+                <div className="holdings-portfolio">
+                    <p className="portfolio-header">portfolio</p>
+                    {tickerArr}
+                </div>
+            );
         }
+
         Object.values(this.props.holdings).forEach((ticker, idx) => {
             if (ticker.quantity !== 0) {
                 tickerArr.push(<Link

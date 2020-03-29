@@ -8,12 +8,14 @@ import { graphPricesReducer } from './securities/graph_prices_reducer';
 import { holdingReducer } from './securities/holding_reducer';
 import { indexPricesReducer } from './securities/index_prices_reducer';
 import { cashReducer } from './securities/cash_reducer';
+import { newsReducer } from './securities/news_reducer';
 
 const entitiesReducer = combineReducers({
     users: usersReducer,
     stocks: securitiesReducer,
     indexes: indexesReducer,
     profile: profileReducer,
+    news: newsReducer,
     price: realTimePriceReducer,
     graphPrices: graphPricesReducer,
     holdings: holdingReducer,

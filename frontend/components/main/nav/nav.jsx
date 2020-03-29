@@ -21,7 +21,7 @@ class MainNav extends React.Component {
     if (JSON.stringify(this.props.stocks) === '{}' || this.props.indexes.majorIndexesList === undefined) {
       return null
     } else {
-      // console.log(this.props.indexes.majorIndexesList[0].ticker)
+
       let shuffle = (a) => {
         let j, x, i;
         for (i = a.length - 1; i > 0; i--) {
@@ -63,12 +63,14 @@ class MainNav extends React.Component {
         </div>
         <div className="nav-bar">
           <div className="nav-left">
-            <img src={window.logo_pic} alt=""/>
+            <Link to="/feed" className="nav-right-ele">
+              <img className="main-nav-logo" src={window.logo_pic} alt=""/>
+            </Link>
             <NavSearchContainer stocks={this.props.stocks}/>
           </div>
           <div className="nav-right">
             <Link to="/feed" className="nav-right-ele">Home</Link>
-            <a className="nav-right-ele">Messages</a>
+            <a className="nav-right-ele">Dark Mode</a>
             <a className="nav-right-ele" onClick={() => this.props.logout()}>logout</a>
           </div>
         </div>

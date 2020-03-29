@@ -20,12 +20,18 @@
 
 .nav-right-ele {
     font-family: sans-serif;
+    margin: 0px 20px 0px 20px;
 }
 
 .nav-right-ele:hover {
     color: #21ce99;
 }
 
+.main-nav-logo {
+    height: 55px;
+    width: 55px;
+    margin-right: 15px;
+}
 
 .search-form {
     border: 1px solid lightgray;

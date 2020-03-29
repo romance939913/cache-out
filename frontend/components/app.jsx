@@ -5,10 +5,8 @@ import SigninContainer from './session//signin_container';
 import SignupContainer from './session/signup_container';
 import { AuthRoute } from '../util/route_util';
 import { ProtectedRoute } from '../util/protect_util';
-import MainFeed from './main/feed';
 import ShowPageContainer from './show_page/show_page_container';
 import MainFeedContainer from './main/feed_container';
-// import TransactionContainer from './show_page/transaction_container';
 
 const App = (props) => {
   return(<div>

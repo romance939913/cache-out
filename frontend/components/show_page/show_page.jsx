@@ -13,6 +13,7 @@ class ShowPage extends React.Component {
     componentDidMount() {
         this.props.receiveProfile(this.props.ticker);
         this.props.receiveRealTimePrice(this.props.ticker);
+        this.props.receiveNews()
     }
 
     componentDidUpdate(previousProps) {
@@ -24,9 +25,27 @@ class ShowPage extends React.Component {
 
     render() {
 
-        if(this.props.profile.description === undefined || JSON.stringify(this.props.price) === '{}') {
-            return null; 
-        } 
+        if (this.props.profile.description === undefined) return null; 
+        if (JSON.stringify(this.props.price) === '{}') return null;
+        if (this.props.news.length === 0) return null;
+
+        let newsArr = [];
+        this.props.news.forEach((ele, idx) => {
+            newsArr.push(
+                <a target="_blank" href={`${this.props.news[idx].url}`}>
+                    <div className="news-item-wrapper">
+                        <img className="news-item-image" src={`${this.props.news[idx].urlToImage}`} alt="" />
+                        <div className="news-item-content">
+                            <div>
+                                <li className="news-item-website">{this.props.news[idx].source.name}</li>
+                                <li className="news-item-title">{this.props.news[idx].title}</li>
+                            </div>
+                            <li className="news-item-description">{this.props.news[idx].description}</li>
+                        </div>
+                    </div>
+                </a>
+            )
+        })
         
         return (
             <div>
@@ -87,6 +106,7 @@ class ShowPage extends React.Component {
                             <div className="show-page-attr-item"></div>
                         </div>
                     </ul>
+                    {newsArr}
                 </div>
             </div>
         );

@@ -22,9 +22,8 @@ class GraphMain extends React.Component {
     
     render() {  
         let totalEquity = 0;
-        if (Object.keys(this.props.price).length !== this.props.tickers.length || this.props.indexPrices.prices === undefined) {
-            return null
-        }
+        if (Object.keys(this.props.price).length !== this.props.tickers.length) return null;
+        if (this.props.indexPrices.prices === undefined) return null;
 
         this.props.tickers.forEach((ticker, idx) => {
             if(this.props.holdings[ticker].quantity !== 0) {
