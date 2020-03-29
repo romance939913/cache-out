@@ -19,6 +19,6 @@ export const fetchStockWeek = (ticker) => (
 
 export const fetchNews = () => (
     $.ajax({
-        url: `http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${ENV['NEWS_API_KEY']}`,
+        url: `http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsapikey}`,
     })
 )
