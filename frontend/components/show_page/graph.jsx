@@ -106,7 +106,7 @@ class ShowPageGraph extends React.Component {
                 data={data} 
                 onMouseMove={this.handleHover} 
                 onMouseLeave={this.handleMouseLeave}>
-                <Line type="monotone" dataKey="close" stroke={color}/>
+                <Line type="monotone" dataKey="close" stroke={color} dot={false}/>
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
                 <XAxis dataKey='date' hide={true}/>

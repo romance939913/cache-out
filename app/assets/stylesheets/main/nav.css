@@ -30,38 +30,37 @@
 .main-nav-logo {
     height: 55px;
     width: 55px;
-    margin-right: 15px;
-}
-
-.search-form {
-    border: 1px solid lightgray;
-    width: 50vw;
 }
 
 .search-field {
-    font-size: 18px;
-    width: 50vw;
     position: relative;
+    width: 40vw;
+    font-size: 18px;
 }
+
 .search-field:focus {
     box-shadow: 0 0 4px #21ce99;
     outline: none;
+    font-size: 18px;
 }
 
 .search-field:hover {
     box-shadow: 0 0 4px #21ce99;
     outline: none;
+    font-size: 18px;
 }
 
 .search-form:hover ul{
     display: block;
     background-color: white;
     box-shadow: 0 0 4px #21ce99;
+    font-size: 18px;
 }
 .search-field:focus + ul{
     display: block;
     background-color: white;
     box-shadow: 0 0 4px #21ce99;
+    font-size: 18px;
 }
 
 .suggestion-box {

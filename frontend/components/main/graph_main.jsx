@@ -55,7 +55,7 @@ class GraphMain extends React.Component {
 
         const renderLineChart = (
             <LineChart width={800} height={400} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                <Line type="monotone" dataKey="close" stroke="#21ce99"/>
+                <Line type="monotone" dataKey="close" stroke="#21ce99" dot={false}/>
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
                 <YAxis domain={['dataMin', 'dataMax']}/>
                 <Tooltip />
