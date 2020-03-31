@@ -37,6 +37,18 @@ class TransactionForm extends React.Component {
 
     handleClick(value) {
         this.setState({ buySell: value });
+        this.changeUnderline(value)
+    }
+
+    changeUnderline(value) {
+        let types = Array.prototype.slice.call(document.getElementsByClassName("transaction-type"));
+        types.forEach((type, idx) => {
+            let typeClassList = Array.prototype.slice.call(type.classList);
+            type.classList.remove("selected")
+            if(typeClassList.includes(value)) {
+                type.classList.add("selected")
+            }
+        })
     }
 
     update(field) {
@@ -93,8 +105,8 @@ class TransactionForm extends React.Component {
         return (
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
                 <div className="buy-sell-button-wrapper">
-                    <p onClick={() => this.handleClick('BUY')}>Buy {`${this.props.ticker}`}</p>
-                    <p onClick={() => this.handleClick('SELL')}>Sell {`${this.props.ticker}`}</p>
+                    <p onClick={() => this.handleClick('BUY')} className="transaction-type BUY selected">Buy {`${this.props.ticker}`}</p>
+                    <p onClick={() => this.handleClick('SELL')} className="transaction-type SELL">Sell {`${this.props.ticker}`}</p>
                 </div>
                 <div className="share-quantity-wrapper">
                     <label>Shares</label>

@@ -13,6 +13,7 @@
 
 .stock-time-frame {
     cursor: pointer;
+    padding-bottom: 5px;
 }
 
 .stock-time-frame:hover {
@@ -45,6 +46,10 @@
     width: 800px; 
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+.underlined {
+    border-bottom: solid 2px #21ce99;
 }
 
 .show-page-about-description {

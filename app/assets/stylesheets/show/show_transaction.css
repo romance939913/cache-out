@@ -21,6 +21,11 @@
     cursor: pointer;
 }
 
+.selected {
+    color: #21ce99;
+    border-bottom: solid 2px #21ce99;
+}
+
 .share-quantity-wrapper {
     margin: 10px;
 }

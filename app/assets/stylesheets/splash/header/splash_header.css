@@ -68,4 +68,5 @@ div > a {
 .website-title {
     font-size: 25px;
     color: rgb(33, 206, 153);
+    margin-left: 20px;
 }
