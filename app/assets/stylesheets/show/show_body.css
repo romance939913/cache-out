@@ -38,6 +38,7 @@
 
 .graph-transaction-wrapper {
     display: flex;
+    justify-content: center;
 }
 
 .show-page-about-header {
@@ -68,4 +69,11 @@
     width: 120px;
     margin: 30px;
     font-size: 14px;
+}
+
+.news-show-header {
+    font-size: 25px;
+    border-bottom: 1px solid lightgray;
+    width: 800px; 
+    padding-bottom: 15px;
 }

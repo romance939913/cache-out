@@ -47,6 +47,7 @@ class MainFeed extends React.Component {
                             cash={this.props.cash}
                         />
                         <div>
+                            <h1>Today's Top Stories</h1>
                             {newsArr}
                         </div>
                     </div>

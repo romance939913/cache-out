@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { receiveProfile, receiveRealTimePrice } from '../../actions/security_actions';
+import { receiveProfile, receiveRealTimePrice, clearRealTimePrice } from '../../actions/security_actions';
 import ShowPage from './show_page';
 import { receiveNews } from '../../actions/graph_actions';
 
@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
     receiveProfile: (company) => dispatch(receiveProfile(company)),
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
-    receiveNews: () => dispatch(receiveNews())
+    receiveNews: () => dispatch(receiveNews()),
+    clearRealTimePrice: () => dispatch(clearRealTimePrice())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);

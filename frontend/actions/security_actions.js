@@ -9,6 +9,7 @@ export const RECEIVE_STOCKS = "RECEIVE_STOCKS";
 export const RECEIVE_INDEXES = "RECEIVE_INDEXES";
 export const RECEIVE_PROFILE = "RECEIVE_PROFILE";
 export const RECEIVE_REALTIME = "RECEIVE_REALTIME";
+export const CLEAR_REALTIME = "CLEAR_REALTIME";
 export const RECEIVE_INDEX_PRICES = "RECEIVE_INDEX_PRICES";
 
 const receiveTheStocks = (stocks) => ({
@@ -32,6 +33,10 @@ const receiveTheRealTimePrice = price => ({
     price
 });
 
+const clearTheRealTimePrice = () => ({
+    type: CLEAR_REALTIME
+});
+
 const receiveTheIndexPrices = prices => ({
     type: RECEIVE_INDEX_PRICES,
     prices
@@ -52,7 +57,5 @@ export const receiveRealTimePrice = (company) => dispatch => fetchRealTimePrice(
 export const receiveIndexPrices = (index) => dispatch => fetchIndexPrices(index)
     .then(prices => dispatch(receiveTheIndexPrices(prices)))
 
-// export const loginUser = (formUser) => dispatch => login(formUser)
-//     .then(user => dispatch(receiveCurrentUser(user)), pojo => dispatch(receiveErrors(pojo.responseJSON)))
-
+export const clearRealTimePrice = () => dispatch(clearTheRealTimePrice())
     

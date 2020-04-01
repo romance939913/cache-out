@@ -1,4 +1,4 @@
-import { RECEIVE_REALTIME } from "../../actions/security_actions";
+import { RECEIVE_REALTIME, CLEAR_REALTIME } from "../../actions/security_actions";
 
 export const realTimePriceReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -7,6 +7,8 @@ export const realTimePriceReducer = (state = {}, action) => {
         case RECEIVE_REALTIME:
             nextState[action.price.symbol] = action.price;
             return nextState;
+        case CLEAR_REALTIME:
+            return [];
         default:
             return state;
     }

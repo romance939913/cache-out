@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
 import { receiveProfile } from '../../actions/security_actions';
 import TransactionForm from './transaction_form';
-import { receiveHolding, getHoldings, updateUser, getHolding, getUserBP,  } from '../../actions/holding_actions';
+import { receiveHolding, 
+        getHoldings, 
+        updateUser, 
+        getHolding, 
+        getUserBP, 
+        clearErrors,  } from '../../actions/holding_actions';
 
 const mapStateToProps = state => ({
     profile: state.entities.profile,
@@ -17,7 +22,8 @@ const mapDispatchToProps = dispatch => ({
     getHoldings: (holding) => dispatch(getHoldings(holding)),
     updateUser: (user) => dispatch(updateUser(user)),
     getHolding: (holding) => dispatch(getHolding(holding)),
-    getUserBP: (user) => dispatch(getUserBP(user))
+    getUserBP: (user) => dispatch(getUserBP(user)),
+    clearErrors: () => dispatch(clearErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);

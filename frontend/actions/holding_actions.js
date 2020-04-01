@@ -11,6 +11,7 @@ export const GET_HOLDINGS = "GET_HOLDINGS";
 export const GET_HOLDING = "GET_HOLDING";
 export const UPDATE_BUYING_POWER = "UPDATE_BUYING_POWER"
 export const RECEIVE_HOLDING_ERRORS = "RECEIVE_HOLDING_ERRORS"
+export const CLEAR_HOLDING_ERRORS = "CLEAR_HOLDING_ERRORS"
 
 const receiveTheHolding = (holding) => ({
     type: RECEIVE_HOLDING,
@@ -42,6 +43,10 @@ const receiveErrors = (errorsArr) => ({
     errorsArr
 })
 
+const clearTheErrors = () => ({
+    type: CLEAR_HOLDING_ERRORS,
+})
+
 export const receiveHolding = (holding) => dispatch => createNewHolding(holding)
     .then(holding => dispatch(receiveTheHolding(holding)), pojo => dispatch(receiveErrors(pojo.responseJSON)));
 
@@ -56,3 +61,5 @@ export const getHolding = (holding) => dispatch => showHolding(holding)
 
 export const getUserBP = (user) => dispatch => showUser(user)
     .then(user => dispatch(getTheUser(user)))
+
+export const clearErrors = () => dispatch(clearTheErrors())

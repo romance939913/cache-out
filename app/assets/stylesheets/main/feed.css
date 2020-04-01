@@ -36,6 +36,14 @@
     font-size: 22px;
 }
 
+.ticker-quantity {
+    font-size: 14px;
+}
+
+.trading-at {
+    font-size: 14px;
+}
+
 .graph-valuation-wrapper {
     margin-left: 10vw;
 }

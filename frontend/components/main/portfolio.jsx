@@ -37,11 +37,11 @@ class Portfolio extends React.Component {
                         <div className="holding-portfolio-li">
                             <div className="portfolio-ele">
                                 <p>{ticker.ticker}</p>
-                                <p>{ticker.quantity}</p>
+                                <p className="ticker-quantity">{ticker.quantity} shares</p>
                             </div>
                             <div className="portfolio-ele">
                                 <p>Trading at:</p>
-                                <p>${this.props.price[ticker.ticker].price}</p>
+                                <p className="trading-at">${this.props.price[ticker.ticker].price.toFixed(2)}</p>
                             </div>
                         </div>
                     </li>

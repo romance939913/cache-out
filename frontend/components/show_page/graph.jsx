@@ -19,6 +19,7 @@ class ShowPageGraph extends React.Component {
 
     componentDidUpdate(previousProps) {
         if (previousProps.ticker !== this.props.ticker) {
+            this.changeTimeFrames("1d")
             this.props.receiveDay(`${this.props.ticker}`);
         }
     }
@@ -33,7 +34,6 @@ class ShowPageGraph extends React.Component {
             }
         })
     }
-
 
     handleHover(e) {
         const ele = document.getElementById("real-time-price");

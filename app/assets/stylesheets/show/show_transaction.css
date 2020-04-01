@@ -1,18 +1,23 @@
 .transaction-form-wrapper {
     margin-top: 50px;
-    margin-left: 10vw;
+    margin-left: 45px;
     border: solid black 1px;
-    height: 400px;
+    width: 280px;
+    height: 425px;
     box-shadow: 0 0 6px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .buy-sell-button-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .buy-sell-button-wrapper p {
     margin: 10px;
+    padding: 5px;
     font-size: 20px;
 }
 
@@ -27,7 +32,10 @@
 }
 
 .share-quantity-wrapper {
-    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px 20px 20px;
 }
 
 .share-quantity-input {
@@ -47,15 +55,17 @@
     border: solid 2px #21ce99;
 }
 
-.transaction-price p {
-    margin: 10px;
-}
 .transaction-price {
-    margin-bottom: 170px;
+    display: flex;
+    margin: 20px;
+    justify-content: space-between;
 }
 
 .transaction-submit-info {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .transaction-submit-info * {
@@ -63,13 +73,11 @@
 }
 
 .buy-sell-submit {
-    margin-left: 38px;
     width: 100px;
     box-sizing: content-box;
     background-color: #21ce99;
     border-color: #21ce99;
     color: white;
-    font-weight: 500;
     border-radius: 4px;
     font-size: 13px;
     cursor: pointer;
@@ -80,9 +88,13 @@
     justify-content: center;
     min-width: 120px;
     padding: 0 15px;
-    margin-top: 50px;
 }
 
 .buy-sell-submit:focus {
     outline: none;
+}
+
+.transaction-errors-arr {
+    color: red;
+    margin: 0;
 }

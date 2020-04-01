@@ -19,6 +19,7 @@ class TransactionForm extends React.Component {
                 user_id: this.props.currentUser.id,
                 ticker: this.props.ticker
             }
+            this.props.clearErrors()
             this.props.getHolding(holding);
             this.props.getUserBP(this.props.currentUser.id);
             this.state.quantity = 0;
@@ -37,7 +38,8 @@ class TransactionForm extends React.Component {
 
     handleClick(value) {
         this.setState({ buySell: value });
-        this.changeUnderline(value)
+        this.changeUnderline(value);
+        this.props.clearErrors();
     }
 
     changeUnderline(value) {
@@ -77,11 +79,13 @@ class TransactionForm extends React.Component {
         }
         if (this.state.buySell === 'BUY') {
             holding['buying_power'] = this.props.cash - this.state.cost;
+            this.props.clearErrors();
             this.props.receiveHolding(holding);
             this.props.updateUser(holding);
         } else {
             holding['buying_power'] = this.props.cash + this.state.cost;
-            holding.quantity = holding.quantity * (-1)
+            holding.quantity = holding.quantity * (-1);
+            this.props.clearErrors();
             this.props.receiveHolding(holding);
             this.props.updateUser(holding);
         }
@@ -104,25 +108,34 @@ class TransactionForm extends React.Component {
 
         return (
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
-                <div className="buy-sell-button-wrapper">
-                    <p onClick={() => this.handleClick('BUY')} className="transaction-type BUY selected">Buy {`${this.props.ticker}`}</p>
-                    <p onClick={() => this.handleClick('SELL')} className="transaction-type SELL">Sell {`${this.props.ticker}`}</p>
-                </div>
-                <div className="share-quantity-wrapper">
-                    <label>Shares</label>
-                    <input
-                        type="number"
-                        className="share-quantity-input"
-                        onChange={this.update('quantity')}
-                        placeholder="quantity"
-                    />
-                </div>
-                <div className="transaction-price">
-                    <p>Market Price: ${`${this.props.price[this.props.ticker].price}`}</p>
-                    <p>Estimated Cost: ${`${this.state.cost.toFixed(2)}`}</p>
+                <div>
+                    <div className="buy-sell-button-wrapper">
+                        <p onClick={() => this.handleClick('BUY')} className="transaction-type BUY selected">Buy {`${this.props.ticker}`}</p>
+                        <p onClick={() => this.handleClick('SELL')} className="transaction-type SELL">Sell {`${this.props.ticker}`}</p>
+                    </div>
+                    <div className="share-quantity-wrapper">
+                        <label>Shares</label>
+                        <input
+                            type="number"
+                            className="share-quantity-input"
+                            value={this.state.quantity}
+                            onChange={this.update('quantity')}
+                            placeholder="quantity"
+                        />
+                    </div>
+                    <div>
+                        <div className="transaction-price">
+                            <p>Market Price: </p>
+                            <p>${`${this.props.price[this.props.ticker].price.toFixed(2)}`}</p>
+                        </div>
+                        <div className="transaction-price">
+                            <p>Estimated Cost:</p>
+                            <p>${`${this.state.cost.toFixed(2)}`}</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="transaction-submit-info">
-                    <p>
+                    <p className="transaction-errors-arr">
                         {this.props.errors}
                     </p>
                     <input type="submit" value={this.state.buySell} className="buy-sell-submit"/>
