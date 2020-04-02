@@ -14,12 +14,6 @@ class GraphMain extends React.Component {
     
     render() {  
         let totalEquity = 0;
-        // console.log(Object.keys(this.props.price));
-        // console.log("price props")
-        // console.log(this.props.tickers)
-        // console.log("ticker props")
-        if (Object.keys(this.props.price).length !== this.props.tickers.length) return null;
-
         this.props.tickers.forEach((ticker, idx) => {
             if(this.props.holdings[ticker].quantity !== 0) {
                 let value = this.props.holdings[ticker].quantity * this.props.price[ticker].price;

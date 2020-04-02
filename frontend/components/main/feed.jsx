@@ -56,7 +56,7 @@ class MainFeed extends React.Component {
                         <GraphMainContainer 
                             tickers={Object.keys(this.props.holdings)} 
                             cash={this.props.cash}
-                            prices={this.props.price}
+                            price={this.props.price}
                         />
                         <div>
                             <h1>Today's Top Stories</h1>
@@ -65,7 +65,7 @@ class MainFeed extends React.Component {
                     </div>
                     <div className="portfolio-wrapper">
                         <PortfolioContainer 
-                            prices={this.props.price}
+                            price={this.props.price}
                             tickers={Object.keys(this.props.holdings)}
                         />
                     </div>
