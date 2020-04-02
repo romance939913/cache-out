@@ -8,13 +8,6 @@ class Portfolio extends React.Component {
             user_id: this.props.currentUser.id
         }
     }
-
-    componentDidMount() {
-        let tickers = this.props.tickers;
-        tickers.forEach((ticker, idx) => {
-            this.props.receiveRealTimePrice(ticker);
-        });
-    }
     
     render() {
         let tickerArr = [];

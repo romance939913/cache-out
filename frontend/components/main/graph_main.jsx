@@ -11,19 +11,12 @@ class GraphMain extends React.Component {
 
         };
     }
-
-    componentDidMount() {
-        let tickers = this.props.tickers;
-        tickers.forEach((ticker, idx) => {
-            this.props.receiveRealTimePrice(ticker);
-        });
-    }
     
     render() {  
         let totalEquity = 0;
-        // console.log(this.props.price);
+        // console.log(Object.keys(this.props.price));
         // console.log("price props")
-        // console.log(this.props.ticker)
+        // console.log(this.props.tickers)
         // console.log("ticker props")
         if (Object.keys(this.props.price).length !== this.props.tickers.length) return null;
 

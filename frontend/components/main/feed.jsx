@@ -9,12 +9,23 @@ class MainFeed extends React.Component {
         let holding = {
             user_id: this.props.currentUser.id
         }
-        this.props.getHoldings(holding);
-        this.props.getUserBP(this.props.currentUser.id)
+        this.props.getUserBP(this.props.currentUser.id);
         this.props.receiveNews();
+        this.props.getHoldings(holding)
+            .then(holdings => {
+                Object.keys(holdings.holdings).forEach((ticker, idx) => {
+                    this.props.receiveRealTimePrice(ticker)
+                })
+            })
     }
+
+    componentWillUnmount() {
+        this.props.clearRealTimePrice()
+    }
+
     
     render() {
+        if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length) return null;
         if (this.props.holdings.length === 0) return null;
         if (this.props.cash.length === 0) return null;
         if (this.props.news.length === 0) return null;
@@ -45,6 +56,7 @@ class MainFeed extends React.Component {
                         <GraphMainContainer 
                             tickers={Object.keys(this.props.holdings)} 
                             cash={this.props.cash}
+                            prices={this.props.price}
                         />
                         <div>
                             <h1>Today's Top Stories</h1>
@@ -53,6 +65,7 @@ class MainFeed extends React.Component {
                     </div>
                     <div className="portfolio-wrapper">
                         <PortfolioContainer 
+                            prices={this.props.price}
                             tickers={Object.keys(this.props.holdings)}
                         />
                     </div>
