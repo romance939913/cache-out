@@ -11,6 +11,7 @@ class MainFeed extends React.Component {
         }
         this.props.getUserBP(this.props.currentUser.id);
         this.props.receiveNews();
+        this.props.receiveSnapshots(this.props.currentUser.id)
         this.props.getHoldings(holding)
             .then(holdings => {
                 Object.keys(holdings.holdings).forEach((ticker, idx) => {
@@ -21,14 +22,15 @@ class MainFeed extends React.Component {
 
     componentWillUnmount() {
         this.props.clearRealTimePrice()
+        this.props.clearGraphPrices()
     }
-
     
     render() {
         if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length) return null;
         if (this.props.holdings.length === 0) return null;
         if (this.props.cash.length === 0) return null;
         if (this.props.news.length === 0) return null;
+        
 
         let newsArr = [];
         this.props.news.forEach((ele, idx) => {
@@ -57,6 +59,7 @@ class MainFeed extends React.Component {
                             tickers={Object.keys(this.props.holdings)} 
                             cash={this.props.cash}
                             price={this.props.price}
+                            snapshots={this.props.snapshots}
                         />
                         <div>
                             <h1>Today's Top Stories</h1>

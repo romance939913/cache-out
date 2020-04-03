@@ -1,11 +1,14 @@
 import { fetchStockWeek,
         fetchStockDay, 
         fetchstockHistorical, 
-        fetchNews } from "../util/graph_api_util"
+        fetchNews, 
+        fetchSnapshots} from "../util/graph_api_util"
 
 export const RECEIVE_HISTORICAL = "RECEIVE_HISTORICAL";
 export const RECEIVE_DAY = "RECEIVE_DAY";
 export const RECEIVE_WEEK = "RECEIVE_WEEK";
+export const CLEAR_GRAPH_PRICES = "CLEAR_GRAPH_PRICES";
+export const RECEIVE_SNAPSHOTS = "RECEIVE_SNAPSHOTS";
 export const RECEIVE_NEWS = "RECEIVE_NEWS";
 
 const receiveTheHistorical = (prices) => ({
@@ -21,6 +24,15 @@ const receiveTheDay = prices => ({
 const receiveTheWeek = prices => ({
     type: RECEIVE_WEEK,
     prices
+})
+
+const clearTheGraphPrices = () => ({
+    type: CLEAR_GRAPH_PRICES,
+})
+
+const receiveTheSnapshots = snapshots => ({
+    type: RECEIVE_SNAPSHOTS,
+    snapshots
 })
 
 const receiveTheNews = news => ({
@@ -39,3 +51,8 @@ export const receiveWeek = (ticker) => dispatch => fetchStockWeek(ticker)
 
 export const receiveNews = () => dispatch => fetchNews()
     .then(news => dispatch(receiveTheNews(news)))
+
+export const receiveSnapshots = (userId) => dispatch => fetchSnapshots(userId)
+    .then(snapshots => dispatch(receiveTheSnapshots(snapshots)))
+
+export const clearGraphPrices = () => dispatch(clearTheGraphPrices())

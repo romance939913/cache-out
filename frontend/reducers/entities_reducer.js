@@ -9,6 +9,7 @@ import { holdingReducer } from './securities/holding_reducer';
 import { indexPricesReducer } from './securities/index_prices_reducer';
 import { cashReducer } from './securities/cash_reducer';
 import { newsReducer } from './securities/news_reducer';
+import { graphSnapshotReducer } from './securities/graph_snapshot_reducer';
 
 const entitiesReducer = combineReducers({
     users: usersReducer,
@@ -18,6 +19,7 @@ const entitiesReducer = combineReducers({
     news: newsReducer,
     price: realTimePriceReducer,
     graphPrices: graphPricesReducer,
+    snapshots: graphSnapshotReducer,
     holdings: holdingReducer,
     indexPrices: indexPricesReducer,
     buyingPower: cashReducer

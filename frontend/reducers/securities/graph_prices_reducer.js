@@ -1,4 +1,7 @@
-import { RECEIVE_HISTORICAL, RECEIVE_WEEK, RECEIVE_DAY } from "../../actions/graph_actions";
+import { RECEIVE_HISTORICAL, 
+            RECEIVE_WEEK, 
+            RECEIVE_DAY, 
+            CLEAR_GRAPH_PRICES } from "../../actions/graph_actions";
 
 export const graphPricesReducer = (state = [], action) => {
     Object.freeze(state);
@@ -9,6 +12,8 @@ export const graphPricesReducer = (state = [], action) => {
             return action.prices;
         case RECEIVE_DAY:
             return action.prices;        
+        case CLEAR_GRAPH_PRICES:
+            return [];        
         default:
             return state;
     }

@@ -76,7 +76,6 @@ class ShowPageGraph extends React.Component {
     }
     
     render() {
-        if (this.props.graphPrices.length === 0) return null;
         if (this.props.price[this.props.ticker] === undefined) return null;
         
         let data = this.props.graphPrices;

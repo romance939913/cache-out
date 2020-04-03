@@ -22,3 +22,10 @@ export const fetchNews = () => (
         url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsapikey}`,
     })
 )
+
+export const fetchSnapshots = (userId) => (
+    $.ajax({
+        url: `/api/portfolio_snapshots`,
+        data: { userId }
+    })
+)
