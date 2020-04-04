@@ -1,14 +1,16 @@
 .main-page-wrapper {
     display: flex;
+    width: 1200px;
+    margin: auto;
 }
 
 .holdings-portfolio {
-    margin-left: 10vw;
     width: 230px;
     border: solid black 1px;
     box-shadow: 0 0 6px rgba(0,0,0,0.6);
-    margin-top: 25px;
-    height: 70vh;
+    margin: 25px 0px 0px 45px;
+    height: 80vh;
+    position: fixed;
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -32,8 +34,10 @@
 }
 
 .portfolio-header {
-    margin: 10px;
+    margin: 0 0 10px 0;
+    padding: 10px;
     font-size: 22px;
+    border-bottom: lightgray 1px solid;
 }
 
 .ticker-quantity {
@@ -44,18 +48,13 @@
     font-size: 14px;
 }
 
-.graph-valuation-wrapper {
-    margin-left: 10vw;
-}
-
 .main-page-total-assets {
     font-size: 40px;
-    margin: 25px;
+    margin: 10px 0px 10px 0px;
 }
 
 .main-page-buying-power {
-    margin-left: 25px;
-    margin-bottom: 10px
+    margin: 10px 0px 10px 0px;
 }
 
 .news-item-wrapper {
@@ -90,4 +89,15 @@
     flex-direction: column;
     justify-content: space-evenly;
     width: 600px;
+}
+
+.news-container {
+    width: 800px;
+    margin-top: 50px;
+}
+
+.news-header {
+    padding: 15px;
+    font-size: 25px;
+    border-bottom: solid 1px lightgray;
 }

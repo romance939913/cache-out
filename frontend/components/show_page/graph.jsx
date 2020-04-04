@@ -1,5 +1,6 @@
 import React from 'react';
 import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip} from 'recharts';
+import moment from 'moment'
 
 class ShowPageGraph extends React.Component {
     constructor(props) {
@@ -77,24 +78,35 @@ class ShowPageGraph extends React.Component {
     
     render() {
         if (this.props.price[this.props.ticker] === undefined) return null;
+        if (this.props.graphPrices.length === 0) return null;
         
         let data = this.props.graphPrices;
         data = data.slice()
         let d = new Date();
+        // console.log(moment(d).isSame('2020-04-04', 'day'))
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);  
         let date = d.getDate().toString();
         let dateFix = date.padStart(2, "0");
         if (this.state.time === "1d" && !isWeekend) {
             data = data.filter(obj => {
-            let oDate = obj.date.split(" ");
-            let oday = oDate[0].split("-");
-            return oday[2] === dateFix;
-        });
-        data = data.reverse();
-        data = data.slice(1);
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSame(d, 'day')
+                // let oday = oDate[0].split("-");
+                // return oday[2] === dateFix;
+            })
+            data = data.slice(1);
+            data = data.reverse();
+        } else if (this.state.time === "1d" && isWeekend) {
+            data = data.slice(0, 79);
+            data = data.reverse()
         } else if (this.state.time === "1w") {
-            data = data.slice();
+            data = data.filter(obj => {
+                let oDate = obj.date.split(" ");
+                let oday = oDate[0].split("-");
+                return oday[2] === dateFix;
+            })
+            data = data.slice(3);
             data = data.reverse();
         } else if (this.state.time === "1m") {
             data = this.props.graphPrices.slice(-31);
@@ -128,8 +140,6 @@ class ShowPageGraph extends React.Component {
         
         return (
             <div className="graph-wrapper">
-                {/* actual css variables google: dark mode css themes */}
-                {/* custom tooltip Ronil's gh */}
                 <li className="show-stock-price" id="real-time-price">${`${this.props.price[this.props.ticker].price.toFixed(2)}`}</li>
                 {renderLineChart}
                 <ul className="stock-time-frames">

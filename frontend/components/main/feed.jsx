@@ -30,7 +30,6 @@ class MainFeed extends React.Component {
         if (this.props.holdings.length === 0) return null;
         if (this.props.cash.length === 0) return null;
         if (this.props.news.length === 0) return null;
-        
 
         let newsArr = [];
         this.props.news.forEach((ele, idx) => {
@@ -54,15 +53,15 @@ class MainFeed extends React.Component {
             <div>
                 <MainNavContainer />
                 <div className="main-page-wrapper">
-                    <div className="graph-valuation-wrapper">
+                    <div className="graph-news-wrapper">
                         <GraphMainContainer 
                             tickers={Object.keys(this.props.holdings)} 
                             cash={this.props.cash}
                             price={this.props.price}
                             snapshots={this.props.snapshots}
                         />
-                        <div>
-                            <h1>Today's Top Stories</h1>
+                        <div className="news-container">
+                            <h1 className="news-header">Today's Top Stories</h1>
                             {newsArr}
                         </div>
                     </div>

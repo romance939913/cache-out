@@ -1,13 +1,19 @@
 namespace :scheduler do
   task :add_portfolio_snapshots_for_day => :environment do
     puts "Adding day's portfolio snapshots..."
+    require 'date'
 
     date = Date.today
-    next if date.on_weekend?
+    next if date.saturday?
+    next if date.sunday?
 
-    # time = Time.now
-    # timeString = time.to_s
-    # timeSplit = timeString.split("")[1]
+    time = Time.now
+    timeString = time.to_s
+    timeArr = timeString.split("")[1]
+    hour = timeArr.split(":")[0]
+    min = timeArr.split(":")[1]
+    next if hour.to_i < 9 && min.to_i < 30
+    next if hour.to_i > 15
     
     users = User.all
     users.each do |user| 
