@@ -49,7 +49,8 @@ class GraphMain extends React.Component {
             data = data.reverse()
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
-            day === 6 ? friday = moment().subtract(1, 'days') : friday = moment().subtract(2, 'days')
+            day === 6 ? friday = moment().subtract(1, 'days') 
+            : friday = moment().subtract(2, 'days')
             data = data.filter(obj => {
                 return moment(obj.created_at).isSame(friday, 'day')
             })
