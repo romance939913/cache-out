@@ -1,6 +1,6 @@
 import React from 'react';
 import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip } from 'recharts';
-
+import moment from 'moment';
 
 class GraphMain extends React.Component {
     constructor(props) {
@@ -42,25 +42,48 @@ class GraphMain extends React.Component {
         let d = new Date();
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
-        let date = d.getDate().toString();
-        let dateFix = date.padStart(2, "0");
         if (this.state.time === "1d" && !isWeekend) {
             data = data.filter(obj => {
-                let oDate = obj.date.split(" ");
-                let oday = oDate[0].split("-");
-                return oday[2] === dateFix;
-            });
-            data = data.reverse();
-            data = data.slice(1);
+                return moment(obj.created_at).isSame(d, 'day')
+            })
+            data = data.reverse()
+        } else if (this.state.time === "1d" && isWeekend) {
+            let friday;
+            day === 6 ? friday = moment().subtract(1, 'days') : friday = moment().subtract(2, 'days')
+            data = data.filter(obj => {
+                return moment(obj.created_at).isSame(friday, 'day')
+            })
+            data = data.reverse()
         } else if (this.state.time === "1w") {
-            data = data.slice();
+            data = data.filter(obj => {
+                let limit = moment().subtract(1, 'weeks')
+                return moment(obj.created_at).isAfter(limit);
+            })
             data = data.reverse();
         } else if (this.state.time === "1m") {
-            data = this.props.graphPrices.slice(-31);
+            data = data.filter(obj => {
+                let limit = moment().subtract(1, 'months')
+                return moment(obj.created_at).isAfter(limit);
+            })
+            data = data.reverse();
         } else if (this.state.time === "3m") {
-            data = this.props.graphPrices.slice(-93);
+            data = data.filter(obj => {
+                let limit = moment().subtract(3, 'months')
+                return moment(obj.created_at).isAfter(limit);
+            })
+            data = data.reverse();
         } else if (this.state.time === "1y") {
-            data = this.props.graphPrices.slice(-261);
+            data = data.filter(obj => {
+                let limit = moment().subtract(1, 'years')
+                return moment(obj.created_at).isAfter(limit);
+            })
+            data = data.reverse();
+        } else if (this.state.time === "5y") {
+            data = data.filter((obj, idx) => {
+                let limit = moment().subtract(5, 'years')
+                return moment(obj.created_at).isAfter(limit)
+            })
+            data = data.reverse();    
         }
 
         let color = '#21ce99'

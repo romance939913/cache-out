@@ -83,37 +83,50 @@ class ShowPageGraph extends React.Component {
         let data = this.props.graphPrices;
         data = data.slice()
         let d = new Date();
-        // console.log(moment(d).isSame('2020-04-04', 'day'))
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);  
-        let date = d.getDate().toString();
-        let dateFix = date.padStart(2, "0");
         if (this.state.time === "1d" && !isWeekend) {
             data = data.filter(obj => {
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isSame(d, 'day')
-                // let oday = oDate[0].split("-");
-                // return oday[2] === dateFix;
             })
             data = data.slice(1);
             data = data.reverse();
         } else if (this.state.time === "1d" && isWeekend) {
-            data = data.slice(0, 79);
+            data = data.slice(0, 79); // takes last day (friday) data
             data = data.reverse()
         } else if (this.state.time === "1w") {
             data = data.filter(obj => {
+                let limit = moment().subtract(1, 'weeks')
                 let oDate = obj.date.split(" ");
-                let oday = oDate[0].split("-");
-                return oday[2] === dateFix;
+                return moment(oDate[0]).isAfter(limit);
             })
             data = data.slice(3);
             data = data.reverse();
         } else if (this.state.time === "1m") {
-            data = this.props.graphPrices.slice(-31);
+            data = data.filter(obj => {
+                let limit = moment().subtract(1, 'months')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSameOrAfter(limit);
+            })
         } else if (this.state.time === "3m") {
-            data = this.props.graphPrices.slice(-93);
+            data = data.filter(obj => {
+                let limit = moment().subtract(3, 'months')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSameOrAfter(limit);
+            })
         } else if (this.state.time === "1y") {
-            data = this.props.graphPrices.slice(-261);
+            data = data.filter(obj => {
+                let limit = moment().subtract(1, 'years')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSameOrAfter(limit);
+            })
+        } else if (this.state.time === "5y") {
+            data = data.filter((obj, idx) => {
+                let limit = moment().subtract(5, 'years')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSameOrAfter(limit) && idx % 5 === 0;
+            })
         }
 
         let color
@@ -134,7 +147,7 @@ class ShowPageGraph extends React.Component {
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
                 <XAxis dataKey='date' hide={true}/>
-                <Tooltip />
+                <Tooltip content={data.date}/>
             </LineChart>
         );
         
