@@ -28,6 +28,7 @@ class NavSearchForm extends React.Component {
 
     render() {
         let suggestions = []
+
         if(!this.props.stocks) return null;
 
         let companies = Object.values(this.props.stocks);
@@ -50,8 +51,9 @@ class NavSearchForm extends React.Component {
                 }
             }
         })
+
         suggestions = suggestions.slice(0, 6)
-            
+
         return (
             <form className="search-form">
                 <input 

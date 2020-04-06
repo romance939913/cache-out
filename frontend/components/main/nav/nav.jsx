@@ -28,6 +28,7 @@ class MainNav extends React.Component {
   render() {
     if (this.props.stocks.length === 0) return null;
     if (this.props.indexes.majorIndexesList === undefined) return null;
+
     let lis = [];
     let shuffle = (a) => {
       let j, x, i;
@@ -41,33 +42,34 @@ class MainNav extends React.Component {
     }
 
     let indexList = Object.keys(this.props.indexes.majorIndexesList);
-    let indexes = shuffle(indexList);    
-    lis.push(indexes.map((index, idx) => {
-      let color;
-      let idxChanges = this.props.indexes.majorIndexesList[index].changes;
-      if (idxChanges < 0) {
-        color = "red"
-      } else {
-        color = 'green';
-        idxChanges = "+" + this.props.indexes.majorIndexesList[index].changes.toString();
-      }
-
-      return(
-        <li
-          key={idx}
-          className="marquee-item">
-          <div className={`marquee-item-data ${color}`}>
-            {this.props.indexes.majorIndexesList[index].indexName}
-          </div>
-          <div className={`marquee-item-data ${color}`}>
-            {this.props.indexes.majorIndexesList[index].price.toString()}
-          </div>
-          <div className={`marquee-item-data ${color}`}>
-            {idxChanges}
-        </div>
-        </li>
-      )
-    }))
+    let indexes = shuffle(indexList);   
+    while (lis.length  < 300) {
+      lis.push(indexes.map((index, idx) => {
+        let color;
+        let idxChanges = this.props.indexes.majorIndexesList[index].changes;
+        if (idxChanges < 0) {
+          color = "red"
+        } else {
+          color = 'green';
+          idxChanges = "+" + this.props.indexes.majorIndexesList[index].changes.toString();
+        }
+        return(
+          <li
+            key={idx}
+            className="marquee-item">
+              <div className={`marquee-item-data ${color}`}>
+                {this.props.indexes.majorIndexesList[index].indexName}
+              </div>
+              <div className={`marquee-item-data ${color}`}>
+                {this.props.indexes.majorIndexesList[index].price.toString()}
+              </div>
+              <div className={`marquee-item-data ${color}`}>
+                {idxChanges}
+            </div>
+          </li>
+        )
+      }))
+    }
 
     return (
       <div className="nav_plus_quotron">

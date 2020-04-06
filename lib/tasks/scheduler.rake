@@ -3,17 +3,19 @@ namespace :scheduler do
     puts "Adding day's portfolio snapshots..."
     require 'date'
 
+    debugger
     date = Date.today
     next if date.saturday?
     next if date.sunday?
 
     time = Time.now
     timeString = time.to_s
-    timeArr = timeString.split("")[1]
+    timeArr = timeString.split(" ")[1]
     hour = timeArr.split(":")[0]
     min = timeArr.split(":")[1]
-    next if hour.to_i < 9 && min.to_i < 30
-    next if hour.to_i > 15
+    next if hour.to_i < 13 && min.to_i < 30
+    next if hour.to_i > 19
+
     
     users = User.all
     users.each do |user| 
