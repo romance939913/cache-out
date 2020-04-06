@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import numeral from 'numeral'
 
 class Portfolio extends React.Component {
     constructor(props) {
@@ -29,11 +30,11 @@ class Portfolio extends React.Component {
                         <div className="holding-portfolio-li">
                             <div className="portfolio-ele">
                                 <p>{ticker.ticker}</p>
-                                <p className="ticker-quantity">{ticker.quantity} shares</p>
+                                <p className="ticker-quantity">{numeral(ticker.quantity).format('0,0')} shares</p>
                             </div>
                             <div className="portfolio-ele">
                                 <p>Trading at:</p>
-                                <p className="trading-at">${this.props.price[ticker.ticker].price.toFixed(2)}</p>
+                                <p className="trading-at">{numeral(this.props.price[ticker.ticker].price).format('$0,0.00')}</p>
                             </div>
                         </div>
                     </li>

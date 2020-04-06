@@ -1,6 +1,7 @@
 import React from 'react';
 import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip} from 'recharts';
-import moment from 'moment'
+import moment from 'moment';
+import numeral from 'numeral';
 
 class ShowPageGraph extends React.Component {
     constructor(props) {
@@ -38,13 +39,15 @@ class ShowPageGraph extends React.Component {
 
     handleHover(e) {
         const ele = document.getElementById("real-time-price");
-        ele.textContent = `$${e.activePayload[0].value.toFixed(2)}`;
+        let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
+        ele.textContent = hoverPrice;
     }
 
     handleMouseLeave() {
         const ele = document.getElementById("real-time-price");
         let symbol = this.props.ticker;
-        ele.textContent = `$${this.props.price[symbol].price.toFixed(2)}`;
+        let currentPrice = numeral(this.props.price[symbol].price).format('$0,0.00');
+        ele.textContent = currentPrice;
     }
 
     changeTimeFrames(newFrame) {
@@ -150,10 +153,11 @@ class ShowPageGraph extends React.Component {
                 <Tooltip content={data.date}/>
             </LineChart>
         );
+
         
         return (
             <div className="graph-wrapper">
-                <li className="show-stock-price" id="real-time-price">${`${this.props.price[this.props.ticker].price.toFixed(2)}`}</li>
+                <li className="show-stock-price" id="real-time-price">{numeral(this.props.price[this.props.ticker].price).format('$0,0.00')}</li>
                 {renderLineChart}
                 <ul className="stock-time-frames">
                     <li onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined">1D</li>

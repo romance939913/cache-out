@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
-import { receiveRealTimePrice } from '../../actions/security_actions';
-import ShowPageGraph from './graph';
+import ShowPageGraph from './show_graph';
 import { receiveHistorical, receiveDay, receiveWeek, clearGraphPrices } from '../../actions/graph_actions';
 
 const mapStateToProps = (state) => {

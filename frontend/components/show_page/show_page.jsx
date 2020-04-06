@@ -1,6 +1,6 @@
 import React from 'react';
 import NavContainer from '../main/nav/nav_container';
-import ShowPageGraph from './graph_container';
+import ShowPageGraph from './show_graph_container';
 import TransactionContainer from './transaction_container';
 
 class ShowPage extends React.Component {

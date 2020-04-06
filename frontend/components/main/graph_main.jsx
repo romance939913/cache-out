@@ -1,6 +1,7 @@
 import React from 'react';
 import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip } from 'recharts';
 import moment from 'moment';
+import numeral from 'numeral';
 
 class GraphMain extends React.Component {
     constructor(props) {
@@ -9,7 +10,6 @@ class GraphMain extends React.Component {
         this.state = {
             equityBalance: [],
             time: "1d"
-
         };
     }
 
@@ -104,8 +104,8 @@ class GraphMain extends React.Component {
 
         return (
             <div>
-                <h2 className="main-page-total-assets">{`$${(this.props.cash + totalEquity).toFixed(2)}`}</h2>
-                <p className ="main-page-buying-power">Cash balance: {`$${(this.props.cash).toFixed(2)}`}</p>
+                <h2 className="main-page-total-assets">{numeral(this.props.cash + totalEquity).format('$0,0.00')}</h2>
+                <p className="main-page-buying-power">Cash balance: {`${numeral(this.props.cash).format('$0,0.00')}`}</p>
                 {renderLineChart}
                 <ul className="stock-time-frames">
                     <li onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined">1D</li>

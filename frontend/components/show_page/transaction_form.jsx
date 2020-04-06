@@ -1,4 +1,5 @@
 import React from 'react';
+import numeral from 'numeral'
 
 class TransactionForm extends React.Component {
     constructor(props) {
@@ -96,13 +97,13 @@ class TransactionForm extends React.Component {
         if (this.props.price[this.props.ticker] === undefined) return null;
 
         let bottomMessage = '';
-        if(this.state.buySell === 'BUY') {
-            bottomMessage = `Buying Power: $${this.props.cash.toFixed(2)}`;
+        if(this.state.buySell === 'BUY') { 
+            bottomMessage = `Buying Power: ${numeral(this.props.cash).format('$0,0.00')}`;
         } else {
             if(this.props.holdings[this.props.ticker] === undefined) {
                 bottomMessage = '0 Shares Available';
             } else {
-                bottomMessage = `${this.props.holdings[this.props.ticker].quantity} shares available`;
+                bottomMessage = `${numeral(this.props.holdings[this.props.ticker].quantity).format('0,0')} shares available`;
             }
         }
 
@@ -126,11 +127,11 @@ class TransactionForm extends React.Component {
                     <div>
                         <div className="transaction-price">
                             <p>Market Price: </p>
-                            <p>${`${this.props.price[this.props.ticker].price.toFixed(2)}`}</p>
+                            <p>{numeral(this.props.price[this.props.ticker].price).format('$0,0.00')}</p>
                         </div>
                         <div className="transaction-price">
                             <p>Estimated Cost:</p>
-                            <p>${`${this.state.cost.toFixed(2)}`}</p>
+                            <p>{numeral(this.state.cost).format('$0,0.00')}</p>
                         </div>
                     </div>
                 </div>
