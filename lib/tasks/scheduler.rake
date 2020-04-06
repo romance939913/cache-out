@@ -3,7 +3,6 @@ namespace :scheduler do
     puts "Adding day's portfolio snapshots..."
     require 'date'
 
-    debugger
     date = Date.today
     next if date.saturday?
     next if date.sunday?
