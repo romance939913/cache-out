@@ -3,7 +3,7 @@
     height: 600px;
     position: relative;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
@@ -19,13 +19,21 @@
     padding: 15px;
 }
 
+.carousel-track {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2vw 0 0;
+}
+
 .carousel-slide-indicator:hover {
     color: #21ce99;
 }
 
 .carousel-slide-description {
     color: white;
-    max-width: 40vw;
+    max-width: 35vw;
+    margin: 0 0 0 2vw;
 }
 
 .carousel-slide-description h1 {
@@ -60,6 +68,7 @@
     height: 250px;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .contact-info {
@@ -70,9 +79,9 @@
 }
 
 .info-icon {
-    height: 35px;
-    width: 35px;
-    margin: 10px 10px 10px 10px;
+    height: 40px;
+    width: 40px;
+    margin: 0 10px 0 10px;
 }
 
 .contact-info h1 {
