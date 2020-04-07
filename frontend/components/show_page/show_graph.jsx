@@ -10,6 +10,7 @@ class ShowPageGraph extends React.Component {
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.changeTimeFrames = this.changeTimeFrames.bind(this);
         this.handleFetch = this.handleFetch.bind(this);
+        this.customToolTip = this.customToolTip.bind(this)
         this.state = { 
             time: '1d',
         };
@@ -78,6 +79,21 @@ class ShowPageGraph extends React.Component {
                 break;
         }
     }
+
+    customToolTip(e) {
+        let formatted
+        if (this.state.time === "1d") {
+        formatted = moment(e.label).format('LT');
+        } else if (this.state.time === "1w") {
+            formatted = moment(e.label).format('LLL');
+        } else {
+            formatted = moment(e.label).format('L');
+        }
+        return (
+            <div className="custom-tooltip">{formatted}</div>
+        )
+    }
+
     
     render() {
         if (this.props.price[this.props.ticker] === undefined) return null;
@@ -150,7 +166,13 @@ class ShowPageGraph extends React.Component {
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
                 <XAxis dataKey='date' hide={true}/>
-                <Tooltip content={data.date}/>
+                <Tooltip
+                    position={{ y: 0 }}
+                    offset={-50}
+                    isAnimationActive={false}
+                    content={this.customToolTip}
+                    wrapperStyle={{ top: -15 }}
+                />
             </LineChart>
         );
 

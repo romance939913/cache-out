@@ -28,10 +28,13 @@
     list-style: none;
 }
 
+.custom-tooltip {
+    color: #8a8a8a;
+}
+
 .show-stock-price {
     font-size: 32px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin: 15px 0 25px 0;
     text-decoration: none;
     list-style: none;
 }

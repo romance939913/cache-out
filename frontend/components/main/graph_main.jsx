@@ -6,9 +6,10 @@ import numeral from 'numeral';
 class GraphMain extends React.Component {
     constructor(props) {
         super(props);
-        this.changeTimeFrames = this.changeTimeFrames.bind(this)
+        this.changeTimeFrames = this.changeTimeFrames.bind(this);
         this.handleHover = this.handleHover.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
+        this.customToolTip = this.customToolTip.bind(this);
         this.state = {
             equityBalance: [],
             time: "1d"
@@ -50,6 +51,20 @@ class GraphMain extends React.Component {
         ele.textContent = currentPrice;
     }
     
+    customToolTip(e) {
+        let formatted
+        if (this.state.time === "1d") {
+            formatted = moment(e.label).format('LT'); 
+        } else if (this.state.time === "1w") {
+            formatted = moment(e.label).format('LLL');
+        } else {
+            formatted = moment(e.label).format('L');
+        }
+        return (
+            <div className="custom-tooltip">{formatted}</div>
+        )
+    }
+
     render() {  
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
@@ -120,8 +135,14 @@ class GraphMain extends React.Component {
                 <Line type="monotone" dataKey="valuation" stroke={color} dot={false} />
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
-                <XAxis dataKey='date' hide={true} />
-                <Tooltip />
+                <XAxis dataKey='created_at' hide={true} />
+                <Tooltip
+                    position={{ y: 0 }}
+                    offset={-50}
+                    isAnimationActive={false}
+                    content={this.customToolTip}
+                    wrapperStyle={{ top: -15 }}
+                />
             </LineChart>
         );
 
