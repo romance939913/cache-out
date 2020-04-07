@@ -7,6 +7,8 @@ class GraphMain extends React.Component {
     constructor(props) {
         super(props);
         this.changeTimeFrames = this.changeTimeFrames.bind(this)
+        this.handleHover = this.handleHover.bind(this);
+        this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.state = {
             equityBalance: [],
             time: "1d"
@@ -27,6 +29,25 @@ class GraphMain extends React.Component {
                 li.classList.add("underlined")
             }
         })
+    }
+
+    handleHover(e) {
+        const ele = document.getElementById("current-valuation");
+        let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
+        ele.textContent = hoverPrice;
+    }
+
+    handleMouseLeave() {
+        const ele = document.getElementById("current-valuation");
+        let totalEquity = 0;
+        this.props.tickers.forEach((ticker, idx) => {
+            if (this.props.holdings[ticker].quantity !== 0) {
+                let value = this.props.holdings[ticker].quantity * this.props.price[ticker].price;
+                totalEquity = totalEquity + value;
+            }
+        });
+        let currentPrice = numeral(totalEquity + this.props.cash).format('$0,0.00');
+        ele.textContent = currentPrice;
     }
     
     render() {  
@@ -93,7 +114,9 @@ class GraphMain extends React.Component {
             <LineChart
                 width={800}
                 height={400}
-                data={data}>
+                data={data}
+                onMouseMove={this.handleHover}
+                onMouseLeave={this.handleMouseLeave}>
                 <Line type="monotone" dataKey="valuation" stroke={color} dot={false} />
                 <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
@@ -104,7 +127,9 @@ class GraphMain extends React.Component {
 
         return (
             <div>
-                <h2 className="main-page-total-assets">{numeral(this.props.cash + totalEquity).format('$0,0.00')}</h2>
+                <h2 id="current-valuation" className="main-page-total-assets">
+                    {numeral(this.props.cash + totalEquity).format('$0,0.00')}
+                </h2>
                 <p className="main-page-buying-power">Cash balance: {`${numeral(this.props.cash).format('$0,0.00')}`}</p>
                 {renderLineChart}
                 <ul className="stock-time-frames">
