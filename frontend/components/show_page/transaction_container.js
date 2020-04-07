@@ -6,7 +6,8 @@ import { receiveHolding,
         updateUser, 
         getHolding, 
         getUserBP, 
-        clearErrors,  } from '../../actions/holding_actions';
+        clearErrors,
+        receiveSuccess,  } from '../../actions/holding_actions';
 
 const mapStateToProps = state => ({
     profile: state.entities.profile,
@@ -23,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
     updateUser: (user) => dispatch(updateUser(user)),
     getHolding: (holding) => dispatch(getHolding(holding)),
     getUserBP: (user) => dispatch(getUserBP(user)),
-    clearErrors: () => dispatch(clearErrors())
+    clearErrors: () => dispatch(clearErrors()),
+    receiveSuccess: () => dispatch(receiveSuccess())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);

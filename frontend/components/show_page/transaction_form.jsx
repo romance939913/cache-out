@@ -5,7 +5,7 @@ class TransactionForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-                quantity: 0,
+                quantity: '',
                 cost:  0,
                 buySell: 'BUY',
                 buying_power: this.props.buying_power
@@ -81,14 +81,26 @@ class TransactionForm extends React.Component {
         if (this.state.buySell === 'BUY') {
             holding['buying_power'] = this.props.cash - this.state.cost;
             this.props.clearErrors();
-            this.props.receiveHolding(holding);
+            this.props.receiveHolding(holding)
+                .then((res) => {
+                    if (res.holding !== undefined) {
+                        this.props.receiveSuccess()
+                    }
+                })
             this.props.updateUser(holding);
+            setTimeout(() => { this.props.clearErrors() }, 3000);
         } else {
             holding['buying_power'] = this.props.cash + this.state.cost;
             holding.quantity = holding.quantity * (-1);
             this.props.clearErrors();
-            this.props.receiveHolding(holding);
+            this.props.receiveHolding(holding)
+                .then((res) => {
+                    if (res.holding !== undefined) {
+                        this.props.receiveSuccess()
+                    }
+                })
             this.props.updateUser(holding);
+            setTimeout(() => { this.props.clearErrors() }, 3000);
         }
     }
 
@@ -106,6 +118,17 @@ class TransactionForm extends React.Component {
                 bottomMessage = `${numeral(this.props.holdings[this.props.ticker].quantity).format('0,0')} shares available`;
             }
         }
+
+        let color;
+        if (this.props.errors.length !== 0) {
+            if (this.props.errors[0] === 'not enough cash' || 
+                this.props.errors[0] === 'not enough shares') {
+                color = 'red'
+            } else {
+                color = 'green'
+            }
+        }
+
 
         return (
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
@@ -136,7 +159,7 @@ class TransactionForm extends React.Component {
                     </div>
                 </div>
                 <div className="transaction-submit-info">
-                    <p className="transaction-errors-arr">
+                    <p className={`transaction-errors-arr ${color}`}>
                         {this.props.errors}
                     </p>
                     <input type="submit" value={this.state.buySell} className="buy-sell-submit"/>
