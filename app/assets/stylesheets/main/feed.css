@@ -1,18 +1,18 @@
 .main-page-wrapper {
     display: flex;
-    width: 1200px;
-    margin: auto;
+    justify-content: center;
 }
 
 .holdings-portfolio {
     width: 230px;
     border: solid black 1px;
     box-shadow: 0 0 6px rgba(0,0,0,0.6);
-    margin: 25px 0px 0px 45px;
+    margin: 0 0 0 45px;
     height: 80vh;
-    position: fixed;
+    top: 150px;
     overflow: hidden;
     overflow-y: scroll;
+    position: sticky;
 }
 
 .holding-portfolio-li-wrapper {

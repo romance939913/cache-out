@@ -44,6 +44,10 @@
     justify-content: center;
 }
 
+.graph-and-title-wrapper {
+    position: relative;
+}
+
 .show-page-about-header {
     font-size: 25px;
     border-bottom: 1px solid lightgray;

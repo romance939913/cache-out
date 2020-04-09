@@ -106,11 +106,13 @@ class ShowPage extends React.Component {
                             <p className="news-show-header">News</p>
                             {newsArr}
                         </div>
-                        <TransactionContainer 
-                            ticker={this.props.ticker}
-                            price={this.props.price} 
-                            currentUser={this.props.currentUser}
-                        />
+                        <div className="transaction-box">
+                            <TransactionContainer 
+                                ticker={this.props.ticker}
+                                price={this.props.price} 
+                                currentUser={this.props.currentUser}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

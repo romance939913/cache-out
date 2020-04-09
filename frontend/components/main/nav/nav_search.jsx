@@ -35,18 +35,17 @@ class NavSearchForm extends React.Component {
         let userInput = this.state.query.toUpperCase()
         companies.forEach((ticker, idx) => {
             if(userInput.length > 0) {
-                if (ticker.symbol.startsWith(userInput) || (ticker.name !== null 
-                && ticker.name.toUpperCase().startsWith(userInput))) {
+                if (ticker.symbol.includes(userInput) || (ticker.name !== null 
+                && ticker.name.toUpperCase().includes(userInput))) {
                     suggestions.push(
-                        <li key={idx} className="suggestion-item">
-                            <Link 
+                        <Link key={idx}
                             to={`/show/${ticker.symbol}`}
-                            key={idx}
                             className="suggestion-item-link"
                             onClick={this.handleClearForm}>
-                            {ticker.symbol}  {ticker.name}
-                            </Link>
-                        </li>
+                            <li key={idx} className="suggestion-item">
+                                {ticker.symbol}  {ticker.name}
+                            </li>
+                        </Link>
                     )
                 }
             }

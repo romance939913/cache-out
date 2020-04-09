@@ -1,5 +1,6 @@
 .transaction-form-wrapper {
-    margin-top: 50px;
+    top: 175px;
+    position: sticky;
     margin-left: 45px;
     border: solid black 1px;
     width: 280px;
@@ -43,16 +44,20 @@
     font-size: 15px;
     width: 100px;
     margin-left: 30px;
+    background-color: #F0F8FF;
+    border: 1px solid #fafafa;
 }
 
 .share-quantity-input:focus {
     outline: none;
-    border: solid 2px #21ce99;
+    background-color: white;
+    box-shadow: 0 0 4px #21ce99;
 }
 
 .share-quantity-input:hover {
     outline: none;
-    border: solid 2px #21ce99;
+    background-color: white;
+    box-shadow: 0 0 4px #21ce99;
 }
 
 .transaction-price {
@@ -92,6 +97,10 @@
 
 .buy-sell-submit:focus {
     outline: none;
+}
+
+.buy-sell-submit:hover {
+    box-shadow: 0 0 4px black;
 }
 
 .transaction-errors-arr {

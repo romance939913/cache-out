@@ -29,39 +29,49 @@
 
 .search-field {
     position: relative;
+    box-sizing: border-box;
+    padding: 15px 20px 15px 20px;
+    border: 1px solid #fafafa;
+    background-color: #F0F8FF;
     width: 25vw;
-    font-size: 18px;
+    border-radius: 4px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 30px;
+    font-size: 16px;
+    box-shadow: none;
+    height: 15.5%;
+    outline: none
 }
 
 .search-field:focus {
     box-shadow: 0 0 4px #21ce99;
     outline: none;
-    font-size: 18px;
+    background-color: white;
 }
 
 .search-field:hover {
     box-shadow: 0 0 4px #21ce99;
     outline: none;
-    font-size: 18px;
+    background-color: white;
 }
 
 .search-form:hover ul{
     display: block;
     background-color: white;
     box-shadow: 0 0 4px #21ce99;
-    font-size: 18px;
 }
 .search-field:focus + ul{
     display: block;
     background-color: white;
     box-shadow: 0 0 4px #21ce99;
-    font-size: 18px;
 }
 
 .suggestion-box {
     display: none;
     position: absolute;
     z-index: 1;
+    width: 25vw;
 }
 
 .suggestion-item {
