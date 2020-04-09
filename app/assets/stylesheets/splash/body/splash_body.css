@@ -1,10 +1,25 @@
 .carousel-wrapper {
     background-color: black;
-    height: 600px;
+    height: 700px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.carousel-nav-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+}
+
+.carousel-track-container {
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+    width: 250px;
 }
 
 .carousel-pic {
@@ -12,36 +27,57 @@
     width: auto;
 }
 
-.carousel-slide-indicator {
-    color: white;
-    font-size: 25px;
-    cursor: pointer;
-    padding: 15px;
-}
-.carousel-slide {
-    margin: 0 25px 0 0;
+.carousel-track {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
 }
 
-.carousel-track {
+.carousel-slide {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+}
+
+.carousel-nav {
+    margin: 0 40px 0 40px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 2vw 0 0;
+}
+
+.ios-app-div {
+    color: white;
+    width: 35vw;
+}
+
+.ios-app-header {
+    font-size: 62px;
+    line-height: 72px;
+    margin-bottom: 20px;
+}
+
+.ios-app-body {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.carousel-slide-indicator {
+    color: white;
+    cursor: pointer;
+    margin: 20px 0 20px 0;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
 }
 
 .carousel-slide-indicator:hover {
     color: #21ce99;
 }
 
-.carousel-slide-description {
-    color: white;
-    max-width: 35vw;
-    margin: 0 0 0 2vw;
-}
-
-.carousel-slide-description h1 {
-    font-size: 50px;
-    padding-bottom: 25px;
+.current-slide {
+    color: #21ce99;
 }
 
 .marquee {

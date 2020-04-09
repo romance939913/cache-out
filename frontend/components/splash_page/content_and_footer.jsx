@@ -1,43 +1,76 @@
 import React from 'react';
 
 class ContentAndFooter extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-    this.state = {
-      picture: window.manage_pic
-    }
+
+  moveToSlide(track, currentSlide, targetSlide) {
+    track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
+    currentSlide.classList.remove('current-slide');
+    currentSlide.classList.remove('animated');
+    currentSlide.classList.remove('fadeIn');
+    targetSlide.classList.add('current-slide');
+    targetSlide.classList.add('animated');
+    targetSlide.classList.add('fadeIn');
   }
 
-  handleClick(picture_name) {
-    return e => {
-      if (picture_name === "learn") {
-        this.setState({ picture: window.learn_pic })
-      } else if (picture_name === "manage") {
-        this.setState({ picture: window.manage_pic })
-      } else {
-        this.setState({ picture: window.customize_pic})
-      }
-    }
+  updateColor(currentWord, targetWord) {
+    currentWord.classList.remove('current-slide')
+    targetWord.classList.add('current-slide')
+  }
+
+  componentDidMount() {
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const leftButton = document.querySelector('.carousel-button-left');
+    const rightButton = document.querySelector('.carousel-button-right');
+    const words = document.querySelector('.carousel-nav');
+    const wordsArr = Array.from(words.children)
+
+    slides[0].style.left = '0px';
+    slides[1].style.left = '250px';
+    slides[2].style.left = '500px';
+
+    words.addEventListener('click', (e) => {
+      let targetWord = e.target.closest('li')
+      if (!targetWord) return;
+      const currentSlide = track.querySelector('.current-slide');
+      const currentWord = words.querySelector('.current-slide');
+      const targetIndex = wordsArr.findIndex(word => word === targetWord)
+      const targetSlide = slides[targetIndex]
+
+      this.moveToSlide(track, currentSlide, targetSlide)
+      this.updateColor(currentWord, targetWord)
+      this.hideArrows(leftButton, rightButton, targetIndex)
+    })
   }
 
   render() {
     return (
       <div>
         <div className="carousel-wrapper">
-          <div className="carousel-track">
-            <li className="carousel-slide">
-              <img className="carousel-pic" src={this.state.picture}/>
-            </li>
+          <div className="carousel-nav-wrapper">
+            <div className="carousel-track-container">
+              <ul className="carousel-track">
+                <li className="carousel-slide current-slide">
+                  <img className="carousel-pic" src={window.learn_pic}/>
+                </li>
+                <li className="carousel-slide">
+                  <img className="carousel-pic" src={window.customize_pic}/>
+                </li>
+                <li className="carousel-slide">
+                  <img className="carousel-pic" src={window.manage_pic}/>
+                </li>
+              </ul>
+            </div>
             <ul className="carousel-nav">
-              <li onClick={() => this.handleClick("learn")} className="carousel-slide-indicator">Learn</li>
-              <li onClick={() => this.handleClick("manage")} className="carousel-slide-indicator">Manage</li>
-              <li onClick={() => this.handleClick("customize")} className="carousel-slide-indicator">Customize</li>
+              <li className="carousel-slide-indicator current-slide">Learn</li>
+              <li className="carousel-slide-indicator">Customize</li>
+              <li className="carousel-slide-indicator">Manage</li>
             </ul>
           </div>
-          <div className="carousel-slide-description">
-            <h1>iOS app coming soon!</h1>
-            <p>Keep your portfolio in your pocket. Everything you need to manage your assets is available in a single app.</p>
+          <div className="ios-app-div">
+            <h1 className="ios-app-header">iOS app coming Soon!</h1>
+            <p className="ios-app-body">My goal is to make investing in financial markets more intuitive for beginners, 
+            no matter how much experience you have (or don’t have), the Cache Out platform is a great place to start</p>
           </div>
         </div>
         <div className="marquee">

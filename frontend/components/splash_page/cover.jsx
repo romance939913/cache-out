@@ -20,8 +20,8 @@ class SplashCover extends React.Component {
         <div className="splash-jumbotron">
           <div className="splash-jumbotron-mission">
             <p className="splash-jumbotron-header">It's Time to Do Money</p>
-            <p className="splash-jumbotron-text">Cache Out lets you practice investing in the stock market, consequence free!</p>
-            <p className="splash-jumbotron-signup" onClick={this.handleDemoSignin}>Demo</p>
+            <p className="splash-jumbotron-text">Cache Out lets you practice investing in the stock market, consequence free. Try it out here!</p>
+            <p className="splash-jumbotron-demo " onClick={this.handleDemoSignin}>Demo user</p>
           </div>
           <div className="gif-holder">
             <video autoPlay loop muted preload="auto" className="video-cont">

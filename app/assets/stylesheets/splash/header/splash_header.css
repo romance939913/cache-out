@@ -5,12 +5,6 @@
     padding: 12px;
 }
 
-div > a {
-    text-decoration: none;
-    font-family: "sans-serif";
-    color: rgb(4, 13, 20);
-}
-
 .splash-navigation-sign-up {
     font-family: sans-serif;
     display: inline-flex;
@@ -21,6 +15,7 @@ div > a {
     cursor: pointer;
     height: 44px;
     min-width: 76px;
+    color: white;
     background-color: rgb(33, 206, 153);
     text-decoration: none;
     overflow: hidden;
@@ -52,7 +47,7 @@ div > a {
 }
 
 .splash-navigation-sign-up:hover {
-    color: white;
+    color: black;
 }
 
 .splash-navigation-bar-left-side {
@@ -63,6 +58,12 @@ div > a {
 .logo-icon {
     height: 60px;
     width: 60px;
+}
+
+.website-title {
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
 }
 
 .website-title {

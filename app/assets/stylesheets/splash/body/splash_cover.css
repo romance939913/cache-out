@@ -8,7 +8,17 @@
     overflow: hidden;
 }
 
-.splash-jumbotron-signup {
+div > a {
+    text-decoration: none;
+    font-family: "sans-serif";
+    color: rgb(4, 13, 20);
+}
+
+.splash-jumbotron-demo {
+  animation-duration: 500ms;
+}
+
+.splash-jumbotron-demo {
     color: white;
     font-family: sans-serif;
     display: inline-flex;
@@ -24,6 +34,10 @@
     padding: 0px 16px;
     border-radius: 8px;
     border-color: rgb(36, 42, 45);
+}
+
+.splash-jumbotron-demo:hover {
+    color: #21ce99;
 }
 
 .splash-jumbotron-mission {
@@ -107,7 +121,8 @@
 .splash-content-text {
     font-size: 20px;
     font-weight: 300;
+    line-height: 1.25;
     width: 45vw;
-    margin: 25px 0 80px 0;
+    margin: 20px 0 80px 0;
     text-align: center;
 }

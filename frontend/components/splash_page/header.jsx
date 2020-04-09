@@ -9,7 +9,7 @@ class Header extends React.Component {
                 <div className="splash-navigation-bar">
                     <div className="splash-navigation-bar-left-side">
                         <p className="website-title">Cache Out</p>
-                        <a href="" ><img src={window.logo_pic} className="logo-icon"/></a>
+                        <img src={window.logo_pic} className="logo-icon"/>
                     </div>
                     <div className="splash-navigation-bar-right-side">
                         <Link 
