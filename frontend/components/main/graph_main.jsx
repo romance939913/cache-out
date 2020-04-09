@@ -82,7 +82,6 @@ class GraphMain extends React.Component {
             data = data.filter(obj => {
                 return moment(obj.created_at).isSame(d, 'day')
             })
-            data = data.reverse()
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
             day === 6 ? friday = moment().subtract(1, 'days') 
@@ -90,37 +89,31 @@ class GraphMain extends React.Component {
             data = data.filter(obj => {
                 return moment(obj.created_at).isSame(friday, 'day')
             })
-            data = data.reverse()
         } else if (this.state.time === "1w") {
             data = data.filter(obj => {
                 let limit = moment().subtract(1, 'weeks')
                 return moment(obj.created_at).isAfter(limit);
-            })
-            data = data.reverse();
+            });
         } else if (this.state.time === "1m") {
             data = data.filter(obj => {
                 let limit = moment().subtract(1, 'months')
                 return moment(obj.created_at).isAfter(limit);
-            })
-            data = data.reverse();
+            });
         } else if (this.state.time === "3m") {
             data = data.filter(obj => {
                 let limit = moment().subtract(3, 'months')
                 return moment(obj.created_at).isAfter(limit);
-            })
-            data = data.reverse();
+            });
         } else if (this.state.time === "1y") {
             data = data.filter(obj => {
                 let limit = moment().subtract(1, 'years')
                 return moment(obj.created_at).isAfter(limit);
-            })
-            data = data.reverse();
+            });
         } else if (this.state.time === "5y") {
             data = data.filter((obj, idx) => {
                 let limit = moment().subtract(5, 'years')
                 return moment(obj.created_at).isAfter(limit)
-            })
-            data = data.reverse();    
+            });    
         }
 
         let color = '#21ce99'

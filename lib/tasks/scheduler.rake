@@ -6,13 +6,15 @@ namespace :scheduler do
     date = Date.today
     next if date.saturday?
     next if date.sunday?
+    return if date.saturday?
+    return if date.sunday?
 
     time = Time.now
     timeString = time.to_s
     timeArr = timeString.split(" ")[1]
     hour = timeArr.split(":")[0]
     min = timeArr.split(":")[1]
-    next if hour.to_i < 13 && min.to_i < 30
+    next if hour.to_i < 13
     next if hour.to_i > 19
 
     

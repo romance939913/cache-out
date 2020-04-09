@@ -87,7 +87,7 @@ class ShowPageGraph extends React.Component {
         } else if (this.state.time === "1w") {
             formatted = moment(e.label).format('LLL');
         } else {
-            formatted = moment(e.label).format('L');
+            formatted = moment(e.label).format("MMM Do, YYYY");
         }
         return (
             <div className="custom-tooltip">{formatted}</div>
@@ -109,7 +109,7 @@ class ShowPageGraph extends React.Component {
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isSame(d, 'day')
             })
-            data = data.slice(1);
+            data = data.slice();
             data = data.reverse();
         } else if (this.state.time === "1d" && isWeekend) {
             data = data.slice(0, 79); // takes last day (friday) data
@@ -120,7 +120,7 @@ class ShowPageGraph extends React.Component {
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isAfter(limit);
             })
-            data = data.slice(3);
+            data = data.slice();
             data = data.reverse();
         } else if (this.state.time === "1m") {
             data = data.filter(obj => {
