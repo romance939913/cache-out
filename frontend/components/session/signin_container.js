@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import { loginUser, receiveErrors } from '../../actions/session_actions';
+import { loginUser, clearSessionErrors } from '../../actions/session_actions';
 import Signin from './signin'
-
 
 const mapStateToProps = state => ({
     errors: state.errors.session
@@ -9,7 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     signin: (formUser) => dispatch(loginUser(formUser)),
-    clearErrors: () => dispatch(receiveErrors([]))
+    clearSessionErrors: () => dispatch(clearSessionErrors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);

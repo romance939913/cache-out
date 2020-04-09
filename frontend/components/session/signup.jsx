@@ -10,17 +10,25 @@ class Signup extends React.Component {
         password: '',
         buying_power: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemoSignin = this.handleDemoSignin.bind(this);
   }
 
   componentDidMount() {
-    this.props.clearErrors();
+    this.props.clearSessionErrors();
   }
 
   update(field) {
     return e => {
       this.setState({ [field]: e.currentTarget.value})
     }
+  }
+
+  handleDemoSignin() {
+    this.props.signin({
+      username: 'demo',
+      password: 'password'
+    })
   }
 
   handleSubmit(e) {
@@ -86,7 +94,10 @@ class Signup extends React.Component {
             className="signup-input-field signup-submit"
           />
           {this.renderErrors()}
-          <Link to="/signin" className="already-a-user">already a user? Sign in here</Link>
+          <div className="signup-alternatives">
+            <p className="already-a-user" onClick={this.handleDemoSignin}>Demo User</p>
+            <Link to="/signin"><p className="already-a-user">Already a user? Sign in here</p></Link>
+          </div>
         </form>
 
       </div>

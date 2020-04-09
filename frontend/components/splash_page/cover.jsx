@@ -43,8 +43,8 @@ class SplashCover extends React.Component {
         </div>
         <div className="splash-content">
           <h2 className="splash-content-header">Sharpen your skills and track your portfolio</h2>
-          <p className="splash-content-text">Make unlimited commission-free trades in stocks, funds, and options with Robinhood Financial.
-      The same goes for buying and selling cryptocurrencies with Robinhood Crypto. Zero commission fees.</p>
+          <p className="splash-content-text">Ever wish you had a spare million dollars lying around? With Cache Out you do! Build the portfolio of your dreams
+          and monitor its performance up to the minute.</p>
         </div>
       </div>
     )

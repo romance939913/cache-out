@@ -65,8 +65,13 @@
     text-decoration: none;
     color: #21ce99;
     font-size: 13px;
+    cursor: pointer;
+    margin: 5px 20px 5px 20px;
 }
 
+.signup-alternatives {
+    display: flex;
+}
 .session-errors {
     font-size: 13px;
     color: red;

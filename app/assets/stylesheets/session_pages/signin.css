@@ -67,6 +67,10 @@
     outline: none;
 } 
 
+.signin-submit-container {
+    display: flex;
+}
+
 .signin-submit {
     width: 100px;
     box-sizing: content-box;
@@ -84,7 +88,7 @@
     justify-content: center;
     min-width: 120px;
     padding: 0 15px;
-    margin-top: 50px;
+    margin: 50px 25px 0 0;
 }
 
 .forgot-user-pass {

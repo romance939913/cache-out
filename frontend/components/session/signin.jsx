@@ -9,16 +9,24 @@ class Signin extends React.Component {
         password: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDemoSignin = this.handleDemoSignin.bind(this)
   }
 
   componentDidMount() {
-    this.props.clearErrors();
+    this.props.clearSessionErrors();
   }
 
   update(field) {
     return e => {
       this.setState({ [field]: e.currentTarget.value})
     }
+  }
+
+  handleDemoSignin() {
+    this.props.signin({
+      username: 'demo',
+      password: 'password'
+    })
   }
 
   handleSubmit(e) {
@@ -66,7 +74,10 @@ class Signin extends React.Component {
             </label>
             {this.renderErrors()}
             <Link to="/" className="forgot-user-pass">Forgot your username/password?</Link>
-            <input type="submit" value="Sign In" className="signin-submit"/>
+            <div className="signin-submit-container">
+              <input type="submit" value="Sign In" className="signin-submit"/>
+              <p className="signin-submit" onClick={this.handleDemoSignin}>Demo user</p>
+            </div>
           </form>
         </div>
       </div>
