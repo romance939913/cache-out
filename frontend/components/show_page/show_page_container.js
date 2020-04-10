@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { receiveProfile, receiveRealTimePrice, clearRealTimePrice } from '../../actions/security_actions';
 import ShowPage from './show_page';
-import { receiveNews, clearGraphPrices } from '../../actions/graph_actions';
+import { receiveNews } from '../../actions/graph_actions';
 
 const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.id],
@@ -16,7 +16,6 @@ const mapDispatchToProps = dispatch => ({
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
     receiveNews: () => dispatch(receiveNews()),
     clearRealTimePrice: () => dispatch(clearRealTimePrice()),
-    clearGraphPrices: () => dispatch(clearGraphPrices())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);

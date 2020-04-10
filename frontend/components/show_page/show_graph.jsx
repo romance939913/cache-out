@@ -17,7 +17,8 @@ class ShowPageGraph extends React.Component {
     }
 
     componentDidMount() {
-        this.props.receiveDay(`${this.props.ticker}`)
+        this.props.clearGraphPrices();
+        this.props.receiveDay(`${this.props.ticker}`);
     }
 
     componentDidUpdate(previousProps) {

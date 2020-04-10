@@ -24,7 +24,6 @@ class ShowPage extends React.Component {
 
     componentWillUnmount() {
         this.props.clearRealTimePrice();
-        this.props.clearGraphPrices();
     }
 
     render() {
