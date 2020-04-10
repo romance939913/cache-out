@@ -6,6 +6,7 @@ import PortfolioContainer from './portfolio_container';
 class MainFeed extends React.Component {
 
     componentDidMount() {
+        this.props.clearGraphPrices()
         let holding = {
             user_id: this.props.currentUser.id
         }
