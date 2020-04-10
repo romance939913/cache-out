@@ -11,6 +11,12 @@ class Portfolio extends React.Component {
             user_id: this.props.currentUser.id
         }
     }
+
+    componentDidMount() {
+        this.props.tickers.forEach((ticker, idx) => {
+            this.props.receiveMultipleDays(ticker)
+        })
+    }
     
     render() {
         let tickerArr = [];
@@ -18,51 +24,49 @@ class Portfolio extends React.Component {
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
 
-        if (this.props.tickers.length === 0) {
-            return (
-                <div className="holdings-portfolio">
-                    <p className="portfolio-header">portfolio</p>
-                    {tickerArr}
-                </div>
-            );
-        }
-
         Object.values(this.props.holdings).forEach((ticker, idx) => {
             if (ticker.quantity !== 0) {
-
+                let data;
+                let dayDifference;
+                let percentage;
                 let color;
-                let data = this.props.graphPrices[ticker.ticker]
-
-                data = data.filter(obj => {
-                    let oDate = obj.date.split(" ");
-                    return moment(oDate[0]).isSame(d, 'day')
-                })
-
-                data = data.slice();
-                data = data.reverse();
-
-                let dayDifference = data.slice(-1)[0].close - data[0].close;
-
-                if (dayDifference >= 0) {
-                    color = '#21ce99'
+                let renderLineChart
+                if (Object.keys(this.props.graphPrices).length !== this.props.tickers.length) {
+                    data = []
                 } else {
-                    color = '#ff0000'
+                    data = this.props.graphPrices[ticker.ticker]
+
+                    data = data.filter(obj => {
+                        let oDate = obj.date.split(" ");
+                        return moment(oDate[0]).isSame(d, 'day')
+                    })
+
+                    data = data.slice();
+                    data = data.reverse();
+                    
+                    if (dayDifference >= 0) {
+                        color = '#21ce99'
+                    } else {
+                        color = '#ff0000'
+                    }
+                    
+                    dayDifference = data.slice(-1)[0].close - data[0].close;
+                    percentage = dayDifference / data[0].close;
+                    percentage = numeral(percentage).format('0.00%')
+    
+                    renderLineChart = (
+                        <LineChart
+                            width={100}
+                            height={50}
+                            data={data}>
+                            <Line type="monotone" dataKey="close" stroke={color} dot={false} />
+                            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                            <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
+                            <XAxis dataKey='date' hide={true} />
+                        </LineChart>
+                    );
                 }
 
-                let percentage = dayDifference / data[0].close;
-                percentage = numeral(percentage).format('0.00%')
-
-                const renderLineChart = (
-                    <LineChart
-                        width={100}
-                        height={50}
-                        data={data}>
-                        <Line type="monotone" dataKey="close" stroke={color} dot={false} />
-                        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                        <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
-                        <XAxis dataKey='date' hide={true} />
-                    </LineChart>
-                );
 
                 tickerArr.push(<Link
                     to={`/show/${ticker.ticker}`}

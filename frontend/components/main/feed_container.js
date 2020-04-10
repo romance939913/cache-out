@@ -18,7 +18,6 @@ const mapDispatchToProps = dispatch => ({
     getHoldings: (holding) => dispatch(getHoldings(holding)),
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
     getUserBP: (user) => dispatch(getUserBP(user)),
-    receiveMultipleDays: (ticker) => dispatch(receiveMultipleDays(ticker)),
     receiveNews: () => dispatch(receiveNews()),
     clearRealTimePrice: () => dispatch(clearRealTimePrice()),
     receiveSnapshots: (userId) => dispatch(receiveSnapshots(userId)),

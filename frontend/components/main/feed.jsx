@@ -18,9 +18,6 @@ class MainFeed extends React.Component {
                 Object.keys(holdings.holdings).forEach((ticker, idx) => {
                     this.props.receiveRealTimePrice(ticker)
                 })
-                Object.keys(holdings.holdings).forEach((ticker, idx) => {
-                    this.props.receiveMultipleDays(ticker)
-                })
             })
     }
 
@@ -31,7 +28,6 @@ class MainFeed extends React.Component {
     
     render() {
         if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length) return null;
-        if (Object.keys(this.props.graphPrices).length !== Object.keys(this.props.holdings).length) return null;
         if (this.props.holdings.length === 0) return null;
         if (this.props.cash.length === 0) return null;
         if (this.props.news.length === 0) return null;
