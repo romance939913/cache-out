@@ -97,11 +97,11 @@ class ShowPageGraph extends React.Component {
 
     
     render() {
+        if (this.props.graphPrices[0] === undefined) return null;
         if (this.props.price[this.props.ticker] === undefined) return null;
         if (this.props.graphPrices.length === 0) return null;
         
         let data = this.props.graphPrices;
-        data = data.slice()
         let d = new Date();
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);  
