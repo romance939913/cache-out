@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getHoldings, getUserBP } from '../../actions/holding_actions';
 import MainFeed from './feed';
-import { receiveNews, receiveSnapshots, clearGraphPrices } from '../../actions/graph_actions';
+import { receiveNews, receiveSnapshots, clearGraphPrices, receiveMultipleDays } from '../../actions/graph_actions';
 import { clearRealTimePrice, receiveRealTimePrice } from '../../actions/security_actions';
 
 const mapStateToProps = state => ({
@@ -10,13 +10,15 @@ const mapStateToProps = state => ({
     cash: state.entities.buyingPower,
     price: state.entities.price,
     news: state.entities.news,
-    snapshots: state.entities.snapshots
+    snapshots: state.entities.snapshots,
+    graphPrices: state.entities.graphPrices
 });
 
 const mapDispatchToProps = dispatch => ({
     getHoldings: (holding) => dispatch(getHoldings(holding)),
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
     getUserBP: (user) => dispatch(getUserBP(user)),
+    receiveMultipleDays: (ticker) => dispatch(receiveMultipleDays(ticker)),
     receiveNews: () => dispatch(receiveNews()),
     clearRealTimePrice: () => dispatch(clearRealTimePrice()),
     receiveSnapshots: (userId) => dispatch(receiveSnapshots(userId)),

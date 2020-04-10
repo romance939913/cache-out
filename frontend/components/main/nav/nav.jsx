@@ -15,16 +15,6 @@ class MainNav extends React.Component {
     this.props.receiveIndexes();
   }
 
-  handleMarqueeColor() {
-    let lis = Array.prototype.slice.call(document.getElementsByClassName("index-changes"))
-    debugger
-    lis.forEach((li, idx) => {
-      if (li.innerHTML === 24) {
-        li.classList.add("green")
-      }
-    })
-  }
-
   render() {
     if (this.props.stocks.length === 0) return null;
     if (this.props.indexes.majorIndexesList === undefined) return null;

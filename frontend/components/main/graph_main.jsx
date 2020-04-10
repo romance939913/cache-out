@@ -66,6 +66,8 @@ class GraphMain extends React.Component {
     }
 
     render() {  
+        if (this.props.snapshots.length === 0) return null;
+        
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
             if(this.props.holdings[ticker].quantity !== 0) {
@@ -116,6 +118,24 @@ class GraphMain extends React.Component {
             });    
         }
 
+        let assets = totalEquity + this.props.cash;
+        let difference;
+        let percentage;
+        if (JSON.stringify(this.props.snapshots) !== '{}') {
+            difference = assets - data[0].valuation;
+            percentage =  difference / data[0].valuation;
+            if (difference > 0) {
+                difference = numeral(difference).format('$0,0.00')
+                percentage = numeral(percentage).format('0.00%')
+                difference = "+" + difference.toString();
+                percentage = "+" + difference.toString();
+            } else {
+                percentage = numeral(percentage).format('0.00%')
+                difference = numeral(difference).format('$0,0.00')
+            }
+        }
+
+
         let color = '#21ce99'
 
         const renderLineChart = (
@@ -144,7 +164,10 @@ class GraphMain extends React.Component {
                 <h2 id="current-valuation" className="main-page-total-assets">
                     {numeral(this.props.cash + totalEquity).format('$0,0.00')}
                 </h2>
-                <p className="main-page-buying-power">Cash balance: {`${numeral(this.props.cash).format('$0,0.00')}`}</p>
+                <div className="main-percentage-and-difference">
+                    <p className="main-page-difference">{difference}</p>
+                    <p className="main-page-percentage">({percentage})</p>
+                </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">
                     <li onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined">1D</li>

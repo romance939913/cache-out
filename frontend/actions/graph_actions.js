@@ -6,6 +6,7 @@ import { fetchStockWeek,
 
 export const RECEIVE_HISTORICAL = "RECEIVE_HISTORICAL";
 export const RECEIVE_DAY = "RECEIVE_DAY";
+export const RECEIVE_DAYS = "RECEIVE_DAYS";
 export const RECEIVE_WEEK = "RECEIVE_WEEK";
 export const CLEAR_GRAPH_PRICES = "CLEAR_GRAPH_PRICES";
 export const RECEIVE_SNAPSHOTS = "RECEIVE_SNAPSHOTS";
@@ -18,6 +19,11 @@ const receiveTheHistorical = (prices) => ({
 
 const receiveTheDay = prices => ({
     type: RECEIVE_DAY,
+    prices
+})
+
+const receiveTheDays = prices => ({
+    type: RECEIVE_DAYS,
     prices
 })
 
@@ -45,6 +51,9 @@ export const receiveHistorical = (ticker) => dispatch => fetchstockHistorical(ti
 
 export const receiveDay = (ticker) => dispatch => fetchStockDay(ticker)
     .then(prices => dispatch(receiveTheDay(prices)))
+
+export const receiveMultipleDays = (ticker) => dispatch => fetchStockDay(ticker)
+    .then(prices => dispatch(receiveTheDays({ticker, prices})))
 
 export const receiveWeek = (ticker) => dispatch => fetchStockWeek(ticker)
     .then(prices => dispatch(receiveTheWeek(prices)))

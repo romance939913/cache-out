@@ -2,13 +2,13 @@ namespace :scheduler do
   task :add_portfolio_snapshots_for_day => :environment do
     puts "Adding day's portfolio snapshots..."
     require 'date'
+    require 'us_bank_holidays'
 
-    date = Date.today
-    next if date.saturday?
-    next if date.sunday?
-    return if date.saturday?
-    return if date.sunday?
-
+    today = Date.today
+    date = Date.new
+    next if date.weekend?
+    next if date.bank_holiday?
+  
     time = Time.now
     timeString = time.to_s
     timeArr = timeString.split(" ")[1]
