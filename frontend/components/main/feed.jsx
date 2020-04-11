@@ -28,7 +28,6 @@ class MainFeed extends React.Component {
     
     render() {
         if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length) return null;
-        if (this.props.holdings.length === 0) return null;
         if (this.props.cash.length === 0) return null;
         if (this.props.news.length === 0) return null;
 
@@ -60,6 +59,7 @@ class MainFeed extends React.Component {
                             cash={this.props.cash}
                             price={this.props.price}
                             snapshots={this.props.snapshots}
+                            holdings={this.props.holdings}
                         />
                         <div className="news-container">
                             <h1 className="news-header">Today's Top Stories</h1>
@@ -71,6 +71,7 @@ class MainFeed extends React.Component {
                             price={this.props.price}
                             tickers={Object.keys(this.props.holdings)}
                             graphPrices={this.props.graphPrices}
+                            holdings={this.props.holdings}
                         />
                     </div>
                 </div>

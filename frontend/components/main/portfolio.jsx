@@ -24,8 +24,8 @@ class Portfolio extends React.Component {
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
 
-        Object.values(this.props.holdings).forEach((ticker, idx) => {
-            if (ticker.quantity !== 0) {
+        this.props.tickers.forEach((ticker, idx) => {
+            if (this.props.holdings[ticker].quantity !== 0) {
                 let data;
                 let dayDifference;
                 let percentage;
@@ -34,7 +34,7 @@ class Portfolio extends React.Component {
                 if (Object.keys(this.props.graphPrices).length !== this.props.tickers.length) {
                     data = []
                 } else {
-                    data = this.props.graphPrices[ticker.ticker]
+                    data = this.props.graphPrices[ticker]
 
                     data = data.filter(obj => {
                         let oDate = obj.date.split(" ");
@@ -49,10 +49,11 @@ class Portfolio extends React.Component {
                     } else {
                         color = '#ff0000'
                     }
-                    
-                    dayDifference = data.slice(-1)[0].close - data[0].close;
-                    percentage = dayDifference / data[0].close;
-                    percentage = numeral(percentage).format('0.00%')
+                    if (!isWeekend) {
+                        dayDifference = data.slice(-1)[0].close - data[0].close;
+                        percentage = dayDifference / data[0].close;
+                        percentage = numeral(percentage).format('0.00%')
+                    }
     
                     renderLineChart = (
                         <LineChart
@@ -69,18 +70,18 @@ class Portfolio extends React.Component {
 
 
                 tickerArr.push(<Link
-                    to={`/show/${ticker.ticker}`}
+                    to={`/show/${ticker}`}
                     key={idx}>
                     <li key={idx} className="holding-portfolio-li">
                         <div className="portfolio-ele portfolio-ele-left">
-                            <p>{ticker.ticker}</p>
-                            <p className="portfolio-ele-small">{numeral(ticker.quantity).format('0,0')} shares</p>
+                            <p>{ticker}</p>
+                            <p className="portfolio-ele-small">{numeral(this.props.holdings[ticker].quantity).format('0,0')} shares</p>
                         </div>
                         <div className="chart-thumbnail">
                             {renderLineChart}
                         </div>
                         <div className="portfolio-ele portfolio-ele-right">
-                            <p>{numeral(this.props.price[ticker.ticker].price).format('$0,0.00')}</p>
+                            <p>{numeral(this.props.price[ticker].price).format('$0,0.00')}</p>
                             <p className="portfolio-ele-small">{percentage}</p>
                         </div>
                     </li>
