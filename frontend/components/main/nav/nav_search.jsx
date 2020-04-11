@@ -53,6 +53,17 @@ class NavSearchForm extends React.Component {
 
         suggestions = suggestions.slice(0, 6)
 
+        if (this.props.stocks[userInput]) {
+            suggestions[0] = 
+            (<Link to={`/show/${this.props.stocks[userInput].symbol}`}
+                className="suggestion-item-link"
+                onClick={this.handleClearForm}>
+                <li className="suggestion-item">
+                    {this.props.stocks[userInput].symbol}  {this.props.stocks[userInput].name}
+                </li>
+            </Link>)
+        }
+
         return (
             <form className="search-form">
                 <input 
