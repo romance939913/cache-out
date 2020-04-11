@@ -4,16 +4,20 @@
 
 .stock-time-frames {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     width: 800px;  
     padding-top: 15px;
-    padding-bottom: 15px;
     border-bottom: lightgray solid 1px;
 }
 
+.underlined {
+    border-bottom: solid 2px #21ce99;
+}
+
 .stock-time-frame {
+    margin: 0 25px 0 0;
+    padding-bottom: 15px;
     cursor: pointer;
-    padding-bottom: 5px;
 }
 
 .stock-time-frame:hover {
@@ -28,13 +32,28 @@
     list-style: none;
 }
 
+.show-percentage-and-difference {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.show-percentage-and-difference li {
+    list-style: none;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
 .custom-tooltip {
     color: #8a8a8a;
 }
 
+.display-none {
+    display: none;
+}
+
 .show-stock-price {
     font-size: 32px;
-    margin: 15px 0 25px 0;
+    margin: 15px 0 10px 0;
     text-decoration: none;
     list-style: none;
 }
@@ -54,10 +73,6 @@
     width: 800px; 
     padding-top: 15px;
     padding-bottom: 15px;
-}
-
-.underlined {
-    border-bottom: solid 2px #21ce99;
 }
 
 .show-page-about-description {

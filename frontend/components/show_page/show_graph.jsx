@@ -40,9 +40,29 @@ class ShowPageGraph extends React.Component {
     }
 
     handleHover(e) {
-        const ele = document.getElementById("real-time-price");
+        if (e.activePayload[0].value === undefined) return null;
+        const rtp = document.getElementById("real-time-price");
+        const diff = document.getElementById("show-diff");
+        const perc = document.getElementById("show-perc");
+        const startingprice = document.getElementById("starting-price");
+
         let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
-        ele.textContent = hoverPrice;
+        let hoverDiff = e.activePayload[0].value - startingprice.textContent
+        let hoverPerc = hoverDiff / startingprice.textContent
+
+        if (hoverDiff > 0) {
+            hoverDiff = numeral(hoverDiff).format('$0,0.00')
+            hoverPerc = numeral(hoverPerc).format('0.00%')
+            hoverDiff = "+" + hoverDiff.toString();
+            hoverPerc = "+" + hoverPerc.toString();
+        } else {
+            hoverPerc = numeral(hoverPerc).format('0.00%')
+            hoverDiff = numeral(hoverDiff).format('$0,0.00')
+        }
+        
+        diff.textContent = hoverDiff;
+        perc.textContent = `(${hoverPerc})`;
+        rtp.textContent = hoverPrice;
     }
 
     handleMouseLeave() {
@@ -156,10 +176,22 @@ class ShowPageGraph extends React.Component {
             color = '#21ce99';
         }
 
+        let dayDifference = this.props.price[this.props.ticker].price - data[0].close;
+        let percentage = dayDifference / data[0].close;
+        if (dayDifference > 0) {
+            dayDifference = numeral(dayDifference).format('$0,0.00')
+            percentage = numeral(percentage).format('0.00%')
+            dayDifference = "+" + dayDifference.toString();
+            percentage = "+" + percentage.toString();
+        } else {
+            percentage = numeral(percentage).format('0.00%')
+            dayDifference = numeral(dayDifference).format('$0,0.00')
+        }
+
         const renderLineChart = (
             <LineChart 
                 width={800} 
-                height={400} 
+                height={370} 
                 data={data} 
                 onMouseMove={this.handleHover} 
                 onMouseLeave={this.handleMouseLeave}>
@@ -181,6 +213,11 @@ class ShowPageGraph extends React.Component {
         return (
             <div className="graph-wrapper">
                 <li className="show-stock-price" id="real-time-price">{numeral(this.props.price[this.props.ticker].price).format('$0,0.00')}</li>
+                <div className="show-percentage-and-difference">
+                    <li className="show-page-difference" id="show-diff">{dayDifference}</li>
+                    <li className="show-page-percentage" id="show-perc">({percentage})</li>
+                    <li className="display-none" id="starting-price">{data[0].close}</li>
+                </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">
                     <li onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined">1D</li>
