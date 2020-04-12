@@ -56,14 +56,14 @@ class ShowPage extends React.Component {
                 <div className="show-page-body-wrapper">
                     <div className="graph-transaction-wrapper">
                         <div className="graph-and-title-wrapper">
-                            <h1 className="show-company-name">{this.props.profile.companyName}</h1>
+                            <h3 className="show-company-name">{this.props.profile.companyName}</h3>
                             <ShowPageGraph 
                                 ticker={this.props.ticker}
                                 price={this.props.price}
                             />
                             <ul className="company-profile">
                                 <div>
-                                    <li className="show-page-about-header">About</li>
+                                    <h3 className="show-page-about-header">About</h3>
                                     <li className="show-page-about-description">{this.props.profile.description}</li>
                                 </div>
                                 <div className="show-page-attr-wrapper">
@@ -102,7 +102,7 @@ class ShowPage extends React.Component {
                                     <div className="show-page-attr-item"></div>
                                 </div>
                             </ul>
-                            <p className="news-show-header">News</p>
+                            <h3 className="news-show-header">News</h3>
                             {newsArr}
                         </div>
                         <div className="transaction-box">

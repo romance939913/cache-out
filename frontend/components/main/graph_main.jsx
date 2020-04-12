@@ -33,6 +33,9 @@ class GraphMain extends React.Component {
     }
 
     handleHover(e) {
+        if (e.activePayload === undefined) return null;
+        if (e.activePayload === null) return null;
+
         const ele = document.getElementById("current-valuation");
         let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
         ele.textContent = hoverPrice;
@@ -170,12 +173,12 @@ class GraphMain extends React.Component {
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">
-                    <li onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined">1D</li>
-                    <li onClick={() => this.changeTimeFrames("1w")} className="stock-time-frame 1w">1W</li>
-                    <li onClick={() => this.changeTimeFrames("1m")} className="stock-time-frame 1m">1M</li>
-                    <li onClick={() => this.changeTimeFrames("3m")} className="stock-time-frame 3m">3M</li>
-                    <li onClick={() => this.changeTimeFrames("1y")} className="stock-time-frame 1y">1Y</li>
-                    <li onClick={() => this.changeTimeFrames("5y")} className="stock-time-frame 5y">5Y</li>
+                    <h2 onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined">1D</h2>
+                    <h2 onClick={() => this.changeTimeFrames("1w")} className="stock-time-frame 1w">1W</h2>
+                    <h2 onClick={() => this.changeTimeFrames("1m")} className="stock-time-frame 1m">1M</h2>
+                    <h2 onClick={() => this.changeTimeFrames("3m")} className="stock-time-frame 3m">3M</h2>
+                    <h2 onClick={() => this.changeTimeFrames("1y")} className="stock-time-frame 1y">1Y</h2>
+                    <h2 onClick={() => this.changeTimeFrames("5y")} className="stock-time-frame 5y">5Y</h2>
                 </ul>
             </div>
         )

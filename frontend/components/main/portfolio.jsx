@@ -49,6 +49,7 @@ class Portfolio extends React.Component {
                     } else {
                         color = '#ff0000'
                     }
+
                     if (!isWeekend) {
                         dayDifference = data.slice(-1)[0].close - data[0].close;
                         percentage = dayDifference / data[0].close;
@@ -91,7 +92,7 @@ class Portfolio extends React.Component {
 
         return (
             <div className="holdings-portfolio">
-                <p className="portfolio-header">portfolio</p>
+                <p className="portfolio-header">Portfolio</p>
                 {tickerArr}
             </div>
         );
