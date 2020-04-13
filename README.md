@@ -70,7 +70,8 @@ Aside from this minimizing the data returned from expensive external API calls, 
 ![transaction-gif](app/assets/images/transaction.gif)
 <br/>
 <br/>
-No Cheating on this app!Users are only allowed to purchase shares of stock if they have adequate buying power. Additionally, they are only allowed to sell, at max, as many shares as they own. These checks are handled by the holdings controller on the back-end, and descriptive error messages will be rendered to the page if a user attempts to make an invalid transaction. The form will only submit and trigger a refresh of the page upon a valid transaction submitted by the user.
+No Cheating for my users! Users are only allowed to purchase shares of stock if they have adequate buying power. Additionally, they are only allowed to sell, at max, as many shares as they own. These checks are handled by the holdings controller on the back-end, and descriptive error messages will be rendered to the page if a user attempts to make an invalid transaction. The form will only submit and trigger a refresh of the page upon a valid transaction submitted by the user.
+
 ```rb
     def create
         if params[:holding][:buying_power].to_f >= 0
