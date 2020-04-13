@@ -43,7 +43,8 @@ class NavSearchForm extends React.Component {
                             className="suggestion-item-link"
                             onClick={this.handleClearForm}>
                             <li key={idx} className="suggestion-item">
-                                {ticker.symbol}  {ticker.name}
+                                <p className="suggestion-ticker">{ticker.symbol}</p>
+                                <p>{ticker.name}</p>
                             </li>
                         </Link>
                     )
@@ -59,7 +60,9 @@ class NavSearchForm extends React.Component {
                 className="suggestion-item-link"
                 onClick={this.handleClearForm}>
                 <li className="suggestion-item">
-                    {this.props.stocks[userInput].symbol}  {this.props.stocks[userInput].name}
+                    <p className="suggestion-ticker">{this.props.stocks[userInput].symbol}</p>
+                    <p>{this.props.stocks[userInput].name}</p>
+                      
                 </li>
             </Link>)
         }

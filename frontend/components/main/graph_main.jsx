@@ -36,13 +36,36 @@ class GraphMain extends React.Component {
         if (e.activePayload === undefined) return null;
         if (e.activePayload === null) return null;
 
-        const ele = document.getElementById("current-valuation");
+        let rtv = document.getElementById("current-valuation");
+        let diff = document.getElementById("main-diff");
+        let perc = document.getElementById("main-perc");
+        let startPrice = document.getElementById("main-starting-price");
+
         let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
-        ele.textContent = hoverPrice;
+        let hoverDiff = e.activePayload[0].value - startPrice.textContent;
+        let hoverPerc = hoverDiff / startPrice.textContent;
+
+        if (hoverDiff > 0) {
+            hoverDiff = numeral(hoverDiff).format('$0,0.00')
+            hoverPerc = numeral(hoverPerc).format('0.00%')
+            hoverDiff = `+${hoverDiff.toString()}`;
+            hoverPerc = `(+${hoverPerc.toString()})`;
+        } else {
+            hoverPerc = `(${numeral(hoverPerc).format('0.00%')})`;
+            hoverDiff = numeral(hoverDiff).format('$0,0.00')
+        }
+
+        rtv.textContent = hoverPrice;
+        diff.textContent = hoverDiff;
+        perc.textContent = hoverPerc;
     }
 
     handleMouseLeave() {
-        const ele = document.getElementById("current-valuation");
+        let rtv = document.getElementById("current-valuation");
+        let startPrice = document.getElementById("main-starting-price");
+        let diff = document.getElementById("main-diff");
+        let perc = document.getElementById("main-perc");
+
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
             if (this.props.holdings[ticker].quantity !== 0) {
@@ -50,8 +73,24 @@ class GraphMain extends React.Component {
                 totalEquity = totalEquity + value;
             }
         });
-        let currentPrice = numeral(totalEquity + this.props.cash).format('$0,0.00');
-        ele.textContent = currentPrice;
+
+        let currentPrice = totalEquity + this.props.cash;
+        let currentDiff = currentPrice - startPrice.textContent;
+        let currentPerc = currentDiff / startPrice.textContent;
+
+        if (currentDiff > 0) {
+            currentDiff = numeral(currentDiff).format('$0,0.00')
+            currentPerc = numeral(currentPerc).format('0.00%')
+            currentDiff = `+${currentDiff.toString()}`;
+            currentPerc = `(+${currentPerc.toString()})`;
+        } else {
+            currentPerc = `(${numeral(currentPerc).format('0.00%')})`;
+            currentDiff = numeral(currentDiff).format('$0,0.00')
+        }
+
+        rtv.textContent = numeral(currentPrice).format('$0,0.00');
+        diff.textContent = currentDiff;
+        perc.textContent = currentPerc;
     }
     
     customToolTip(e) {
@@ -124,14 +163,16 @@ class GraphMain extends React.Component {
         let assets = totalEquity + this.props.cash;
         let difference;
         let percentage;
+        let start;
         if (JSON.stringify(this.props.snapshots) !== '{}') {
+            start = data[0].valuation
             difference = assets - data[0].valuation;
             percentage =  difference / data[0].valuation;
             if (difference > 0) {
-                difference = numeral(difference).format('$0,0.00')
-                percentage = numeral(percentage).format('0.00%')
-                difference = "+" + difference.toString();
-                percentage = "+" + difference.toString();
+                difference = numeral(difference).format('$0,0.00');
+                percentage = numeral(percentage).format('0.00%');
+                difference = `(+${difference.toString()})`;
+                percentage = `+${percentage.toString()}`;
             } else {
                 percentage = `(${numeral(percentage).format('0.00%')})`
                 difference = numeral(difference).format('$0,0.00')
@@ -168,8 +209,9 @@ class GraphMain extends React.Component {
                     {numeral(this.props.cash + totalEquity).format('$0,0.00')}
                 </h2>
                 <div className="main-percentage-and-difference">
-                    <p className="main-page-difference">{difference}</p>
-                    <p className="main-page-percentage">{percentage}</p>
+                    <p className="main-page-difference" id="main-diff">{difference}</p>
+                    <p className="main-page-percentage" id="main-perc">{percentage}</p>
+                    <li className="display-none" id="main-starting-price">{start}</li>
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">

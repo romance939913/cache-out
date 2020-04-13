@@ -13,8 +13,8 @@ namespace :scheduler do
     timeArr = timeString.split(" ")[1]
     hour = timeArr.split(":")[0]
     min = timeArr.split(":")[1]
-    next if hour.to_i < 13
-    next if hour.to_i > 19
+    # next if hour.to_i < 13
+    # next if hour.to_i > 19
 
     
     users = User.all
