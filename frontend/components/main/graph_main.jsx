@@ -118,6 +118,7 @@ class GraphMain extends React.Component {
             }
         });
 
+        // login grabs only the necessary time slots
         let data = Object.values(this.props.snapshots)
         let d = new Date();
         let day = d.getDay();

@@ -123,6 +123,7 @@ class ShowPageGraph extends React.Component {
         if (this.props.price[this.props.ticker] === undefined) return null;
         if (this.props.graphPrices.length === 0) return null;
         
+        // logic grabs only the necessary time snapshots
         let data = this.props.graphPrices;
         let d = new Date();
         let day = d.getDay();
