@@ -5,9 +5,8 @@ namespace :scheduler do
     require 'us_bank_holidays'
 
     today = Date.today
-    date = Date.new
-    next if date.weekend?
-    next if date.bank_holiday?
+    next if today.weekend?
+    next if today.bank_holiday?
   
     time = Time.now
     timeString = time.to_s
