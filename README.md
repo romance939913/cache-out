@@ -65,12 +65,14 @@ Charts are dynamic and interactive, allowing users to switch between ranges of *
 Aside from this minimizing the data returned from expensive external API calls, this switch method helps organize the applications Redux state into a single "graphPrices" slice. If other front end developers were to work on this app with me, it would be very easy to navigate.
 
 ### Transaction Validation
+
+No Cheating for my users! Users are only allowed to purchase shares of stock if they have adequate buying power. Additionally, they are only allowed to sell, at max, as many shares as they own. 
 <br/>
 <br/>
-![transaction-gif](app/assets/images/transaction.gif)
+![transaction-gif](app/assets/images/transaction.gif) 
 <br/>
 <br/>
-No Cheating for my users! Users are only allowed to purchase shares of stock if they have adequate buying power. Additionally, they are only allowed to sell, at max, as many shares as they own. These checks are handled by the holdings controller on the back-end, and descriptive error messages will be rendered to the page if a user attempts to make an invalid transaction. The form will only submit and trigger a refresh of the page upon a valid transaction submitted by the user.
+These checks are handled by the holdings controller on the back-end, and descriptive error messages will be rendered to the page if a user attempts to make an invalid transaction. The form will only submit and trigger a refresh of the page upon a valid transaction submitted by the user.
 
 ```rb
     def create
