@@ -20,7 +20,38 @@ Once a User logs in, they are directed to the portfolio page, which displays a c
 <br/>
 <br/>
 #### Portfolio Snapshots (**newest feature**)
-In order to render charts that display a user's portfolio balance over time, 'snapshots' of the users portfolio are taken using Rails rake tasks and Heroku Scheduler every 10 minutes. Through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data is fetched.
+In order to render charts that display a user's portfolio balance over time, 'snapshots' of the users portfolio are taken using Rails rake tasks and Heroku Scheduler. Through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data is fetched.
+
+```rb
+namespace :scheduler do
+  task :add_portfolio_snapshots_for_day => :environment do
+    puts "Adding day's portfolio snapshots..."
+    require 'date'
+    require 'us_bank_holidays'
+
+    today = Date.today
+    next if today.weekend?
+    next if today.bank_holiday?
+  
+    time = Time.now
+    timeString = time.to_s
+    timeArr = timeString.split(" ")[1]
+    hour = timeArr.split(":")[0]
+    min = timeArr.split(":")[1]
+    next if hour.to_i < 13
+    next if hour.to_i > 19
+
+    
+    users = User.all
+    users.each do |user| 
+      balance = user.calculate_total_assets
+      PortfolioSnapshot.create({ valuation: balance, user_id: user.id })
+    end
+    
+    puts "done."
+  end
+end
+```
 
 ### Show Page
 An Security show page contains current and historical price information data, general company information, relevant news, and allows users to purchase and sell shares of the stock at the most recent market price. 
@@ -103,6 +134,11 @@ These checks are handled by the holdings controller on the back-end, and descrip
     end
 ```
 
-and here is yet another gif
+### Search
 
+Users can search for over 8,000 companies and other various securities to purchase across multiple exchanges. Because the navigation element getes reused, this fetch is performed just once when the user signs in. The suggestion logic performed when typing makes sure that exact matches appear at the top.
+<br/>
+<br/>
 ![search-gif](app/assets/images/search.gif)
+<br/>
+<br/>
