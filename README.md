@@ -2,4 +2,4 @@ Cache Out is my own rendition of the popular financial asset trading app Robinho
 
 Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 
-![app-screenshot](app/assets/images/cache-out.png)
+![app-screenshot](app/assets/images/searchdemo.gif)
