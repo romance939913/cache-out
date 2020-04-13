@@ -178,16 +178,22 @@ class ShowPageGraph extends React.Component {
             color = '#21ce99';
         }
 
-        let dayDifference = this.props.price[this.props.ticker].price - data[0].close;
-        let percentage = dayDifference / data[0].close;
-        if (dayDifference > 0) {
-            dayDifference = numeral(dayDifference).format('$0,0.00')
-            percentage = numeral(percentage).format('0.00%')
-            dayDifference = "+" + dayDifference.toString();
-            percentage = "+" + percentage.toString();
-        } else {
-            percentage = numeral(percentage).format('0.00%')
-            dayDifference = numeral(dayDifference).format('$0,0.00')
+        let dayDifference;
+        let percentage;
+        let start;
+        if (data[0]) {
+            start = data[0].close
+            dayDifference = this.props.price[this.props.ticker].price - data[0].close;
+            percentage = dayDifference / data[0].close;
+            if (dayDifference > 0) {
+                dayDifference = numeral(dayDifference).format('$0,0.00')
+                percentage = numeral(percentage).format('0.00%')
+                dayDifference = "+" + dayDifference.toString();
+                percentage = "+" + percentage.toString();
+            } else {
+                percentage = `(${numeral(percentage).format('0.00%')})`
+                dayDifference = numeral(dayDifference).format('$0,0.00')
+            }
         }
 
         const renderLineChart = (
@@ -217,8 +223,8 @@ class ShowPageGraph extends React.Component {
                 <li className="show-stock-price" id="real-time-price">{numeral(this.props.price[this.props.ticker].price).format('$0,0.00')}</li>
                 <div className="show-percentage-and-difference">
                     <li className="show-page-difference" id="show-diff">{dayDifference}</li>
-                    <li className="show-page-percentage" id="show-perc">({percentage})</li>
-                    <li className="display-none" id="starting-price">{data[0].close}</li>
+                    <li className="show-page-percentage" id="show-perc">{percentage}</li>
+                    <li className="display-none" id="starting-price">{start}</li>
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">

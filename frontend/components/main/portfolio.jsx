@@ -43,17 +43,17 @@ class Portfolio extends React.Component {
 
                     data = data.slice();
                     data = data.reverse();
-                    
+
+                    if (!isWeekend && data[0]) {
+                        dayDifference = data.slice(-1)[0].close - data[0].close;
+                        percentage = dayDifference / data[0].close;
+                        percentage = numeral(percentage).format('0.00%')
+                    }
+
                     if (dayDifference >= 0) {
                         color = '#21ce99'
                     } else {
                         color = '#ff0000'
-                    }
-
-                    if (!isWeekend) {
-                        dayDifference = data.slice(-1)[0].close - data[0].close;
-                        percentage = dayDifference / data[0].close;
-                        percentage = numeral(percentage).format('0.00%')
                     }
     
                     renderLineChart = (

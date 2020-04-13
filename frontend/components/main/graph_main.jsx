@@ -133,7 +133,7 @@ class GraphMain extends React.Component {
                 difference = "+" + difference.toString();
                 percentage = "+" + difference.toString();
             } else {
-                percentage = numeral(percentage).format('0.00%')
+                percentage = `(${numeral(percentage).format('0.00%')})`
                 difference = numeral(difference).format('$0,0.00')
             }
         }
@@ -169,7 +169,7 @@ class GraphMain extends React.Component {
                 </h2>
                 <div className="main-percentage-and-difference">
                     <p className="main-page-difference">{difference}</p>
-                    <p className="main-page-percentage">({percentage})</p>
+                    <p className="main-page-percentage">{percentage}</p>
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">
