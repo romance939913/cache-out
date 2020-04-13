@@ -19,7 +19,6 @@ Once a User logs in, they are directed to the portfolio page, which displays a c
 ![tour-gif](app/assets/images/tour.gif)
 <br/>
 <br/>
-
 #### Portfolio Snapshots (**newest feature**)
 In order to render charts that display a user's portfolio balance over time, 'snapshots' of the users portfolio are taken using Rails rake tasks and Heroku Scheduler every 10 minutes. Through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data is fetched.
 
@@ -65,7 +64,41 @@ Charts are dynamic and interactive, allowing users to switch between ranges of *
 
 Aside from this minimizing the data returned from expensive external API calls, this switch method helps organize the applications Redux state into a single "graphPrices" slice. If other front end developers were to work on this app with me, it would be very easy to navigate.
 
+### Transaction Validation
+<br/>
+<br/>
 ![transaction-gif](app/assets/images/transaction.gif)
+<br/>
+<br/>
+No Cheating on this app!Users are only allowed to purchase shares of stock if they have adequate buying power. Additionally, they are only allowed to sell, at max, as many shares as they own. These checks are handled by the holdings controller on the back-end, and descriptive error messages will be rendered to the page if a user attempts to make an invalid transaction. The form will only submit and trigger a refresh of the page upon a valid transaction submitted by the user.
+```rb
+    def create
+        if params[:holding][:buying_power].to_f >= 0
+            @user_records = Holding.where(user_id: params[:holding][:user_id])
+            @update_record = @user_records.find_by(ticker: params[:holding][:ticker])
+            if @update_record
+                new_amt = @update_record.quantity + params[:holding][:quantity].to_i
+                if new_amt > 0
+                    @update_record.update(quantity: new_amt)
+                    @holding = @update_record
+                    render :show
+                elsif new_amt == 0
+                    @update_record.destroy
+                else
+                    render json: ["not enough shares"], status: 422
+                end
+            else
+                @holding = Holding.new(holdings_params)
+                if @holding.quantity >= 0
+                    @holding.save
+                    render :show
+                else
+                    render json: ["not enough shares"], status: 422
+                end
+            end
+        end
+    end
+```
 
 and here is yet another gif
 
