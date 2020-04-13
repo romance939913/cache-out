@@ -4,7 +4,7 @@ Cache Out is my own rendition of the popular trading app Robinhood. New users ca
 
 Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 
-## Notable Features
+## Features
 * Secure frontend to backend user authentication using the gem BCrypt
 * Real-time and historical price data of all stocks traded on the NASDAQ and NYSE exchanges
 * Interactive charts displaying a stock's price fluctuation as well as the user's portfolio balance fluctuation over time
@@ -32,7 +32,7 @@ Upon visiting a show page, a variety of API calls are made to fetch the necessar
   * Company Profile (symbol, company name, CEO, industry, etc.)
   * Real Time asset price which continually updates
   * Intraday Price Data (5 minutes historical prices with volume)
-* [News API](https://newsapi.org/)
+* [News API](https://newsapi.org/) - 1 API call
 
 #### Dynamic Chart Rendering
 Charts are dynamic and interactive, allowing users to switch between ranges of **1D**, **1W**, **1M**, **3M**, **1Y**, and **5Y** for individual stocks or their overall portfolio. Buttons for each range appear below the chart with click handlers installed, which serve to update the React component's local state with the relevant chunk of data. The `handleFetch` function takes in a range and determines which thunk actions to trigger to fetch the desired data. 
