@@ -29,15 +29,14 @@ An Security show page contains current and historical price information data, ge
 #### Fetching Security Data
 
 Upon visiting a show page, a variety of API calls are made to fetch the necessary information to render the price charts, the information ('About' section) and relecant news articles. The following APIs are hit
-[Financial Modeling Prep](https://financialmodelingprep.com/)
-* Financial Modeling Prep - 4 separate API calls
+* [Financial Modeling Prep](https://financialmodelingprep.com/) - 4 separate API calls
   * Company Profile (symbol, company name, CEO, industry, etc.)
   * Real Time asset price which continually updates
   * Intraday Price Data (5 minutes historical prices with volume)
 * [News API](https://newsapi.org/)
 
 #### Dynamic Chart Rendering
-Charts are dynamic and interactive, allowing users to switch between ranges of **1D**, **1W**, **1M**, **3M**, **1Y**, and **5Y** for individual stocks or their overall portfolio (the **5Y** range is replaced by the **ALL** range for portfolio chart). Buttons for each range appear below the chart with click handlers installed, which serve to update the React component's local state with the relevant chunk of data. The `renderChart` function takes in one of the aforementioned ranges as a string, using it to key into the `RANGES` hash to determine the appropriate portion of the dailyData to grab.
+Charts are dynamic and interactive, allowing users to switch between ranges of **1D**, **1W**, **1M**, **3M**, **1Y**, and **5Y** for individual stocks or their overall portfolio. Buttons for each range appear below the chart with click handlers installed, which serve to update the React component's local state with the relevant chunk of data. The `handleFetch` function takes in a range and determines which thunk actions to trigger to fetch the desired data. 
 
 ```js
     handleFetch(time) {
@@ -64,7 +63,7 @@ Charts are dynamic and interactive, allowing users to switch between ranges of *
     }
 ```
 
-Here's another gif
+Aside from this minimizing the data returned from expensive external API calls, this switch method helps organize the applications Redux state into a single "graphPrices" slice. If other front end developers were to work on this app with me, it would be very easy to navigate.
 
 ![transaction-gif](app/assets/images/transaction.gif)
 
