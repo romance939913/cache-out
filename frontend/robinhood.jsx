@@ -27,14 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     // testing end
-    window.receiveHistorical = receiveHistorical
-    window.fetchstockHistorical = fetchstockHistorical;
-    window.fetchStockWeek = fetchStockWeek;
-    window.fetchStockDay = fetchStockDay;
-    window.fetchNasdaq = fetchNasdaq;
-    window.fetchNYSE = fetchNYSE;
-    window.fetchIndexes = fetchIndexes;
-    window.fetchProfile = fetchProfile;
+
     const root = document.getElementById("root");
     ReactDOM.render(<Root store={store}/>, root);
 });

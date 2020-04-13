@@ -20,12 +20,8 @@
     cursor: pointer;
 }
 
-.red-hover:hover {
-    color: red;
-}
-
-.green-hover:hover {
-    color: green;
+.stock-time-frame:hover {
+    color: #21ce99;
 }
 
 .show-company-name {

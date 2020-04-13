@@ -41,23 +41,24 @@ class GraphMain extends React.Component {
         let perc = document.getElementById("main-perc");
         let startPrice = document.getElementById("main-starting-price");
 
-        let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
-        let hoverDiff = e.activePayload[0].value - startPrice.textContent;
-        let hoverPerc = hoverDiff / startPrice.textContent;
-
-        if (hoverDiff > 0) {
-            hoverDiff = numeral(hoverDiff).format('$0,0.00')
-            hoverPerc = numeral(hoverPerc).format('0.00%')
-            hoverDiff = `+${hoverDiff.toString()}`;
-            hoverPerc = `(+${hoverPerc.toString()})`;
-        } else {
-            hoverPerc = `(${numeral(hoverPerc).format('0.00%')})`;
-            hoverDiff = numeral(hoverDiff).format('$0,0.00')
+        if (!!startPrice.textContent) {
+            let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
+            let hoverDiff = e.activePayload[0].value - startPrice.textContent;
+            let hoverPerc = hoverDiff / startPrice.textContent;
+            if (hoverDiff > 0) {
+                hoverDiff = numeral(hoverDiff).format('$0,0.00')
+                hoverPerc = numeral(hoverPerc).format('0.00%')
+                hoverDiff = `+${hoverDiff.toString()}`;
+                hoverPerc = `(+${hoverPerc.toString()})`;
+            } else {
+                hoverPerc = `(${numeral(hoverPerc).format('0.00%')})`;
+                hoverDiff = numeral(hoverDiff).format('$0,0.00')
+            }
+    
+            rtv.textContent = hoverPrice;
+            diff.textContent = hoverDiff;
+            perc.textContent = hoverPerc;
         }
-
-        rtv.textContent = hoverPrice;
-        diff.textContent = hoverDiff;
-        perc.textContent = hoverPerc;
     }
 
     handleMouseLeave() {
@@ -73,24 +74,25 @@ class GraphMain extends React.Component {
                 totalEquity = totalEquity + value;
             }
         });
-
-        let currentPrice = totalEquity + this.props.cash;
-        let currentDiff = currentPrice - startPrice.textContent;
-        let currentPerc = currentDiff / startPrice.textContent;
-
-        if (currentDiff > 0) {
-            currentDiff = numeral(currentDiff).format('$0,0.00')
-            currentPerc = numeral(currentPerc).format('0.00%')
-            currentDiff = `+${currentDiff.toString()}`;
-            currentPerc = `(+${currentPerc.toString()})`;
-        } else {
-            currentPerc = `(${numeral(currentPerc).format('0.00%')})`;
-            currentDiff = numeral(currentDiff).format('$0,0.00')
+        if (!!startPrice.textContent) {
+            let currentPrice = totalEquity + this.props.cash;
+            let currentDiff = currentPrice - startPrice.textContent;
+            let currentPerc = currentDiff / startPrice.textContent;
+    
+            if (currentDiff > 0) {
+                currentDiff = numeral(currentDiff).format('$0,0.00')
+                currentPerc = numeral(currentPerc).format('0.00%')
+                currentDiff = `+${currentDiff.toString()}`;
+                currentPerc = `(+${currentPerc.toString()})`;
+            } else {
+                currentPerc = `(${numeral(currentPerc).format('0.00%')})`;
+                currentDiff = numeral(currentDiff).format('$0,0.00')
+            }
+    
+            rtv.textContent = numeral(currentPrice).format('$0,0.00');
+            diff.textContent = currentDiff;
+            perc.textContent = currentPerc;
         }
-
-        rtv.textContent = numeral(currentPrice).format('$0,0.00');
-        diff.textContent = currentDiff;
-        perc.textContent = currentPerc;
     }
     
     customToolTip(e) {
@@ -118,7 +120,6 @@ class GraphMain extends React.Component {
             }
         });
 
-        // login grabs only the necessary time slots
         let data = Object.values(this.props.snapshots)
         let d = new Date();
         let day = d.getDay();
@@ -165,7 +166,8 @@ class GraphMain extends React.Component {
         let difference;
         let percentage;
         let start;
-        if (JSON.stringify(this.props.snapshots) !== '{}') {
+        let color;
+        if (JSON.stringify(this.props.snapshots) !== '{}' && this.props.snapshots.length !== 0) {
             start = data[0].valuation
             difference = assets - data[0].valuation;
             percentage =  difference / data[0].valuation;
@@ -178,10 +180,13 @@ class GraphMain extends React.Component {
                 percentage = `(${numeral(percentage).format('0.00%')})`
                 difference = numeral(difference).format('$0,0.00')
             }
+
+            if (data[0] !== undefined && data[0].valuation > data.slice(-1)[0].valuation) {
+                color = '#ff0000';
+            } else {
+                color = '#21ce99';
+            }
         }
-
-
-        let color = '#21ce99'
 
         const renderLineChart = (
             <LineChart
