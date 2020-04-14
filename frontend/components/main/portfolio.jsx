@@ -75,7 +75,7 @@ class Portfolio extends React.Component {
                     key={idx}>
                     <li key={idx} className="holding-portfolio-li">
                         <div className="portfolio-ele portfolio-ele-left">
-                            <p>{ticker}</p>
+                            <h1>{ticker}</h1>
                             <p className="portfolio-ele-small">{numeral(this.props.holdings[ticker].quantity).format('0,0')} shares</p>
                         </div>
                         <div className="chart-thumbnail">
@@ -92,7 +92,7 @@ class Portfolio extends React.Component {
 
         return (
             <div className="holdings-portfolio">
-                <p className="portfolio-header">Portfolio</p>
+                <h1 className="portfolio-header">Portfolio</h1>
                 {tickerArr}
             </div>
         );

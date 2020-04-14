@@ -16,15 +16,15 @@
     justify-content: space-evenly;
 }
 
-.buy-sell-button-wrapper p {
-    margin: 10px;
-    padding: 5px;
-    font-size: 20px;
+.transaction-type {
+    padding: 10px;
+    margin: 5px;
+    font-size: 22px;
+    cursor: pointer;
 }
 
-.buy-sell-button-wrapper p:hover {
-    color: #21ce99;
-    cursor: pointer;
+.transaction-type:hover {
+    color: #21ce99
 }
 
 .selected {

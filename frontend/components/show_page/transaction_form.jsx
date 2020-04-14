@@ -23,8 +23,9 @@ class TransactionForm extends React.Component {
             this.props.clearErrors()
             this.props.getHolding(holding);
             this.props.getUserBP(this.props.currentUser.id);
-            this.state.quantity = 0;
+            this.state.quantity = '';
             this.state.cost = 0;
+            this.state.buySell = 'BUY'
         }
     }
 
@@ -78,6 +79,7 @@ class TransactionForm extends React.Component {
             quantity: this.state.quantity,
             cost: this.state.cost
         }
+        if (holding.quantity === '') return;
         if (this.state.buySell === 'BUY') {
             holding['buying_power'] = this.props.cash - this.state.cost;
             this.props.clearErrors();
@@ -134,8 +136,8 @@ class TransactionForm extends React.Component {
             <form className="transaction-form-wrapper" onSubmit={this.handleSubmit}>
                 <div>
                     <div className="buy-sell-button-wrapper">
-                        <p onClick={() => this.handleClick('BUY')} className="transaction-type BUY selected">Buy {`${this.props.ticker}`}</p>
-                        <p onClick={() => this.handleClick('SELL')} className="transaction-type SELL">Sell {`${this.props.ticker}`}</p>
+                        <h2 onClick={() => this.handleClick('BUY')} className="transaction-type BUY selected">Buy {`${this.props.ticker}`}</h2>
+                        <h2 onClick={() => this.handleClick('SELL')} className="transaction-type SELL">Sell {`${this.props.ticker}`}</h2>
                     </div>
                     <div className="share-quantity-wrapper">
                         <label>Shares</label>
