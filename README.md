@@ -1,6 +1,6 @@
 # Cache Out
 
-Cache Out is my own rendition of the popular trading app Robinhood. New users can start with up to $10 million in cash, buy or sell shares in over 8,000 various companies and securities, track their performance with real-time market data, and make informed decisions with interactive company graphs and metrics.
+Cache Out is my own rendition of the popular financial asset trading app Robinhood. New users can start with up to $10 million in cash, buy or sell shares of over 8,000 companies and various securities, make informed decisions with interactive company graphs and metrics and track their portfolio's performance overtime with up to the minute market data.
 
 Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 
@@ -142,3 +142,14 @@ Users can search for over 8,000 companies and other various securities to purcha
 ![search-gif](app/assets/images/search.gif)
 <br/>
 <br/>
+Users may type in any word or symbol in the companies name and, if specific enough, it will populate in the suggestions box. 
+
+### Technologies and Libraries
+* Backend: Rails/ActiveRecord/PostgreSQL
+* Frontend: React/Redux
+* [Financial Modeling Prep API](https://financialmodelingprep.com/)
+* [News API](https://newsapi.org/)
+* [Recharts](http://recharts.org/en-US/)
+* [CSS Animate](http://animate.css)
+* [MomentJS](https://momentjs.com/)
+* [NumeralJS](http://numeraljs.com/)
