@@ -17,32 +17,12 @@ class MainNav extends React.Component {
     this.props.receiveIndexes();
   }
 
-  // handleDarkMode() {
-  //   let mode = document.getElementById("dark-mode");
-  //   let modeClasses = Array.from(mode.classList);
-  //   let body = document.body;
-  //   let newsItems = document.getElementsByClassName("news-container");
-  //   console.log(newsItems[0].children)
-  //   debugger
-  //   if (modeClasses.includes("active")) {
-  //     mode.classList.remove("active");
-  //     body.classList.remove("dark-mode");
-  //     newsItems.forEach((ele, idx) => {
-  //       ele.classList.remove("white")
-  //     })
-  //     newsItems.classList.remove("white");
-  //   } else {
-  //     mode.classList.add("active")
-  //     body.classList.add("dark-mode")
-  //     newsItems.forEach((ele, idx) => {
-  //       ele.classList.add("white")
-  //     })
-  //   }
-  // }
 
   changeTheme() {
-    var currentTheme = document.body.getAttribute("data-theme")
+    let currentTheme = document.body.getAttribute("data-theme")
+    let newsItems = Array.from(document.getElementsByClassName("news-item-wrapper"))
     var docBody = document.body
+    console.log(newsItems)
     if (currentTheme === "light") {
       docBody.setAttribute("data-theme", "dark");
       this.setState({ mode: "dark" });
