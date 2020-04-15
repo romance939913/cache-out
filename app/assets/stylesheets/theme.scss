@@ -1,0 +1,38 @@
+.dark-mode {
+    background-color: #202020;
+    color: white;
+}
+
+.white {
+    color: white;
+}
+
+.white:hover {
+    background-color: #181818;
+}
+
+[data-theme="light"] {
+  color: black;
+//   --icon-color: black;
+  background-color: white;
+//   --portfolio-border: 1px solid #1b1b1b;
+//   --news-border: 1px solid #cbcbcd;
+//   --news-title: black;
+//   --news-hover: #fafafa;
+//   --transaction-border: #ededed;
+//   --chart-border: 1px solid#cbcbcd;
+//   --single-news-border: none;
+}
+
+[data-theme="dark"] {
+  color: white;
+  background-color: #202020;
+//   --icon-color: white;
+//   --portfolio-border: 1px solid white;
+//   --news-border: 1px solid black;
+//   --news-title: white;
+//   --news-hover: #0e0d0d;
+//   --transaction-border: 1px solid black;
+//   --chart-border: 1px solid black;
+//   --single-news-border: 1px solid black;
+}

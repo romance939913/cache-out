@@ -34,20 +34,20 @@ class MainFeed extends React.Component {
         let newsArr = [];
         this.props.news.forEach((ele, idx) => {
             newsArr.push(
-                <a target="_blank" href={`${this.props.news[idx].url}`}>
-                <div className="news-item-wrapper">
-                    <img  className="news-item-image" src={`${this.props.news[idx].urlToImage}`} alt=""/>
-                    <div className="news-item-content">
-                        <div>
-                            <li key={idx} className="news-item-website">{this.props.news[idx].source.name}</li>
-                            <li key={idx + 30} className="news-item-title">{this.props.news[idx].title}</li>
+                <a key={idx} target="_blank" href={`${this.props.news[idx].url}`}>
+                    <div className="news-item-wrapper">
+                        <img  className="news-item-image" src={`${this.props.news[idx].urlToImage}`} alt=""/>
+                        <div className="news-item-content">
+                            <div>
+                                <p className="news-item-website">{this.props.news[idx].source.name}</p>
+                                <p className="news-item-title">{this.props.news[idx].title}</p>
+                            </div>
+                            <p className="news-item-description">{this.props.news[idx].description}</p>
                         </div>
-                        <li key={idx + 60} className="news-item-description">{this.props.news[idx].description}</li>
                     </div>
-                </div>
                 </a>
             )
-        })
+        }) 
             
         return (
             <div>
@@ -61,8 +61,8 @@ class MainFeed extends React.Component {
                             snapshots={this.props.snapshots}
                             holdings={this.props.holdings}
                         />
-                        <div className="news-container">
-                            <h1 className="news-header">Today's Top Stories</h1>
+                        <h1 className="news-header">Today's Top Stories</h1>
+                        <div id="news-container-feed" className="news-container">
                             {newsArr}
                         </div>
                     </div>

@@ -167,26 +167,26 @@ class GraphMain extends React.Component {
         let percentage;
         let start;
         let color;
-        if (JSON.stringify(this.props.snapshots) !== '{}' && this.props.snapshots.length !== 0) {
-            start = data[0].valuation
-            difference = assets - data[0].valuation;
-            percentage =  difference / data[0].valuation;
-            if (difference > 0) {
-                difference = numeral(difference).format('$0,0.00');
-                percentage = numeral(percentage).format('0.00%');
-                difference = `(+${difference.toString()})`;
-                percentage = `+${percentage.toString()}`;
-            } else {
-                percentage = `(${numeral(percentage).format('0.00%')})`
-                difference = numeral(difference).format('$0,0.00')
-            }
+        // if (JSON.stringify(this.props.snapshots) !== '{}' && this.props.snapshots.length !== 0) {
+        //     start = data[0].valuation
+        //     difference = assets - data[0].valuation;
+        //     percentage =  difference / data[0].valuation;
+        //     if (difference > 0) {
+        //         difference = numeral(difference).format('$0,0.00');
+        //         percentage = numeral(percentage).format('0.00%');
+        //         difference = `(+${difference.toString()})`;
+        //         percentage = `+${percentage.toString()}`;
+        //     } else {
+        //         percentage = `(${numeral(percentage).format('0.00%')})`
+        //         difference = numeral(difference).format('$0,0.00')
+        //     }
 
-            if (data[0] !== undefined && data[0].valuation > data.slice(-1)[0].valuation) {
-                color = '#ff0000';
-            } else {
-                color = '#21ce99';
-            }
-        }
+        //     if (data[0] !== undefined && data[0].valuation > data.slice(-1)[0].valuation) {
+        //         color = '#ff0000';
+        //     } else {
+        //         color = '#21ce99';
+        //     }
+        // }
 
         const renderLineChart = (
             <LineChart

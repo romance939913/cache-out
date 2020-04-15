@@ -35,8 +35,8 @@ class ShowPage extends React.Component {
         let newsArr = [];
         this.props.news.forEach((ele, idx) => {
             newsArr.push(
-                <a target="_blank" href={`${this.props.news[idx].url}`}>
-                    <div className="news-item-wrapper">
+                <a key={idx} target="_blank" href={`${this.props.news[idx].url}`}>
+                    <div id="news" className="news-item-wrapper">
                         <img className="news-item-image" src={`${this.props.news[idx].urlToImage}`} alt="" />
                         <div className="news-item-content">
                             <div>
@@ -103,7 +103,9 @@ class ShowPage extends React.Component {
                                 </div>
                             </ul>
                             <h3 className="news-show-header">News</h3>
-                            {newsArr}
+                            <div className="news-container">
+                                {newsArr}
+                            </div>
                         </div>
                         <div className="transaction-box">
                             <TransactionContainer 

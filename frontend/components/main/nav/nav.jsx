@@ -6,13 +6,51 @@ class MainNav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      indexes: ''
+      indexes: '',
+      mode: 'light'
     };
+    this.changeTheme = this.changeTheme.bind(this)
   }
 
   componentDidMount() {
     this.props.receiveStocks();
     this.props.receiveIndexes();
+  }
+
+  // handleDarkMode() {
+  //   let mode = document.getElementById("dark-mode");
+  //   let modeClasses = Array.from(mode.classList);
+  //   let body = document.body;
+  //   let newsItems = document.getElementsByClassName("news-container");
+  //   console.log(newsItems[0].children)
+  //   debugger
+  //   if (modeClasses.includes("active")) {
+  //     mode.classList.remove("active");
+  //     body.classList.remove("dark-mode");
+  //     newsItems.forEach((ele, idx) => {
+  //       ele.classList.remove("white")
+  //     })
+  //     newsItems.classList.remove("white");
+  //   } else {
+  //     mode.classList.add("active")
+  //     body.classList.add("dark-mode")
+  //     newsItems.forEach((ele, idx) => {
+  //       ele.classList.add("white")
+  //     })
+  //   }
+  // }
+
+  changeTheme() {
+    var currentTheme = document.body.getAttribute("data-theme")
+    var docBody = document.body
+    if (currentTheme === "light") {
+      docBody.setAttribute("data-theme", "dark");
+      this.setState({ mode: "dark" });
+    }
+    else {
+      docBody.setAttribute("data-theme", "light");
+      this.setState({ mode: "light" });
+    }
   }
 
   render() {
@@ -81,6 +119,7 @@ class MainNav extends React.Component {
           </div>
           <div className="nav-right">
             <Link to="/feed" className="nav-right-ele">Home</Link>
+            <p className="nav-right-ele" id="dark-mode" onClick={this.changeTheme}>Dark Mode</p>
             <a className="nav-right-ele" onClick={() => this.props.logout()}>logout</a>
           </div>
         </div>
