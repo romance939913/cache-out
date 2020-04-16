@@ -100,26 +100,17 @@
     font-weight: bold;
 }
 
-.news-item-content li {
-    list-style: none;
-    margin: 0px 20px 0px 20px;
-}
-
 .news-item-content {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     width: 600px;
-}
-
-.news-container {
-    width: 800px;
-    margin-top: 50px;
-    color: white;
+    margin: 0px 20px 0px 20px;
 }
 
 .news-header {
     padding: 15px;
     font-size: 25px;
+    margin-top: 50px;
     border-bottom: solid 1px lightgray;
 }

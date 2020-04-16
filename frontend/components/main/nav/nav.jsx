@@ -9,7 +9,8 @@ class MainNav extends React.Component {
       indexes: '',
       mode: 'light'
     };
-    this.changeTheme = this.changeTheme.bind(this)
+    this.changeTheme = this.changeTheme.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
@@ -17,16 +18,24 @@ class MainNav extends React.Component {
     this.props.receiveIndexes();
   }
 
+  handleLogout() {
+    this.props.logout();
+    let docBody = document.body;
+    docBody.setAttribute("data-theme", "light");
+  }
 
   changeTheme() {
     let currentTheme = document.body.getAttribute("data-theme")
+    let themeEle = document.getElementById("dark-mode");
     var docBody = document.body
     if (currentTheme === "light") {
       docBody.setAttribute("data-theme", "dark");
+      themeEle.textContent = "Light Mode";
       this.setState({ mode: "dark" });
     }
     else {
       docBody.setAttribute("data-theme", "light");
+      themeEle.textContent = "Dark Mode";
       this.setState({ mode: "light" });
     }
   }
@@ -98,7 +107,7 @@ class MainNav extends React.Component {
           <div className="nav-right">
             <Link to="/feed" className="nav-right-ele">Home</Link>
             <p className="nav-right-ele" id="dark-mode" onClick={this.changeTheme}>Dark Mode</p>
-            <a className="nav-right-ele" onClick={() => this.props.logout()}>logout</a>
+            <a className="nav-right-ele" onClick={this.handleLogout}>logout</a>
           </div>
         </div>
       </div>

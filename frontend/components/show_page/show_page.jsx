@@ -40,10 +40,10 @@ class ShowPage extends React.Component {
                         <img className="news-item-image" src={`${this.props.news[idx].urlToImage}`} alt="" />
                         <div className="news-item-content">
                             <div>
-                                <li className="news-item-website">{this.props.news[idx].source.name}</li>
-                                <li className="news-item-title">{this.props.news[idx].title}</li>
+                                <p className="news-item-website">{this.props.news[idx].source.name}</p>
+                                <p className="news-item-title">{this.props.news[idx].title}</p>
                             </div>
-                            <li className="news-item-description">{this.props.news[idx].description}</li>
+                            <p className="news-item-description">{this.props.news[idx].description}</p>
                         </div>
                     </div>
                 </a>
