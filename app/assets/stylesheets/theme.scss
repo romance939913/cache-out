@@ -1,33 +1,13 @@
-.dark-mode {
-    background-color: #202020;
-    color: white;
-}
-
-.white {
-    color: white;
-}
-
-.white:hover {
-    background-color: #181818;
-}
-
 [data-theme="light"] {
     color: black;
     background-color: white;
   --text-color: black;
   --bg-color: white;
   --input-bg: #F0F8FF;
-//   --portfolio-border: 1px solid #1b1b1b;
-//   --news-border: 1px solid #cbcbcd;
-//   --news-title: black;
-
   --hover: #F0F8FF;
   --hover-focus: white;
   --input-border: 1px solid #fafafa;
   --input-box-shadow: 0 0 4px #21ce99;
-//   --transaction-border: #ededed;
-//   --chart-border: 1px solid#cbcbcd;
-//   --single-news-border: none;
 }
 
 [data-theme="dark"] {
@@ -37,14 +17,8 @@
   --bg-color: #202020;
   --border-color: white;
   --input-bg: #202020;
-//   --portfolio-border: 1px solid white;
-//   --news-border: 1px solid black;
-//   --news-title: white;
   --hover: #0e0d0d;
   --hover-focus: #0e0d0d;
   --input-border: 1px solid #0e0d0d;
   --input-box-shadow: 0 0 6px white;
-//   --transaction-border: 1px solid black;
-//   --chart-border: 1px solid black;
-//   --single-news-border: 1px solid black;
 }

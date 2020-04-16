@@ -74,7 +74,7 @@ class GraphMain extends React.Component {
                 totalEquity = totalEquity + value;
             }
         });
-        
+
         if (!!startPrice.textContent) {
             let currentPrice = totalEquity + this.props.cash;
             let currentDiff = currentPrice - startPrice.textContent;
@@ -142,25 +142,73 @@ class GraphMain extends React.Component {
                 return moment(obj.created_at).isAfter(limit);
             });
         } else if (this.state.time === "1m") {
-            data = data.filter(obj => {
-                let limit = moment().subtract(1, 'months')
-                return moment(obj.created_at).isAfter(limit);
-            });
-        } else if (this.state.time === "3m") {
-            data = data.filter(obj => {
-                let limit = moment().subtract(3, 'months')
-                return moment(obj.created_at).isAfter(limit);
-            });
-        } else if (this.state.time === "1y") {
-            data = data.filter(obj => {
-                let limit = moment().subtract(1, 'years')
-                return moment(obj.created_at).isAfter(limit);
-            });
-        } else if (this.state.time === "5y") {
+            let limit = moment().subtract(1, 'months')
             data = data.filter((obj, idx) => {
-                let limit = moment().subtract(5, 'years')
+                return moment(obj.created_at).isAfter(limit);
+            });
+            let newData = [];
+            data = data.forEach(obj => {
+                if (newData.length === 0) {
+                    newData.push(obj)
+                } else {
+                    if(moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
+                        newData.pop();
+                    }
+                    newData.push(obj)
+                }
+            })
+            data = newData;
+        } else if (this.state.time === "3m") {
+            let limit = moment().subtract(3, 'months')
+            data = data.filter(obj => {
+                return moment(obj.created_at).isAfter(limit);
+            });
+            let newData = [];
+            data = data.forEach(obj => {
+                if (newData.length === 0) {
+                    newData.push(obj)
+                } else {
+                    if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
+                        newData.pop();
+                    }
+                    newData.push(obj)
+                }
+            })
+            data = newData;
+        } else if (this.state.time === "1y") {
+            let limit = moment().subtract(1, 'years')
+            data = data.filter(obj => {
+                return moment(obj.created_at).isAfter(limit);
+            });
+            let newData = [];
+            data = data.forEach(obj => {
+                if (newData.length === 0) {
+                    newData.push(obj)
+                } else {
+                    if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
+                        newData.pop();
+                    }
+                    newData.push(obj)
+                }
+            })
+            data = newData;
+        } else if (this.state.time === "5y") {
+            let limit = moment().subtract(5, 'years')
+            data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit)
             });    
+            let newData = [];
+            data = data.forEach(obj => {
+                if (newData.length === 0) {
+                    newData.push(obj)
+                } else {
+                    if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
+                        newData.pop();
+                    }
+                    newData.push(obj)
+                }
+            })
+            data = newData;
         }
 
         let assets = totalEquity + this.props.cash;
@@ -168,7 +216,7 @@ class GraphMain extends React.Component {
         let percentage;
         let start;
         let color;
-        if (data[0] !== undefined) {
+        if (data[0]) {
             start = data[0].valuation;
             difference = assets - start;
             percentage =  difference / start;
