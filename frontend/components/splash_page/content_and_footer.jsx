@@ -85,9 +85,9 @@ class ContentAndFooter extends React.Component {
             
           </div>
           <div className="feedback-section">
-            <p>Please Leave Feedback!</p>
+            <p>I love feedback!</p>
+            <p>Please open an issue if you find a bug</p>
             <p>I'm always improving this site</p>
-            <p>Link to Google Form</p>
           </div>
           <div className="my-profiles">
             <a target="_blank" href="https://github.com/romance939913/">

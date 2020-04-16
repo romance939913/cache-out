@@ -74,6 +74,7 @@ class GraphMain extends React.Component {
                 totalEquity = totalEquity + value;
             }
         });
+        
         if (!!startPrice.textContent) {
             let currentPrice = totalEquity + this.props.cash;
             let currentDiff = currentPrice - startPrice.textContent;
@@ -167,10 +168,10 @@ class GraphMain extends React.Component {
         let percentage;
         let start;
         let color;
-        if (JSON.stringify(this.props.snapshots) !== '{}' && this.props.snapshots.length !== 0) {
-            start = data[0].valuation
-            difference = assets - data[0].valuation;
-            percentage =  difference / data[0].valuation;
+        if (data[0] !== undefined) {
+            start = data[0].valuation;
+            difference = assets - start;
+            percentage =  difference / start;
             if (difference > 0) {
                 difference = numeral(difference).format('$0,0.00');
                 percentage = numeral(percentage).format('0.00%');
