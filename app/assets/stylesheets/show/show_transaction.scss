@@ -44,20 +44,21 @@
     font-size: 15px;
     width: 100px;
     margin-left: 30px;
-    background-color: #F0F8FF;
-    border: 1px solid #fafafa;
+    background-color: var(--input-bg);
+    border: var(--input-border);
+    color: var(--text-color);
 }
 
 .share-quantity-input:focus {
     outline: none;
-    background-color: white;
-    box-shadow: 0 0 4px #21ce99;
+    background-color: var(--hover-focus);
+    box-shadow: var(--input-box-shadow);
 }
 
 .share-quantity-input:hover {
     outline: none;
-    background-color: white;
-    box-shadow: 0 0 4px #21ce99;
+    background-color: var(--hover-focus);
+    box-shadow: var(--input-box-shadow);
 }
 
 .transaction-price {

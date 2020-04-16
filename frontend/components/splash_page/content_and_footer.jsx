@@ -90,16 +90,16 @@ class ContentAndFooter extends React.Component {
             <p>Link to Google Form</p>
           </div>
           <div className="my-profiles">
-            <a href="https://github.com/romance939913/">
+            <a target="_blank" href="https://github.com/romance939913/">
               <img className="info-icon" src={window.github_pic} alt="" />
             </a>
-            <a href="https://www.linkedin.com/in/brennanromance/">
+            <a target="_blank" href="https://www.linkedin.com/in/brennanromance/">
               <img className="info-icon" src={window.linkedin_pic} alt="" />
             </a>
-            <a href="https://www.linkedin.com/in/brennanromance/">
+            <a target="_blank" href="https://www.linkedin.com/in/brennanromance/">
               <img className="info-icon" src={window.angellist_pic} alt="" />
             </a>
-            <a href="">
+            <a target="_blank" href="">
               <img className="info-icon" src={window.info_pic} alt="" />
             </a>
           </div>

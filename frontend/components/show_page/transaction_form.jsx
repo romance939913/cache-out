@@ -140,7 +140,7 @@ class TransactionForm extends React.Component {
                         <h2 onClick={() => this.handleClick('SELL')} className="transaction-type SELL">Sell {`${this.props.ticker}`}</h2>
                     </div>
                     <div className="share-quantity-wrapper">
-                        <label>Shares</label>
+                        <label>Shares:</label>
                         <input
                             type="number"
                             className="share-quantity-input"

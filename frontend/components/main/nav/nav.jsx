@@ -20,9 +20,7 @@ class MainNav extends React.Component {
 
   changeTheme() {
     let currentTheme = document.body.getAttribute("data-theme")
-    let newsItems = Array.from(document.getElementsByClassName("news-item-wrapper"))
     var docBody = document.body
-    console.log(newsItems)
     if (currentTheme === "light") {
       docBody.setAttribute("data-theme", "dark");
       this.setState({ mode: "dark" });

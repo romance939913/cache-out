@@ -34,13 +34,14 @@
 .holding-portfolio-li {
     list-style: none;
     display: flex;
+    color: var(--text-color);
     justify-content: space-between;
     align-items: center;
     height: 70px;
 }
 
 .holding-portfolio-li:hover {
-    background-color: #F0F8FF;
+    background-color: var(--hover);
 }
 
 .portfolio-ele {
@@ -86,7 +87,7 @@
 }
 
 .news-item-wrapper:hover {
-    background-color: lightgray;
+    background-color: var(--hover);
 }
 
 .news-item-image {

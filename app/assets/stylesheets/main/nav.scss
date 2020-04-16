@@ -15,6 +15,7 @@
 .nav-right-ele {
     font-family: sans-serif;
     margin: 0px 20px 0px 20px;
+    color: var(--text-color)
 }
 
 .nav-right-ele:hover {
@@ -31,8 +32,9 @@
     position: relative;
     box-sizing: border-box;
     padding: 15px 20px 15px 20px;
-    border: 1px solid #fafafa;
-    background-color: #F0F8FF;
+    color: var(--text-color);
+    border: var(--input-border);
+    background-color: var(--input-bg);
     width: 25vw;
     border-radius: 4px;
     padding-top: 10px;
@@ -45,26 +47,28 @@
 }
 
 .search-field:focus {
-    box-shadow: 0 0 4px #21ce99;
+    box-shadow: var(--input-box-shadow);
     outline: none;
-    background-color: white;
+    background-color: var(--hover-focus);
 }
 
 .search-field:hover {
-    box-shadow: 0 0 4px #21ce99;
+    box-shadow: var(--input-box-shadow);
     outline: none;
-    background-color: white;
+    background-color: var(--hover-focus);
 }
 
 .search-form:hover ul{
     display: block;
-    background-color: white;
-    box-shadow: 0 0 4px #21ce99;
+    color: var(--text-color);
+    background-color: var(--hover-focus);
+    box-shadow: var(--input-box-shadow);
 }
 .search-field:focus + ul{
     display: block;
-    background-color: white;
-    box-shadow: 0 0 4px #21ce99;
+    color: var(--text-color);
+    background-color: var(--hover-focus);
+    box-shadow: var(--input-box-shadow);
 }
 
 .suggestion-box {
