@@ -62,7 +62,6 @@ class Portfolio extends React.Component {
                             height={50}
                             data={data}>
                             <Line type="monotone" dataKey="close" stroke={color} dot={false} />
-                            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                             <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
                             <XAxis dataKey='date' hide={true} />
                         </LineChart>

@@ -196,7 +196,6 @@ class GraphMain extends React.Component {
                 onMouseMove={this.handleHover}
                 onMouseLeave={this.handleMouseLeave}>
                 <Line type="monotone" dataKey="valuation" stroke={color} dot={false} />
-                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
                 <XAxis dataKey='created_at' hide={true} />
                 <Tooltip
