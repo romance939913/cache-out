@@ -51,7 +51,6 @@ class User < ApplicationRecord
     holdings.each do |holding| 
       url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{holding.ticker}"
       security = JSON.parse(open(url).read)
-      # Credit to user245031 and lolmaus - Andrey Mikhaylov on Stack Overflow for the code to make API call in Ruby
       assets << security['price'] * holding.quantity
     end
 
