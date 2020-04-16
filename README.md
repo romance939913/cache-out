@@ -16,7 +16,7 @@ Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 Once a User logs in, they are directed to the portfolio page, which displays a chart showing their portfolio valuation over time, a list of their holdings with current day metrics, and real-time financial news
 <br/>
 <br/>
-![tour-gif](app/assets/images/tour.gif)
+![tour-gif](app/assets/images/darkgif3.gif)
 <br/>
 <br/>
 #### Portfolio Snapshots (**newest feature**)
