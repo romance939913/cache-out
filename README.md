@@ -1,6 +1,6 @@
 # Cache Out
 
-A tribute to the popular security trading app Robinhood. New users can start with up to $10 million in cash, buy or sell shares of over 8,000 companies and various securities, make informed decisions with interactive company graphs and metrics and track their portfolio's performance overtime with up to the minute market data.
+Cache Out is my own rendition of the popular securities trading app Robinhood. New users can start with up to $10 million in cash, buy or sell shares of over 8,000 companies and various securities, make informed decisions with interactive company graphs and metrics and track their portfolio's performance overtime with up to the minute market data.
 
 Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 
@@ -13,16 +13,17 @@ Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 * Relevant news displayed for the general market on home page, and for specific stock on the stock's show page
 
 ## Portfolio Page
-Once a User logs in, they are directed to the portfolio page, which displays a chart showing their portfolio valuation over time, a list of their holdings with current day metrics, and real-time financial news
+Once a User logs in, they are directed to the portfolio page, which displays a chart showing their portfolio valuation over time, a list of their holdings with the current day fluctuation, and real-time financial news
 <br/>
 <br/>
-![tour-gif](app/assets/images/tour.gif)
+![tour-gif](app/assets/images/darkgif3.gif)
 <br/>
 <br/>
 #### Portfolio Snapshots (**newest feature**)
-In order to render charts that display a user's portfolio balance over time, 'snapshots' of the users portfolio are taken using Rails rake tasks and Heroku Scheduler. Through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data is fetched.
+In order to render charts that display a user's portfolio balance over time, 'snapshots' of the users portfolio balance are calculated and then saved using rake tasks and Heroku Scheduler. Through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data can easily be fetched.
 
 ```rb
+# 'snapshot'
 namespace :scheduler do
   task :add_portfolio_snapshots_for_day => :environment do
     puts "Adding day's portfolio snapshots..."
@@ -52,7 +53,20 @@ namespace :scheduler do
   end
 end
 ```
+```rb
+  def calculate_total_assets
+    assets = []
+    return buying_power if holdings.empty?
 
+    holdings.each do |holding| 
+      url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{holding.ticker}"
+      security = JSON.parse(open(url).read)
+      assets << security['price'] * holding.quantity
+    end
+
+    assets.sum + buying_power
+  end
+```
 ### Show Page
 An Security show page contains current and historical price information data, general company information, relevant news, and allows users to purchase and sell shares of the stock at the most recent market price. 
 
