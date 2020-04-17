@@ -15,7 +15,11 @@ class SplashCover extends React.Component {
     let e = { username: 'demo5', password: 'password' };
     let array = [a, b, c, d, e];
     let rand = array[Math.floor(Math.random() * array.length)];
+    this.props.login(rand)
     this.props.signin(rand)
+    setTimeout(() => {
+      this.props.logoutUser();
+    }, 3600000); 
   }
 
   render() {

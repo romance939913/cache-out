@@ -31,6 +31,9 @@ class Signin extends React.Component {
     let array = [a, b, c, d, e];
     let rand = array[Math.floor(Math.random() * array.length)];
     this.props.signin(rand)
+    setTimeout(() => {
+      this.props.logoutUser();
+    }, 3600000); 
   }
 
   handleSubmit(e) {

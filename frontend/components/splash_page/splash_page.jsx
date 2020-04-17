@@ -9,7 +9,10 @@ class SplashPage extends React.Component {
         return(
             <div>
                 <Header />
-                <SplashCover login={this.props.login} />
+                <SplashCover 
+                    login={this.props.login}
+                    logoutUser={this.props.logoutUser} 
+                />
                 <ContentAndFooter />
             </div>
         )
