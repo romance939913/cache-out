@@ -80,13 +80,7 @@ Upon visiting a show page, a variety of API calls are made to fetch the necessar
 * [News API](https://newsapi.org/) - 1 API call
 
 #### Dynamic Chart Rendering
-Charts are dynamic and interactive, allowing users to switch between ranges of **1D**, **1W**, **1M**, **3M**, **1Y**, and **5Y** for individual stocks or their overall portfolio. Buttons for each range appear below the chart with click handlers installed, which serve to update the React component's local state with the relevant chunk of data. 
-<br/>
-<br/>
-![tour-gif](app/assets/images/graphdemo.gif)
-<br/>
-<br/>
-The `handleFetch` function takes in a range and determines which thunk actions to trigger to fetch the desired data. 
+Charts are dynamic and interactive, allowing users to switch between ranges of **1D**, **1W**, **1M**, **3M**, **1Y**, and **5Y** for individual stocks or their overall portfolio. Buttons for each range appear below the chart with click handlers installed, which serve to update the React component's local state with the relevant chunk of data. The `handleFetch` function takes in a range and determines which thunk actions to trigger to fetch the desired data. 
 
 ```js
     handleFetch(time) {
