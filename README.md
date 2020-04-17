@@ -159,8 +159,8 @@ Users can search for over 8,000 companies and other various securities to purcha
 Users may type in any word or symbol in the companies name and, if specific enough, it will populate in the suggestions box. 
 
 ### Technologies and Libraries
-* Backend: Rails/ActiveRecord/PostgreSQL
-* Frontend: React/Redux
+* Backend: Ruby on Rails/ActiveRecord/PostgreSQL
+* Frontend: React.js/Redux.js
 * [Financial Modeling Prep API](https://financialmodelingprep.com/)
 * [News API](https://newsapi.org/)
 * [Recharts](http://recharts.org/en-US/)
