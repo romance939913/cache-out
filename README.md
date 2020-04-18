@@ -20,7 +20,7 @@ Once a User logs in, they are directed to the portfolio page, which displays a c
 <br/>
 <br/>
 #### Portfolio Snapshots (**newest feature**)
-In order to render charts that display a user's portfolio balance over time, 'snapshots' of the users portfolio balance are calculated and then saved using rake tasks and Heroku Scheduler. Through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data can easily be fetched.
+In order to render charts that display a user's portfolio performance over time, 'snapshots' of the users portfolio balance are taken using rake tasks and Heroku Scheduler. Portfolio balance is calculated by looping through each stock they own, multiplying the quantity of shares by the stock's current price, and adding all of that together with their cash. Then, through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data can easily be fetched.
 
 ```rb
 # 'snapshot'
