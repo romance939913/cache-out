@@ -274,7 +274,7 @@ class GraphMain extends React.Component {
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">
-                    <h2 onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined green">1D</h2>
+                    <h2 onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined">1D</h2>
                     <h2 onClick={() => this.changeTimeFrames("1w")} className="stock-time-frame 1w">1W</h2>
                     <h2 onClick={() => this.changeTimeFrames("1m")} className="stock-time-frame 1m">1M</h2>
                     <h2 onClick={() => this.changeTimeFrames("3m")} className="stock-time-frame 3m">3M</h2>

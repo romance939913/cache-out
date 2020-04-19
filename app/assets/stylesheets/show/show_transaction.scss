@@ -24,12 +24,12 @@
 }
 
 .transaction-type:hover {
-    color: #21ce99
+    color: var(--trend-color)
 }
 
 .selected {
-    color: #21ce99;
-    border-bottom: solid 2px #21ce99;
+    color: var(--trend-color);
+    border-bottom: solid 2px var(--trend-color);
 }
 
 .share-quantity-wrapper {
@@ -81,8 +81,8 @@
 .buy-sell-submit {
     width: 100px;
     box-sizing: content-box;
-    background-color: #21ce99;
-    border-color: #21ce99;
+    background-color: var(--trend-color);
+    border-color: var(--trend-color);
     color: white;
     border-radius: 4px;
     font-size: 13px;

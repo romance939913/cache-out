@@ -11,7 +11,8 @@
 }
 
 .underlined {
-    border-bottom: solid 2px #21ce99;
+    color: var(--trend-color);
+    border-bottom: solid 3px var(--trend-color);
 }
 
 .stock-time-frame {
@@ -21,7 +22,7 @@
 }
 
 .stock-time-frame:hover {
-    color: #21ce99;
+    color: var(--trend-color);
 }
 
 .show-company-name {
@@ -91,6 +92,10 @@
     width: 120px;
     margin: 30px 30px 15px 30px;
     font-size: 14px;
+}
+
+.show-ceo {
+    color: var(--trend-color);
 }
 
 .news-show-header {

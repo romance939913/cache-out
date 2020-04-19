@@ -68,35 +68,35 @@ class ShowPage extends React.Component {
                                 </div>
                                 <div className="show-page-attr-wrapper">
                                     <div className="show-page-attr-item">
-                                        <li>CEO</li>
-                                        <li>{this.props.profile.ceo}</li>
+                                        <h3>CEO</h3>
+                                        <li className="show-ceo">{this.props.profile.ceo}</li>
                                     </div>
                                     <div className="show-page-attr-item">
-                                        <li>Sector</li>
+                                        <h3>Sector</h3>
                                         <li>{this.props.profile.sector}</li>
                                     </div>
                                     <div className="show-page-attr-item">
-                                        <li>Industry</li>
+                                        <h3>Industry</h3>
                                         <li>{this.props.profile.industry}</li>
                                     </div>
                                     <div className="show-page-attr-item">
-                                        <li>exchange</li>
+                                        <h3>exchange</h3>
                                         <li>{this.props.profile.exchange}</li>
                                     </div>
                                     <div className="show-page-attr-item">
-                                        <li>Market Cap</li>
+                                        <h3>Market Cap</h3>
                                         <li>{this.props.profile.mktCap}</li>
                                     </div>
                                     <div className="show-page-attr-item">
-                                        <li>Last Dividend</li>
+                                        <h3>Last Dividend</h3>
                                         <li>{this.props.profile.lastDiv}</li>
                                     </div>
                                     <div className="show-page-attr-item">
-                                        <li>Volume Average</li>
+                                        <h3>Volume Average</h3>
                                         <li>{this.props.profile.volAvg}</li>
                                     </div>
                                     <div className="show-page-attr-item">
-                                        <li>Day change</li>
+                                        <h3>Day change</h3>
                                         <li>{this.props.profile.changes}</li>
                                     </div>
                                     <div className="show-page-attr-item"></div>
