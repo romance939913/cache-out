@@ -1,6 +1,7 @@
 import React from 'react';
 import NavSearchContainer from './nav_search_container';
 import { Link } from 'react-router-dom';
+import numeral from 'numeral'
 
 class MainNav extends React.Component {
   constructor(props) {
@@ -76,10 +77,10 @@ class MainNav extends React.Component {
                 {this.props.indexes.majorIndexesList[index].indexName}
               </div>
               <div className={`marquee-item-data ${color}`}>
-                {this.props.indexes.majorIndexesList[index].price.toString()}
+              {numeral(this.props.indexes.majorIndexesList[index].price.toString()).format('0,0.00')}
               </div>
               <div className={`marquee-item-data ${color}`}>
-                {idxChanges}
+                ({idxChanges})
             </div>
           </li>
         )
