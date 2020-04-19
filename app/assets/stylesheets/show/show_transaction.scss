@@ -104,6 +104,14 @@
     box-shadow: var(--input-box-shadow);
 }
 
+.buying-power-label {
+    margin: 10px 0 10px 0;
+    padding: 15px 0 0 0;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid var(--border-bottoms)
+}
+
 .transaction-errors-arr {
     margin: 0;
 }
