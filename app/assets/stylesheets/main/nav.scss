@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+.nav-left {
+    margin: 10px 0 0 20px;
+}
+
 .nav-right-ele {
     font-family: sans-serif;
     margin: 0px 20px 0px 20px;
@@ -22,10 +26,12 @@
     color: var(--trend-color);
 }
 
-.main-nav-logo {
-    height: 55px;
-    width: 55px;
-    margin: 0 0 0 20px;
+.home-svg-logo {
+    fill: var(--text-color);
+}
+
+.home-svg-logo:hover {
+    fill: var(--trend-color);
 }
 
 .search-field {
