@@ -148,7 +148,6 @@ class TransactionForm extends React.Component {
                             onChange={this.update('quantity')}
                             placeholder="quantity"
                             min="0"
-                            max="999"
                         />
                     </div>
                     <div>

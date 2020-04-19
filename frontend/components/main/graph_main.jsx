@@ -26,8 +26,10 @@ class GraphMain extends React.Component {
         lis.forEach((li, idx) => {
             let liClassList = Array.prototype.slice.call(li.classList)
             li.classList.remove("underlined")
+            li.classList.remove("green")
             if (liClassList.includes(timeFrame)) {
                 li.classList.add("underlined")
+                li.classList.add("green")
             }
         })
     }
@@ -216,6 +218,7 @@ class GraphMain extends React.Component {
         let percentage;
         let start;
         let color;
+        let docBody = document.body;
         if (data[0]) {
             start = data[0].valuation;
             difference = assets - start;
@@ -231,8 +234,10 @@ class GraphMain extends React.Component {
             }
 
             if (data[0] !== undefined && data[0].valuation > data.slice(-1)[0].valuation) {
-                color = '#ff0000';
+                docBody.setAttribute("data-trend", "down");
+                color = '#f45531';
             } else {
+                docBody.setAttribute("data-trend", "up");
                 color = '#21ce99';
             }
         }
@@ -240,7 +245,7 @@ class GraphMain extends React.Component {
         const renderLineChart = (
             <LineChart
                 width={800}
-                height={400}
+                height={350}
                 data={data}
                 onMouseMove={this.handleHover}
                 onMouseLeave={this.handleMouseLeave}>
@@ -269,7 +274,7 @@ class GraphMain extends React.Component {
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">
-                    <h2 onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined">1D</h2>
+                    <h2 onClick={() => this.changeTimeFrames("1d")} className="stock-time-frame 1d underlined green">1D</h2>
                     <h2 onClick={() => this.changeTimeFrames("1w")} className="stock-time-frame 1w">1W</h2>
                     <h2 onClick={() => this.changeTimeFrames("1m")} className="stock-time-frame 1m">1M</h2>
                     <h2 onClick={() => this.changeTimeFrames("3m")} className="stock-time-frame 3m">3M</h2>

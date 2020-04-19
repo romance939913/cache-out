@@ -22,3 +22,11 @@
   --input-border: 1px solid #0e0d0d;
   --input-box-shadow: 0 0 6px white;
 }
+
+[data-trend="down"] {
+  --trend-color: #f45531;
+}
+
+[data-trend="up"] {
+  --trend-color: #21ce99;
+}

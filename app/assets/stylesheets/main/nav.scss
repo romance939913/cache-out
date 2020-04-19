@@ -19,7 +19,7 @@
 }
 
 .nav-right-ele:hover {
-    color: #21ce99;
+    color: var(--trend-color);
 }
 
 .main-nav-logo {
@@ -60,13 +60,13 @@
 
 .search-form:hover ul{
     display: block;
-    color: var(--text-color);
+    color: var(--trend-color);
     background-color: var(--hover-focus);
     box-shadow: var(--input-box-shadow);
 }
 .search-field:focus + ul{
     display: block;
-    color: var(--text-color);
+    color: var(--trend-color);
     background-color: var(--hover-focus);
     box-shadow: var(--input-box-shadow);
 }
@@ -96,7 +96,7 @@
 
 .suggestion-item-link:hover {
     text-decoration: none;
-    color: #21ce99;
+    color: var(--trend-color);
 }
 
 .cheesy-marquee {
@@ -108,7 +108,7 @@
 }
 
 .red {
-    color: red;
+    color: #f45531;
 }
 
 .marquee-item {
