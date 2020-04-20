@@ -115,7 +115,7 @@ class MainNav extends React.Component {
           <div className="nav-right">
             <Link to="/feed" className="nav-right-ele">Home</Link>
             <p className="nav-right-ele" id="dark-mode" onClick={this.changeTheme}>Dark Mode</p>
-            <a className="nav-right-ele" onClick={this.handleLogout}>logout</a>
+            <a className="nav-right-ele" onClick={this.handleLogout}>Logout</a>
           </div>
         </div>
       </div>

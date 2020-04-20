@@ -2,6 +2,7 @@ import React from 'react';
 import NavContainer from '../main/nav/nav_container';
 import ShowPageGraph from './show_graph_container';
 import TransactionContainer from './transaction_container';
+import numeral from 'numeral';
 
 class ShowPage extends React.Component {
     constructor(props) {
@@ -32,6 +33,13 @@ class ShowPage extends React.Component {
         if (JSON.stringify(this.props.price) === '{}') return null;
         if (this.props.news.length === 0) return null;
 
+        let strMktCap = this.props.profile.mktCap.toString();
+        let withoutExp = strMktCap.split("E")
+        let withoutDecimal = withoutExp[0].split(".")
+        let start = withoutDecimal[0] + withoutDecimal[1]
+        let final = start.padEnd(parseInt(withoutExp[1]), "0")
+        let formattedMktCap = numeral(parseInt(final)).format('0.0a')
+        
         let newsArr = [];
         this.props.news.forEach((ele, idx) => {
             newsArr.push(
@@ -85,15 +93,15 @@ class ShowPage extends React.Component {
                                     </div>
                                     <div className="show-page-attr-item">
                                         <h3>Market Cap</h3>
-                                        <li>{this.props.profile.mktCap}</li>
+                                        <li>{formattedMktCap}</li>
                                     </div>
                                     <div className="show-page-attr-item">
                                         <h3>Last Dividend</h3>
                                         <li>{this.props.profile.lastDiv}</li>
                                     </div>
                                     <div className="show-page-attr-item">
-                                        <h3>Volume Average</h3>
-                                        <li>{this.props.profile.volAvg}</li>
+                                        <h3>Average Volume</h3>
+                                        <li>{numeral(this.props.profile.volAvg).format('0,0.00')}</li>
                                     </div>
                                     <div className="show-page-attr-item">
                                         <h3>Day change</h3>
@@ -103,7 +111,7 @@ class ShowPage extends React.Component {
                                 </div>
                             </ul>
                             <h3 className="news-show-header">News</h3>
-                            <div className="news-container-poop">
+                            <div>
                                 {newsArr}
                             </div>
                         </div>

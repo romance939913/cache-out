@@ -58,8 +58,8 @@ class ShowPageGraph extends React.Component {
             hoverDiff = "+" + hoverDiff.toString();
             hoverPerc = "+" + hoverPerc.toString();
         } else {
-            hoverPerc = numeral(hoverPerc).format('0.00%')
             hoverDiff = numeral(hoverDiff).format('$0,0.00')
+            hoverPerc = numeral(hoverPerc).format('0.00%')
         }
         
         diff.textContent = hoverDiff;
@@ -68,10 +68,28 @@ class ShowPageGraph extends React.Component {
     }
 
     handleMouseLeave() {
-        const ele = document.getElementById("real-time-price");
-        let symbol = this.props.ticker;
-        let currentPrice = numeral(this.props.price[symbol].price).format('$0,0.00');
-        ele.textContent = currentPrice;
+        let rtp = document.getElementById("real-time-price");
+        let startPrice = document.getElementById("starting-price");
+        let diff = document.getElementById("show-diff");
+        let perc = document.getElementById("show-perc");
+        
+        let start = startPrice.textContent;
+        let difference = this.props.price[this.props.ticker].price - start;
+        let percentage = difference / start;
+
+        if(difference > 0) {
+            difference = numeral(difference).format('$0,0.00');
+            percentage = numeral(percentage).format('0.00%');
+            difference = "+" + difference.toString();
+            percentage = "+" + percentage.toString();
+        } else {
+            difference = numeral(difference).format('$0,0.00');
+            percentage = numeral(percentage).format('0.00%')
+        }
+
+        rtp.textContent = numeral(this.props.price[this.props.ticker].price).format('$0,0.00');
+        diff.textContent = difference;
+        perc.textContent = `(${percentage})`;
     }
 
     changeTimeFrames(newFrame) {
@@ -186,13 +204,13 @@ class ShowPageGraph extends React.Component {
         let start;
         if (data[0]) {
             start = data[0].close
-            dayDifference = this.props.price[this.props.ticker].price - data[0].close;
-            percentage = dayDifference / data[0].close;
+            dayDifference = this.props.price[this.props.ticker].price - start;
+            percentage = dayDifference / start;
             if (dayDifference > 0) {
                 dayDifference = numeral(dayDifference).format('$0,0.00')
                 percentage = numeral(percentage).format('0.00%')
                 dayDifference = "+" + dayDifference.toString();
-                percentage = "+" + percentage.toString();
+                percentage = `(+${percentage.toString()})`;
             } else {
                 percentage = `(${numeral(percentage).format('0.00%')})`
                 dayDifference = numeral(dayDifference).format('$0,0.00')
