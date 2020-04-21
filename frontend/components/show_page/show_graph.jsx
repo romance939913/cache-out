@@ -9,7 +9,6 @@ class ShowPageGraph extends React.Component {
         this.handleHover = this.handleHover.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.changeTimeFrames = this.changeTimeFrames.bind(this);
-        this.handleFetch = this.handleFetch.bind(this);
         this.customToolTip = this.customToolTip.bind(this)
         this.state = { 
             time: '1d',
@@ -19,6 +18,8 @@ class ShowPageGraph extends React.Component {
     componentDidMount() {
         this.props.clearGraphPrices();
         this.props.receiveDay(`${this.props.ticker}`);
+        this.props.receiveWeek(`${this.props.ticker}`);
+        this.props.receiveHistorical(`${this.props.ticker}`);
     }
 
     componentDidUpdate(previousProps) {
@@ -94,31 +95,7 @@ class ShowPageGraph extends React.Component {
 
     changeTimeFrames(newFrame) {
         this.setState({ time: newFrame });
-        this.handleFetch(newFrame);
         this.changeTimeFrameUnderline(newFrame)
-    }
-
-    handleFetch(time) {
-        switch (time) {
-            case "1d":
-                this.props.receiveDay(`${this.props.ticker}`);
-                break;
-            case "1w":
-                this.props.receiveWeek(`${this.props.ticker}`);
-                break;
-            case "1m":
-                this.props.receiveHistorical(`${this.props.ticker}`);
-                break;
-            case "3m":
-                this.props.receiveHistorical(`${this.props.ticker}`);
-                break;
-            case "1y":
-                this.props.receiveHistorical(`${this.props.ticker}`);
-                break;
-            case "5y":
-                this.props.receiveHistorical(`${this.props.ticker}`);
-                break;
-        }
     }
 
     customToolTip(e) {
@@ -137,11 +114,20 @@ class ShowPageGraph extends React.Component {
 
     
     render() {
-        if (this.props.graphPrices[0] === undefined) return null;
+        if (this.props.graphPrices['Week'] === undefined) return null;
+        if (this.props.graphPrices['Day'] === undefined) return null;
+        if (this.props.graphPrices['Historical'] === undefined) return null;
         if (this.props.price[this.props.ticker] === undefined) return null;
-        if (this.props.graphPrices.length === 0) return null;
         
-        let data = this.props.graphPrices;
+        let data;
+        if (this.state.time === '1d') {
+            data = this.props.graphPrices['Day'];
+        } else if (this.state.time === '1w'){
+            data = this.props.graphPrices['Week'];
+        } else {
+            data = this.props.graphPrices['Historical']
+        }
+
         let d = new Date();
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);  

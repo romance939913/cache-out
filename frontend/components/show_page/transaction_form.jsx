@@ -146,7 +146,7 @@ class TransactionForm extends React.Component {
                             className="share-quantity-input"
                             value={this.state.quantity}
                             onChange={this.update('quantity')}
-                            placeholder="quantity"
+                            placeholder={0}
                             min="0"
                         />
                     </div>

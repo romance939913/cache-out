@@ -9,11 +9,14 @@ export const graphPricesReducer = (state = [], action) => {
     let nextState = Object.assign({}, state)
     switch (action.type) {
         case RECEIVE_HISTORICAL:
-            return action.prices.historical;
+            nextState['Historical'] = action.prices.historical
+            return nextState;
         case RECEIVE_WEEK:
-            return action.prices;
+            nextState['Week'] = action.prices;
+            return nextState;
         case RECEIVE_DAY:
-            return action.prices;        
+            nextState['Day'] = action.prices;
+            return nextState;        
         case RECEIVE_DAYS:
             nextState[action.prices.ticker] = action.prices.prices;
             return nextState;
