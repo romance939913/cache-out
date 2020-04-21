@@ -53,7 +53,7 @@ class Portfolio extends React.Component {
                     if (dayDifference >= 0) {
                         color = '#21ce99'
                     } else {
-                        color = '#ff0000'
+                        color = '#f45531'
                     }
     
                     renderLineChart = (

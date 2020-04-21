@@ -25,6 +25,8 @@ class MainNav extends React.Component {
     docBody.setAttribute("data-theme", "light");
   }
 
+  
+
   changeTheme() {
     let currentTheme = document.body.getAttribute("data-theme")
     let themeEle = document.getElementById("dark-mode");
