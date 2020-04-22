@@ -60,7 +60,7 @@ class ShowPage extends React.Component {
         
         return (
             <div>
-                <NavContainer />
+                {/* <NavContainer /> */}
                 <div className="show-page-body-wrapper">
                     <div className="graph-transaction-wrapper">
                         <div className="graph-and-title-wrapper">
