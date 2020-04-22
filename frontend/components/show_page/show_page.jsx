@@ -1,5 +1,4 @@
 import React from 'react';
-import NavContainer from '../main/nav/nav_container';
 import ShowPageGraph from './show_graph_container';
 import TransactionContainer from './transaction_container';
 import numeral from 'numeral';
@@ -60,7 +59,6 @@ class ShowPage extends React.Component {
         
         return (
             <div>
-                <NavContainer />
                 <div className="show-page-body-wrapper">
                     <div className="graph-transaction-wrapper">
                         <div className="graph-and-title-wrapper">

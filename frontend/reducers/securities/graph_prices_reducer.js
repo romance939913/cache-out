@@ -2,7 +2,7 @@ import { RECEIVE_HISTORICAL,
             RECEIVE_WEEK, 
             RECEIVE_DAY, 
             CLEAR_GRAPH_PRICES, 
-            RECEIVE_DAYS} from "../../actions/graph_actions";
+            RECEIVE_DAYS } from "../../actions/graph_actions";
 
 export const graphPricesReducer = (state = [], action) => {
     Object.freeze(state);
