@@ -9,7 +9,6 @@ import ShowPageContainer from './show_page/show_page_container';
 import MainFeedContainer from './main/feed_container';
 
 const App = (props) => {
-  if (props.loggedIn)
   return (<div>
     <Switch>
       <ProtectedRoute path="/show/:ticker" component={ShowPageContainer} />
@@ -20,5 +19,28 @@ const App = (props) => {
     </Switch>
   </div>)
 };
+
+// const App = ({ loggedin }) => {
+//   if (loggedin) {
+//     debugger
+//     return (
+//       <div>
+//         <NavBar />
+//         <Switch>
+//           <ProtectedRoute path="/show/:ticker" component={ShowPageContainer} />
+//           <ProtectedRoute path="/feed" component={MainFeedContainer} />
+//         </Switch>
+//       </div>
+//     )
+//   } else {
+//     return (
+//       <Switch>
+//         <AuthRoute path="/signup" component={SignupContainer} />
+//         <AuthRoute path="/signin" component={SigninContainer} />
+//         <AuthRoute path="/" component={SplashPageContainer} />
+//       </Switch>
+//     )
+//   }
+// };
 
 export default App;
