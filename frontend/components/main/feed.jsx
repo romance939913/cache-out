@@ -1,6 +1,7 @@
 import React from 'react';
 import GraphMainContainer from './graph_main_container';
 import PortfolioContainer from './portfolio_container';
+import MainNavContainer from './nav/nav_container';
 
 class MainFeed extends React.Component {
 
@@ -50,6 +51,7 @@ class MainFeed extends React.Component {
             
         return (
             <div>
+                <MainNavContainer />
                 <div className="main-page-wrapper">
                     <div className="graph-news-wrapper">
                         <GraphMainContainer 
