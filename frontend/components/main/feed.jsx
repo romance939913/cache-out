@@ -51,7 +51,6 @@ class MainFeed extends React.Component {
             
         return (
             <div>
-                {/* <MainNavContainer /> */}
                 <div className="main-page-wrapper">
                     <div className="graph-news-wrapper">
                         <GraphMainContainer 

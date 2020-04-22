@@ -60,7 +60,6 @@ class ShowPage extends React.Component {
         
         return (
             <div>
-                {/* <NavContainer /> */}
                 <div className="show-page-body-wrapper">
                     <div className="graph-transaction-wrapper">
                         <div className="graph-and-title-wrapper">
@@ -97,11 +96,11 @@ class ShowPage extends React.Component {
                                     </div>
                                     <div className="show-page-attr-item">
                                         <h3>Last Dividend</h3>
-                                        <li>{this.props.profile.lastDiv}</li>
+                                        <li>{numeral(this.props.profile.lastDiv).format('0,0.00')}</li>
                                     </div>
                                     <div className="show-page-attr-item">
                                         <h3>Average Volume</h3>
-                                        <li>{numeral(this.props.profile.volAvg).format('0,0.00')}</li>
+                                        <li>{numeral(this.props.profile.volAvg).format('0.0a')}</li>
                                     </div>
                                     <div className="show-page-attr-item">
                                         <h3>Day change</h3>

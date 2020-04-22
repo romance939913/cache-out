@@ -73,24 +73,28 @@ class ShowPageGraph extends React.Component {
         let startPrice = document.getElementById("starting-price");
         let diff = document.getElementById("show-diff");
         let perc = document.getElementById("show-perc");
-        
-        let start = startPrice.textContent;
-        let difference = this.props.price[this.props.ticker].price - start;
-        let percentage = difference / start;
+        let start;
+        let difference;
+        let percentage;
 
-        if(difference > 0) {
-            difference = numeral(difference).format('$0,0.00');
-            percentage = numeral(percentage).format('0.00%');
-            difference = "+" + difference.toString();
-            percentage = "+" + percentage.toString();
-        } else {
-            difference = numeral(difference).format('$0,0.00');
-            percentage = numeral(percentage).format('0.00%')
+        if (startPrice.textContent) {
+            start = startPrice.textContent;
+            difference = this.props.price[this.props.ticker].price - start;
+            percentage = difference / start;
+            if(difference > 0) {
+                difference = numeral(difference).format('$0,0.00');
+                percentage = numeral(percentage).format('0.00%');
+                difference = "+" + difference.toString();
+                percentage = "+" + percentage.toString();
+            } else {
+                difference = numeral(difference).format('$0,0.00');
+                percentage = numeral(percentage).format('0.00%')
+            }
+    
+            rtp.textContent = numeral(this.props.price[this.props.ticker].price).format('$0,0.00');
+            diff.textContent = difference;
+            perc.textContent = `(${percentage})`;
         }
-
-        rtp.textContent = numeral(this.props.price[this.props.ticker].price).format('$0,0.00');
-        diff.textContent = difference;
-        perc.textContent = `(${percentage})`;
     }
 
     changeTimeFrames(newFrame) {

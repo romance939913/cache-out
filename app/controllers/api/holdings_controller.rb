@@ -31,7 +31,7 @@ class Api::HoldingsController < ApplicationController
         if @holdings
             render :index
         else
-            render json: ['no user holdings yet']
+            render json: []
         end
     end
 
@@ -41,7 +41,7 @@ class Api::HoldingsController < ApplicationController
         if @holding
             render :show
         else
-            render json: ['no holding to fetch']
+            render json: []
         end
     end
 
