@@ -33,6 +33,13 @@ export const fetchProfile = (company) => (
     })
 )
 
+export const fetchFinancials = (ticker) => (
+    $.ajax({
+        url: `https://financialmodelingprep.com/api/v3/financials/income-statement/${ticker}`,
+        method: "GET"
+    })
+)
+
 export const fetchRealTimePrice = (company) => (
     $.ajax({
         url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${company}`,

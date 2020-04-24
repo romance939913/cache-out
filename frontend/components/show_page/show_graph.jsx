@@ -24,8 +24,11 @@ class ShowPageGraph extends React.Component {
 
     componentDidUpdate(previousProps) {
         if (previousProps.ticker !== this.props.ticker) {
+            this.props.clearGraphPrices();
             this.changeTimeFrames("1d")
             this.props.receiveDay(`${this.props.ticker}`);
+            this.props.receiveWeek(`${this.props.ticker}`);
+            this.props.receiveHistorical(`${this.props.ticker}`);
         }
     }
 
@@ -210,7 +213,7 @@ class ShowPageGraph extends React.Component {
         const renderLineChart = (
             <LineChart 
                 width={800} 
-                height={350} 
+                height={300} 
                 data={data} 
                 onMouseMove={this.handleHover} 
                 onMouseLeave={this.handleMouseLeave}>

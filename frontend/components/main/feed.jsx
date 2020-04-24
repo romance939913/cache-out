@@ -1,7 +1,6 @@
 import React from 'react';
 import GraphMainContainer from './graph_main_container';
 import PortfolioContainer from './portfolio_container';
-import MainNavContainer from './nav/nav_container';
 
 class MainFeed extends React.Component {
 

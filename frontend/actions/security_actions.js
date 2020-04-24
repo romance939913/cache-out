@@ -3,8 +3,10 @@ import { fetchIndexes,
     fetchNasdaq,
     fetchRealTimePrice,
     fetchProfile,
-    fetchIndexPrices} from "../util/securities_api_util";
+    fetchIndexPrices,
+    fetchFinancials} from "../util/securities_api_util";
 
+export const RECEIVE_FINANCIALS = "RECEIVE_FINANCIALS";    
 export const RECEIVE_STOCKS = "RECEIVE_STOCKS";
 export const RECEIVE_INDEXES = "RECEIVE_INDEXES";
 export const RECEIVE_PROFILE = "RECEIVE_PROFILE";
@@ -17,11 +19,15 @@ const receiveTheStocks = (stocks) => ({
     stocks
 });
 
+const receiveTheFinancials = (financials) => ({
+    type: RECEIVE_FINANCIALS,
+    financials
+})
+
 const receiveTheIndexes = (indexes) => ({
     type: RECEIVE_INDEXES,
     indexes
 });
-
 
 const receiveTheProfile = profile => ({
     type: RECEIVE_PROFILE,
@@ -56,6 +62,9 @@ export const receiveRealTimePrice = (company) => dispatch => fetchRealTimePrice(
 
 export const receiveIndexPrices = (index) => dispatch => fetchIndexPrices(index)
     .then(prices => dispatch(receiveTheIndexPrices(prices)))
+
+export const receiveFinancials = (ticker) => dispatch => fetchFinancials(ticker)
+    .then(financials => dispatch(receiveTheFinancials(financials)))
 
 export const clearRealTimePrice = () => dispatch(clearTheRealTimePrice())
     
