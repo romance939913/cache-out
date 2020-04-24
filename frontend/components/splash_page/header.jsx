@@ -21,7 +21,7 @@ class Header extends React.Component {
                             <p className="nav-social-links">Linkedin</p>
                         </a>
                         <a target="_blank" href="https://github.com/romance939913/">
-                            <p className="nav-social-links">Github</p>
+                            <p className="nav-social-links">Github profile</p>
                         </a>
                         <a target="_blank" href="https://angel.co/u/brennan-romance">
                             <p className="nav-social-links">AngelList</p>
