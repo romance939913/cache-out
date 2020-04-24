@@ -16,6 +16,8 @@ npm-debug.log
 /log/*
 /log/.keep
 
+public/assets
+
 app/assets/javascripts/bundle.js
 
 tmp/cache/assets/sprockets
