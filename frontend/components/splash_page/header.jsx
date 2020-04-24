@@ -18,7 +18,7 @@ class Header extends React.Component {
                             </g>
                         </svg>
                         <a target="_blank" href="https://www.linkedin.com/in/brennanromance/">
-                            <p className="nav-social-links">Linkedin</p>
+                            <p className="nav-social-links">Linkedout</p>
                         </a>
                         <a target="_blank" href="https://github.com/romance939913/">
                             <p className="nav-social-links">Github</p>
