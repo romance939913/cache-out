@@ -129,7 +129,7 @@ class GraphMain extends React.Component {
         let isWeekend = (day === 6) || (day === 0);
         if (this.state.time === "1d" && !isWeekend) {
             data = data.filter(obj => {
-                return moment(obj.created_at).isSame(d, 'day').isAfter("9:20:00 AM");
+                return moment(obj.created_at).isSame(d, 'day') && moment(obj.created_at).isAfter('9:20:00 AM', 'time')
             })
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
@@ -245,7 +245,7 @@ class GraphMain extends React.Component {
         const renderLineChart = (
             <LineChart
                 width={800}
-                height={350}
+                height={300}
                 data={data}
                 onMouseMove={this.handleHover}
                 onMouseLeave={this.handleMouseLeave}>
