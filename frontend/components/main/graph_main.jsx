@@ -129,7 +129,7 @@ class GraphMain extends React.Component {
         let isWeekend = (day === 6) || (day === 0);
         if (this.state.time === "1d" && !isWeekend) {
             data = data.filter(obj => {
-                return moment(obj.created_at).isSame(d, 'day')
+                return moment(obj.created_at).isSame(d, 'day').isAfter("9:20:00 AM");
             })
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;

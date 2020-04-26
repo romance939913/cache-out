@@ -21,6 +21,7 @@ class ShowPage extends React.Component {
     if (previousProps.match.params.ticker !== this.props.match.params.ticker) {
       this.props.receiveProfile(this.props.ticker);
       this.props.receiveRealTimePrice(this.props.ticker);
+      this.props.receiveFinancials(this.props.ticker);
     }
   }
 
