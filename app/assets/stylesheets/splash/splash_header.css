@@ -85,3 +85,9 @@
 .nav-social-links:hover {
     color: rgb(33, 206, 153);
 }
+
+@media only screen and (max-width: 950px) {
+    .nav-social-links {
+        display: none;
+    }
+}

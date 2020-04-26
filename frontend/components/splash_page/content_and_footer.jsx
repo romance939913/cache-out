@@ -70,7 +70,7 @@ class ContentAndFooter extends React.Component {
           <div className="ios-app-div">
             <h1 className="ios-app-header">iOS app coming Soon!</h1>
             <p className="ios-app-body">My goal is to make investing in financial markets more intuitive for everybody. 
-            No matter how much experience you have (or don’t have), the Cache Out platform is a great place to start investing</p>
+            No matter how much experience you have (or don’t have), the Cache Out platform is a great place to start</p>
           </div>
         </div>
         <div className="marquee">

@@ -162,3 +162,45 @@
 .help-section p {
     margin: 10px 0px 10px 0px;
 }
+
+@media only screen and (max-width: 1200px) {
+    .carousel-wrapper {
+        flex-direction: column;
+        height: auto;
+    }
+    .carousel-track {
+        padding: 10px;
+    }
+    .ios-app-div {
+        padding: 10px 0 55px 0;
+        width: 80vw;
+        max-width: 750px;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .ios-app-header {
+        font-size: 48px;
+    }
+    .ios-app-body {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1.5;
+        text-align: center;
+    }
+    .contact-info {
+        display: none;
+    }
+    .feedback-section {
+        display: none;
+    }
+    .footer {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .my-profiles {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}

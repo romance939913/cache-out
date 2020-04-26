@@ -127,3 +127,44 @@ div > a {
     margin: 20px 0 80px 0;
     text-align: center;
 }
+
+@media only screen and (max-width: 1200px) {
+    .splash-jumbotron {
+        flex-direction: column;
+    }
+    .splash-jumbotron-mission {
+        padding: 45px 0 35px 0;
+        width: 90vw;
+        margin: 0 35px 0 35px;
+        max-width: 750px;
+        text-align: center;
+    }
+    .gif-holder {
+        max-width: 80vw;
+    }
+    .splash-jumbotron-demo {
+        display: none;
+    }
+    .splash-content {
+        text-align: center;
+        padding: 35px;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .splash-jumbotron-mission {
+        padding: 45px 0 20px 0;
+        width: 80vw;
+        margin: 0 35px 0 35px;
+        max-width: 550px;
+        text-align: center;
+    }
+    .splash-jumbotron-header {
+        font-size: 48px;
+    }
+    .splash-jumbotron-text {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.5;
+    }
+}
