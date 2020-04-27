@@ -204,3 +204,44 @@
         justify-content: space-evenly;
     }
 }
+
+/* iphones regular size */
+@media only screen and (device-width : 375px) { 
+    .carousel-slide-indicator {
+        font-size: 65px;
+    }
+    .contact-info {
+        display: none;
+    }
+    .feedback-section {
+        display: none;
+    }
+    .footer {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .my-profiles {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
+/* iPhones Max */
+@media only screen and (device-width : 414px) { 
+    .carousel-slide-indicator {
+        font-size: 65px;
+    }     
+    .contact-info {
+        display: none;
+    }
+    .feedback-section {
+        display: none;
+    }
+    .footer {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .my-profiles {
+        display: flex;
+        justify-content: space-evenly;
+    }
+} 

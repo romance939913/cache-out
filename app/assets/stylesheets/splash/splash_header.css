@@ -91,3 +91,16 @@
         display: none;
     }
 }
+
+/* iphones regular size */
+@media only screen and (device-width : 375px) { 
+    .nav-social-links {
+        display: none;
+    }
+}
+/* iPhones Max */
+@media only screen and (device-width : 414px) { 
+    .nav-social-links {
+        display: none;
+    }
+} 
