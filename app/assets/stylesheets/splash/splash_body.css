@@ -207,9 +207,9 @@
 
 /* iphones regular size */
 @media only screen and (device-width : 375px) { 
-    .carousel-slide-indicator {
+    /* .carousel-slide-indicator {
         font-size: 65px;
-    }
+    } */
     .contact-info {
         display: none;
     }
@@ -227,9 +227,9 @@
 }
 /* iPhones Max */
 @media only screen and (device-width : 414px) { 
-    .carousel-slide-indicator {
+    /* .carousel-slide-indicator {
         font-size: 65px;
-    }     
+    }  */
     .contact-info {
         display: none;
     }
