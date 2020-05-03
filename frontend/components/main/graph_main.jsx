@@ -100,8 +100,16 @@ class GraphMain extends React.Component {
     
     customToolTip(e) {
         let formatted
+        let dayTime
+        if (e.label !== undefined) {
+            let t = e.label.split("T");
+            let tt = t[1].split(":");
+            let makeTen = 10 - parseInt(tt[1][1]);
+            dayTime = moment(e.label).add(makeTen, "minutes");
+        }
+
         if (this.state.time === "1d") {
-            formatted = moment(e.label).format('LT'); 
+            formatted = moment(dayTime).format('LT'); 
         } else if (this.state.time === "1w") {
             formatted = moment(e.label).format('LLL');
         } else {
@@ -111,6 +119,7 @@ class GraphMain extends React.Component {
             <div className="custom-tooltip">{formatted}</div>
         )
     }
+
 
     render() {  
         if (this.props.snapshots.length === 0) return null;
@@ -129,14 +138,14 @@ class GraphMain extends React.Component {
         let isWeekend = (day === 6) || (day === 0);
         if (this.state.time === "1d" && !isWeekend) {
             data = data.filter(obj => {
-                return moment(obj.created_at).isSame(d, 'day')
+                return moment(obj.created_at).isSame(d, 'day');
             })
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
-            day === 6 ? friday = moment().subtract(1, 'days') 
+            day === 6 ? friday = moment().subtract(1, 'days')
             : friday = moment().subtract(2, 'days')
             data = data.filter(obj => {
-                return moment(obj.created_at).isSame(friday, 'day')
+                return moment(obj.created_at).isSame(friday, 'day');
             })
         } else if (this.state.time === "1w") {
             data = data.filter(obj => {
