@@ -111,7 +111,7 @@ class GraphMain extends React.Component {
         if (this.state.time === "1d") {
             formatted = moment(dayTime).format('LT'); 
         } else if (this.state.time === "1w") {
-            formatted = moment(e.label).format('LLL');
+            formatted = moment(dayTime).format('LLL');
         } else {
             formatted = moment(e.label).format('L');
         }
@@ -134,8 +134,13 @@ class GraphMain extends React.Component {
 
         let data = Object.values(this.props.snapshots)
         let d = new Date();
+        let timeStr = d.toString();
+        let timeCheck = timeStr.split(" ");
+        timeCheck[4] = '09:20:00';
+        let time = timeCheck.join(" ");
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
+        
         if (this.state.time === "1d" && !isWeekend) {
             data = data.filter(obj => {
                 return moment(obj.created_at).isSame(d, 'day');

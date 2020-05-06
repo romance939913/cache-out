@@ -70,7 +70,7 @@ class ShowPage extends React.Component {
     let OperatingIncome = this.undoScientificNotation(this.props.financials['Operating Income'])
     let grossProfit = this.undoScientificNotation(this.props.financials['Gross Profit'])
     let netIncome = this.undoScientificNotation(this.props.financials['Net Income'])
-    console.log(this.props.financials['Gross Margin'])
+
     let newsArr = [];
     this.props.news.forEach((ele, idx) => {
       newsArr.push(
@@ -173,7 +173,7 @@ class ShowPage extends React.Component {
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>DPS</h2>
-                      <li>{numeral(parseFloat(this.props.financials['Dividend per Share'])).format('0,0.00')}</li>
+                      <li>{numeral(parseFloat(this.props.financials['Dividend per Share'])).format('$0,0.00')}</li>
                     </div>
                   </div>
                 </ul>
