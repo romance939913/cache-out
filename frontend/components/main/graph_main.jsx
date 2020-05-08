@@ -113,7 +113,7 @@ class GraphMain extends React.Component {
         } else if (this.state.time === "1w") {
             formatted = moment(dayTime).format('LLL');
         } else {
-            formatted = moment(e.label).format('L');
+            formatted = moment(e.label).format('MMM Do, YYYY');
         }
         return (
             <div className="custom-tooltip">{formatted}</div>
