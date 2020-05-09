@@ -99,7 +99,9 @@ class ContentAndFooter extends React.Component {
             <a target="_blank" href="https://www.linkedin.com/in/brennanromance/">
               <img className="info-icon" src={window.angellist_pic} alt="" />
             </a>
-            <img className="info-icon" src={window.info_pic} alt="" />
+            <a target="_blank" href="http://www.brennanromance.com">
+              <img className="info-icon" src={window.info_pic} alt="" />
+            </a>
           </div>
         </div>
       </div>
