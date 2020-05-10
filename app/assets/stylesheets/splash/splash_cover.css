@@ -163,6 +163,7 @@ div > a {
 .fractional-shares-header {
     font-size: 36px;
     margin: 10px 0 10px 0;
+    text-align: center;
 }
 
 .fractional-shares-caption {
@@ -243,5 +244,28 @@ div > a {
         font-weight: 300;
         line-height: 1.5;
     }
-    .
+    .fractional-shares-div {
+        height: 100%;
+    }
+
+    .fractional-header-div {
+        margin-bottom: 65px;
+    }
+    .fractional-content-div {
+        flex-direction: column;
+    }
+    .fractional-shares-input {
+        width: 200px;
+    }
+    .fractional-shares-p {
+        margin-bottom: 50px;
+    }
+    .fractional-input-div {
+        max-width: 90vw;
+    }
+    .fractional-content-card {
+        max-width: 80vw;
+        width: 80vw;
+        margin: 0;
+    }
 }

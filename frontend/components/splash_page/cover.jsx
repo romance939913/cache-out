@@ -41,7 +41,14 @@ class SplashCover extends React.Component {
   }
 
   handleEmailWaitlist() {
-
+    let button = document.getElementById("fractional-shares-email-submit");
+    button.innerText = "You're in!";
+    setTimeout(() => {
+      button.innerText = "Get early access"
+    }, 2000)
+    this.setState({
+      email: ''
+    })
   }
 
   render() {
@@ -105,6 +112,7 @@ class SplashCover extends React.Component {
                 className="fractional-shares-input"
               />
               <p 
+                id="fractional-shares-email-submit"
                 className="splash-navigation-sign-up"
                 onClick={this.handleEmailWaitlist}
               >Get Early Access</p>
