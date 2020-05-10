@@ -85,7 +85,7 @@ class Signin extends React.Component {
               />
             </label>
             {this.renderErrors()}
-            <Link to="/" className="forgot-user-pass">Forgot your username/password?</Link>
+            <Link to="/" className="forgot-user-pass">Back to splash page</Link>
             <div className="signin-submit-container">
               <input type="submit" value="Sign In" className="signin-submit"/>
               <p className="signin-submit" onClick={this.handleDemoSignin}>Demo user</p>

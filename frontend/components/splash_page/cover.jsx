@@ -5,6 +5,11 @@ class SplashCover extends React.Component {
   constructor(props) {
     super(props);
     this.handleDemoSignin = this.handleDemoSignin.bind(this);
+    this.handleEmailWaitlist = this.handleEmailWaitlist.bind(this);
+    this.update = this.update.bind(this);
+    this.state = {
+      email: ''
+    }
   }
 
   handleDemoSignin() {
@@ -25,6 +30,18 @@ class SplashCover extends React.Component {
     setTimeout(() => {
       this.props.logoutUser();
     }, 3600000); 
+  }
+
+  update(field) {
+    return e => {
+      this.setState({
+        [field]: e.currentTarget.value,
+      })
+    }
+  }
+
+  handleEmailWaitlist() {
+
   }
 
   render() {
@@ -56,8 +73,8 @@ class SplashCover extends React.Component {
         </div>
         <div className="splash-content">
           <h2 className="splash-content-header">Sharpen your skills and track your portfolio</h2>
-          <p className="splash-content-text">Ever wish you had a spare million dollars lying around? With Cache Out you do! Build the portfolio of your dreams
-          and monitor its performance up to the minute.</p>
+          <p className="splash-content-text-top">Ever wish you had a spare million dollars lying around? With Cache Out you do!</p>
+          <p className="splash-content-text">Build the portfolio of your dreams and monitor its performance up to the minute</p>
         </div>
         <div className="fractional-shares-div">
           <div className="fractional-shares-content">
@@ -79,13 +96,18 @@ class SplashCover extends React.Component {
                 <p className="fractional-shares-p">Investing in fractional shares is real-time and, as always, commission-free.</p>
               </div>
             </div>
-            <div>
+            <div className="fractional-input-div">
               <input 
                 placeholder="enter your email" 
                 type="text"
+                value={this.state.email}
+                onChange={this.update("email")}
                 className="fractional-shares-input"
               />
-              <p className="splash-navigation-sign-up">Get Early Access</p>
+              <p 
+                className="splash-navigation-sign-up"
+                onClick={this.handleEmailWaitlist}
+              >Get Early Access</p>
             </div>
           </div>
           <img 

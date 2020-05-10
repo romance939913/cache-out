@@ -122,9 +122,16 @@ div > a {
 .splash-content-text {
     font-size: 18px;
     font-weight: 300;
-    line-height: 1.5;
     width: 45vw;
     margin-bottom: 75px;
+    text-align: center;
+}
+
+.splash-content-text-top {
+    font-size: 18px;
+    font-weight: 300;
+    width: 45vw;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -160,6 +167,7 @@ div > a {
 
 .fractional-shares-caption {
     color: gray;
+    text-align: center;
 }
 
 .fractional-content-header {
@@ -172,8 +180,22 @@ div > a {
     color: gray;
 }
 
-.fractional-shares-input {
+.fractional-input-div {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
 
+.fractional-shares-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 250px;
+    margin-right: 15px;
+}
+
+.fractional-shares-img {
+    padding: 20px 0 20px 0;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -199,6 +221,9 @@ div > a {
     }
     .fractional-shares-img {
         display: none;
+    }
+    .fractional-shares-div {
+        height: 444px;
     }
 }
 
