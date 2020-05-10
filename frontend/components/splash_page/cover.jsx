@@ -59,6 +59,41 @@ class SplashCover extends React.Component {
           <p className="splash-content-text">Ever wish you had a spare million dollars lying around? With Cache Out you do! Build the portfolio of your dreams
           and monitor its performance up to the minute.</p>
         </div>
+        <div className="fractional-shares-div">
+          <div className="fractional-shares-content">
+            <div className="fractional-header-div">
+              <h1 className="fractional-shares-header">Introducing Fractional Shares</h1>
+              <p className="fractional-shares-caption">Invest in thousands of stocks with as little as $1</p>
+            </div>
+            <div className="fractional-content-div">
+              <div className="fractional-content-card">
+                <h3 className="fractional-content-header">Invest Any Amount</h3>
+                <p className="fractional-shares-p">Choose how much you want to invest and we'll convert from dollars to parts of a whole share</p>
+              </div>
+              <div className="fractional-content-card">
+                <h3 className="fractional-content-header">Build a Balanced Portfolio</h3>
+                <p className="fractional-shares-p">Customize your portfolio with pieces of different companies and funds to help reduce risk.</p>
+              </div>
+              <div className="fractional-content-card">
+                <h3 className="fractional-content-header">Trade in Real Time</h3>
+                <p className="fractional-shares-p">Investing in fractional shares is real-time and, as always, commission-free.</p>
+              </div>
+            </div>
+            <div>
+              <input 
+                placeholder="enter your email" 
+                type="text"
+                className="fractional-shares-input"
+              />
+              <p className="splash-navigation-sign-up">Get Early Access</p>
+            </div>
+          </div>
+          <img 
+            src={window.partial_shares_pic} 
+            alt=""
+            className="fractional-shares-img"
+          />
+        </div>
       </div>
     )
   }
