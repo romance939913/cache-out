@@ -256,6 +256,9 @@ class GraphMain extends React.Component {
             }
         }
 
+        let toolTipOffSet;
+        this.state.time === '1w' ? toolTipOffSet = -70 : toolTipOffSet = -50;
+
         const renderLineChart = (
             <LineChart
                 width={800}
@@ -268,7 +271,7 @@ class GraphMain extends React.Component {
                 <XAxis dataKey='created_at' hide={true} />
                 <Tooltip
                     position={{ y: 0 }}
-                    offset={-50}
+                    offset={toolTipOffSet}
                     isAnimationActive={false}
                     content={this.customToolTip}
                     wrapperStyle={{ top: -15 }}

@@ -192,6 +192,9 @@ class ShowPageGraph extends React.Component {
             color = '#21ce99';
         }
 
+        let toolTipOffSet;
+        this.state.time === '1w' ? toolTipOffSet = -70 : toolTipOffSet = -50;
+
         let dayDifference;
         let percentage;
         let start;
@@ -222,7 +225,7 @@ class ShowPageGraph extends React.Component {
                 <XAxis dataKey='date' hide={true}/>
                 <Tooltip
                     position={{ y: 0 }}
-                    offset={-50}
+                    offset={toolTipOffSet}
                     isAnimationActive={false}
                     content={this.customToolTip}
                     wrapperStyle={{ top: -15 }}
