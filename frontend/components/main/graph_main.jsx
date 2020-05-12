@@ -145,17 +145,25 @@ class GraphMain extends React.Component {
             data = data.filter(obj => {
                 return moment(obj.created_at).isSame(d, 'day');
             })
+            data = data.slice(2)
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
-            day === 6 ? friday = moment().subtract(1, 'days')
-            : friday = moment().subtract(2, 'days')
+            day === 6 
+                ? friday = moment().subtract(1, 'days')
+                : friday = moment().subtract(2, 'days');
             data = data.filter(obj => {
                 return moment(obj.created_at).isSame(friday, 'day');
             })
         } else if (this.state.time === "1w") {
             data = data.filter(obj => {
+                let t = obj.created_at.split("T");
+                let tt = t[1].split(":");
+                let keep
+                parseInt(tt[1]) >= 20 && parseInt(tt[1]) < 30 || parseInt(tt[1]) >= 50 
+                    ? keep = true
+                    : keep = false;
                 let limit = moment().subtract(1, 'weeks')
-                return moment(obj.created_at).isAfter(limit);
+                return moment(obj.created_at).isAfter(limit) && keep;
             });
         } else if (this.state.time === "1m") {
             let limit = moment().subtract(1, 'months')
