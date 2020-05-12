@@ -120,6 +120,21 @@ class GraphMain extends React.Component {
         )
     }
 
+    getOnlyDayEndPrice(data) {
+        let newData = [];
+        data = data.forEach(obj => {
+            if (newData.length === 0) {
+                newData.push(obj)
+            } else {
+                if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
+                    newData.pop();
+                }
+                newData.push(obj)
+            }
+        })
+        return newData
+    }
+
 
     render() {  
         if (this.props.snapshots.length === 0) return null;
@@ -141,6 +156,7 @@ class GraphMain extends React.Component {
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
         
+        // graph data filtering
         if (this.state.time === "1d" && !isWeekend) {
             data = data.filter(obj => {
                 return moment(obj.created_at).isSame(d, 'day');
@@ -170,69 +186,25 @@ class GraphMain extends React.Component {
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            let newData = [];
-            data = data.forEach(obj => {
-                if (newData.length === 0) {
-                    newData.push(obj)
-                } else {
-                    if(moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
-                        newData.pop();
-                    }
-                    newData.push(obj)
-                }
-            })
-            data = newData;
+            data = this.getOnlyDayEndPrice(data);
         } else if (this.state.time === "3m") {
             let limit = moment().subtract(3, 'months')
             data = data.filter(obj => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            let newData = [];
-            data = data.forEach(obj => {
-                if (newData.length === 0) {
-                    newData.push(obj)
-                } else {
-                    if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
-                        newData.pop();
-                    }
-                    newData.push(obj)
-                }
-            })
-            data = newData;
+            data = this.getOnlyDayEndPrice(data);
         } else if (this.state.time === "1y") {
             let limit = moment().subtract(1, 'years')
             data = data.filter(obj => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            let newData = [];
-            data = data.forEach(obj => {
-                if (newData.length === 0) {
-                    newData.push(obj)
-                } else {
-                    if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
-                        newData.pop();
-                    }
-                    newData.push(obj)
-                }
-            })
-            data = newData;
+            data = this.getOnlyDayEndPrice(data);
         } else if (this.state.time === "5y") {
             let limit = moment().subtract(5, 'years')
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit)
             });    
-            let newData = [];
-            data = data.forEach(obj => {
-                if (newData.length === 0) {
-                    newData.push(obj)
-                } else {
-                    if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
-                        newData.pop();
-                    }
-                    newData.push(obj)
-                }
-            })
-            data = newData;
+            data = this.getOnlyDayEndPrice(data);
         }
 
         let assets = totalEquity + this.props.cash;
@@ -241,6 +213,7 @@ class GraphMain extends React.Component {
         let start;
         let color;
         let docBody = document.body;
+
         if (data[0]) {
             start = data[0].valuation;
             difference = assets - start;
