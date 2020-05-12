@@ -108,7 +108,7 @@ class ShowPageGraph extends React.Component {
     customToolTip(e) {
         let formatted
         if (this.state.time === "1d") {
-        formatted = moment(e.label).format('LT');
+            formatted = moment(e.label).format('LT') + ' ET';
         } else if (this.state.time === "1w") {
             formatted = moment(e.label).format('LLL');
         } else {

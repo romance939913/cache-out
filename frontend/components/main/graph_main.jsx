@@ -109,7 +109,7 @@ class GraphMain extends React.Component {
         }
 
         if (this.state.time === "1d") {
-            formatted = moment(dayTime).format('LT'); 
+            formatted = moment(dayTime).format('LT') + ' ET'; 
         } else if (this.state.time === "1w") {
             formatted = moment(dayTime).format('LLL');
         } else {
