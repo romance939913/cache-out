@@ -220,7 +220,7 @@ class ShowPageGraph extends React.Component {
                 data={data} 
                 onMouseMove={this.handleHover} 
                 onMouseLeave={this.handleMouseLeave}>
-                <Line type="monotone" dataKey="close" stroke={color} dot={false}/>
+                <Line type="linear" dataKey="close" stroke={color} dot={false} strokeWidth={2}/>
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
                 <XAxis dataKey='date' hide={true}/>
                 <Tooltip
