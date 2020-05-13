@@ -61,7 +61,7 @@ class Portfolio extends React.Component {
                             width={100}
                             height={50}
                             data={data}>
-                            <Line type="monotone" dataKey="close" stroke={color} dot={false} />
+                            <Line type="linear" dataKey="close" stroke={color} dot={false} />
                             <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
                             <XAxis dataKey='date' hide={true} />
                         </LineChart>

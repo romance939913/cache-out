@@ -268,7 +268,7 @@ class GraphMain extends React.Component {
                 <div className="main-percentage-and-difference">
                     <p className="main-page-difference" id="main-diff">{difference}</p>
                     <p className="main-page-percentage" id="main-perc">{percentage}</p>
-                    <li className="display-none" id="main-starting-price">{start}</li>
+                    <li className="hide" id="main-starting-price">{start}</li>
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">

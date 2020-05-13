@@ -9,7 +9,7 @@ class ShowPageGraph extends React.Component {
         this.handleHover = this.handleHover.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.changeTimeFrames = this.changeTimeFrames.bind(this);
-        this.customToolTip = this.customToolTip.bind(this)
+        this.customToolTip = this.customToolTip.bind(this);
         this.state = { 
             time: '1d',
         };
@@ -20,6 +20,8 @@ class ShowPageGraph extends React.Component {
         this.props.receiveDay(`${this.props.ticker}`);
         this.props.receiveWeek(`${this.props.ticker}`);
         this.props.receiveHistorical(`${this.props.ticker}`);
+        let yesterdayTag = document.getElementById("show-yesterday");
+        console.log(yesterdayTag)
     }
 
     componentDidUpdate(previousProps) {
@@ -139,12 +141,23 @@ class ShowPageGraph extends React.Component {
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);  
         if (this.state.time === "1d" && !isWeekend) {
-            data = data.filter(obj => {
+            let dayData = data.filter(obj => {
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isSame(d, 'day')
             })
-            data = data.slice();
-            data = data.reverse();
+            dayData = dayData.slice();
+            dayData = dayData.reverse();
+            if (dayData.length === 0) {
+                data = data.filter(obj => {
+                    let oDate = obj.date.split(" ");
+                    let yesterday = moment(d).subtract(1, 'day')
+                    return moment(oDate[0]).isSame(yesterday, 'day')
+                })
+                data = data.slice();
+                data = data.reverse();
+            } else {
+                data = dayData;
+            }
         } else if (this.state.time === "1d" && isWeekend) {
             data = data.slice(0, 79); // takes last day (friday) data
             data = data.reverse()
@@ -236,11 +249,13 @@ class ShowPageGraph extends React.Component {
         
         return (
             <div className="graph-wrapper">
+                <h3 className="show-company-name">{this.props.profile.companyName}</h3>
                 <li className="show-stock-price" id="real-time-price">{numeral(this.props.price[this.props.ticker].price).format('$0,0.00')}</li>
                 <div className="show-percentage-and-difference">
                     <li className="show-page-difference" id="show-diff">{dayDifference}</li>
                     <li className="show-page-percentage" id="show-perc">{percentage}</li>
-                    <li className="display-none" id="starting-price">{start}</li>
+                    <li className="hide" id="starting-price">{start}</li>
+                    
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">

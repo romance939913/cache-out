@@ -94,7 +94,6 @@ class ShowPage extends React.Component {
           <div className="show-page-body-wrapper">
             <div className="graph-transaction-wrapper">
               <div className="graph-and-title-wrapper">
-                <h3 className="show-company-name">{this.props.profile.companyName}</h3>
                 <ShowPageGraph 
                   ticker={this.props.ticker}
                   price={this.props.price}
