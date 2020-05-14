@@ -36,14 +36,16 @@ class SplashCover extends React.Component {
   }
 
   handleEmailWaitlist() {
-    let button = document.getElementById("fractional-shares-email-submit");
-    button.innerText = "You're in!";
-    setTimeout(() => {
-      button.innerText = "Get early access"
-    }, 2000)
-    this.setState({
-      email: ''
-    })
+    if (this.state.email !== '') {
+      let button = document.getElementById("fractional-shares-email-submit");
+      button.innerText = "You're in!";
+      setTimeout(() => {
+        button.innerText = "Get early access"
+      }, 2000)
+      this.setState({
+        email: ''
+      })
+    }
   }
 
   render() {
