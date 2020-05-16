@@ -20,8 +20,6 @@ class ShowPageGraph extends React.Component {
         this.props.receiveDay(`${this.props.ticker}`);
         this.props.receiveWeek(`${this.props.ticker}`);
         this.props.receiveHistorical(`${this.props.ticker}`);
-        let yesterdayTag = document.getElementById("show-yesterday");
-        console.log(yesterdayTag)
     }
 
     componentDidUpdate(previousProps) {
