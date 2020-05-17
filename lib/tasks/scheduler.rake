@@ -48,11 +48,10 @@ namespace :scheduler do
 
         case snap_date <=> month_ago
         when -1
-          # 19:52:16
           time = date_string.split(" ")[1]
           hour = time.split(":")[0]
           min = time.split(":")[1]
-          if (hour.to_i != 19 && min.to_i < 50)
+          if (hour.to_i != 19 || min.to_i < 50)
             snapshot.destroy
           end
         end
