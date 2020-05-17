@@ -1,8 +1,10 @@
 namespace :scheduler do
+
   task :add_portfolio_snapshots_for_day => :environment do
-    puts "Adding day's portfolio snapshots..."
     require 'date'
     require 'us_bank_holidays'
+
+    puts "Adding day's portfolio snapshots..."
 
     today = Date.today
     next if today.weekend?
@@ -25,4 +27,34 @@ namespace :scheduler do
     
     puts "done."
   end
+
+  task :remove_snapshot_if_older_than_month_and_not_day_close => :environment do
+    require 'date'
+    require 'byebug'
+    
+    users = User.all
+    today = Date.today
+    month_ago = today.prev_month
+
+    users.each do |user| 
+      snapshots = user.portfolio_snapshots
+      snapshots.each do |snapshot|
+        date_string = snapshot.created_at.to_s
+        date = date_string.split(" ")[0]
+        snap_year = date.split("-")[0]
+        snap_month = date.split("-")[1]
+        snap_day = date.split("-")[2]
+        snap_date = Date.new(snap_year.to_i, snap_month.to_i, snap_day.to_i)
+
+        case snap_date <=> month_ago
+        when -1
+          puts "brennan"
+        end
+      end
+    end
+    
+    puts "done."
+  end
+
+
 end
