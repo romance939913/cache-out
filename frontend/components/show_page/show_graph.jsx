@@ -15,20 +15,9 @@ class ShowPageGraph extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.props.clearGraphPrices();
-        this.props.receiveDay(`${this.props.ticker}`);
-        this.props.receiveWeek(`${this.props.ticker}`);
-        this.props.receiveHistorical(`${this.props.ticker}`);
-    }
-
     componentDidUpdate(previousProps) {
         if (previousProps.ticker !== this.props.ticker) {
-            this.props.clearGraphPrices();
             this.changeTimeFrames("1d")
-            this.props.receiveDay(`${this.props.ticker}`);
-            this.props.receiveWeek(`${this.props.ticker}`);
-            this.props.receiveHistorical(`${this.props.ticker}`);
         }
     }
 
@@ -121,11 +110,6 @@ class ShowPageGraph extends React.Component {
 
     
     render() {
-        if (this.props.graphPrices['Week'] === undefined) return null;
-        if (this.props.graphPrices['Day'] === undefined) return null;
-        if (this.props.graphPrices['Historical'] === undefined) return null;
-        if (this.props.price[this.props.ticker] === undefined) return null;
-        
         let data;
         if (this.state.time === '1d') {
             data = this.props.graphPrices['Day'];

@@ -4,9 +4,13 @@ import { receiveProfile,
             clearRealTimePrice, 
             receiveFinancials 
 } from '../../actions/security_actions';
-
+import { receiveNews, 
+            receiveDay, 
+            receiveWeek, 
+            receiveHistorical, 
+            clearGraphPrices 
+} from '../../actions/graph_actions';
 import ShowPage from './show_page';
-import { receiveNews } from '../../actions/graph_actions';
 
 const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.id],
@@ -14,7 +18,8 @@ const mapStateToProps = (state, ownProps) => ({
     profile: state.entities.profile,
     price: state.entities.price,
     news: state.entities.news,
-    financials: state.entities.financials
+    financials: state.entities.financials,
+    graphPrices: state.entities.graphPrices
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -22,7 +27,11 @@ const mapDispatchToProps = dispatch => ({
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
     receiveNews: () => dispatch(receiveNews()),
     clearRealTimePrice: () => dispatch(clearRealTimePrice()),
-    receiveFinancials: (ticker) => dispatch(receiveFinancials(ticker))
+    receiveFinancials: (ticker) => dispatch(receiveFinancials(ticker)),
+    receiveDay: (ticker) => dispatch(receiveDay(ticker)),
+    receiveHistorical: (ticker) => dispatch(receiveHistorical(ticker)),
+    receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
+    clearGraphPrices: () => dispatch(clearGraphPrices())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);

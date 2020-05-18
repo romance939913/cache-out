@@ -15,6 +15,10 @@ class ShowPage extends React.Component {
     this.props.receiveRealTimePrice(this.props.ticker);
     this.props.receiveNews()
     this.props.receiveFinancials(this.props.ticker);
+    this.props.clearGraphPrices();
+    this.props.receiveDay(`${this.props.ticker}`);
+    this.props.receiveWeek(`${this.props.ticker}`);
+    this.props.receiveHistorical(`${this.props.ticker}`);
   }
 
   componentDidUpdate(previousProps) {
@@ -22,6 +26,10 @@ class ShowPage extends React.Component {
       this.props.receiveProfile(this.props.ticker);
       this.props.receiveRealTimePrice(this.props.ticker);
       this.props.receiveFinancials(this.props.ticker);
+      this.props.clearGraphPrices();
+      this.props.receiveDay(`${this.props.ticker}`);
+      this.props.receiveWeek(`${this.props.ticker}`);
+      this.props.receiveHistorical(`${this.props.ticker}`);
     }
   }
 
@@ -63,6 +71,10 @@ class ShowPage extends React.Component {
     if (JSON.stringify(this.props.price) === '{}') return null;
     if (this.props.news.length === 0) return null;
     if (this.props.financials.length === 0) return null;
+    if (!this.props.graphPrices['Day']) return null;
+    if (!this.props.graphPrices['Week']) return null;
+    if (!this.props.graphPrices['Historical']) return null;
+    if (this.props.price[this.props.ticker] === undefined) return null;
 
     let MktCap = this.undoScientificNotation(this.props.profile.mktCap);
     let revenue = this.undoScientificNotation(this.props.financials.Revenue)
