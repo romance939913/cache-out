@@ -2,6 +2,7 @@ import React from 'react';
 import ShowPageGraph from './show_graph_container';
 import TransactionContainer from './transaction_container';
 import numeral from 'numeral';
+import RingLoader from "react-spinners/RingLoader";
 
 class ShowPage extends React.Component {
   constructor(props) {
@@ -67,14 +68,25 @@ class ShowPage extends React.Component {
   }
 
   render() {
-    if (this.props.profile.description === undefined) return null; 
-    if (JSON.stringify(this.props.price) === '{}') return null;
-    if (this.props.news.length === 0) return null;
-    if (this.props.financials.length === 0) return null;
-    if (!this.props.graphPrices['Day']) return null;
-    if (!this.props.graphPrices['Week']) return null;
-    if (!this.props.graphPrices['Historical']) return null;
-    if (this.props.price[this.props.ticker] === undefined) return null;
+    if (this.props.profile.description === undefined
+      || JSON.stringify(this.props.price) === '{}'
+      || this.props.news.length === 0
+      || this.props.financials.length === 0
+      || !this.props.graphPrices['Day']
+      || !this.props.graphPrices['Week']
+      || !this.props.graphPrices['Historical']
+      || this.props.price[this.props.ticker] === undefined) {
+        return (
+          <div className="show-page-loading">
+            <RingLoader
+              css={""}
+              size={150}
+              color={"#21ce99"}
+              loading={true}
+            />
+          </div>
+        )
+      } 
 
     let MktCap = this.undoScientificNotation(this.props.profile.mktCap);
     let revenue = this.undoScientificNotation(this.props.financials.Revenue)
