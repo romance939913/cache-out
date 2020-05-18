@@ -169,16 +169,16 @@ class GraphMain extends React.Component {
                     let yesterday = moment(d).subtract(1, 'day')
                     return moment(oDate[0]).isSame(yesterday, 'day')
                 })
-                if (dayData.length === 0) {
-                    dayData = data.filter(obj => {
-                        let oDate = obj.date.split(" ");
-                        let friday = moment(d).subtract(3, 'day')
-                        return moment(oDate[0]).isSame(friday, 'day')
-                    })
-                }
-                data = dayData.slice();
-                data = data.reverse();
-            } 
+            if (dayData.length === 0) {
+                dayData = data.filter(obj => {
+                    let oDate = obj.date.split(" ");
+                    let friday = moment(d).subtract(3, 'day')
+                    return moment(oDate[0]).isSame(friday, 'day')
+                })
+            }
+            data = dayData.slice();
+            data = data.reverse();
+        } 
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
             day === 6 
