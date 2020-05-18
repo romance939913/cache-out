@@ -1,6 +1,7 @@
 import React from 'react';
 import GraphMainContainer from './graph_main_container';
 import PortfolioContainer from './portfolio_container';
+import RingLoader from "react-spinners/RingLoader";
 
 class MainFeed extends React.Component {
 
@@ -26,9 +27,20 @@ class MainFeed extends React.Component {
     }
     
     render() {
-        if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length) return null;
-        if (this.props.cash.length === 0) return null;
-        if (this.props.news.length === 0) return null;
+        if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length
+            || this.props.cash.length === 0
+            || this.props.news.length === 0) {
+            return (
+                <div className="show-page-loading">
+                    <RingLoader
+                        css={""}
+                        size={150}
+                        color={"#21ce99"}
+                        loading={true}
+                    />
+                </div>
+            )
+            }
 
         let newsArr = [];
         this.props.news.forEach((ele, idx) => {
