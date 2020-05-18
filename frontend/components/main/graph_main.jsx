@@ -158,27 +158,10 @@ class GraphMain extends React.Component {
         
         // graph data filtering
         if (this.state.time === "1d" && !isWeekend) {
-            let dayData
-            dayData = data.filter(obj => {
+            data = data.filter(obj => {
                 return moment(obj.created_at).isSame(d, 'day');
             })
-            dayData = dayData.slice(2)
-            if (dayData.length === 0) {
-                dayData = data.filter(obj => {
-                    let oDate = obj.date.split(" ");
-                    let yesterday = moment(d).subtract(1, 'day')
-                    return moment(oDate[0]).isSame(yesterday, 'day')
-                })
-            if (dayData.length === 0) {
-                dayData = data.filter(obj => {
-                    let oDate = obj.date.split(" ");
-                    let friday = moment(d).subtract(3, 'day')
-                    return moment(oDate[0]).isSame(friday, 'day')
-                })
-            }
-            data = dayData.slice();
-            data = data.reverse();
-        } 
+            data = data.slice(2)
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
             day === 6 
