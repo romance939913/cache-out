@@ -13,14 +13,14 @@ Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 * Relevant news displayed for the general market on home page, and for specific stock on the stock's show page
 
 ## Portfolio Page
-Once a User logs in, they are directed to the portfolio page, which displays a chart showing their portfolio valuation over time, a list of their holdings with the current day fluctuation, and real-time financial news
+Once a User logs in, they are directed to the portfolio page, which displays a chart showing their portfolio valuation over time and total current assets (total cash + shares held * their current price) above. A list of their holdings is displayed on the right, and below the graph is a financial news feed for the day. 
 <br/>
 <br/>
 ![tour-gif](app/assets/images/tour.gif)
 <br/>
 <br/>
 #### Portfolio Snapshots (**newest feature**)
-In order to render charts that display a user's portfolio performance over time, 'snapshots' of the users portfolio balance are taken using rake tasks and Heroku Scheduler. Portfolio balance is calculated by looping through each stock they own, multiplying the quantity of shares by the stock's current price, and adding all of that together with their cash at the end. Then, through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data can easily be fetched.
+In order to render charts that display a user's portfolio performance over time, 'snapshots' of the users portfolio balance are taken using rake tasks and Heroku Scheduler. Portfolio balance is calculated by looping through each stock they own, multiplying the quantity of shares by the stock's current price, and adding all of that together with their cash at the end. Then, through a simple association between the `User` and `PortfolioSnapshot` models, all of the user's historical portfolio data can easily be fetched
 
 ```rb
 # 'snapshot'
