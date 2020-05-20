@@ -1,5 +1,4 @@
 require 'open-uri'
-require 'byebug'
 
 class User < ApplicationRecord
   attr_reader :password
@@ -50,7 +49,6 @@ class User < ApplicationRecord
     return buying_power if holdings.empty?
 
     holdings.each do |holding| 
-      debugger
       url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{holding.ticker}?apikey=#{Rails.application.credentials.stockapi[:api_key]}"
       security = JSON.parse(open(url).read)
       assets << security['price'] * holding.quantity
