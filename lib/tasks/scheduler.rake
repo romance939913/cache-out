@@ -6,17 +6,17 @@ namespace :scheduler do
 
     puts "Adding day's portfolio snapshots..."
 
-    today = Date.today
-    next if today.weekend?
-    next if today.bank_holiday?
+    # today = Date.today
+    # next if today.weekend?
+    # next if today.bank_holiday?
   
-    time = Time.now
-    timeString = time.to_s
-    timeArr = timeString.split(" ")[1]
-    hour = timeArr.split(":")[0]
-    min = timeArr.split(":")[1]
-    next if hour.to_i < 13
-    next if hour.to_i > 19
+    # time = Time.now
+    # timeString = time.to_s
+    # timeArr = timeString.split(" ")[1]
+    # hour = timeArr.split(":")[0]
+    # min = timeArr.split(":")[1]
+    # next if hour.to_i < 13
+    # next if hour.to_i > 19
 
     
     users = User.all

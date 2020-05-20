@@ -266,8 +266,8 @@ class GraphMain extends React.Component {
                     {numeral(this.props.cash + totalEquity).format('$0,0.00')}
                 </h2>
                 <div className="main-percentage-and-difference">
-                    <p className="main-page-difference" id="main-diff">{difference}</p>
-                    <p className="main-page-percentage" id="main-perc">{percentage}</p>
+                    <p className="main-page-difference custom-tooltip" id="main-diff">{difference}</p>
+                    <p className="main-page-percentage custom-tooltip" id="main-perc">{percentage}</p>
                     <li className="hide" id="main-starting-price">{start}</li>
                 </div>
                 {renderLineChart}
