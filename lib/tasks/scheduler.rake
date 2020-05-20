@@ -30,7 +30,6 @@ namespace :scheduler do
 
   task :remove_snapshot_if_older_than_month_and_not_day_close => :environment do
     require 'date'
-    require 'byebug'
     
     users = User.all
     today = Date.today
