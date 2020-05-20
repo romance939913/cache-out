@@ -157,24 +157,28 @@ class ShowPageGraph extends React.Component {
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isSameOrAfter(limit);
             })
+            data = data.reverse();
         } else if (this.state.time === "3m") {
             data = data.filter(obj => {
                 let limit = moment().subtract(3, 'months')
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isSameOrAfter(limit);
             })
+            data = data.reverse();
         } else if (this.state.time === "1y") {
             data = data.filter(obj => {
                 let limit = moment().subtract(1, 'years')
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isSameOrAfter(limit);
             })
+            data = data.reverse();
         } else if (this.state.time === "5y") {
             data = data.filter((obj, idx) => {
                 let limit = moment().subtract(5, 'years')
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isSameOrAfter(limit) && idx % 5 === 0;
             })
+            data = data.reverse();
         }
 
         let color;
