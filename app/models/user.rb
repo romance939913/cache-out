@@ -49,7 +49,7 @@ class User < ApplicationRecord
     return buying_power if holdings.empty?
 
     holdings.each do |holding| 
-      url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{holding.ticker}"
+      url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{holding.ticker}?apikey=#{Rails.application.credentials.stockapikey[:api_key]}"
       security = JSON.parse(open(url).read)
       assets << security['price'] * holding.quantity
     end
