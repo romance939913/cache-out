@@ -70,7 +70,7 @@ class ShowPage extends React.Component {
   render() {
     if (this.props.profile.description === undefined
       || JSON.stringify(this.props.price) === '{}'
-      /*|| this.props.news.length === 0*/
+      || this.props.news.length === 0
       || this.props.financials.length === 0
       || !this.props.graphPrices['Day']
       || !this.props.graphPrices['Week']
@@ -97,20 +97,22 @@ class ShowPage extends React.Component {
 
     let newsArr = [];
     this.props.news.forEach((ele, idx) => {
-      newsArr.push(
-        <a key={idx} target="_blank" href={`${this.props.news[idx].url}`}>
-          <div className="news-item-wrapper">
-            <img className="news-item-image" src={`${this.props.news[idx].urlToImage}`} alt="" />
-            <div className="news-item-content">
-              <div>
-                <p className="news-item-website">{this.props.news[idx].source.name}</p>
-                <p className="news-item-title">{this.props.news[idx].title}</p>
+      if (this.props.news[idx].urlToImage) {
+        newsArr.push(
+          <a key={idx} target="_blank" href={`${this.props.news[idx].url}`}>
+            <div className="news-item-wrapper">
+              <img className="news-item-image" src={`${this.props.news[idx].urlToImage}`} alt="" />
+              <div className="news-item-content">
+                <div>
+                  <p className="news-item-website">{this.props.news[idx].source.name}</p>
+                  <p className="news-item-title">{this.props.news[idx].title}</p>
+                </div>
+                <p className="news-item-description">{this.props.news[idx].description}</p>
               </div>
-              <p className="news-item-description">{this.props.news[idx].description}</p>
             </div>
-          </div>
-        </a>
-      )
+          </a>
+        )
+      }
     })
       
     return (
