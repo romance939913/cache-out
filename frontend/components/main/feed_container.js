@@ -4,6 +4,7 @@ import MainFeed from './feed';
 import { receiveNews, receiveSnapshots, clearGraphPrices, receiveMultipleDays } from '../../actions/graph_actions';
 import { clearRealTimePrice, receiveRealTimePrice } from '../../actions/security_actions';
 
+receiveMultipleDays
 const mapStateToProps = state => ({
     currentUser: state.entities.users[state.session.id],
     holdings: state.entities.holdings,
@@ -17,6 +18,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getHoldings: (holding) => dispatch(getHoldings(holding)),
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
+    receiveMultipleDays: (ticker) => dispatch(receiveMultipleDays(ticker)),
     getUserBP: (user) => dispatch(getUserBP(user)),
     receiveNews: () => dispatch(receiveNews()),
     clearRealTimePrice: () => dispatch(clearRealTimePrice()),

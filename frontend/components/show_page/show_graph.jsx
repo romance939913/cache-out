@@ -107,7 +107,6 @@ class ShowPageGraph extends React.Component {
             <div className="custom-tooltip">{formatted}</div>
         )
     }
-
     
     render() {
         let data;

@@ -135,6 +135,9 @@ class GraphMain extends React.Component {
         return newData
     }
 
+    getOnlyNecessaryTimeFrames() {
+
+    }
 
     render() {  
         if (this.props.snapshots.length === 0) return null;
@@ -155,6 +158,8 @@ class GraphMain extends React.Component {
         let time = timeCheck.join(" ");
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
+
+        this.getOnlyNecessaryTimeFrames(data)
         
         // graph data filtering
         if (this.state.time === "1d" && !isWeekend) {

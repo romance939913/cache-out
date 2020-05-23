@@ -15,8 +15,9 @@ class MainFeed extends React.Component {
         this.props.receiveSnapshots(this.props.currentUser.id)
         this.props.getHoldings(holding)
             .then(holdings => {
-                Object.keys(holdings.holdings).forEach((ticker, idx) => {
+                Object.keys(holdings.holdings).forEach(ticker => {
                     this.props.receiveRealTimePrice(ticker)
+                    this.props.receiveMultipleDays(ticker)
                 })
             })
     }
@@ -28,6 +29,7 @@ class MainFeed extends React.Component {
     
     render() {
         if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length
+            || Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length
             || this.props.cash.length === 0
             || this.props.news.length === 0
             || this.props.snapshots.length === 0) {
@@ -41,7 +43,7 @@ class MainFeed extends React.Component {
                     />
                 </div>
             )
-            }
+        }
 
         let newsArr = [];
         this.props.news.forEach((ele, idx) => {

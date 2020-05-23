@@ -9,7 +9,6 @@ export const graphSnapshotReducer = (state = [], action) => {
         case RECEIVE_SNAPSHOTS:
             let snapshots;
             if (JSON.stringify(action.snapshots) === '{}') {
-                debugger
                 snapshots = {};
             } else {
                 snapshots = action.snapshots;
