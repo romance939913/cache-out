@@ -82,26 +82,24 @@ class TransactionForm extends React.Component {
         if (holding.quantity === '') return;
         if (this.state.buySell === 'BUY') {
             holding['buying_power'] = this.props.cash - this.state.cost;
-            this.props.clearErrors();
+            this.props.updateUser(holding);
             this.props.receiveHolding(holding)
                 .then((res) => {
                     if (res.holding !== undefined) {
                         this.props.receiveSuccess()
                     }
                 })
-            this.props.updateUser(holding);
             setTimeout(() => { this.props.clearErrors() }, 3000);
         } else {
             holding['buying_power'] = this.props.cash + this.state.cost;
             holding.quantity = holding.quantity * (-1);
-            this.props.clearErrors();
+            this.props.updateUser(holding);
             this.props.receiveHolding(holding)
                 .then((res) => {
                     if (res.holding !== undefined) {
                         this.props.receiveSuccess()
                     }
                 })
-            this.props.updateUser(holding);
             setTimeout(() => { this.props.clearErrors() }, 3000);
         }
     }

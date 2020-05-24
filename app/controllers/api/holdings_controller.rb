@@ -5,12 +5,15 @@ class Api::HoldingsController < ApplicationController
             @update_record = @user_records.find_by(ticker: params[:holding][:ticker])
             if @update_record
                 new_amt = @update_record.quantity + params[:holding][:quantity].to_i
-                if new_amt >= 0
+                if new_amt > 0
                     @update_record.update(quantity: new_amt)
                     @holding = @update_record
                     render :show
                 elsif new_amt == 0
+                    @update_record.update(quantity: new_amt)
+                    @holding = @update_record
                     @update_record.destroy
+                    render :show
                 else
                     render json: ["not enough shares"], status: 422
                 end
