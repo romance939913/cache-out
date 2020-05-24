@@ -78,7 +78,7 @@ class SplashCover extends React.Component {
         <div className="splash-content">
           <h2 className="splash-content-header">Sharpen your skills and track your portfolio</h2>
           <p className="splash-content-text-top">Ever wish you had a spare million dollars lying around? With Cache Out you do!</p>
-          <p className="splash-content-text">Build the portfolio of your dreams and monitor its performance up to the minute</p>
+          <p className="splash-content-text">Build your dream portfolio and monitor its performance up to the minute</p>
         </div>
         <div className="fractional-shares-div">
           <div className="fractional-shares-content">
