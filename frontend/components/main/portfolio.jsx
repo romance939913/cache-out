@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { LineChart, Line, CartesianGrid, YAxis, XAxis } from 'recharts';
+import Holidays from 'date-holidays';
 import numeral from 'numeral'
 import moment from 'moment';
 
@@ -16,6 +17,8 @@ class Portfolio extends React.Component {
         let tickerArr = [];
         let d = new Date();
         let day = d.getDay();
+        let holidays = new Holidays('US');
+        let hd = holidays.isHoliday(new Date());
 
         this.props.tickers.forEach((ticker, idx) => {
             if (this.props.holdings[ticker].quantity !== 0) {
@@ -24,7 +27,9 @@ class Portfolio extends React.Component {
                 let percentage;
                 let color;
                 let renderLineChart
-                if (Object.keys(this.props.graphPrices).length !== this.props.tickers.length) {
+                if (Object.keys(this.props.graphPrices).length !== this.props.tickers.length
+                    || hd.type === 'public'
+                    || hd.type === 'bank') {
                     data = []
                 } else {
                     data = this.props.graphPrices[ticker]

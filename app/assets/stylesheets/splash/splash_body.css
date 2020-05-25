@@ -56,11 +56,13 @@
     font-size: 62px;
     line-height: 72px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .ios-app-body {
     font-size: 18px;
     line-height: 1.8;
+    text-align: center;
 }
 
 .carousel-slide-indicator {
