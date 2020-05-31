@@ -70,7 +70,7 @@ class ShowPage extends React.Component {
   render() {
     if (this.props.profile.description === undefined
       || JSON.stringify(this.props.price) === '{}'
-      || this.props.news.length === 0
+      // || this.props.news.length === 0
       || this.props.financials.length === 0
       || !this.props.graphPrices['Day']
       || !this.props.graphPrices['Week']
