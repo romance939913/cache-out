@@ -19,10 +19,7 @@ export const fetchStockWeek = (ticker) => (
 
 export const fetchNews = () => (
     $.ajax({
-        url: `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsapikey}`,
-        headers: {
-            "X-Requested-With": "XMLHttpRequest"
-        },
+        url: `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${window.newsapikey}`,
     })
 )
 
