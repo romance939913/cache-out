@@ -154,31 +154,31 @@ class ShowPage extends React.Component {
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Market Cap</h2>
-                      <li>{MktCap}</li>
+                      <li>${MktCap}</li>
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Last Dividend</h2>
-                      <li>{numeral(this.props.profile.lastDiv).format('0,0.00')}</li>
+                      <li>${numeral(this.props.profile.lastDiv).format('0,0.00')}</li>
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Average Volume</h2>
-                      <li>{numeral(this.props.profile.volAvg).format('0.0a')}</li>
+                      <li>${numeral(this.props.profile.volAvg).format('0.0a')}</li>
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Day change</h2>
-                      <li>{this.props.profile.changes}</li>
+                      <li>${this.props.profile.changes}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Revenue</h2>
-                      <li>{revenue}</li>
+                      <li>${revenue}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Gross Profit</h2>
-                      <li>{grossProfit}</li>
+                      <li>${grossProfit}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Operating Inc</h2>
-                      <li>{OperatingIncome}</li>
+                      <li>${OperatingIncome}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>EPS</h2>
@@ -186,15 +186,15 @@ class ShowPage extends React.Component {
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Net Income</h2>
-                      <li>{netIncome}</li>
+                      <li>${netIncome}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Gross Margin</h2>
-                      <li>{numeral(parseFloat(this.props.financials['Gross Margin'])).format('0,0.00')}</li>
+                      <li>${numeral(parseFloat(this.props.financials['Gross Margin'])).format('0,0.00')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Operating Exp</h2>
-                      <li>{OperatingExpenses}</li>
+                      <li>${OperatingExpenses}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>DPS</h2>

@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
         graphPrices: state.entities.graphPrices,
         price: state.entities.price,
         indexes: state.entities.indexes,
-        indexPrices: state.entities.indexPrices
+        indexPrices: state.entities.indexPrices,
     }
 }
 

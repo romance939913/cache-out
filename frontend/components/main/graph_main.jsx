@@ -16,6 +16,10 @@ class GraphMain extends React.Component {
         };
     }
 
+    componentDidMount() {
+        this.getOnlyNecessaryTimeFrames(this.props.snapshots);
+    }
+
     changeTimeFrames(newFrame) {
         this.setState({ time: newFrame });
         this.changeTimeFrameUnderline(newFrame)
@@ -120,7 +124,7 @@ class GraphMain extends React.Component {
         )
     }
 
-    getOnlyDayEndPrice(data) {
+    getOnlyDayEndPrices(data) {
         let newData = [];
         data = data.forEach(obj => {
             if (newData.length === 0) {
@@ -135,8 +139,41 @@ class GraphMain extends React.Component {
         return newData
     }
 
-    getOnlyNecessaryTimeFrames() {
+    getOnlyNecessaryTimeFrames(snapshots) {
+        let timeFrames = Array.from(document.getElementsByClassName("stock-time-frame"));
+        let earliestSnap = moment(Object.values(snapshots)[0].created_at);
 
+        if (earliestSnap.isAfter(moment().subtract(1, 'days'))) {
+            timeFrames[0].innerHTML = "All";
+            let otherTimes = timeFrames.slice(1);
+            otherTimes.forEach(time => {
+                time.classList.add("hide")
+            })
+        } else if (earliestSnap.isAfter(moment().subtract(1, 'weeks'))) {
+            timeFrames[1].innerHTML = "All";
+            let otherTimes = timeFrames.slice(2);
+            otherTimes.forEach(time => {
+                time.classList.add("hide")
+            })
+        } else if (earliestSnap.isAfter(moment().subtract(1, 'months'))) {
+            timeFrames[2].innerHTML = "All";
+            let otherTimes = timeFrames.slice(3);
+            otherTimes.forEach(time => {
+                time.classList.add("hide")
+            })
+        } else if (earliestSnap.isAfter(moment().subtract(3, 'months'))) {
+            timeFrames[3].innerHTML = "All";
+            let otherTimes = timeFrames.slice(4);
+            otherTimes.forEach(time => {
+                time.classList.add("hide")
+            })
+        } else if (earliestSnap.isAfter(moment().subtract(1, 'years'))) {
+            timeFrames[4].innerHTML = "All";
+            let otherTimes = timeFrames.slice(5);
+            otherTimes.forEach(time => {
+                time.classList.add("hide")
+            })
+        }
     }
 
     render() {  
@@ -158,8 +195,6 @@ class GraphMain extends React.Component {
         let time = timeCheck.join(" ");
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
-
-        this.getOnlyNecessaryTimeFrames(data)
         
         // graph data filtering
         if (this.state.time === "1d" && !isWeekend) {
@@ -191,25 +226,25 @@ class GraphMain extends React.Component {
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            data = this.getOnlyDayEndPrice(data);
+            data = this.getOnlyDayEndPrices(data);
         } else if (this.state.time === "3m") {
             let limit = moment().subtract(3, 'months')
             data = data.filter(obj => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            data = this.getOnlyDayEndPrice(data);
+            data = this.getOnlyDayEndPrices(data);
         } else if (this.state.time === "1y") {
             let limit = moment().subtract(1, 'years')
             data = data.filter(obj => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            data = this.getOnlyDayEndPrice(data);
+            data = this.getOnlyDayEndPrices(data);
         } else if (this.state.time === "5y") {
             let limit = moment().subtract(5, 'years')
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit)
             });    
-            data = this.getOnlyDayEndPrice(data);
+            data = this.getOnlyDayEndPrices(data);
         }
 
         let assets = totalEquity + this.props.cash;
@@ -282,7 +317,7 @@ class GraphMain extends React.Component {
                     <h2 onClick={() => this.changeTimeFrames("1m")} className="stock-time-frame 1m">1M</h2>
                     <h2 onClick={() => this.changeTimeFrames("3m")} className="stock-time-frame 3m">3M</h2>
                     <h2 onClick={() => this.changeTimeFrames("1y")} className="stock-time-frame 1y">1Y</h2>
-                    <h2 onClick={() => this.changeTimeFrames("5y")} className="stock-time-frame 5y">5Y</h2>
+                    <h2 onClick={() => this.changeTimeFrames("5y")} className="stock-time-frame 5y">All</h2>
                 </ul>
             </div>
         )
