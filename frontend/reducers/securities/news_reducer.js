@@ -4,6 +4,7 @@ export const newsReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_NEWS:
+            debugger
             return action.news.articles;
         default:
             return state;
