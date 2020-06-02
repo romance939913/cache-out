@@ -140,6 +140,7 @@ class GraphMain extends React.Component {
     }
 
     getOnlyNecessaryTimeFrames(snapshots) {
+        if (Object.values(snapshots)[0].created_at === undefined) return;
         let timeFrames = Array.from(document.getElementsByClassName("stock-time-frame"));
         let earliestSnap = moment(Object.values(snapshots)[0].created_at);
 
