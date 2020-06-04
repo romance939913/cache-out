@@ -89,7 +89,7 @@ class Signin extends React.Component {
             <label className="signin-form-label">Password
               <input 
                 className="signin-input-field"
-                type="text"
+                type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
               />
