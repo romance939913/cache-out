@@ -3,7 +3,8 @@ require 'open-uri'
 class User < ApplicationRecord
   attr_reader :password
 
-  validates :password_digest, :buying_power, presence: true
+  validates :password_digest, presence: true
+  validates_inclusion_of :buying_power, :in => 1..10000000
   validates :username, :session_token, uniqueness: true, presence: true
   validates :password, length: {minimum: 6, allow_nil: true}
 

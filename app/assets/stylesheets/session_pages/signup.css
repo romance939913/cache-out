@@ -13,7 +13,8 @@
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    flex-basis: 50%;
+    flex-basis: 50vw;
+    min-width: 470px;
     white-space: nowrap;
     align-items: center;
     flex-direction: column;
@@ -49,16 +50,41 @@
     outline: none;
 }
 
+.google-signup-button {
+    box-sizing: content-box;
+    background-color: #21ce99;
+    border-color: #21ce99;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    align-items: center;
+    border: 1px solid transparent;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    min-width: 120px;
+    padding: 0 15px;
+    margin: 0 25px 0 0;
+    width: 50%
+}
+
 .signup-submit {
     cursor: pointer;
     box-sizing: border-box;
-    width: 100%;
+    width: 50%;
     background-color: #21ce99;
     border-color: #21ce99;
     color: white;
     font-weight: 500;
     border-radius: 4px;
     font-size: 18px;
+}
+
+.signup-submit-container {
+    width: 100%;
+    display: flex;
 }
 
 .already-a-user {
@@ -75,6 +101,13 @@
 .session-errors {
     font-size: 13px;
     color: #f45531;
+    padding: 0 10px 0 10px;
+}
+.signin-errors-arr {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 25px 0 25px 0;
 }
 
 .sign-up-logo {
