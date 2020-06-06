@@ -30,10 +30,17 @@ namespace :scheduler do
 
   task :remove_snapshot_if_older_than_month_and_not_day_close => :environment do
     require 'date'
+    require 'byebug'
     
     users = User.all
     today = Date.today
-    month_ago = today.prev_month
+    yesterday = today.prev_day
+    two_days_ago = yesterday.prev_day
+    three_days_ago = two_days_ago.prev_day
+    four_days_ago = three_days_ago.prev_day
+    five_days_ago = four_days_ago.prev_day
+    six_days_ago = five_days_ago.prev_day
+    week_ago = six_days_ago.prev_day
 
     users.each do |user| 
       snapshots = user.portfolio_snapshots
@@ -45,7 +52,7 @@ namespace :scheduler do
         snap_day = date.split("-")[2]
         snap_date = Date.new(snap_year.to_i, snap_month.to_i, snap_day.to_i)
 
-        case snap_date <=> month_ago
+        case snap_date <=> week_ago
         when -1
           time = date_string.split(" ")[1]
           hour = time.split(":")[0]
