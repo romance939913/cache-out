@@ -1,19 +1,36 @@
-export const fetchstockHistorical = (ticker) => {
-    let d = new Date();
-    return $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/historical-price-full/${ticker}?from=2015-01-01&to=${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}&apikey=${window.stockapikey}`,
-    })
-}
-
 export const fetchStockDay = (ticker) => (
     $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/historical-chart/5min/${ticker}?apikey=${window.stockapikey}`,
+        url: `https://sandbox.iexapis.com/stable/stock/TWTR/intraday-prices?token=${window.iexapikey}`
     })
 )
 
 export const fetchStockWeek = (ticker) => (
     $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/historical-chart/30min/${ticker}?apikey=${window.stockapikey}`,
+        url: `https://sandbox.iexapis.com/stable/stock/TWTR/chart/5d?token=${window.iexapikey}`
+    })
+)
+
+export const fetchStockMonth = (ticker) => (
+    $.ajax({
+        url: `https://sandbox.iexapis.com/stable/stock/TWTR/chart/1m?token=${window.iexapikey}`
+    })
+)
+
+export const fetchStockThreeMonths = (ticker) => (
+    $.ajax({
+        url: `https://sandbox.iexapis.com/stable/stock/TWTR/chart/3m?token=${window.iexapikey}`
+    })
+)
+
+export const fetchStockYear = (ticker) => (
+    $.ajax({
+        url: `https://sandbox.iexapis.com/stable/stock/TWTR/chart/1y?token=${window.iexapikey}`
+    })
+)
+
+export const fetchStockFiveYears = (ticker) => (
+    $.ajax({
+        url: `https://sandbox.iexapis.com/stable/stock/TWTR/chart/5y?token=${window.iexapikey}`
     })
 )
 

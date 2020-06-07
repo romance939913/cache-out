@@ -107,27 +107,32 @@ class ShowPageGraph extends React.Component {
             <div className="custom-tooltip">{formatted}</div>
         )
     }
-    
-    render() {
-        let data;
+
+    filterGraphData(data) {
         if (this.state.time === '1d') {
-            data = this.props.graphPrices['Day'];
-        } else if (this.state.time === '1w'){
-            data = this.props.graphPrices['Week'];
+            data = data['Day'];
+        } else if (this.state.time === '1w') {
+            data = data['Week'];
+        } else if (this.state.time === '1m') {
+            data = data['Month'];
+        } else if (this.state.time === '3m') {
+            data = data['ThreeMonths'];
+        } else if (this.state.time === '1y') {
+            data = data['Year'];
         } else {
-            data = this.props.graphPrices['Historical']
-        }
+            data = data['FiveYears'];
+        } 
 
         let d = new Date();
         let day = d.getDay();
-        let isWeekend = (day === 6) || (day === 0);  
+        let isWeekend = (day === 6) || (day === 0);
         if (this.state.time === "1d" && !isWeekend) {
-            let dayData = data.filter(obj => {
+            data = data.filter(obj => {
                 let oDate = obj.date.split(" ");
                 return moment(oDate[0]).isSame(d, 'day')
             })
-            dayData = dayData.slice();
-            dayData = dayData.reverse();
+            data = data.slice();
+            data = data.reverse();
             if (dayData.length === 0) {
                 data = data.filter(obj => {
                     let oDate = obj.date.split(" ");
@@ -140,8 +145,10 @@ class ShowPageGraph extends React.Component {
                 data = dayData;
             }
         } else if (this.state.time === "1d" && isWeekend) {
-            data = data.slice(0, 79); // takes last day (friday) data
-            data = data.reverse()
+            data = data.filter(obj => {
+                let minute = obj.minute.split(":");
+                return parseInt(minute[1]) % 5 === 0 && !!obj.close
+            })
         } else if (this.state.time === "1w") {
             data = data.filter(obj => {
                 let limit = moment().subtract(1, 'weeks')
@@ -179,6 +186,11 @@ class ShowPageGraph extends React.Component {
             })
             data = data.reverse();
         }
+        return data;
+    }
+    
+    render() {
+        let data = this.props.graphPrices['Day'];
 
         let color;
         let docBody = document.body;
@@ -211,6 +223,7 @@ class ShowPageGraph extends React.Component {
             }
         }
 
+        console.log(data);
         const renderLineChart = (
             <LineChart 
                 width={800} 
@@ -220,7 +233,7 @@ class ShowPageGraph extends React.Component {
                 onMouseLeave={this.handleMouseLeave}>
                 <Line type="linear" dataKey="close" stroke={color} dot={false} strokeWidth={2}/>
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
-                <XAxis dataKey='date' hide={true}/>
+                <XAxis dataKey='minute' hide={true}/>
                 <Tooltip
                     position={{ y: 0 }}
                     offset={toolTipOffSet}
