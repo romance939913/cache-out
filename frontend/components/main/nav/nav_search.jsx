@@ -27,8 +27,6 @@ class NavSearchForm extends React.Component {
 
     render() {
         let suggestions = []
-        if(!this.props.stocks) return null;
-
         let companies = Object.values(this.props.stocks);
         let userInput = this.state.query.toUpperCase()
         if(userInput.length > 0) {

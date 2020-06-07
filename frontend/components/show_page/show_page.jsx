@@ -53,19 +53,6 @@ class ShowPage extends React.Component {
     }
   }
 
-  undoScientificNotation(arg) {
-    if (arg.includes("E") || arg.includes("e")) {
-      let strVersion = arg.toString();
-      let withoutExp = strVersion.includes("E") ? strVersion.split("E") : strVersion.split("e")
-      let withoutDecimal = withoutExp[0].split(".")
-      let start = withoutDecimal[0] + withoutDecimal[1]
-      let final = start.padEnd(parseInt(withoutExp[1]) + 1, "0")
-      return numeral(parseInt(final)).format('0.0a')
-    } else {
-      return numeral(parseInt(arg)).format('0.0a')
-    }
-  }
-
   componentWillUnmount() {
     this.props.clearRealTimePrice();
   }
@@ -94,12 +81,12 @@ class ShowPage extends React.Component {
         )
       } 
 
-    let MktCap = this.undoScientificNotation(this.props.profile.mktCap);
-    let revenue = this.undoScientificNotation(this.props.financials.Revenue)
-    let OperatingExpenses = this.undoScientificNotation(this.props.financials['Operating Expenses'])  
-    let OperatingIncome = this.undoScientificNotation(this.props.financials['Operating Income'])
-    let grossProfit = this.undoScientificNotation(this.props.financials['Gross Profit'])
-    let netIncome = this.undoScientificNotation(this.props.financials['Net Income'])
+    let MktCap = this.props.profile.mktCap;
+    let revenue = this.props.financials.Revenue;
+    let OperatingExpenses = this.props.financials['Operating Expenses'];
+    let OperatingIncome = this.props.financials['Operating Income'];
+    let grossProfit = this.props.financials['Gross Profit'];
+    let netIncome = this.props.financials['Net Income'];
 
     let newsArr = [];
     this.props.news.forEach((ele, idx) => {

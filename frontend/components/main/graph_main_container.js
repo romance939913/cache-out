@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { receiveRealTimePrice, receiveIndexes, receiveIndexPrices, } from '../../actions/security_actions';
+import { receiveRealTimePrice, receiveIndexPrices, } from '../../actions/security_actions';
 import GraphMain from './graph_main';
 
 const mapStateToProps = (state) => {
@@ -14,7 +14,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
-    receiveIndexes: () => dispatch(receiveIndexes()),
     receiveIndexPrices: (index) => dispatch(receiveIndexPrices(index))
 })
 

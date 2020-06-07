@@ -19,30 +19,23 @@ export const fetchIndexes = () => (
     })
 )
 
-export const fetchIndexPrices = (index) => (
-    $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/historical-chart/5min/${index}`,
-        method: "GET"
-    })
-);
-
 export const fetchProfile = (company) => (
     $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/company/profile/${company}?apikey=${window.stockapikey}`,
+        url: `https://sandbox.iexapis.com/stable/stock/aapl/company?token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
         method: "GET"
     })
 )
 
 export const fetchFinancials = (ticker) => (
     $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/financials/income-statement/${ticker}?apikey=${window.stockapikey}`,
+        url: `https://sandbox.iexapis.com/stable/stock/aapl/financials?period=annual&token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
         method: "GET"
     })
 )
 
 export const fetchRealTimePrice = (company) => (
     $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/stock/real-time-price/${company}?apikey=${window.stockapikey}`,
+        url: `https://sandbox.iexapis.com/stable/stock/twtr/price?token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
         method: "GET"
     })
 )

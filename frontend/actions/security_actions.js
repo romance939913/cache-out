@@ -34,9 +34,10 @@ const receiveTheProfile = profile => ({
     profile
 });
 
-const receiveTheRealTimePrice = price => ({
+const receiveTheRealTimePrice = (price, symbol) => ({
     type: RECEIVE_REALTIME,
-    price
+    price,
+    symbol
 });
 
 const clearTheRealTimePrice = () => ({
@@ -58,7 +59,7 @@ export const receiveProfile = (company) => dispatch => fetchProfile(company)
     .then(profile => dispatch(receiveTheProfile(profile)));
 
 export const receiveRealTimePrice = (company) => dispatch => fetchRealTimePrice(company)
-    .then(price => dispatch(receiveTheRealTimePrice(price)));
+    .then(price => dispatch(receiveTheRealTimePrice(price, company)));
 
 export const receiveIndexPrices = (index) => dispatch => fetchIndexPrices(index)
     .then(prices => dispatch(receiveTheIndexPrices(prices)))
