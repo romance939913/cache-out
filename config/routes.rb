@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :holdings, only: [:index, :show, :create, :update, :destroy]
     resources :portfolio_snapshots, only: [:index]
     resources :news, only: [:index]
+    resources :stocks, only: [:index]
   end
 
   root to: "static_pages#root"

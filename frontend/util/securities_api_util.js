@@ -1,16 +1,9 @@
-export const fetchNasdaq = () => (
+export const fetchStocks = () => (
     $.ajax({
-        url: `https://cors-anywhere.herokuapp.com/https://financialmodelingprep.com/api/v3/search?query=&limit=&exchange=NASDAQ&apikey=${window.stockapikey}`,
+        url: '/api/stocks',
         method: "GET"
     })
 )
-
-export const fetchNYSE = () => (
-    $.ajax({
-        url: `https://cors-anywhere.herokuapp.com/https://financialmodelingprep.com/api/v3/search?query=&limit=&exchange=nyse&apikey=${window.stockapikey}`,
-        method: "GET"
-    })
-);
 
 export const fetchProfile = (company) => (
     $.ajax({

@@ -42,7 +42,7 @@ class MainNav extends React.Component {
   }
 
   render() {
-    // if (this.props.stocks.length === 0) return null;
+    if (this.props.stocks.length === 0) return null;
 
     return (
       <div className="nav-bar">
