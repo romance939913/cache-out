@@ -113,10 +113,10 @@ class ShowPage extends React.Component {
           <div className="show-page-body-wrapper">
             <div className="graph-transaction-wrapper">
               <div className="graph-and-title-wrapper">
-                <ShowPageGraph 
+                {/* <ShowPageGraph 
                   ticker={this.props.ticker}
                   price={this.props.price}
-                />
+                /> */}
                 <ul className="company-profile">
                   <div>
                     <div className="about-div-header">
