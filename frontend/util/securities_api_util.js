@@ -19,9 +19,16 @@ export const fetchFinancials = (company) => (
     })
 )
 
+export const fetchAdvancedStats = (company) => (
+    $.ajax({
+        url: `https://sandbox.iexapis.com/stable/stock/aapl/advanced-stats?token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
+        method: "GET"
+    })
+)
+
 export const fetchRealTimePrice = (company) => (
     $.ajax({
-        url: `https://sandbox.iexapis.com/stable/stock/TWTRcompany/price?token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
+        url: `https://sandbox.iexapis.com/stable/stock/TWTR/price?token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
         method: "GET"
     })
 )

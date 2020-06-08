@@ -8,21 +8,21 @@ class ShowPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.props.profile;
-    this.showFinancials = this.showFinancials.bind(this)
+    this.showFinancials = this.showFinancials.bind(this);
   }
 
   componentDidMount() {
-    this.props.receiveProfile(this.props.ticker);
+    // this.props.receiveProfile(this.props.ticker);
     this.props.receiveRealTimePrice(this.props.ticker);
     this.props.receiveNews()
-    this.props.receiveFinancials(this.props.ticker);
-    this.props.clearGraphPrices();
+    // this.props.receiveFinancials(this.props.ticker);
+    // this.props.receiveAdvancedStats(this.props.ticker);
+    // this.props.clearGraphPrices();
     this.props.receiveDay(`${this.props.ticker}`);
-    this.props.receiveWeek(`${this.props.ticker}`);
-    this.props.receiveMonth(`${this.props.ticker}`);
-    this.props.receiveThreeMonths(`${this.props.ticker}`);
-    this.props.receiveYear(`${this.props.ticker}`);
-    this.props.receiveFiveYears(`${this.props.ticker}`);
+    // this.props.receiveWeek(`${this.props.ticker}`);
+    // this.props.receiveMonth(`${this.props.ticker}`);
+    // this.props.receiveThreeMonths(`${this.props.ticker}`);
+    // this.props.receiveYear(`${this.props.ticker}`);
   }
 
   componentDidUpdate(previousProps) {
@@ -58,17 +58,16 @@ class ShowPage extends React.Component {
   }
 
   render() {
-    if (this.props.profile.description === undefined
-      || JSON.stringify(this.props.price) === '{}'
+    if (/*this.props.profile.description === undefined
+      || */JSON.stringify(this.props.price) === '{}'/*
       || this.props.news.length === 0
-      || this.props.financials.length === 0
-      // || !this.props.graphPrices['Day']
-      // || !this.props.graphPrices['Week']
-      // || !this.props.graphPrices['Month']
-      // || !this.props.graphPrices['ThreeMonths']
-      // || !this.props.graphPrices['Year']
-      // || !this.props.graphPrices['FiveYears']
-      || this.props.price[this.props.ticker] === undefined) {
+      || this.props.financials.length === 0*/
+      || !this.props.graphPrices['Day']/*
+      || !this.props.graphPrices['Week']
+      || !this.props.graphPrices['Month']
+      || !this.props.graphPrices['ThreeMonths']
+      || !this.props.graphPrices['Year']
+      || this.props.price[this.props.ticker] === undefined*/) {
         return (
           <div className="show-page-loading">
             <RingLoader
@@ -80,13 +79,6 @@ class ShowPage extends React.Component {
           </div>
         )
       } 
-
-    let MktCap = this.props.profile.mktCap;
-    let revenue = this.props.financials.Revenue;
-    let OperatingExpenses = this.props.financials['Operating Expenses'];
-    let OperatingIncome = this.props.financials['Operating Income'];
-    let grossProfit = this.props.financials['Gross Profit'];
-    let netIncome = this.props.financials['Net Income'];
 
     let newsArr = [];
     this.props.news.forEach((ele, idx) => {
@@ -113,10 +105,10 @@ class ShowPage extends React.Component {
           <div className="show-page-body-wrapper">
             <div className="graph-transaction-wrapper">
               <div className="graph-and-title-wrapper">
-                {/* <ShowPageGraph 
+                <ShowPageGraph 
                   ticker={this.props.ticker}
                   price={this.props.price}
-                /> */}
+                />
                 <ul className="company-profile">
                   <div>
                     <div className="about-div-header">
@@ -131,7 +123,7 @@ class ShowPage extends React.Component {
                   <div className="show-page-attr-wrapper">
                     <div className="show-page-attr-item">
                       <h2>CEO</h2>
-                      <li className="show-ceo">{this.props.profile.ceo}</li>
+                      <li className="show-ceo">{this.props.profile.CEO}</li>
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Sector</h2>
@@ -142,56 +134,56 @@ class ShowPage extends React.Component {
                       <li>{this.props.profile.industry}</li>
                     </div>
                     <div className="show-page-attr-item">
-                      <h2>exchange</h2>
-                      <li>{this.props.profile.exchange}</li>
+                      <h2>Employees</h2>
+                      <li>{numeral(this.props.profile.employees).format('0,0')}</li>
+                    </div>
+                    <div className="show-page-attr-item">
+                      <h2>Exchange</h2>
+                      <li>${this.props.profile.exchange}</li>
+                    </div>
+                    <div className="show-page-attr-item">
+                      <h2>Location</h2>
+                      <li>{this.props.profile.city}, {this.props.profile.state}</li>
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Market Cap</h2>
-                      <li>${MktCap}</li>
+                      <li>{numeral(this.props.advancedStats.marketcap).format('$0.00a')}</li>
                     </div>
                     <div className="show-page-attr-item">
-                      <h2>Last Dividend</h2>
-                      <li>${numeral(this.props.profile.lastDiv).format('0,0.00')}</li>
-                    </div>
-                    <div className="show-page-attr-item">
-                      <h2>Average Volume</h2>
-                      <li>${numeral(this.props.profile.volAvg).format('0.0a')}</li>
-                    </div>
-                    <div className="show-page-attr-item">
-                      <h2>Day change</h2>
-                      <li>${this.props.profile.changes}</li>
+                      <h2>Total Assets</h2>
+                      <li>{numeral(this.props.financials.totalAssets).format('$0.00a')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Revenue</h2>
-                      <li>${revenue}</li>
+                      <li>{numeral(this.props.financials.totalRevenue).format('$0.00a')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Gross Profit</h2>
-                      <li>${grossProfit}</li>
+                      <li>{numeral(this.props.financials.grossProfit).format('$0.00a')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Operating Inc</h2>
-                      <li>${OperatingIncome}</li>
+                      <li>{numeral(this.props.financials.grossProfit).format('$0.00a')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>EPS</h2>
-                      <li>{numeral(parseFloat(this.props.financials['EPS'])).format('$0,0.00')}</li>
+                      <li>{numeral(this.props.advancedStats.ttmEPS).format('$0.00')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Net Income</h2>
-                      <li>${netIncome}</li>
-                    </div>
-                    <div className="show-page-attr-item financials hide">
-                      <h2>Gross Margin</h2>
-                      <li>${numeral(parseFloat(this.props.financials['Gross Margin'])).format('0,0.00')}</li>
+                      <li>{numeral(this.props.financials.netIncome).format('$0.00a')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Operating Exp</h2>
-                      <li>${OperatingExpenses}</li>
+                      <li>{numeral(this.props.financials.operatingExpense).format('$0.00a')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
-                      <h2>DPS</h2>
-                      <li>{numeral(parseFloat(this.props.financials['Dividend per Share'])).format('$0,0.00')}</li>
+                      <h2>Current Assets</h2>
+                      <li>{numeral(this.props.financials.currentAssets).format('$0.00a')}</li>
+                    </div>
+                    <div className="show-page-attr-item financials hide">
+                      <h2>Current Debt</h2>
+                      <li>{numeral(this.props.financials.currentDebt).format('$0.00a')}</li>
                     </div>
                   </div>
                 </ul>

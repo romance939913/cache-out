@@ -5,11 +5,11 @@ class NavSearchForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            query: '',
-            results: []
+            query: ''
         }
-        this.handleClearForm = this.handleClearForm.bind(this)
-        this.update = this.update.bind(this)
+        this.handleClearForm = this.handleClearForm.bind(this);
+        this.update = this.update.bind(this);
+        this.filterSuggestions = this.filterSuggestions.bind(this);
     }
     
     handleClearForm() {
@@ -24,15 +24,15 @@ class NavSearchForm extends React.Component {
         }
     }
 
-
-    render() {
-        let suggestions = []
+    filterSuggestions() {
+        let suggestions = [];
         let companies = Object.values(this.props.stocks);
-        let userInput = this.state.query.toUpperCase()
-        if(userInput.length > 0) {
+        let userInput = this.state.query.toUpperCase();
+
+        if (userInput.length > 0) {
             companies.forEach((ticker, idx) => {
-                if (ticker.symbol.includes(userInput) || (ticker.name !== null 
-                && ticker.name.toUpperCase().includes(userInput))) {
+                if (ticker.symbol.includes(userInput) || (ticker.company !== null
+                    && ticker.company.toUpperCase().includes(userInput))) {
                     suggestions.push(
                         <div key={idx}>
                             <Link
@@ -41,7 +41,7 @@ class NavSearchForm extends React.Component {
                                 onClick={this.handleClearForm}>
                                 <div className="suggestion-item">
                                     <p className="suggestion-ticker">{ticker.symbol}</p>
-                                    <p>{ticker.name}</p>
+                                    <p>{ticker.company}</p>
                                 </div>
                             </Link>
                         </div>
@@ -49,24 +49,27 @@ class NavSearchForm extends React.Component {
                 }
             })
         }
-
         suggestions = suggestions.slice(0, 6)
-
         if (this.props.stocks[userInput]) {
-            suggestions[0] = 
-            (
-            <div key={10000}>
-                <Link to={`/show/${this.props.stocks[userInput].symbol}`}
-                    className="suggestion-item-link"
-                    onClick={this.handleClearForm}>
-                    <li className="suggestion-item">
-                        <p className="suggestion-ticker">{this.props.stocks[userInput].symbol}</p>
-                        <p>{this.props.stocks[userInput].name}</p>
-                    </li>
-                </Link>
-            </div> 
-            )
+            suggestions[0] =
+                (
+                    <div key={10000}>
+                        <Link to={`/show/${this.props.stocks[userInput].symbol}`}
+                            className="suggestion-item-link"
+                            onClick={this.handleClearForm}>
+                            <li className="suggestion-item">
+                                <p className="suggestion-ticker">{this.props.stocks[userInput].symbol}</p>
+                                <p>{this.props.stocks[userInput].company}</p>
+                            </li>
+                        </Link>
+                    </div>
+                )
         }
+        return suggestions;
+    }
+
+    render() {
+        let suggestions = this.filterSuggestions();
 
         return (
             <form className="search-form">

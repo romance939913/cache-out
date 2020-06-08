@@ -5,7 +5,6 @@ export const securitiesReducer = (state = [], action) => {
     let pojo = {};
     switch (action.type) {
         case RECEIVE_STOCKS:
-            debugger
             action.stocks.map(stock => pojo[stock.symbol] = stock);
             return pojo;  
         default:

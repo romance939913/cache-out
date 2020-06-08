@@ -10,6 +10,7 @@ class ShowPageGraph extends React.Component {
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.changeTimeFrames = this.changeTimeFrames.bind(this);
         this.customToolTip = this.customToolTip.bind(this);
+        this.filterGraphData = this.filterGraphData.bind(this);
         this.state = { 
             time: '1d',
         };
@@ -96,8 +97,9 @@ class ShowPageGraph extends React.Component {
 
     customToolTip(e) {
         let formatted
+        console.log(e)
         if (this.state.time === "1d") {
-            formatted = moment(e.label).format('LT') + ' ET';
+            formatted = e.label + ' ET';
         } else if (this.state.time === "1w") {
             formatted = moment(e.label).format('LLL');
         } else {
@@ -117,80 +119,21 @@ class ShowPageGraph extends React.Component {
             data = data['Month'];
         } else if (this.state.time === '3m') {
             data = data['ThreeMonths'];
-        } else if (this.state.time === '1y') {
-            data = data['Year'];
         } else {
-            data = data['FiveYears'];
-        } 
-
-        let d = new Date();
-        let day = d.getDay();
-        let isWeekend = (day === 6) || (day === 0);
-        if (this.state.time === "1d" && !isWeekend) {
-            data = data.filter(obj => {
-                let oDate = obj.date.split(" ");
-                return moment(oDate[0]).isSame(d, 'day')
-            })
-            data = data.slice();
-            data = data.reverse();
-            if (dayData.length === 0) {
-                data = data.filter(obj => {
-                    let oDate = obj.date.split(" ");
-                    let yesterday = moment(d).subtract(1, 'day')
-                    return moment(oDate[0]).isSame(yesterday, 'day')
-                })
-                data = data.slice();
-                data = data.reverse();
-            } else {
-                data = dayData;
-            }
-        } else if (this.state.time === "1d" && isWeekend) {
-            data = data.filter(obj => {
-                let minute = obj.minute.split(":");
-                return parseInt(minute[1]) % 5 === 0 && !!obj.close
-            })
-        } else if (this.state.time === "1w") {
-            data = data.filter(obj => {
-                let limit = moment().subtract(1, 'weeks')
-                let oDate = obj.date.split(" ");
-                return moment(oDate[0]).isAfter(limit);
-            })
-            data = data.slice();
-            data = data.reverse();
-        } else if (this.state.time === "1m") {
-            data = data.filter(obj => {
-                let limit = moment().subtract(1, 'months')
-                let oDate = obj.date.split(" ");
-                return moment(oDate[0]).isSameOrAfter(limit);
-            })
-            data = data.reverse();
-        } else if (this.state.time === "3m") {
-            data = data.filter(obj => {
-                let limit = moment().subtract(3, 'months')
-                let oDate = obj.date.split(" ");
-                return moment(oDate[0]).isSameOrAfter(limit);
-            })
-            data = data.reverse();
-        } else if (this.state.time === "1y") {
-            data = data.filter(obj => {
-                let limit = moment().subtract(1, 'years')
-                let oDate = obj.date.split(" ");
-                return moment(oDate[0]).isSameOrAfter(limit);
-            })
-            data = data.reverse();
-        } else if (this.state.time === "5y") {
-            data = data.filter((obj, idx) => {
-                let limit = moment().subtract(5, 'years')
-                let oDate = obj.date.split(" ");
-                return moment(oDate[0]).isSameOrAfter(limit) && idx % 5 === 0;
-            })
-            data = data.reverse();
+            data = data['Year'];
         }
+
+        if (this.state.time === "1d") {
+            data = data.filter(obj => {
+                let times = obj.minute.split(":");
+                return parseInt(times[1]) % 5 === 0 && !!obj.close
+            })
+        } 
         return data;
     }
     
     render() {
-        let data = this.props.graphPrices['Day'];
+        let data = this.filterGraphData(this.props.graphPrices);
 
         let color;
         let docBody = document.body;
@@ -223,7 +166,6 @@ class ShowPageGraph extends React.Component {
             }
         }
 
-        console.log(data);
         const renderLineChart = (
             <LineChart 
                 width={800} 
@@ -233,7 +175,7 @@ class ShowPageGraph extends React.Component {
                 onMouseLeave={this.handleMouseLeave}>
                 <Line type="linear" dataKey="close" stroke={color} dot={false} strokeWidth={2}/>
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
-                <XAxis dataKey='minute' hide={true}/>
+                <XAxis dataKey='date' hide={true}/>
                 <Tooltip
                     position={{ y: 0 }}
                     offset={toolTipOffSet}
@@ -253,7 +195,6 @@ class ShowPageGraph extends React.Component {
                     <li className="show-page-difference" id="show-diff">{dayDifference}</li>
                     <li className="show-page-percentage" id="show-perc">{percentage}</li>
                     <li className="hide" id="starting-price">{start}</li>
-                    
                 </div>
                 {renderLineChart}
                 <ul className="stock-time-frames">
@@ -262,7 +203,6 @@ class ShowPageGraph extends React.Component {
                     <h2 onClick={() => this.changeTimeFrames("1m")} className="stock-time-frame 1m">1M</h2>
                     <h2 onClick={() => this.changeTimeFrames("3m")} className="stock-time-frame 3m">3M</h2>
                     <h2 onClick={() => this.changeTimeFrames("1y")} className="stock-time-frame 1y">1Y</h2>
-                    <h2 onClick={() => this.changeTimeFrames("5y")} className="stock-time-frame 5y">5Y</h2>
                 </ul>
             </div>
         )

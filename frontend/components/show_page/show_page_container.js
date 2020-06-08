@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { receiveProfile, 
             receiveRealTimePrice, 
             clearRealTimePrice, 
-            receiveFinancials 
+            receiveFinancials, 
+            receiveAdvancedStats,
 } from '../../actions/security_actions';
 import { receiveNews, 
             receiveDay, 
@@ -22,6 +23,7 @@ const mapStateToProps = (state, ownProps) => ({
     price: state.entities.price,
     news: state.entities.news,
     financials: state.entities.financials,
+    advancedStats: state.entities.advancedStats,
     graphPrices: state.entities.graphPrices
 })
 
@@ -31,6 +33,7 @@ const mapDispatchToProps = dispatch => ({
     receiveNews: () => dispatch(receiveNews()),
     clearRealTimePrice: () => dispatch(clearRealTimePrice()),
     receiveFinancials: (ticker) => dispatch(receiveFinancials(ticker)),
+    receiveAdvancedStats: (ticker) => dispatch(receiveAdvancedStats(ticker)),
     receiveDay: (ticker) => dispatch(receiveDay(ticker)),
     receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
     receiveMonth: (ticker) => dispatch(receiveMonth(ticker)),
