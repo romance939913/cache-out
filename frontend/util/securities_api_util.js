@@ -7,28 +7,28 @@ export const fetchStocks = () => (
 
 export const fetchProfile = (company) => (
     $.ajax({
-        url: `https://sandbox.iexapis.com/stable/stock/TWTR/company?token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
+        url: `https://cloud.iexapis.com/stable/stock/${company}/company?token=${window.iexapikey2}`,
         method: "GET"
     })
 )
 
 export const fetchFinancials = (company) => (
     $.ajax({
-        url: `https://sandbox.iexapis.com/stable/stock/TWTR/financials?period=annual&token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
+        url: `https://cloud.iexapis.com/stable/stock/${company}/financials?period=annual&token=${window.iexapikey2}`,
         method: "GET"
     })
 )
 
 export const fetchAdvancedStats = (company) => (
     $.ajax({
-        url: `https://sandbox.iexapis.com/stable/stock/aapl/advanced-stats?token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
+        url: `https://cloud.iexapis.com/stable/stock/${company}/advanced-stats?token=${window.iexapikey2}`,
         method: "GET"
     })
 )
 
 export const fetchRealTimePrice = (company) => (
     $.ajax({
-        url: `https://sandbox.iexapis.com/stable/stock/TWTR/price?token=Tsk_8b8700fde9b94bc382719cb416f0d336`,
+        url: `https://financialmodelingprep.com/api/v3/quote-short/${company}?apikey=${window.stockapikey}`,
         method: "GET"
     })
 )

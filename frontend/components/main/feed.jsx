@@ -74,7 +74,6 @@ class MainFeed extends React.Component {
                             cash={this.props.cash}
                             price={this.props.price}
                             snapshots={this.props.snapshots}
-                            holdings={this.props.holdings}
                         />
                         <h1 className="news-header">Today's Top Stories</h1>
                         <div id="news-container-feed" className="news-container">

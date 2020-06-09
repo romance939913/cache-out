@@ -40,8 +40,7 @@ class GraphMain extends React.Component {
     }
 
     handleHover(e) {
-        if (e.activePayload === undefined) return null;
-        if (e.activePayload === null) return null;
+        if (!e.activePayload) return null;
 
         let rtv = document.getElementById("current-valuation");
         let diff = document.getElementById("main-diff");
@@ -50,18 +49,17 @@ class GraphMain extends React.Component {
 
         if (!!startPrice.textContent) {
             let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
-            let hoverDiff = e.activePayload[0].value - startPrice.textContent;
-            let hoverPerc = hoverDiff / startPrice.textContent;
+            let hoverDiff = e.activePayload[0].value - parseInt(startPrice.textContent);
+            let hoverPerc = (e.activePayload[0].value - parseInt(startPrice.textContent)) / parseInt(startPrice.textContent);
             if (hoverDiff > 0) {
-                hoverDiff = numeral(hoverDiff).format('$0,0.00')
-                hoverPerc = numeral(hoverPerc).format('0.00%')
+                hoverDiff = numeral(hoverDiff).format('$0,0.00');
+                hoverPerc = numeral(hoverPerc).format('0.00%');
                 hoverDiff = `+${hoverDiff.toString()}`;
                 hoverPerc = `(+${hoverPerc.toString()})`;
             } else {
                 hoverPerc = `(${numeral(hoverPerc).format('0.00%')})`;
                 hoverDiff = numeral(hoverDiff).format('$0,0.00')
             }
-    
             rtv.textContent = hoverPrice;
             diff.textContent = hoverDiff;
             perc.textContent = hoverPerc;
@@ -96,7 +94,6 @@ class GraphMain extends React.Component {
                 currentPerc = `(${numeral(currentPerc).format('0.00%')})`;
                 currentDiff = numeral(currentDiff).format('$0,0.00')
             }
-    
             rtv.textContent = numeral(currentPrice).format('$0,0.00');
             diff.textContent = currentDiff;
             perc.textContent = currentPerc;
@@ -105,39 +102,17 @@ class GraphMain extends React.Component {
     
     customToolTip(e) {
         let formatted
-        let dayTime
-        if (e.label !== undefined) {
-            let t = e.label.split("T");
-            let tt = t[1].split(":");
-            let makeTen = 10 - parseInt(tt[1][1]);
-            dayTime = moment(e.label).add(makeTen, "minutes");
-        }
 
         if (this.state.time === "1d") {
-            formatted = moment(dayTime).format('LT') + ' ET'; 
+            formatted = moment(e.label).format('LT') + ' ET'; 
         } else if (this.state.time === "1w") {
-            formatted = moment(dayTime).format('LLL');
+            formatted = moment(e.label).format('LLL');
         } else {
             formatted = moment(e.label).format('MMM Do, YYYY');
         }
         return (
             <div className="custom-tooltip">{formatted}</div>
         )
-    }
-
-    getOnlyDayEndPrices(data) {
-        let newData = [];
-        data = data.forEach(obj => {
-            if (newData.length === 0) {
-                newData.push(obj)
-            } else {
-                if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
-                    newData.pop();
-                }
-                newData.push(obj)
-            }
-        })
-        return newData
     }
 
     getOnlyNecessaryTimeFrames(snapshots) {
@@ -179,82 +154,60 @@ class GraphMain extends React.Component {
     }
 
     filterGraphPrices() {
+        if (Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length) return null;
         let data = Object.values(this.props.snapshots)
-        
-        let d = new Date();
-        let timeStr = d.toString();
-        let timeCheck = timeStr.split(" ");
-        timeCheck[4] = '09:20:00';
-        let time = timeCheck.join(" ");
-        let day = d.getDay();
-        let isWeekend = (day === 6) || (day === 0);
 
-        if (this.state.time === "1d" && !isWeekend) {
+        if (this.state.time === "1d") {
             data = []
-            let allPrices = Object.values(this.props.graphPrices);
+            let allPrices = [];
+            Object.keys(this.props.graphPrices).forEach(key => {
+                allPrices.push([key, this.props.graphPrices[key]])
+            })
             let i = 0;
-            while (i < allPrices[0].length) {
-                let allHoldingsPresent = true
-                let closeAvg = 0;
+            while (i < allPrices[0][1].length) {
+                let allHoldingsPresent = true;
+                let close = 0;
                 allPrices.forEach(arr => {
-                    if (arr[i].close) {
-                        closeAvg += arr[i].close;
+                    if (arr[1][i].close) {
+                        close += arr[1][i].close * this.props.holdings[arr[0]].quantity;
                     } else {
                         allHoldingsPresent = false;
                     }
                 })
-                let close = closeAvg / allPrices.length;
+                close += this.props.buyingPower;
                 if (i % 5 === 0 && allHoldingsPresent) {
                     data.push({ close,
-                        minute: allPrices[0][i]['minute'],
-                        date: allPrices[0][i]['date'],
+                        minute: allPrices[0][1][i]['minute'],
+                        date: allPrices[0][1][i]['date'],
                     })
                 }
                 i++;
             }
-        } else if (this.state.time === "1d" && isWeekend) {
-            let friday;
-            day === 6
-                ? friday = moment().subtract(1, 'days')
-                : friday = moment().subtract(2, 'days');
-            data = data.filter(obj => {
-                return moment(obj.created_at).isSame(friday, 'day');
-            })
         } else if (this.state.time === "1w") {
-            data = data.filter(obj => {
-                let t = obj.created_at.split("T");
-                let tt = t[1].split(":");
-                let keep
-                parseInt(tt[1]) >= 20 && parseInt(tt[1]) < 30 || parseInt(tt[1]) >= 50
-                    ? keep = true
-                    : keep = false;
-                let limit = moment().subtract(1, 'weeks')
-                return moment(obj.created_at).isAfter(limit) && keep;
+            let limit = moment().subtract(1, 'weeks')
+            data = data.filter((obj, idx) => {
+                return moment(obj.created_at).isAfter(limit);
             });
         } else if (this.state.time === "1m") {
             let limit = moment().subtract(1, 'months')
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            data = this.getOnlyDayEndPrices(data);
         } else if (this.state.time === "3m") {
             let limit = moment().subtract(3, 'months')
             data = data.filter(obj => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            data = this.getOnlyDayEndPrices(data);
         } else if (this.state.time === "1y") {
             let limit = moment().subtract(1, 'years')
             data = data.filter(obj => {
                 return moment(obj.created_at).isAfter(limit);
             });
-            data = this.getOnlyDayEndPrices(data);
         } else if (this.state.time === "5y") {
             let limit = moment().subtract(5, 'years')
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit)
             });
-            data = this.getOnlyDayEndPrices(data);
         }
         return data
     }

@@ -34,8 +34,7 @@ class ShowPageGraph extends React.Component {
     }
 
     handleHover(e) {
-        if (e.activePayload === undefined) return null;
-        if (e.activePayload === null) return null;
+        if (!e.activePayload) return null;
         
         const rtp = document.getElementById("real-time-price");
         const diff = document.getElementById("show-diff");
