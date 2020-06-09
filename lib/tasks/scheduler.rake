@@ -3,6 +3,7 @@ namespace :scheduler do
   task :add_portfolio_snapshots_for_day => :environment do
     require 'date'
     require 'us_bank_holidays'
+    require 'byebug'
 
     puts "Adding day's portfolio snapshots..."
 
@@ -10,19 +11,30 @@ namespace :scheduler do
     next if today.weekend?
     next if today.bank_holiday?
   
-    time = Time.now
-    timeString = time.to_s
-    timeArr = timeString.split(" ")[1]
-    hour = timeArr.split(":")[0]
-    min = timeArr.split(":")[1]
-    next if hour.to_i < 13
-    next if hour.to_i > 19
+    now = Time.now
+    next if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
 
-    
+    stocks_to_find = []
     users = User.all
+    users.each do |user|
+      holdings = user.holdings
+      holdings.each do |stock|
+        stocks_to_find << stock.ticker
+      end
+    end
+
+    symbols = stocks_to_find.flatten.uniq.join(",")
+    url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{symbols}?apikey=#{Rails.application.credentials.stockapi[:api_key]}"
+    prices = JSON.parse(open(url).read)
+
+    obj = {}
+    prices['companiesPriceList'].each do |price|
+      obj[price['symbol']] = price['price']
+    end
+
     users.each do |user| 
-      balance = user.calculate_total_assets
-      PortfolioSnapshot.create({ valuation: balance, user_id: user.id })
+      balance = user.calculate_total_assets(obj)
+      # PortfolioSnapshot.create({ valuation: balance, user_id: user.id })
     end
     
     puts "done."

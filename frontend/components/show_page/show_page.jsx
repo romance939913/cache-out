@@ -14,7 +14,7 @@ class ShowPage extends React.Component {
   componentDidMount() {
     this.props.receiveProfile(this.props.ticker);
     this.props.receiveRealTimePrice(this.props.ticker);
-    this.props.receiveNews()
+    this.props.receiveNews();
     // this.props.receiveFinancials(this.props.ticker);
     // this.props.receiveAdvancedStats(this.props.ticker);
     // this.props.clearGraphPrices();
@@ -29,11 +29,13 @@ class ShowPage extends React.Component {
     if (previousProps.match.params.ticker !== this.props.match.params.ticker) {
       this.props.receiveProfile(this.props.ticker);
       this.props.receiveRealTimePrice(this.props.ticker);
-      this.props.receiveFinancials(this.props.ticker);
-      this.props.clearGraphPrices();
+      this.props.receiveNews();
+      // this.props.receiveFinancials(this.props.ticker);
       this.props.receiveDay(`${this.props.ticker}`);
-      this.props.receiveWeek(`${this.props.ticker}`);
-      this.props.receiveHistorical(`${this.props.ticker}`);
+    // this.props.receiveWeek(`${this.props.ticker}`);
+    // this.props.receiveMonth(`${this.props.ticker}`);
+    // this.props.receiveThreeMonths(`${this.props.ticker}`);
+    // this.props.receiveYear(`${this.props.ticker}`);
     }
   }
 

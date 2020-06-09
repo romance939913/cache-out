@@ -45,14 +45,12 @@ class User < ApplicationRecord
     self.session_token
   end
 
-  def calculate_total_assets
+  def calculate_total_assets(prices)
     assets = []
     return buying_power if holdings.empty?
 
     holdings.each do |holding| 
-      url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{holding.ticker}?apikey=#{Rails.application.credentials.stockapi[:api_key]}"
-      security = JSON.parse(open(url).read)
-      assets << security['price'] * holding.quantity
+      assets << prices[holding.ticker] * holding.quantity
     end
 
     assets.sum + buying_power

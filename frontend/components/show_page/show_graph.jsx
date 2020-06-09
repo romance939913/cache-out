@@ -133,7 +133,6 @@ class ShowPageGraph extends React.Component {
     
     render() {
         let data = this.filterGraphData(this.props.graphPrices);
-        console.log(this.props.price[this.props.ticker]);
 
         let color;
         let docBody = document.body;
