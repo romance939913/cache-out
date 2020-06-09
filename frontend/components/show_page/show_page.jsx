@@ -12,7 +12,7 @@ class ShowPage extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.receiveProfile(this.props.ticker);
+    this.props.receiveProfile(this.props.ticker);
     this.props.receiveRealTimePrice(this.props.ticker);
     this.props.receiveNews()
     // this.props.receiveFinancials(this.props.ticker);
@@ -58,8 +58,8 @@ class ShowPage extends React.Component {
   }
 
   render() {
-    if (/*this.props.profile.description === undefined
-      || */JSON.stringify(this.props.price) === '{}'/*
+    if (this.props.profile.description === undefined
+      || JSON.stringify(this.props.price) === '{}'/*
       || this.props.news.length === 0
       || this.props.financials.length === 0*/
       || !this.props.graphPrices['Day']/*

@@ -61,7 +61,7 @@ class TransactionForm extends React.Component {
             if (e.currentTarget.value === '') {
                 cost = 0;
             } else {
-                cost = parseInt(e.currentTarget.value) * this.props.price[this.props.ticker].price;
+                cost = parseInt(e.currentTarget.value) * this.props.price[this.props.ticker];
             }
 
             this.setState({
@@ -151,7 +151,7 @@ class TransactionForm extends React.Component {
                     <div>
                         <div className="transaction-price">
                             <p>Market Price: </p>
-                            <p>{numeral(this.props.price[this.props.ticker].price).format('$0,0.00')}</p>
+                            <p>{numeral(this.props.price[this.props.ticker]).format('$0,0.00')}</p>
                         </div>
                         <div className="transaction-price">
                             <p>Estimated Cost:</p>

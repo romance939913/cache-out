@@ -85,7 +85,7 @@ class Portfolio extends React.Component {
                             {renderLineChart}
                         </div>
                         <div className="portfolio-ele portfolio-ele-right">
-                            <p>{numeral(this.props.price[ticker].price).format('$0,0.00')}</p>
+                            <p>{numeral(this.props.price[ticker]).format('$0,0.00')}</p>
                             <p className="portfolio-ele-small">{percentage}</p>
                         </div>
                     </li>
