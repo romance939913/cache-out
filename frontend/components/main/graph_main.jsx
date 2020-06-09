@@ -10,6 +10,7 @@ class GraphMain extends React.Component {
         this.handleHover = this.handleHover.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.customToolTip = this.customToolTip.bind(this);
+        this.filterGraphPrices = this.filterGraphPrices.bind(this);
         this.state = {
             equityBalance: [],
             time: "1d"
@@ -177,19 +178,9 @@ class GraphMain extends React.Component {
         }
     }
 
-    render() {  
-        if (this.props.snapshots.length === 0) return null;
-        console.log(this.props.graphPrices);
-        
-        let totalEquity = 0;
-        this.props.tickers.forEach((ticker, idx) => {
-            if(this.props.holdings[ticker].quantity !== 0) {
-                let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
-                totalEquity = totalEquity + value;
-            }
-        });
-
+    filterGraphPrices() {
         let data = Object.values(this.props.snapshots)
+        
         let d = new Date();
         let timeStr = d.toString();
         let timeCheck = timeStr.split(" ");
@@ -197,16 +188,26 @@ class GraphMain extends React.Component {
         let time = timeCheck.join(" ");
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
-        
-        // graph data filtering
+
         if (this.state.time === "1d" && !isWeekend) {
-            data = data.filter(obj => {
-                return moment(obj.created_at).isSame(d, 'day');
-            })
-            data = data.slice(2)
+            data = []
+            let allPrices = Object.values(this.props.graphPrices);
+            let i = 0;
+            while (i < allPrices[0].length) {
+                let closeAvg = 0;
+                allPrices.forEach(arr => {
+                    closeAvg += arr[i].close;
+                })
+                let close = closeAvg / allPrices.length;
+                data.push({ close,
+                    minute: allPrices[0][i]['minute'],
+                    date: allPrices[0][i]['date'],
+                })
+                i++;
+            }
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
-            day === 6 
+            day === 6
                 ? friday = moment().subtract(1, 'days')
                 : friday = moment().subtract(2, 'days');
             data = data.filter(obj => {
@@ -217,7 +218,7 @@ class GraphMain extends React.Component {
                 let t = obj.created_at.split("T");
                 let tt = t[1].split(":");
                 let keep
-                parseInt(tt[1]) >= 20 && parseInt(tt[1]) < 30 || parseInt(tt[1]) >= 50 
+                parseInt(tt[1]) >= 20 && parseInt(tt[1]) < 30 || parseInt(tt[1]) >= 50
                     ? keep = true
                     : keep = false;
                 let limit = moment().subtract(1, 'weeks')
@@ -245,9 +246,22 @@ class GraphMain extends React.Component {
             let limit = moment().subtract(5, 'years')
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit)
-            });    
+            });
             data = this.getOnlyDayEndPrices(data);
         }
+        return data
+    }
+
+    render() {  
+        let data = this.filterGraphPrices()
+
+        let totalEquity = 0;
+        this.props.tickers.forEach((ticker, idx) => {
+            if(this.props.holdings[ticker].quantity !== 0) {
+                let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
+                totalEquity = totalEquity + value;
+            }
+        });
 
         let assets = totalEquity + this.props.cash;
         let difference;
@@ -257,7 +271,7 @@ class GraphMain extends React.Component {
         let docBody = document.body;
 
         if (data[0]) {
-            start = data[0].valuation;
+            start = data[0].close;
             difference = assets - start;
             percentage =  difference / start;
             if (difference > 0) {
@@ -270,7 +284,7 @@ class GraphMain extends React.Component {
                 difference = numeral(difference).format('$0,0.00')
             }
 
-            if (data[0] !== undefined && data[0].valuation > data.slice(-1)[0].valuation) {
+            if (data[0] !== undefined && data[0].close > data.slice(-1)[0].close) {
                 docBody.setAttribute("data-trend", "down");
                 color = '#f45531';
             } else {
@@ -289,7 +303,7 @@ class GraphMain extends React.Component {
                 data={data}
                 onMouseMove={this.handleHover}
                 onMouseLeave={this.handleMouseLeave}>
-                <Line type="linear" dataKey="valuation" stroke={color} dot={false} strokeWidth={2}/>
+                <Line type="linear" dataKey="close" stroke={color} dot={false} strokeWidth={2}/>
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
                 <XAxis dataKey='created_at' hide={true} />
                 <Tooltip
