@@ -22,7 +22,7 @@ namespace :scheduler do
     end
 
     symbols = stocks_to_find.flatten.uniq.join(",")
-    url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{symbols}?apikey=#{Rails.application.credentials.stockapi[:api_key]}"
+    url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{symbols}?apikey=#{Rails.application.credentials.stockapi2[:api_key]}"
     prices = JSON.parse(open(url).read)
 
     obj = {}

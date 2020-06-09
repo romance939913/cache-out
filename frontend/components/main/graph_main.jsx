@@ -194,15 +194,22 @@ class GraphMain extends React.Component {
             let allPrices = Object.values(this.props.graphPrices);
             let i = 0;
             while (i < allPrices[0].length) {
+                let allHoldingsPresent = true
                 let closeAvg = 0;
                 allPrices.forEach(arr => {
-                    closeAvg += arr[i].close;
+                    if (arr[i].close) {
+                        closeAvg += arr[i].close;
+                    } else {
+                        allHoldingsPresent = false;
+                    }
                 })
                 let close = closeAvg / allPrices.length;
-                data.push({ close,
-                    minute: allPrices[0][i]['minute'],
-                    date: allPrices[0][i]['date'],
-                })
+                if (i % 5 === 0 && allHoldingsPresent) {
+                    data.push({ close,
+                        minute: allPrices[0][i]['minute'],
+                        date: allPrices[0][i]['date'],
+                    })
+                }
                 i++;
             }
         } else if (this.state.time === "1d" && isWeekend) {
