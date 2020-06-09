@@ -12,10 +12,6 @@ namespace :scheduler do
     next if today.weekend?
     next if today.bank_holiday?
   
-    ENV['TZ'] = 'America/New_York'
-    now = Time.now
-    next if (now.hour < 9 && now.min < 30) || (now.hour >= 16 && now.min > 30)
-
     stocks_to_find = []
     users = User.all
     users.each do |user|
@@ -36,7 +32,7 @@ namespace :scheduler do
 
     users.each do |user| 
       balance = user.calculate_total_assets(obj)
-      # PortfolioSnapshot.create({ valuation: balance, user_id: user.id })
+      PortfolioSnapshot.create({ valuation: balance, user_id: user.id })
     end
     
     puts "done."

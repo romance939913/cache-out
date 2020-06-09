@@ -179,6 +179,7 @@ class GraphMain extends React.Component {
 
     render() {  
         if (this.props.snapshots.length === 0) return null;
+        console.log(this.props.graphPrices);
         
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {

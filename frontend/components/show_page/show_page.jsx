@@ -30,6 +30,7 @@ class ShowPage extends React.Component {
       this.props.receiveProfile(this.props.ticker);
       this.props.receiveRealTimePrice(this.props.ticker);
       this.props.receiveNews();
+      this.props.clearGraphPrices();
       // this.props.receiveFinancials(this.props.ticker);
       this.props.receiveDay(`${this.props.ticker}`);
     // this.props.receiveWeek(`${this.props.ticker}`);

@@ -35,16 +35,8 @@ class Portfolio extends React.Component {
                     data = this.props.graphPrices[ticker]
 
                     data = data.filter(obj => {
-                        let oDate = obj.date.split(" ");
-                        if (day === 6) {
-                            let friday = moment(d).subtract(1, 'day')
-                            return moment(oDate[0]).isSame(friday, 'day')
-                        } else if (day === 0) {
-                            let friday = moment(d).subtract(2, 'day')
-                            return moment(oDate[0]).isSame(friday, 'day')
-                        } else {
-                            return moment(oDate[0]).isSame(d, 'day')
-                        }
+                        let times = obj.minute.split(":");
+                        return parseInt(times[1]) % 5 === 0 && !!obj.close
                     })
 
                     data = data.slice();
