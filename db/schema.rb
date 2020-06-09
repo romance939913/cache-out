@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 2020_06_08_160500) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "snap_shots_tables", force: :cascade do |t|
+    t.string "user_id", null: false
+    t.float "portfolio_balance", null: false
+    t.datetime "created_at", null: false
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.string "company", null: false
     t.string "symbol", null: false
