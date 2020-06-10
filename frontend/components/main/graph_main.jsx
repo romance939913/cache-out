@@ -152,13 +152,14 @@ class GraphMain extends React.Component {
     }
 
     filterGraphPrices(data) {
+        let pricePojo = this.props.graphPrices;
         data = Object.values(this.props.snapshots)
 
         if (this.state.time === "1d") {
             data = []
             let allPrices = [];
-            Object.keys(this.props.graphPrices).forEach(key => {
-                allPrices.push([key, this.props.graphPrices[key]])
+            Object.keys(pricePojo).forEach(key => {
+                allPrices.push([key, pricePojo[key]])
             })
             let i = 0;
             while (i < allPrices[0][1].length) {

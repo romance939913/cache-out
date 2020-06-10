@@ -6,6 +6,7 @@ const mapStateToProps = (state) => {
         currentUser: state.entities.users[state.session.id],
         profile: state.entities.profile,
         graphPrices: state.entities.graphPrices,
+        price: state.entities.price
     }
 }
 
