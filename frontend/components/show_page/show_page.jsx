@@ -33,10 +33,10 @@ class ShowPage extends React.Component {
       this.props.clearGraphPrices();
       // this.props.receiveFinancials(this.props.ticker);
       this.props.receiveDay(`${this.props.ticker}`);
-    // this.props.receiveWeek(`${this.props.ticker}`);
-    // this.props.receiveMonth(`${this.props.ticker}`);
-    // this.props.receiveThreeMonths(`${this.props.ticker}`);
-    // this.props.receiveYear(`${this.props.ticker}`);
+      // this.props.receiveWeek(`${this.props.ticker}`);
+      // this.props.receiveMonth(`${this.props.ticker}`);
+      // this.props.receiveThreeMonths(`${this.props.ticker}`);
+      // this.props.receiveYear(`${this.props.ticker}`);
     }
   }
 
@@ -62,15 +62,15 @@ class ShowPage extends React.Component {
 
   render() {
     if (this.props.profile.description === undefined
-      || JSON.stringify(this.props.price) === '{}'/*
+      || JSON.stringify(this.props.price) === '{}'
       || this.props.news.length === 0
-      || this.props.financials.length === 0*/
-      || !this.props.graphPrices['Day']/*
-      || !this.props.graphPrices['Week']
-      || !this.props.graphPrices['Month']
-      || !this.props.graphPrices['ThreeMonths']
-      || !this.props.graphPrices['Year']
-      || this.props.price[this.props.ticker] === undefined*/) {
+      // || this.props.financials.length === 0
+      || !this.props.graphPrices['Day']
+      // || !this.props.graphPrices['Week']
+      // || !this.props.graphPrices['Month']
+      // || !this.props.graphPrices['ThreeMonths']
+      // || !this.props.graphPrices['Year']
+      || this.props.price[this.props.ticker] === undefined) {
         return (
           <div className="show-page-loading">
             <RingLoader
@@ -150,7 +150,7 @@ class ShowPage extends React.Component {
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Market Cap</h2>
-                      <li>{numeral(this.props.advancedStats.marketcap).format('$0.00a')}</li>
+                      <li>**Change Out**</li>
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Total Assets</h2>
@@ -170,7 +170,7 @@ class ShowPage extends React.Component {
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>EPS</h2>
-                      <li>{numeral(this.props.advancedStats.ttmEPS).format('$0.00')}</li>
+                      <li>**Change Out**</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Net Income</h2>

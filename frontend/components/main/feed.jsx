@@ -71,7 +71,6 @@ class MainFeed extends React.Component {
                     <div className="graph-news-wrapper">
                         <GraphMainContainer 
                             tickers={Object.keys(this.props.holdings)} 
-                            cash={this.props.cash}
                             price={this.props.price}
                             snapshots={this.props.snapshots}
                         />

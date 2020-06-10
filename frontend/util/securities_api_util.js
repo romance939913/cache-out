@@ -19,13 +19,6 @@ export const fetchFinancials = (company) => (
     })
 )
 
-export const fetchAdvancedStats = (company) => (
-    $.ajax({
-        url: `https://cloud.iexapis.com/stable/stock/${company}/advanced-stats?token=${window.iexapikey2}`,
-        method: "GET"
-    })
-)
-
 export const fetchRealTimePrice = (company) => (
     $.ajax({
         url: `https://financialmodelingprep.com/api/v3/quote-short/${company}?apikey=${window.stockapikey}`,

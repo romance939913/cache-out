@@ -74,14 +74,12 @@ class GraphMain extends React.Component {
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
-            if (this.props.holdings[ticker].quantity !== 0) {
-                let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
-                totalEquity = totalEquity + value;
-            }
+            let value = this.props.holdings[ticker].quantity * this.props.price[ticker][0].price;
+            totalEquity += value;
         });
 
         if (!!startPrice.textContent) {
-            let currentPrice = totalEquity + this.props.cash;
+            let currentPrice = totalEquity + this.props.buyingPower;
             let currentDiff = currentPrice - startPrice.textContent;
             let currentPerc = currentDiff / startPrice.textContent;
     
@@ -153,9 +151,8 @@ class GraphMain extends React.Component {
         }
     }
 
-    filterGraphPrices() {
-        if (Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length) return null;
-        let data = Object.values(this.props.snapshots)
+    filterGraphPrices(data) {
+        data = Object.values(this.props.snapshots)
 
         if (this.state.time === "1d") {
             data = []
@@ -213,17 +210,22 @@ class GraphMain extends React.Component {
     }
 
     render() {  
-        let data = this.filterGraphPrices()
+        if (Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length
+            || this.props.buyingPower.length === 0) {
+            return null
+            }
+
+        let data = this.filterGraphPrices(this.props.graphPrices)
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
             if(this.props.holdings[ticker].quantity !== 0) {
-                let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
+                let value = this.props.holdings[ticker].quantity * this.props.price[ticker][0].price;
                 totalEquity = totalEquity + value;
             }
         });
 
-        let assets = totalEquity + this.props.cash;
+        let assets = totalEquity + this.props.buyingPower;
         let difference;
         let percentage;
         let start;
@@ -279,7 +281,7 @@ class GraphMain extends React.Component {
         return (
             <div>
                 <h2 id="current-valuation" className="main-page-total-assets">
-                    {numeral(this.props.cash + totalEquity).format('$0,0.00')}
+                    {numeral(this.props.buyingPower + totalEquity).format('$0,0.00')}
                 </h2>
                 <div className="main-percentage-and-difference">
                     <p className="main-page-difference" id="main-diff">{difference}</p>

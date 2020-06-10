@@ -24,7 +24,7 @@ export const fetchStockThreeMonths = (ticker) => (
 
 export const fetchStockYear = (ticker) => (
     $.ajax({
-        url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/1y?token=${window.iexapikey2}`
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/1y?token=${window.iexapikey}`
     })
 )
 
