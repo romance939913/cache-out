@@ -155,7 +155,7 @@ class GraphMain extends React.Component {
         let pricePojo = this.props.graphPrices;
         data = Object.values(this.props.snapshots)
 
-        if (this.state.time === "1d") {
+        if (this.state.time === "1d" && Object.keys(pricePojo).length > 0) {
             data = []
             let allPrices = [];
             Object.keys(pricePojo).forEach(key => {

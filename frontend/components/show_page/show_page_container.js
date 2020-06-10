@@ -2,9 +2,8 @@ import { connect } from 'react-redux';
 import { receiveProfile, 
             receiveRealTimePrice, 
             clearRealTimePrice, 
-            receiveFinancials, 
-            receiveAdvancedStats,
-} from '../../actions/security_actions';
+            receiveFinancials
+        } from '../../actions/security_actions';
 import { receiveNews, 
             receiveDay, 
             receiveWeek, 
@@ -13,7 +12,7 @@ import { receiveNews,
             receiveYear,
             receiveFiveYears, 
             clearGraphPrices 
-} from '../../actions/graph_actions';
+        } from '../../actions/graph_actions';
 import ShowPage from './show_page';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -23,7 +22,6 @@ const mapStateToProps = (state, ownProps) => ({
     price: state.entities.price,
     news: state.entities.news,
     financials: state.entities.financials,
-    advancedStats: state.entities.advancedStats,
     graphPrices: state.entities.graphPrices
 })
 
@@ -33,7 +31,6 @@ const mapDispatchToProps = dispatch => ({
     receiveNews: () => dispatch(receiveNews()),
     clearRealTimePrice: () => dispatch(clearRealTimePrice()),
     receiveFinancials: (ticker) => dispatch(receiveFinancials(ticker)),
-    receiveAdvancedStats: (ticker) => dispatch(receiveAdvancedStats(ticker)),
     receiveDay: (ticker) => dispatch(receiveDay(ticker)),
     receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
     receiveMonth: (ticker) => dispatch(receiveMonth(ticker)),
