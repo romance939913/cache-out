@@ -75,7 +75,7 @@ class GraphMain extends React.Component {
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
             if (this.props.holdings[ticker].quantity !== 0) {
-                let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
+                let value = this.props.holdings[ticker].quantity * this.props.price[ticker][0].price;
                 totalEquity = totalEquity + value;
             }
         });
@@ -153,15 +153,14 @@ class GraphMain extends React.Component {
         }
     }
 
-    filterGraphPrices() {
-        if (Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length) return null;
+    filterGraphPrices(pricePojo) {
         let data = Object.values(this.props.snapshots)
 
         if (this.state.time === "1d") {
             data = []
             let allPrices = [];
-            Object.keys(this.props.graphPrices).forEach(key => {
-                allPrices.push([key, this.props.graphPrices[key]])
+            Object.keys(pricePojo).forEach(key => {
+                allPrices.push([key, pricePojo[key]])
             })
             let i = 0;
             while (i < allPrices[0][1].length) {
@@ -213,12 +212,15 @@ class GraphMain extends React.Component {
     }
 
     render() {  
-        let data = this.filterGraphPrices()
+        if (Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length) {
+            return null
+        };
+        let data = this.filterGraphPrices(this.props.graphPrices)
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
             if(this.props.holdings[ticker].quantity !== 0) {
-                let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
+                let value = this.props.holdings[ticker].quantity * this.props.price[ticker][0].price;
                 totalEquity = totalEquity + value;
             }
         });
