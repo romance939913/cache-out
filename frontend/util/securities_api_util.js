@@ -1,20 +1,27 @@
-export const fetchStocks = () => (
+export const fetchNasdaq = () => (
     $.ajax({
-        url: '/api/stocks',
+        url: `https://financialmodelingprep.com/api/v3/search?query=&limit=&exchange=NASDAQ&apikey=${window.stockapikey}`,
         method: "GET"
     })
 )
 
+export const fetchNYSE = () => (
+    $.ajax({
+        url: `https://financialmodelingprep.com/api/v3/search?query=&limit=&exchange=nyse&apikey=${window.stockapikey}`,
+        method: "GET"
+    })
+);
+
 export const fetchProfile = (company) => (
     $.ajax({
-        url: `https://cloud.iexapis.com/stable/stock/${company}/company?token=${window.iexapikey2}`,
+        url: `https://cloud.iexapis.com/stable/stock/${company}/company?token=${window.iexapikey}`,
         method: "GET"
     })
 )
 
 export const fetchFinancials = (company) => (
     $.ajax({
-        url: `https://cloud.iexapis.com/stable/stock/${company}/financials?period=annual&token=${window.iexapikey2}`,
+        url: `https://cloud.iexapis.com/stable/stock/${company}/financials?period=annual&token=${window.iexapikey}`,
         method: "GET"
     })
 )

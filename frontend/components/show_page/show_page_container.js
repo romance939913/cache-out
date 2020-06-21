@@ -7,10 +7,7 @@ import { receiveProfile,
 import { receiveNews, 
             receiveDay, 
             receiveWeek, 
-            receiveMonth,
-            receiveThreeMonths,
-            receiveYear,
-            receiveFiveYears, 
+            receiveHistorical,
             clearGraphPrices 
         } from '../../actions/graph_actions';
 import ShowPage from './show_page';
@@ -33,10 +30,7 @@ const mapDispatchToProps = dispatch => ({
     receiveFinancials: (ticker) => dispatch(receiveFinancials(ticker)),
     receiveDay: (ticker) => dispatch(receiveDay(ticker)),
     receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
-    receiveMonth: (ticker) => dispatch(receiveMonth(ticker)),
-    receiveThreeMonths: (ticker) => dispatch(receiveThreeMonths(ticker)),
-    receiveYear: (ticker) => dispatch(receiveYear(ticker)),
-    receiveFiveYears: (ticker) => dispatch(receiveFiveYears(ticker)),
+    receiveHistorical: (ticker) => dispatch(receiveHistorical(ticker)),
     clearGraphPrices: () => dispatch(clearGraphPrices())
 })
 

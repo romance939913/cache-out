@@ -19,10 +19,8 @@ class ShowPage extends React.Component {
     // this.props.receiveAdvancedStats(this.props.ticker);
     this.props.clearGraphPrices();
     this.props.receiveDay(`${this.props.ticker}`);
-    this.props.receiveWeek(`${this.props.ticker}`);
-    this.props.receiveMonth(`${this.props.ticker}`);
-    this.props.receiveThreeMonths(`${this.props.ticker}`);
-    this.props.receiveYear(`${this.props.ticker}`);
+    this.props.receiveWeek(this.props.ticker);
+    this.props.receiveHistorical(this.props.ticker)
   }
 
   componentDidUpdate(previousProps) {
@@ -34,10 +32,8 @@ class ShowPage extends React.Component {
       // this.props.receiveFinancials(this.props.ticker);
       // this.props.receiveAdvancedStats(this.props.ticker);
       this.props.receiveDay(`${this.props.ticker}`);
-      this.props.receiveWeek(`${this.props.ticker}`);
-      this.props.receiveMonth(`${this.props.ticker}`);
-      this.props.receiveThreeMonths(`${this.props.ticker}`);
-      this.props.receiveYear(`${this.props.ticker}`);
+      this.props.receiveWeek(this.props.ticker);
+      this.props.receiveHistorical(this.props.ticker)
     }
   }
 
@@ -68,9 +64,7 @@ class ShowPage extends React.Component {
       // || this.props.financials.length === 0
       || !this.props.graphPrices['Day']
       || !this.props.graphPrices['Week']
-      || !this.props.graphPrices['Month']
-      || !this.props.graphPrices['ThreeMonths']
-      || !this.props.graphPrices['Year']
+      || !this.props.graphPrices['Historical']
       || this.props.price[this.props.ticker] === undefined) {
         return (
           <div className="show-page-loading">

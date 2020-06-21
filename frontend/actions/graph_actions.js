@@ -1,19 +1,13 @@
 import { fetchStockDay, 
         fetchStockWeek,
-        fetchStockMonth,
-        fetchStockThreeMonths,
-        fetchStockYear,
-        fetchStockFiveYears, 
+        fetchstockHistorical, 
         fetchNews, 
         fetchSnapshots} from "../util/graph_api_util"
 
 export const RECEIVE_DAY = "RECEIVE_DAY";
 export const RECEIVE_DAYS = "RECEIVE_DAYS";
 export const RECEIVE_WEEK = "RECEIVE_WEEK";
-export const RECEIVE_MONTH = "RECEIVE_MONTH";
-export const RECEIVE_THREE_MONTHS = "RECEIVE_THREE_MONTHS";
-export const RECEIVE_YEAR = "RECEIVE_YEAR";
-export const RECEIVE_FIVE_YEARS = "RECEIVE_FIVE_YEARS";
+export const RECEIVE_HISTORICAL = "RECEIVE_HISTORICAL";
 export const CLEAR_GRAPH_PRICES = "CLEAR_GRAPH_PRICES";
 export const RECEIVE_SNAPSHOTS = "RECEIVE_SNAPSHOTS";
 export const RECEIVE_NEWS = "RECEIVE_NEWS";
@@ -33,23 +27,8 @@ const receiveTheWeek = prices => ({
     prices
 })
 
-const receiveTheMonth = prices => ({
-    type: RECEIVE_MONTH,
-    prices
-})
-
-const receiveTheThreeMonths = prices => ({
-    type: RECEIVE_THREE_MONTHS,
-    prices
-})
-
-const receiveTheYear = prices => ({
-    type: RECEIVE_YEAR,
-    prices
-})
-
-const receiveTheFiveYears = prices => ({
-    type: RECEIVE_FIVE_YEARS,
+const receiveTheHistorical = prices => ({
+    type: RECEIVE_HISTORICAL,
     prices
 })
 
@@ -76,17 +55,8 @@ export const receiveMultipleDays = (ticker) => dispatch => fetchStockDay(ticker)
 export const receiveWeek = (ticker) => dispatch => fetchStockWeek(ticker)
     .then(prices => dispatch(receiveTheWeek(prices)))
 
-export const receiveMonth = (ticker) => dispatch => fetchStockMonth(ticker)
-    .then(prices => dispatch(receiveTheMonth(prices)))
-
-export const receiveThreeMonths = (ticker) => dispatch => fetchStockThreeMonths(ticker)
-    .then(prices => dispatch(receiveTheThreeMonths(prices)))
-
-export const receiveYear = (ticker) => dispatch => fetchStockYear(ticker)
-    .then(prices => dispatch(receiveTheYear(prices)))
-
-export const receiveFiveYears = (ticker) => dispatch => fetchStockFiveYears(ticker)
-    .then(prices => dispatch(receiveTheFiveYears(prices)))
+export const receiveHistorical = ticker => dispatch => fetchstockHistorical(ticker)
+    .then(prices => dispatch(receiveTheHistorical(prices)))
 
 export const receiveNews = () => dispatch => fetchNews()
     .then(news => dispatch(receiveTheNews(news)))
