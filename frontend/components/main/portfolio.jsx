@@ -33,18 +33,27 @@ class Portfolio extends React.Component {
                     data = []
                 } else {
                     data = this.props.graphPrices[ticker]
-
                     data = data.filter(obj => {
-                        let times = obj.minute.split(":");
-                        return parseInt(times[1]) % 5 === 0 && !!obj.close
+                        let oDate = obj.date.split(" ");
+                        if (day === 6) {
+                            let friday = moment(d).subtract(1, 'day')
+                            return moment(oDate[0]).isSame(friday, 'day')
+                        } else if (day === 0) {
+                            let friday = moment(d).subtract(2, 'day')
+                            return moment(oDate[0]).isSame(friday, 'day')
+                        } else {
+                            return moment(oDate[0]).isSame(d, 'day')
+                        }
                     })
 
                     data = data.slice();
                     data = data.reverse();
 
-                    dayDifference = data.slice(-1)[0].close - data[0].close;
-                    percentage = dayDifference / data[0].close;
-                    percentage = numeral(percentage).format('0.00%')
+                    if (data.slice(-1)[0]) {
+                        dayDifference = data.slice(-1)[0].close - data[0].close;
+                        percentage = dayDifference / data[0].close;
+                        percentage = numeral(percentage).format('0.00%')    
+                    }
 
                     if (dayDifference >= 0) {
                         color = '#21ce99'

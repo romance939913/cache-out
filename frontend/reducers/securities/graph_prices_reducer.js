@@ -18,8 +18,7 @@ export const graphPricesReducer = (state = [], action) => {
             nextState['Week'] = action.prices;
             return nextState;
         case RECEIVE_HISTORICAL:
-            debugger
-            nextState['Historical'] = action.prices;
+            nextState['Historical'] = action.prices.historical;
             return nextState;
         case CLEAR_GRAPH_PRICES:
             return [];        
