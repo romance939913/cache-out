@@ -74,7 +74,7 @@ class GraphMain extends React.Component {
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
-            let value = this.props.holdings[ticker].quantity * this.props.price[ticker][0].price;
+            let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
             totalEquity += value;
         });
 
@@ -215,7 +215,7 @@ class GraphMain extends React.Component {
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
             if(this.props.holdings[ticker].quantity !== 0) {
-                let value = this.props.holdings[ticker].quantity * this.props.price[ticker][0].price;
+                let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
                 totalEquity = totalEquity + value;
             }
         });

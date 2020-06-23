@@ -73,7 +73,6 @@ class Portfolio extends React.Component {
                     );
                 }
 
-
                 tickerArr.push(<Link
                     to={`/show/${ticker}`}
                     key={idx}>

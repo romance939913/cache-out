@@ -70,7 +70,7 @@ class ShowPageGraph extends React.Component {
 
         if (startPrice.textContent) {
             start = startPrice.textContent;
-            difference = this.props.price[this.props.ticker][0].price - start;
+            difference = this.props.price[this.props.ticker] - start;
             percentage = difference / start;
             if(difference > 0) {
                 difference = numeral(difference).format('$0,0.00');
@@ -82,7 +82,7 @@ class ShowPageGraph extends React.Component {
                 percentage = numeral(percentage).format('0.00%')
             }
     
-            rtp.textContent = numeral(this.props.price[this.props.ticker][0].price).format('$0,0.00');
+            rtp.textContent = numeral(this.props.price[this.props.ticker]).format('$0,0.00');
             diff.textContent = difference;
             perc.textContent = `(${percentage})`;
         }
@@ -197,7 +197,7 @@ class ShowPageGraph extends React.Component {
         let start;
         if (data[0]) {
             start = data[0].close
-            dayDifference = this.props.price[this.props.ticker][0].price - start;
+            dayDifference = this.props.price[this.props.ticker] - start;
             percentage = dayDifference / start;
             if (dayDifference > 0) {
                 dayDifference = numeral(dayDifference).format('$0,0.00')
@@ -234,7 +234,7 @@ class ShowPageGraph extends React.Component {
         return (
             <div className="graph-wrapper">
                 <h3 className="show-company-name">{this.props.profile.companyName}</h3>
-                <li className="show-stock-price" id="real-time-price">{numeral(this.props.price[this.props.ticker][0].price).format('$0,0.00')}</li>
+                <li className="show-stock-price" id="real-time-price">{numeral(this.props.price[this.props.ticker]).format('$0,0.00')}</li>
                 <div className="show-percentage-and-difference">
                     <li className="show-page-difference" id="show-diff">{dayDifference}</li>
                     <li className="show-page-percentage" id="show-perc">{percentage}</li>

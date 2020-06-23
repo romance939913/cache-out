@@ -28,7 +28,7 @@ export const fetchFinancials = (company) => (
 
 export const fetchRealTimePrice = (company) => (
     $.ajax({
-        url: `https://cors-anywhere.herokuapp.com/https://financialmodelingprep.com/api/v3/quote-short/${company}?apikey=${window.stockapikey}`,
+        url: `https://financialmodelingprep.com/api/v3/quote-short/${company}?apikey=${window.stockapikey}`,
         method: "GET",
         crossDomain: true,
     })
