@@ -55,7 +55,6 @@ class User < ApplicationRecord
       security = JSON.parse(open(url).read)
       assets << security['price'] * holding.quantity
     end
-    debugger
 
     assets.sum + buying_power
   end
