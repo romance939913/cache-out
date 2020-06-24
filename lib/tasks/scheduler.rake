@@ -4,7 +4,6 @@ namespace :scheduler do
     require 'us_bank_holidays'
     require 'time'
     require 'open-uri'
-    require 'byebug'
 
     puts "Adding day's portfolio snapshots..."
 
