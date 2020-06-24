@@ -210,7 +210,7 @@ class GraphMain extends React.Component {
             return null
             }
 
-        let data = this.filterGraphPrices(this.props.snapshots)
+        let data = this.filterGraphPrices(Object.values(this.props.snapshots))
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {

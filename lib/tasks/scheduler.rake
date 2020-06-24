@@ -11,7 +11,6 @@ namespace :scheduler do
     today = Date.today
     next if today.weekend?
     next if today.bank_holiday?
-    debugger
   
     time = Time.now
     timeString = time.to_s

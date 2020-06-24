@@ -31,8 +31,8 @@ class NavSearchForm extends React.Component {
 
         if (userInput.length > 0) {
             companies.forEach((ticker, idx) => {
-                if (ticker.symbol.includes(userInput) || (ticker.symbol !== null
-                    && ticker.symbol.toUpperCase().includes(userInput))) {
+                if (ticker.symbol.includes(userInput) || (ticker.name !== null
+                    && ticker.name.toUpperCase().includes(userInput))) {
                     suggestions.push(
                         <div key={idx}>
                             <Link
