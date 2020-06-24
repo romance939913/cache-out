@@ -1,15 +1,17 @@
 namespace :scheduler do
-  task :add_portfolio_snapshots_for_day => :environment do
+  task :add_portfolio_snapshot => :environment do
     require 'date'
     require 'us_bank_holidays'
     require 'time'
     require 'open-uri'
+    require 'byebug'
 
     puts "Adding day's portfolio snapshots..."
 
     today = Date.today
     next if today.weekend?
     next if today.bank_holiday?
+    debugger
   
     time = Time.now
     timeString = time.to_s
