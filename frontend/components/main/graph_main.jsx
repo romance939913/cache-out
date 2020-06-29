@@ -266,7 +266,7 @@ class GraphMain extends React.Component {
                 data={data}
                 onMouseMove={this.handleHover}
                 onMouseLeave={this.handleMouseLeave}>
-                <Line type="linear" dataKey="close" stroke={color} dot={false} strokeWidth={2}/>
+                <Line type="linear" dataKey="valuation" stroke={color} dot={false} strokeWidth={2}/>
                 <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true}/>
                 <XAxis dataKey='created_at' hide={true} />
                 <Tooltip
