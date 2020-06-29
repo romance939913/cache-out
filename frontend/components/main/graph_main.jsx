@@ -74,7 +74,7 @@ class GraphMain extends React.Component {
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
-            let value = this.props.holdings[ticker].quantity * this.props.price[ticker][0].price;
+            let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
             totalEquity += value;
         });
 
@@ -152,35 +152,28 @@ class GraphMain extends React.Component {
     }
 
     filterGraphPrices(data) {
-        let pricePojo = this.props.graphPrices;
-        data = Object.values(this.props.snapshots)
+        let d = new Date();
+        let timeStr = d.toString();
+        let timeCheck = timeStr.split(" ");
+        timeCheck[4] = '09:20:00';
+        let time = timeCheck.join(" ");
+        let day = d.getDay();
+        let isWeekend = (day === 6) || (day === 0);
 
-        if (this.state.time === "1d" && Object.keys(pricePojo).length > 0) {
-            data = []
-            let allPrices = [];
-            Object.keys(pricePojo).forEach(key => {
-                allPrices.push([key, pricePojo[key]])
+        if (JSON.stringify(data) === '{}') return [];
+        
+        if (this.state.time === "1d" && !isWeekend) {
+            data = data.filter(obj => {
+                return moment(obj.created_at).isSame(d, 'day');
             })
-            let i = 0;
-            while (i < allPrices[0][1].length) {
-                let allHoldingsPresent = true;
-                let close = 0;
-                allPrices.forEach(arr => {
-                    if (arr[1][i].close) {
-                        close += arr[1][i].close * this.props.holdings[arr[0]].quantity;
-                    } else {
-                        allHoldingsPresent = false;
-                    }
-                })
-                close += this.props.buyingPower;
-                if (i % 5 === 0 && allHoldingsPresent) {
-                    data.push({ close,
-                        minute: allPrices[0][1][i]['minute'],
-                        date: allPrices[0][1][i]['date'],
-                    })
-                }
-                i++;
-            }
+        } else if (this.state.time === "1d" && isWeekend) {
+            let friday;
+            day === 6 
+                ? friday = moment().subtract(1, 'days')
+                : friday = moment().subtract(2, 'days');
+            data = data.filter(obj => {
+                return moment(obj.created_at).isSame(friday, 'day');
+            });
         } else if (this.state.time === "1w") {
             let limit = moment().subtract(1, 'weeks')
             data = data.filter((obj, idx) => {
@@ -216,12 +209,12 @@ class GraphMain extends React.Component {
             return null
             }
 
-        let data = this.filterGraphPrices(this.props.graphPrices)
+        let data = this.filterGraphPrices(Object.values(this.props.snapshots))
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
             if(this.props.holdings[ticker].quantity !== 0) {
-                let value = this.props.holdings[ticker].quantity * this.props.price[ticker][0].price;
+                let value = this.props.holdings[ticker].quantity * this.props.price[ticker];
                 totalEquity = totalEquity + value;
             }
         });

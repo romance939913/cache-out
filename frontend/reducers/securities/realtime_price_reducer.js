@@ -7,7 +7,7 @@ export const realTimePriceReducer = (state = [], action) => {
         case CLEAR_REALTIME:
             return [];
         case RECEIVE_REALTIME:
-            nextState[action.symbol] = action.price;
+            nextState[action.symbol] = action.price[0].price;
             return nextState;
         default:
             return state;

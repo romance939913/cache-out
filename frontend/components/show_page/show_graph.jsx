@@ -10,7 +10,6 @@ class ShowPageGraph extends React.Component {
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.changeTimeFrames = this.changeTimeFrames.bind(this);
         this.customToolTip = this.customToolTip.bind(this);
-        this.filterGraphData = this.filterGraphData.bind(this);
         this.state = { 
             time: '1d',
         };
@@ -71,7 +70,7 @@ class ShowPageGraph extends React.Component {
 
         if (startPrice.textContent) {
             start = startPrice.textContent;
-            difference = this.props.price[this.props.ticker][0].price - start;
+            difference = this.props.price[this.props.ticker] - start;
             percentage = difference / start;
             if(difference > 0) {
                 difference = numeral(difference).format('$0,0.00');
@@ -83,7 +82,7 @@ class ShowPageGraph extends React.Component {
                 percentage = numeral(percentage).format('0.00%')
             }
     
-            rtp.textContent = numeral(this.props.price[this.props.ticker][0].price).format('$0,0.00');
+            rtp.textContent = numeral(this.props.price[this.props.ticker]).format('$0,0.00');
             diff.textContent = difference;
             perc.textContent = `(${percentage})`;
         }
@@ -107,31 +106,78 @@ class ShowPageGraph extends React.Component {
             <div className="custom-tooltip">{formatted}</div>
         )
     }
-
-    filterGraphData(data) {
-        if (this.state.time === '1d') {
-            data = data['Day'];
-        } else if (this.state.time === '1w') {
-            data = data['Week'];
-        } else if (this.state.time === '1m') {
-            data = data['Month'];
-        } else if (this.state.time === '3m') {
-            data = data['ThreeMonths'];
-        } else {
-            data = data['Year'];
-        }
-
-        if (this.state.time === "1d") {
-            data = data.filter(obj => {
-                let times = obj.minute.split(":");
-                return parseInt(times[1]) % 5 === 0 && !!obj.close
-            })
-        } 
-        return data;
-    }
     
     render() {
-        let data = this.filterGraphData(this.props.graphPrices);
+        let data;
+        if (this.state.time === '1d') {
+            data = this.props.graphPrices['Day'];
+        } else if (this.state.time === '1w'){
+            data = this.props.graphPrices['Week'];
+        } else {
+            data = this.props.graphPrices['Historical'];
+        }
+
+        let d = new Date();
+        let day = d.getDay();
+        let isWeekend = (day === 6) || (day === 0);  
+        if (this.state.time === "1d" && !isWeekend) {
+            let dayData = data.filter(obj => {
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSame(d, 'day')
+            })
+            dayData = dayData.slice();
+            dayData = dayData.reverse();
+            if (dayData.length === 0) {
+                data = data.filter(obj => {
+                    let oDate = obj.date.split(" ");
+                    let yesterday = moment(d).subtract(1, 'day')
+                    return moment(oDate[0]).isSame(yesterday, 'day')
+                })
+                data = data.slice();
+                data = data.reverse();
+            } else {
+                data = dayData;
+            }
+        } else if (this.state.time === "1d" && isWeekend) {
+            data = data.slice(0, 79);
+            data = data.reverse()
+        } else if (this.state.time === "1w") {
+            data = data.filter(obj => {
+                let limit = moment().subtract(1, 'weeks')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isAfter(limit);
+            })
+            data = data.slice();
+            data = data.reverse();
+        } else if (this.state.time === "1m") {
+            data = data.filter(obj => {
+                let limit = moment().subtract(1, 'months')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSameOrAfter(limit);
+            })
+            data = data.reverse();
+        } else if (this.state.time === "3m") {
+            data = data.filter(obj => {
+                let limit = moment().subtract(3, 'months')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSameOrAfter(limit);
+            })
+            data = data.reverse();
+        } else if (this.state.time === "1y") {
+            data = data.filter(obj => {
+                let limit = moment().subtract(1, 'years')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSameOrAfter(limit);
+            })
+            data = data.reverse();
+        } else if (this.state.time === "5y") {
+            data = data.filter((obj, idx) => {
+                let limit = moment().subtract(5, 'years')
+                let oDate = obj.date.split(" ");
+                return moment(oDate[0]).isSameOrAfter(limit) && idx % 5 === 0;
+            })
+            data = data.reverse();
+        }
 
         let color;
         let docBody = document.body;
@@ -151,7 +197,7 @@ class ShowPageGraph extends React.Component {
         let start;
         if (data[0]) {
             start = data[0].close
-            dayDifference = this.props.price[this.props.ticker][0].price - start;
+            dayDifference = this.props.price[this.props.ticker] - start;
             percentage = dayDifference / start;
             if (dayDifference > 0) {
                 dayDifference = numeral(dayDifference).format('$0,0.00')
@@ -188,7 +234,7 @@ class ShowPageGraph extends React.Component {
         return (
             <div className="graph-wrapper">
                 <h3 className="show-company-name">{this.props.profile.companyName}</h3>
-                <li className="show-stock-price" id="real-time-price">{numeral(this.props.price[this.props.ticker][0].price).format('$0,0.00')}</li>
+                <li className="show-stock-price" id="real-time-price">{numeral(this.props.price[this.props.ticker]).format('$0,0.00')}</li>
                 <div className="show-percentage-and-difference">
                     <li className="show-page-difference" id="show-diff">{dayDifference}</li>
                     <li className="show-page-percentage" id="show-perc">{percentage}</li>
@@ -201,6 +247,7 @@ class ShowPageGraph extends React.Component {
                     <h2 onClick={() => this.changeTimeFrames("1m")} className="stock-time-frame 1m">1M</h2>
                     <h2 onClick={() => this.changeTimeFrames("3m")} className="stock-time-frame 3m">3M</h2>
                     <h2 onClick={() => this.changeTimeFrames("1y")} className="stock-time-frame 1y">1Y</h2>
+                    <h2 onClick={() => this.changeTimeFrames("5y")} className="stock-time-frame 5y">5Y</h2>
                 </ul>
             </div>
         )

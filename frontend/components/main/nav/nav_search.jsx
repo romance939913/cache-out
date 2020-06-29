@@ -31,8 +31,8 @@ class NavSearchForm extends React.Component {
 
         if (userInput.length > 0) {
             companies.forEach((ticker, idx) => {
-                if (ticker.symbol.includes(userInput) || (ticker.company !== null
-                    && ticker.company.toUpperCase().includes(userInput))) {
+                if (ticker.symbol.includes(userInput) || (ticker.name !== null
+                    && ticker.name.toUpperCase().includes(userInput))) {
                     suggestions.push(
                         <div key={idx}>
                             <Link
@@ -41,7 +41,7 @@ class NavSearchForm extends React.Component {
                                 onClick={this.handleClearForm}>
                                 <div className="suggestion-item">
                                     <p className="suggestion-ticker">{ticker.symbol}</p>
-                                    <p>{ticker.company}</p>
+                                    <p>{ticker.name}</p>
                                 </div>
                             </Link>
                         </div>
@@ -52,18 +52,16 @@ class NavSearchForm extends React.Component {
         suggestions = suggestions.slice(0, 6)
         if (this.props.stocks[userInput]) {
             suggestions[0] =
-                (
-                    <div key={10000}>
-                        <Link to={`/show/${this.props.stocks[userInput].symbol}`}
-                            className="suggestion-item-link"
-                            onClick={this.handleClearForm}>
-                            <li className="suggestion-item">
-                                <p className="suggestion-ticker">{this.props.stocks[userInput].symbol}</p>
-                                <p>{this.props.stocks[userInput].company}</p>
-                            </li>
-                        </Link>
-                    </div>
-                )
+                (<div key={10000}>
+                    <Link to={`/show/${this.props.stocks[userInput].symbol}`}
+                        className="suggestion-item-link"
+                        onClick={this.handleClearForm}>
+                        <li className="suggestion-item">
+                            <p className="suggestion-ticker">{this.props.stocks[userInput].symbol}</p>
+                            <p>{this.props.stocks[userInput].name}</p>
+                        </li>
+                    </Link>
+                </div>)
         }
         return suggestions;
     }

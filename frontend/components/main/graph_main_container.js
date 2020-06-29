@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
         indexes: state.entities.indexes,
         indexPrices: state.entities.indexPrices,
         holdings: state.entities.holdings,
-        buyingPower: state.entities.buyingPower
+        buyingPower: state.entities.buyingPower,
+        snapshots: state.entities.snapshots
     }
 }
 

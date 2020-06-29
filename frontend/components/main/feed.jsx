@@ -44,7 +44,7 @@ class MainFeed extends React.Component {
                 </div>
             )
         }
-
+        
         let newsArr = [];
         this.props.news.forEach((ele, idx) => {
             if (this.props.news[idx].urlToImage) {
@@ -72,7 +72,6 @@ class MainFeed extends React.Component {
                         <GraphMainContainer 
                             tickers={Object.keys(this.props.holdings)} 
                             price={this.props.price}
-                            snapshots={this.props.snapshots}
                         />
                         <h1 className="news-header">Today's Top Stories</h1>
                         <div id="news-container-feed" className="news-container">
