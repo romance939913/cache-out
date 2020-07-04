@@ -48,9 +48,9 @@ class GraphMain extends React.Component {
         let startPrice = document.getElementById("main-starting-price");
 
         if (!!startPrice.textContent) {
-            let hoverPrice = numeral(e.activePayload[0].value).format('$0,0.00');
-            let hoverDiff = e.activePayload[0].value - parseInt(startPrice.textContent);
-            let hoverPerc = (e.activePayload[0].value - parseInt(startPrice.textContent)) / parseInt(startPrice.textContent);
+            let hoverPrice = numeral(e.activePayload[0].payload.valuation).format('$0,0.00');
+            let hoverDiff = e.activePayload[0].payload.valuation - parseInt(startPrice.textContent);
+            let hoverPerc = (e.activePayload[0].payload.valuation - parseInt(startPrice.textContent)) / parseInt(startPrice.textContent);
             if (hoverDiff > 0) {
                 hoverDiff = numeral(hoverDiff).format('$0,0.00');
                 hoverPerc = numeral(hoverPerc).format('0.00%');
@@ -82,7 +82,7 @@ class GraphMain extends React.Component {
             let currentPrice = totalEquity + this.props.buyingPower;
             let currentDiff = currentPrice - startPrice.textContent;
             let currentPerc = currentDiff / startPrice.textContent;
-    
+
             if (currentDiff > 0) {
                 currentDiff = numeral(currentDiff).format('$0,0.00')
                 currentPerc = numeral(currentPerc).format('0.00%')
@@ -227,7 +227,7 @@ class GraphMain extends React.Component {
         let docBody = document.body;
 
         if (data[0]) {
-            start = data[0].close;
+            start = data[0].valuation;
             difference = assets - start;
             percentage =  difference / start;
             if (difference > 0) {
@@ -240,7 +240,7 @@ class GraphMain extends React.Component {
                 difference = numeral(difference).format('$0,0.00')
             }
 
-            if (data[0] !== undefined && data[0].close > data.slice(-1)[0].close) {
+            if (data[0] !== undefined && data[0].valuation > data.slice(-1)[0].valuation) {
                 docBody.setAttribute("data-trend", "down");
                 color = '#f45531';
             } else {
