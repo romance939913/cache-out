@@ -2,6 +2,7 @@ import {
     fetchRealTimePrice,
     fetchProfile,
     fetchFinancials,
+    fetchProfileFMP,
     fetchNYSE,
     fetchNasdaq } from "../util/securities_api_util";
 
@@ -45,7 +46,7 @@ export const receiveProfile = (company) => dispatch => fetchProfile(company)
 export const receiveRealTimePrice = (company) => dispatch => fetchRealTimePrice(company)
     .then(price => dispatch(receiveTheRealTimePrice(price, company)));
 
-export const receiveFinancials = (ticker) => dispatch => fetchFinancials(ticker)
+export const receiveFinancials = (ticker) => dispatch => Promise.all([fetchFinancials(ticker), fetchProfileFMP(ticker)])
     .then(financials => dispatch(receiveTheFinancials(financials)))
 
 export const clearRealTimePrice = () => dispatch(clearTheRealTimePrice())

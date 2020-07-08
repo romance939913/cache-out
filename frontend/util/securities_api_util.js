@@ -19,9 +19,17 @@ export const fetchProfile = (company) => (
     })
 )
 
+export const fetchProfileFMP = (company) => (
+    $.ajax({
+        url: `https://financialmodelingprep.com/api/v3/profile/${company}?apikey=${window.stockapikey}`,
+        method: "GET"
+    })
+)
+
+
 export const fetchFinancials = (company) => (
     $.ajax({
-        url: `https://cloud.iexapis.com/stable/stock/${company}/financials?period=annual&token=${window.iexapikey}`,
+        url: `https://financialmodelingprep.com/api/v3/income-statement/${company}?apikey=${window.stockapikey}`,
         method: "GET"
     })
 )

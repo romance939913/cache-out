@@ -15,8 +15,7 @@ class ShowPage extends React.Component {
     this.props.receiveProfile(this.props.ticker);
     this.props.receiveRealTimePrice(this.props.ticker);
     this.props.receiveNews();
-    // this.props.receiveFinancials(this.props.ticker);
-    // this.props.receiveAdvancedStats(this.props.ticker);
+    this.props.receiveFinancials(this.props.ticker);
     this.props.clearGraphPrices();
     this.props.receiveDay(`${this.props.ticker}`);
     this.props.receiveWeek(this.props.ticker);
@@ -29,8 +28,7 @@ class ShowPage extends React.Component {
       this.props.receiveRealTimePrice(this.props.ticker);
       this.props.receiveNews();
       this.props.clearGraphPrices();
-      // this.props.receiveFinancials(this.props.ticker);
-      // this.props.receiveAdvancedStats(this.props.ticker);
+      this.props.receiveFinancials(this.props.ticker);
       this.props.receiveDay(`${this.props.ticker}`);
       this.props.receiveWeek(this.props.ticker);
       this.props.receiveHistorical(this.props.ticker)
@@ -61,7 +59,7 @@ class ShowPage extends React.Component {
     if (this.props.profile.description === undefined
       || JSON.stringify(this.props.price) === '{}'
       || this.props.news.length === 0
-      // || this.props.financials.length === 0
+      || this.props.financials.length === 0
       || !this.props.graphPrices['Day']
       || !this.props.graphPrices['Week']
       || !this.props.graphPrices['Historical']
