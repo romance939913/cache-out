@@ -17,9 +17,9 @@ class GraphMain extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.getOnlyNecessaryTimeFrames(this.props.snapshots);
-    }
+    // componentDidMount() {
+    //     this.getOnlyNecessaryTimeFrames(this.props.snapshots);
+    // }
 
     changeTimeFrames(newFrame) {
         this.setState({ time: newFrame });
