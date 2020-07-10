@@ -100,11 +100,17 @@ class GraphMain extends React.Component {
     
     customToolTip(e) {
         let formatted
-
+        let dayTime
+        if (!!e.label) {
+            let t = e.label.split("T");
+            let tt = t[1].split(":");
+            let makeTen = 10 - parseInt(tt[1][1]);
+            dayTime = moment(e.label).add(makeTen, "minutes");
+        }
         if (this.state.time === "1d") {
-            formatted = moment(e.label).format('LT') + ' ET'; 
+            formatted = moment(dayTime).format('LT') + ' ET';
         } else if (this.state.time === "1w") {
-            formatted = moment(e.label).format('LLL');
+            formatted = moment(dayTime).format('LLL');
         } else {
             formatted = moment(e.label).format('MMM Do, YYYY');
         }
@@ -122,13 +128,13 @@ class GraphMain extends React.Component {
             timeFrames[0].innerHTML = "All";
             let otherTimes = timeFrames.slice(1);
             otherTimes.forEach(time => {
-                time.classList.add("hide")
+                time.classList.add("hide");
             })
         } else if (earliestSnap.isAfter(moment().subtract(1, 'weeks'))) {
             timeFrames[1].innerHTML = "All";
             let otherTimes = timeFrames.slice(2);
             otherTimes.forEach(time => {
-                time.classList.add("hide")
+                time.classList.add("hide");
             })
         } else if (earliestSnap.isAfter(moment().subtract(1, 'months'))) {
             timeFrames[2].innerHTML = "All";
