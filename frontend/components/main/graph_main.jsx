@@ -159,19 +159,18 @@ class GraphMain extends React.Component {
 
     filterGraphPrices(data) {
         let d = new Date();
-        let timeStr = d.toString();
-        let timeCheck = timeStr.split(" ");
-        timeCheck[4] = '09:20:00';
-        let time = timeCheck.join(" ");
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
 
         if (JSON.stringify(data) === '{}') return [];
         
         if (this.state.time === "1d" && !isWeekend) {
-            data = data.filter(obj => {
-                return moment(obj.created_at).isSame(d, 'day');
-            })
+            data = data.filter(obj => moment(obj.created_at).isSame(d, 'day'));
+            // check for pre market
+            if (!data.length) {
+                let yesterday = moment().subtract(1, 'days');
+                data = data.filter(obj => moment(obj.created_at).isSame(yesterday, 'day')); 
+            }
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
             day === 6 
