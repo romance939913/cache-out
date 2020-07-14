@@ -17,9 +17,9 @@ class GraphMain extends React.Component {
         };
     }
 
-    // componentDidMount() {
-    //     this.getOnlyNecessaryTimeFrames(this.props.snapshots);
-    // }
+    componentDidMount() {
+        this.getOnlyNecessaryTimeFrames(this.props.snapshots);
+    }
 
     changeTimeFrames(newFrame) {
         this.setState({ time: newFrame });
@@ -157,6 +157,21 @@ class GraphMain extends React.Component {
         }
     }
 
+    getOnlyDayEndPrice(data) {
+        let newData = [];
+        data = data.forEach(obj => {
+            if (newData.length === 0) {
+                newData.push(obj)
+            } else {
+                if (moment(newData.slice(-1)[0].created_at).dayOfYear() === moment(obj.created_at).dayOfYear()) {
+                    newData.pop();
+                }
+                newData.push(obj)
+            }
+        })
+        return newData
+    }
+
     filterGraphPrices(data) {
         let d = new Date();
         let day = d.getDay();
@@ -195,21 +210,25 @@ class GraphMain extends React.Component {
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit);
             });
+            data = this.getOnlyDayEndPrice(data);
         } else if (this.state.time === "3m") {
             let limit = moment().subtract(3, 'months')
             data = data.filter(obj => {
                 return moment(obj.created_at).isAfter(limit);
             });
+            data = this.getOnlyDayEndPrice(data);
         } else if (this.state.time === "1y") {
             let limit = moment().subtract(1, 'years')
             data = data.filter(obj => {
                 return moment(obj.created_at).isAfter(limit);
             });
+            data = this.getOnlyDayEndPrice(data);
         } else if (this.state.time === "5y") {
             let limit = moment().subtract(5, 'years')
             data = data.filter((obj, idx) => {
                 return moment(obj.created_at).isAfter(limit)
             });
+            data = this.getOnlyDayEndPrice(data);
         }
         return data
     }
