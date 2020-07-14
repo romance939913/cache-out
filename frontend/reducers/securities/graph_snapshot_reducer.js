@@ -7,7 +7,7 @@ export const graphSnapshotReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_SNAPSHOTS:
-            return action.snapshots;
+            return Object.values(action.snapshots);
         case CLEAR_GRAPH_PRICES:
             return [];
         default:

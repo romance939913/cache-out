@@ -180,9 +180,15 @@ class GraphMain extends React.Component {
                 return moment(obj.created_at).isSame(friday, 'day');
             });
         } else if (this.state.time === "1w") {
-            let limit = moment().subtract(1, 'weeks')
-            data = data.filter((obj, idx) => {
-                return moment(obj.created_at).isAfter(limit);
+            data = data.filter(obj => {
+                let t = obj.created_at.split("T");
+                let tt = t[1].split(":");
+                let keep
+                parseInt(tt[1]) >= 20 && parseInt(tt[1]) < 30 || parseInt(tt[1]) >= 50
+                    ? keep = true
+                    : keep = false;
+                let limit = moment().subtract(1, 'weeks')
+                return moment(obj.created_at).isAfter(limit) && keep;
             });
         } else if (this.state.time === "1m") {
             let limit = moment().subtract(1, 'months')
@@ -214,7 +220,7 @@ class GraphMain extends React.Component {
             return null
             }
 
-        let data = this.filterGraphPrices(Object.values(this.props.snapshots))
+        let data = this.filterGraphPrices(this.props.snapshots);
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
