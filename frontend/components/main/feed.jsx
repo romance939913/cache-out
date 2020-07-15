@@ -31,8 +31,7 @@ class MainFeed extends React.Component {
         if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length
             || Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length
             || this.props.cash.length === 0
-            || this.props.news.length === 0
-            || this.props.snapshots.length === 0) {
+            || this.props.news.length === 0) {
             return (
                 <div className="show-page-loading">
                     <RingLoader
