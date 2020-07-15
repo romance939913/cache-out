@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class Signup extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemoSignin = this.handleDemoSignin.bind(this);
     this.responseGoogle = this.responseGoogle.bind(this);
+    this.responseFacebook = this.responseFacebook.bind(this);
     this.responseErrorGoogle = this.responseErrorGoogle.bind(this);
   }
 
@@ -40,6 +42,15 @@ class Signup extends React.Component {
       username: response.profileObj.givenName,
       email: response.profileObj.email,
       password: `g$${response.profileObj.googleId}`
+    })
+  }
+
+  responseFacebook(response) {
+    let firstName = response.name.split(" ")[0];
+    this.setState({
+      username: firstName,
+      email: response.email,
+      password: `f$${response.id}`
     })
   }
 
@@ -94,7 +105,7 @@ class Signup extends React.Component {
           className="quantity-chooser signup-input-field"
           onChange={this.update('buying_power')}
           />
-          <div className="signup-submit-container">
+          <div className="oauth-signup-container">
             <GoogleLogin
               clientId="254946018512-0dqs14at73oms2h69u8ugpjoir67935g.apps.googleusercontent.com"
               buttonText="Use Google Credentials"
@@ -102,13 +113,32 @@ class Signup extends React.Component {
               onSuccess={this.responseGoogle}
               onFailure={this.responseErrorGoogle}
               cookiePolicy={'single_host_origin'}
+              render={renderProps => (
+                <button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  className="oauth-signup google-signup"
+                >Google Credentials</button>
+              )}
             />
-            <input
-              type="submit"
-              value="Get Started"
-              className="signup-submit"
+            <FacebookLogin
+              appId="310290627021497"
+              autoLoad={false}
+              fields="name,email,picture"
+              callback={this.responseFacebook} 
+              render={renderProps => (
+                <button
+                  className="oauth-signup facebook-signup"
+                  onClick={renderProps.onClick}
+                >Facebook Credentials</button>
+              )}
             />
           </div>
+          <input
+            type="submit"
+            value="Get Started"
+            className="signup-submit"
+          />
           <div className="signup-alternatives">
             <p className="already-a-user" onClick={this.handleDemoSignin}>Demo User</p>
             <Link to="/signin"><p className="already-a-user">Already a user? Sign in here</p></Link>

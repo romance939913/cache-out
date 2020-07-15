@@ -50,36 +50,47 @@
     outline: none;
 }
 
-.google-signup-button {
-    box-sizing: content-box;
-    background-color: #21ce99;
-    border-color: #21ce99;
-    color: white;
-    font-weight: 500;
-    border-radius: 4px;
-    font-size: 13px;
-    cursor: pointer;
-    align-items: center;
-    border: 1px solid transparent;
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    min-width: 120px;
-    padding: 0 15px;
-    margin: 0 25px 0 0;
-    width: 50%
+.oauth-signup-container {
+  width: 100%;
+  min-width: 480px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.oauth-signup {
+  width: 49%;
+  padding: 15px 20px 15px 20px;
+}
+
+.facebook-signup {
+  background-color: #3b5998;
+  color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.google-signup {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .signup-submit {
     cursor: pointer;
     box-sizing: border-box;
-    width: 50%;
+    width: 100%;
     background-color: #21ce99;
     border-color: #21ce99;
     color: white;
     font-weight: 500;
     border-radius: 4px;
     font-size: 18px;
+    padding: 15px 20px 15px 20px;
+    outline: none;
 }
 
 .signup-submit-container {
@@ -98,11 +109,13 @@
 .signup-alternatives {
     display: flex;
 }
+
 .session-errors {
     font-size: 13px;
     color: #f45531;
     padding: 0 10px 0 10px;
 }
+
 .signin-errors-arr {
     display: flex;
     justify-content: center;
