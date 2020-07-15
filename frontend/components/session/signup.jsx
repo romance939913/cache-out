@@ -13,6 +13,8 @@ class Signup extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemoSignin = this.handleDemoSignin.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
+    this.responseErrorGoogle = this.responseErrorGoogle.bind(this);
   }
 
   update(field) {
@@ -33,6 +35,19 @@ class Signup extends React.Component {
     setTimeout(() => { this.props.clearSessionErrors() }, 3000);
   }
 
+  responseGoogle(response) {
+    this.setState({
+      username: response.profileObj.givenName,
+      email: response.profileObj.email,
+      password: `g$${response.profileObj.googleId}`
+    })
+  }
+
+  responseErrorGoogle(response) {
+    console.log('google signup error');
+    console.log(response);
+  }
+
   render() {
     const errorsArr = [];
     this.props.errors.map((error, i) => {
@@ -42,13 +57,6 @@ class Signup extends React.Component {
       </p>)
     });
 
-    const responseGoogle = (response) => {
-      this.setState({
-        username: response.Tt.sW,
-        email: response.Tt.Du,
-        password: `google-${response.googleId}`
-      })
-    }
     return(
       <div className="signup-page-body">
         <form className="signup-form" onSubmit={this.handleSubmit}>
@@ -91,8 +99,8 @@ class Signup extends React.Component {
               clientId="254946018512-0dqs14at73oms2h69u8ugpjoir67935g.apps.googleusercontent.com"
               buttonText="Use Google Credentials"
               className="google-signup-button"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseErrorGoogle}
               cookiePolicy={'single_host_origin'}
             />
             <input

@@ -9,8 +9,9 @@ class Signin extends React.Component {
         username: '',
         password: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleDemoSignin = this.handleDemoSignin.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemoSignin = this.handleDemoSignin.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
   }
 
   update(field) {
@@ -29,6 +30,22 @@ class Signin extends React.Component {
     const user = Object.assign({}, this.state);
     this.props.signin(user);
     setTimeout(() => { this.props.clearSessionErrors() }, 3000);
+  }
+
+  responseGoogle(response) {
+    console.log(response);
+    debugger
+    const user = {
+      username: response.profileObj.givenName,
+      password: `g$${response.profileObj.googleId}`
+    }
+    this.props.signin(user);
+    setTimeout(() => { this.props.clearSessionErrors() }, 3000);
+  }
+
+  responseErrorGoogle(response) {
+    console.log("google response error");
+    console.log(response);
   }
 
   renderErrors() {
@@ -51,15 +68,6 @@ class Signin extends React.Component {
         {error}
       </li>)
     })
-
-    const responseGoogle = (response) => {
-      const user = {
-        username: response.Tt.sW,
-        password: `google-${response.googleId}`
-      }
-      this.props.signin(user);
-      setTimeout(() => { this.props.clearSessionErrors() }, 3000);
-    }
 
     return(
       <div className="signin-container">
@@ -99,8 +107,8 @@ class Signin extends React.Component {
                   clientId="254946018512-0dqs14at73oms2h69u8ugpjoir67935g.apps.googleusercontent.com"
                   buttonText="Login with Google Credentials"
                   className="google-login-button"
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseErrorGoogle}
                   cookiePolicy={'single_host_origin'}
                 />
               </div>
