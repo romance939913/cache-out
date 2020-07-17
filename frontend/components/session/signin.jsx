@@ -13,6 +13,7 @@ class Signin extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemoSignin = this.handleDemoSignin.bind(this);
     this.responseGoogle = this.responseGoogle.bind(this);
+    this.responseFacebook = this.responseFacebook.bind(this);
     this.responseErrorGoogle = this.responseErrorGoogle.bind(this);
   }
 

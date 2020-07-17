@@ -23,6 +23,7 @@
     height: 100vh;
     width: 75vw;
 }
+
 .signin-container {
     display: flex;
 }
@@ -76,13 +77,13 @@
 .signin-input-field:focus {
     border: 3px solid #21ce99;
     outline: none;
-} 
+}
 
 .signin-submit-container {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} 
 
 .signin-submit {
     width: 100%;
