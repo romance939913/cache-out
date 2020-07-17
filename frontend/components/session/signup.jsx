@@ -38,20 +38,28 @@ class Signup extends React.Component {
   }
 
   responseGoogle(response) {
-    this.setState({
+    let user = {
       username: response.profileObj.givenName,
       email: response.profileObj.email,
-      password: `g$${response.profileObj.googleId}`
-    })
+      password: `g$${response.profileObj.googleId}`,
+      buying_power: 1000000
+    };
+    this.props.signup(user);
+    setTimeout(() => { this.props.clearSessionErrors() }, 3000);
+
   }
 
   responseFacebook(response) {
     let firstName = response.name.split(" ")[0];
-    this.setState({
+    let user = {
       username: firstName,
       email: response.email,
-      password: `f$${response.id}`
-    })
+      password: `f$${response.id}`,
+      buying_power: 1000000
+    };
+    this.props.signup(user);
+    setTimeout(() => { this.props.clearSessionErrors() }, 3000);
+
   }
 
   responseErrorGoogle(response) {
@@ -70,41 +78,49 @@ class Signup extends React.Component {
 
     return(
       <div className="signup-page-body">
-        <form className="signup-form" onSubmit={this.handleSubmit}>
-          <div className="money-move">
-            <img className="sign-up-logo" src={window.logo_pic} alt=""/>
-            <h3>Make your Money Move</h3>
-          </div>
-          <p className="signup-description">Cache Out lets you practice investing with all the companies you know and love.</p>
-          <input 
-          type="text"
-          placeholder="username"
-          className="signup-input-field"
-          value={this.state.username}
-          onChange={this.update('username')}
-          />
-          <input 
-          type="text"
-          placeholder="email address"
-          className="signup-input-field"
-          value={this.state.email}
-          onChange={this.update('email')}
-          />
-          <input 
-          type="password"
-          placeholder="password (min. 6 characters)"
-          className="signup-input-field"
-          value={this.state.password}
-          onChange={this.update('password')}
-          />
-          <input 
-          type="number"
-          placeholder="Initial buying power (up to ten million)"
-          min="0"
-          max="10000000"
-          className="quantity-chooser signup-input-field"
-          onChange={this.update('buying_power')}
-          />
+        <div className="signup-form-container">
+          <form className="signup-form" onSubmit={this.handleSubmit}>
+            <div className="money-move">
+              <img className="sign-up-logo" src={window.logo_pic} alt=""/>
+              <h3>Make your Money Move</h3>
+            </div>
+            <p className="signup-description">Cache Out lets you practice investing with all the companies you know and love.</p>
+            <input 
+              type="text"
+              placeholder="username"
+              className="signup-input-field make-readonly"
+              value={this.state.username}
+              onChange={this.update('username')}
+            />
+            <input 
+              type="text"
+              placeholder="email address"
+              className="signup-input-field make-readonly"
+              value={this.state.email}
+              onChange={this.update('email')}
+              readOnly
+            />
+            <input 
+              type="password"
+              placeholder="password (min. 6 characters)"
+              className="signup-input-field make-readonly"
+              value={this.state.password}
+              onChange={this.update('password')}
+            />
+            <input 
+              type="number"
+              placeholder="Initial buying power (up to ten million)"
+              min="0"
+              max="10000000"
+              className="quantity-chooser signup-input-field"
+              onChange={this.update('buying_power')}
+            />
+            <input
+              type="submit"
+              value="Get Started"
+              className="signup-submit"
+            />
+          </form>
           <div className="oauth-signup-container">
             <GoogleLogin
               clientId="254946018512-0dqs14at73oms2h69u8ugpjoir67935g.apps.googleusercontent.com"
@@ -125,20 +141,16 @@ class Signup extends React.Component {
               appId="310290627021497"
               autoLoad={false}
               fields="name,email,picture"
-              callback={this.responseFacebook} 
+              callback={this.responseFacebook}
               render={renderProps => (
                 <button
-                  className="oauth-signup facebook-signup"
                   onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  className="oauth-signup facebook-signup"
                 >Facebook Credentials</button>
               )}
             />
           </div>
-          <input
-            type="submit"
-            value="Get Started"
-            className="signup-submit"
-          />
           <div className="signup-alternatives">
             <p className="already-a-user" onClick={this.handleDemoSignin}>Demo User</p>
             <Link to="/signin"><p className="already-a-user">Already a user? Sign in here</p></Link>
@@ -147,8 +159,7 @@ class Signup extends React.Component {
             <p className="placeholder-yo">yo</p>
             {errorsArr}
           </div>
-        </form>
-
+        </div>
       </div>
     )
   }

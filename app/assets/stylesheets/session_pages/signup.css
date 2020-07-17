@@ -9,11 +9,17 @@
     font-family: sans-serif;
 }
 
+.signup-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .signup-form {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    flex-basis: 50vw;
     min-width: 470px;
     white-space: nowrap;
     align-items: center;
@@ -90,6 +96,7 @@
     border-radius: 4px;
     font-size: 18px;
     padding: 15px 20px 15px 20px;
+    margin-bottom: 15px;
     outline: none;
 }
 

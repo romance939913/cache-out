@@ -70,7 +70,7 @@
     margin-top: 2%;
     margin-bottom: 2.5%;
     height: 15.5%;
-    outline: none
+    outline: none;
 }
 
 .signin-input-field:focus {
@@ -81,10 +81,11 @@
 .signin-submit-container {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .signin-submit {
-    width: 100px;
+    width: 100%;
     box-sizing: content-box;
     background-color: #21ce99;
     border-color: #21ce99;
@@ -100,27 +101,34 @@
     justify-content: center;
     min-width: 120px;
     padding: 0 15px;
-    margin: 0 25px 0 0;
+    margin-bottom: 15px;
 }
 
-.google-login-button {
-    width: 250px;
-    box-sizing: content-box;
-    background-color: #21ce99;
-    border-color: #21ce99;
-    color: white;
-    font-weight: 500;
-    border-radius: 4px;
-    font-size: 13px;
-    cursor: pointer;
-    align-items: center;
-    border: 1px solid transparent;
-    height: 48px;
+.oauth-signin-container {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    min-width: 120px;
-    padding: 0 15px;
-    margin: 0 25px 0 0;
+    justify-content: space-between;
+}
+
+.oauth-signin {
+    width: 49%;
+    padding: 15px 20px 15px 20px;
+}
+
+.google-signin {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.facebook-signin {
+  background-color: #3b5998;
+  color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .google-login-button:focus {
@@ -132,6 +140,7 @@
     color: #21ce99;
     font-size: 13px;
     cursor: pointer;
+    margin-bottom: 35px;
 }
 
 /* iphones */
