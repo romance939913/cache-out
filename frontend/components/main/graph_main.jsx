@@ -185,6 +185,8 @@ class GraphMain extends React.Component {
             if (!data2.length) {
                 let yesterday = moment().subtract(1, 'days');
                 data = data.filter(obj => moment(obj.created_at).isSame(yesterday, 'day')); 
+                let preMarketTag = document.getElementById("day-premarket-tag");
+                preMarketTag.classList.remove("hide")
             } else {
                 data = data2;
             }
@@ -312,6 +314,7 @@ class GraphMain extends React.Component {
                 <div className="main-percentage-and-difference">
                     <p className="main-page-difference" id="main-diff">{difference}</p>
                     <p className="main-page-percentage" id="main-perc">{percentage}</p>
+                    <p className="hide" id="day-premarket-tag">(premarket)</p>
                     <li className="hide" id="main-starting-price">{start}</li>
                 </div>
                 {renderLineChart}
