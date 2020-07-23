@@ -180,11 +180,13 @@ class GraphMain extends React.Component {
         if (JSON.stringify(data) === '{}') return [];
         
         if (this.state.time === "1d" && !isWeekend) {
-            data = data.filter(obj => moment(obj.created_at).isSame(d, 'day'));
+            let data2 = data.filter(obj => moment(obj.created_at).isSame(d, 'day'));
             // check for pre market
-            if (!data.length) {
+            if (!data2.length) {
                 let yesterday = moment().subtract(1, 'days');
                 data = data.filter(obj => moment(obj.created_at).isSame(yesterday, 'day')); 
+            } else {
+                data = data2;
             }
         } else if (this.state.time === "1d" && isWeekend) {
             let friday;
