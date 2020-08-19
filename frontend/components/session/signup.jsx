@@ -98,7 +98,6 @@ class Signup extends React.Component {
               className="signup-input-field make-readonly"
               value={this.state.email}
               onChange={this.update('email')}
-              readOnly
             />
             <input 
               type="password"
