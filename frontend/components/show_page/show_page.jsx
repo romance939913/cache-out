@@ -19,7 +19,7 @@ class ShowPage extends React.Component {
     this.props.clearGraphPrices();
     this.props.receiveDay(`${this.props.ticker}`);
     this.props.receiveWeek(this.props.ticker);
-    this.props.receiveHistorical(this.props.ticker)
+    this.props.receiveHistorical(this.props.ticker);
   }
 
   componentDidUpdate(previousProps) {
@@ -59,22 +59,21 @@ class ShowPage extends React.Component {
     if (this.props.profile.description === undefined
       || JSON.stringify(this.props.price) === '{}'
       || this.props.news.length === 0
-      || this.props.financials.length === 0
       || !this.props.graphPrices['Day']
       || !this.props.graphPrices['Week']
       || !this.props.graphPrices['Historical']
       || this.props.price[this.props.ticker] === undefined) {
-        return (
-          <div className="show-page-loading">
-            <RingLoader
-              css={""}
-              size={150}
-              color={"#21ce99"}
-              loading={true}
-            />
-          </div>
-        )
-      } 
+      return (
+        <div className="show-page-loading">
+          <RingLoader
+            css={""}
+            size={150}
+            color={"#21ce99"}
+            loading={true}
+          />
+        </div>
+      )
+    } 
 
     let newsArr = [];
     this.props.news.forEach((ele, idx) => {
@@ -142,7 +141,7 @@ class ShowPage extends React.Component {
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Market Cap</h2>
-                      <li>{numeral(this.props.financials.mktCap).format('$0.00a')}</li>
+                    <li>{numeral(this.props.financials.mktCap).format('$0.00a')}</li>
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Average Volume</h2>
