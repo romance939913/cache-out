@@ -5,7 +5,7 @@ class SplashCover extends React.Component {
   constructor(props) {
     super(props);
     this.handleDemoSignin = this.handleDemoSignin.bind(this);
-    this.handleEmailWaitlist = this.handleEmailWaitlist.bind(this);
+    // this.handleEmailWaitlist = this.handleEmailWaitlist.bind(this);
     this.update = this.update.bind(this);
     this.state = {
       email: ''
@@ -25,18 +25,18 @@ class SplashCover extends React.Component {
     }
   }
 
-  handleEmailWaitlist() {
-    if (this.state.email !== '') {
-      let button = document.getElementById("fractional-shares-email-submit");
-      button.innerText = "You're in!";
-      setTimeout(() => {
-        button.innerText = "Get early access"
-      }, 2000)
-      this.setState({
-        email: ''
-      })
-    }
-  }
+  // handleEmailWaitlist() {
+  //   if (this.state.email !== '') {
+  //     let button = document.getElementById("fractional-shares-email-submit");
+  //     button.innerText = "You're in!";
+  //     setTimeout(() => {
+  //       button.innerText = "Get early access"
+  //     }, 2000)
+  //     this.setState({
+  //       email: ''
+  //     })
+  //   }
+  // }
 
   render() {
     return(
@@ -90,20 +90,30 @@ class SplashCover extends React.Component {
                 <p className="fractional-shares-p">Investing in fractional shares is real-time and, as always, commission-free.</p>
               </div>
             </div>
-            <div className="fractional-input-div">
-              <input 
-                placeholder="enter your email" 
-                type="text"
-                value={this.state.email}
-                onChange={this.update("email")}
-                className="fractional-shares-input"
-              />
-              <p 
-                id="fractional-shares-email-submit"
-                className="splash-navigation-sign-up"
-                onClick={this.handleEmailWaitlist}
-              >Get Early Access</p>
-            </div>
+            <form action="https://gmail.us17.list-manage.com/subscribe/post" method="POST" noValidate>
+              <input type="hidden" name="u" value="c610e7736124222478f6f337c" />
+              <input type="hidden" name="id" value="742a2e0494" />
+              <div className="fractional-input-div">
+                <label htmlFor='MERGE0'>
+                  <input 
+                    placeholder="enter your email" 
+                    type="text"
+                    id="MERGE0"
+                    value={this.state.email}
+                    onChange={this.update("email")}
+                    autoCapitalize="off" 
+                    className="fractional-shares-input"
+                  /> 
+                </label>
+                <input 
+                  type="submit" 
+                  value="Subscribe" 
+                  name="subscribe" 
+                  id="mc-embedded-subscribe"  
+                  className="splash-navigation-sign-up"
+                />
+              </div>
+            </form>
           </div>
           <img 
             src={window.partial_shares_pic} 
