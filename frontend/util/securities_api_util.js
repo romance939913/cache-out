@@ -41,3 +41,15 @@ export const fetchRealTimePrice = (company) => (
         crossDomain: true,
     })
 )
+
+export const fetchRealTimePrices = (companies) => {
+    let commaSeparatedString = `${companies[0]}`
+    companies.slice(1).forEach(comp => {
+        commaSeparatedString += `,${comp}`
+    })
+    return $.ajax({
+        url: `https://financialmodelingprep.com/api/v3/quote-short/${commaSeparatedString}?apikey=${window.stockapikey}`,
+        method: "GET",
+        crossDomain: true,
+    })
+}

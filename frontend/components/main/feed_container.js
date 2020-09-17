@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { getHoldings, getUserBP } from '../../actions/holding_actions';
 import MainFeed from './feed';
 import { receiveNews, receiveSnapshots, clearGraphPrices, receiveMultipleDays } from '../../actions/graph_actions';
-import { clearRealTimePrice, receiveRealTimePrice } from '../../actions/security_actions';
+import { clearRealTimePrice, receiveRealTimePrice, receiveRealTimePrices } from '../../actions/security_actions';
 
 receiveMultipleDays
 const mapStateToProps = state => ({
@@ -18,6 +18,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getHoldings: (holding) => dispatch(getHoldings(holding)),
     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
+    receiveRealTimePrices: (ticker) => dispatch(receiveRealTimePrices(ticker)),
     receiveMultipleDays: (ticker) => dispatch(receiveMultipleDays(ticker)),
     getUserBP: (user) => dispatch(getUserBP(user)),
     receiveNews: () => dispatch(receiveNews()),

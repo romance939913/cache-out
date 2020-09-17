@@ -15,10 +15,9 @@ class MainFeed extends React.Component {
         this.props.receiveSnapshots(this.props.currentUser.id)
         this.props.getHoldings(holding)
             .then(holdings => {
-                Object.keys(holdings.holdings).forEach(ticker => {
-                    this.props.receiveRealTimePrice(ticker)
-                    this.props.receiveMultipleDays(ticker)
-                })
+                let arr = Object.keys(holdings.holdings)
+                this.props.receiveRealTimePrices(arr)
+                arr.forEach(ticker => this.props.receiveMultipleDays(ticker))
             })
     }
 
