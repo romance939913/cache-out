@@ -14,6 +14,7 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-facebook-login": "^4.1.1",
+    "react-ga": "^3.2.1",
     "react-google-login": "^5.1.20",
     "react-odometerjs": "^2.1.1",
     "react-redux": "^7.2.0",
