@@ -2,6 +2,7 @@ import React from 'react';
 import GraphMainContainer from './graph_main_container';
 import PortfolioContainer from './portfolio_container';
 import RingLoader from "react-spinners/RingLoader";
+import Navbar from '../main/nav/nav_container'
 
 class MainFeed extends React.Component {
 
@@ -32,13 +33,16 @@ class MainFeed extends React.Component {
             || this.props.cash.length === 0
             || this.props.news.length === 0) {
             return (
-                <div className="show-page-loading">
-                    <RingLoader
-                        css={""}
-                        size={150}
-                        color={"#21ce99"}
-                        loading={true}
-                    />
+                <div>
+                    <Navbar />
+                    <div className="show-page-loading">
+                        <RingLoader
+                            css={""}
+                            size={150}
+                            color={"#21ce99"}
+                            loading={true}
+                        />
+                    </div>
                 </div>
             )
         }
@@ -65,24 +69,27 @@ class MainFeed extends React.Component {
             
         return (
             <div>
-                <div className="main-page-wrapper">
-                    <div className="graph-news-wrapper">
-                        <GraphMainContainer 
-                            tickers={Object.keys(this.props.holdings)} 
-                            price={this.props.price}
-                        />
-                        <h1 className="news-header">Today's Top Stories</h1>
-                        <div id="news-container-feed" className="news-container">
-                            {newsArr}
+                <Navbar />
+                <div>
+                    <div className="main-page-wrapper">
+                        <div className="graph-news-wrapper">
+                            <GraphMainContainer 
+                                tickers={Object.keys(this.props.holdings)} 
+                                price={this.props.price}
+                            />
+                            <h1 className="news-header">Today's Top Stories</h1>
+                            <div id="news-container-feed" className="news-container">
+                                {newsArr}
+                            </div>
                         </div>
-                    </div>
-                    <div className="portfolio-wrapper">
-                        <PortfolioContainer 
-                            price={this.props.price}
-                            tickers={Object.keys(this.props.holdings)}
-                            graphPrices={this.props.graphPrices}
-                            holdings={this.props.holdings}
-                        />
+                        <div className="portfolio-wrapper">
+                            <PortfolioContainer 
+                                price={this.props.price}
+                                tickers={Object.keys(this.props.holdings)}
+                                graphPrices={this.props.graphPrices}
+                                holdings={this.props.holdings}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

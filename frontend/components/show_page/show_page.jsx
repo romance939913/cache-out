@@ -3,6 +3,7 @@ import ShowPageGraph from './show_graph_container';
 import TransactionContainer from './transaction_container';
 import numeral from 'numeral';
 import RingLoader from "react-spinners/RingLoader";
+import Navbar from '../main/nav/nav_container'
 
 class ShowPage extends React.Component {
   constructor(props) {
@@ -64,13 +65,16 @@ class ShowPage extends React.Component {
       || !this.props.graphPrices['Historical']
       || this.props.price[this.props.ticker] === undefined) {
       return (
-        <div className="show-page-loading">
-          <RingLoader
-            css={""}
-            size={150}
-            color={"#21ce99"}
-            loading={true}
-          />
+        <div>
+          <Navbar />
+          <div className="show-page-loading">
+            <RingLoader
+              css={""}
+              size={150}
+              color={"#21ce99"}
+              loading={true}
+            />
+          </div>
         </div>
       )
     } 
@@ -96,6 +100,8 @@ class ShowPage extends React.Component {
     })
       
     return (
+      <div>
+        <Navbar />
         <div>
           <div className="show-page-body-wrapper">
             <div className="graph-transaction-wrapper">
@@ -196,6 +202,7 @@ class ShowPage extends React.Component {
             </div>
           </div>
         </div>
+      </div>
       );
   }
 }
