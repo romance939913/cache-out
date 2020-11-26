@@ -25,57 +25,53 @@ class Portfolio extends React.Component {
 
         this.props.tickers.forEach((ticker, idx) => {
             if (this.props.holdings[ticker].quantity !== 0) {
-                let data;
+                let data = this.props.graphPrices[ticker]
                 let dayDifference;
                 let percentage;
                 let color;
                 let renderLineChart
-                if (hd.type === 'public' || hd.type === 'bank') {
-                    let lastTradingDay = moment(this.props.graphPrices[ticker][0].date.split(" ")[0])
-                    // console.log(lastTradingDay)
-                    // debugger
-                    data = []
-                } else {
-                    data = this.props.graphPrices[ticker]
-                    data = data.filter(obj => {
-                        let oDate = obj.date.split(" ");
-                        if (day === 6) {
-                            let friday = moment(d).subtract(1, 'day')
-                            return moment(oDate[0]).isSame(friday, 'day')
-                        } else if (day === 0) {
-                            let friday = moment(d).subtract(2, 'day')
-                            return moment(oDate[0]).isSame(friday, 'day')
-                        } else {
-                            return moment(oDate[0]).isSame(d, 'day')
-                        }
-                    })
 
-                    data = data.slice();
-                    data = data.reverse();
-
-                    if (data.slice(-1)[0]) {
-                        dayDifference = data.slice(-1)[0].close - data[0].close;
-                        percentage = dayDifference / data[0].close;
-                        percentage = numeral(percentage).format('0.00%')    
-                    }
-
-                    if (dayDifference >= 0) {
-                        color = '#21ce99'
+                data = data.filter(obj => {
+                    let oDate = obj.date.split(" ");
+                    if (day === 6) {
+                        let friday = moment(d).subtract(1, 'day')
+                        return moment(oDate[0]).isSame(friday, 'day')
+                    } else if (day === 0) {
+                        let friday = moment(d).subtract(2, 'day')
+                        return moment(oDate[0]).isSame(friday, 'day')
+                    } else if (hd.type === 'public' || hd.type === 'bank') {
+                        let lastTradingDay = moment(this.props.graphPrices[ticker][0].date.split(" ")[0])
+                        return moment(oDate[0]).isSame(lastTradingDay, 'day')
                     } else {
-                        color = '#f45531'
+                        return moment(oDate[0]).isSame(d, 'day')
                     }
-    
-                    renderLineChart = (
-                        <LineChart
-                            width={100}
-                            height={50}
-                            data={data}>
-                            <Line type="linear" dataKey="close" stroke={color} dot={false} />
-                            <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
-                            <XAxis dataKey='date' hide={true} />
-                        </LineChart>
-                    );
+                })
+
+                data = data.slice();
+                data = data.reverse();
+
+                if (data.slice(-1)[0]) {
+                    dayDifference = data.slice(-1)[0].close - data[0].close;
+                    percentage = dayDifference / data[0].close;
+                    percentage = numeral(percentage).format('0.00%')    
                 }
+
+                if (dayDifference >= 0) {
+                    color = '#21ce99'
+                } else {
+                    color = '#f45531'
+                }
+
+                renderLineChart = (
+                    <LineChart
+                        width={100}
+                        height={50}
+                        data={data}>
+                        <Line type="linear" dataKey="close" stroke={color} dot={false} />
+                        <YAxis domain={['dataMin', 'dataMax']} axisLine={false} hide={true} />
+                        <XAxis dataKey='date' hide={true} />
+                    </LineChart>
+                );
 
                 tickerArr.push(<Link
                     to={`/show/${ticker}`}
