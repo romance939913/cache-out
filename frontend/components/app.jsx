@@ -5,7 +5,7 @@ import SigninContainer from './session/signin_container';
 import SignupContainer from './session/signup_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import ShowPageContainer from './show_page/show_page_container';
-import MainFeedContainer from './main/feed_container';
+import MainFeedContainer from './main/feed';
 
 const App = () => (
   <div>

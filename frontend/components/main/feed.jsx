@@ -1,8 +1,12 @@
 import React from 'react';
-import GraphMainContainer from './graph_main_container';
-import PortfolioContainer from './portfolio_container';
+import GraphMain from './graph_main';
+import Portfolio from './portfolio';
 import RingLoader from "react-spinners/RingLoader";
 import Navbar from '../main/nav/nav_container'
+import { connect } from 'react-redux';
+import { getHoldings, getUserBP } from '../../actions/holding_actions';
+import { receiveNews, receiveSnapshots, clearGraphPrices, receiveMultipleDays } from '../../actions/graph_actions';
+import { clearRealTimePrice, receiveRealTimePrice, receiveRealTimePrices } from '../../actions/security_actions';
 
 class MainFeed extends React.Component {
 
@@ -30,6 +34,7 @@ class MainFeed extends React.Component {
     render() {
         if (Object.keys(this.props.price).length !== Object.keys(this.props.holdings).length
             || Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length
+            || Object.keys(this.props.graphPrices).length !== Object.keys(this.props.holdings).length
             || this.props.cash.length === 0
             || this.props.news.length === 0) {
             return (
@@ -73,7 +78,7 @@ class MainFeed extends React.Component {
                 <div>
                     <div className="main-page-wrapper">
                         <div className="graph-news-wrapper">
-                            <GraphMainContainer 
+                            <GraphMain 
                                 tickers={Object.keys(this.props.holdings)} 
                                 price={this.props.price}
                             />
@@ -83,10 +88,9 @@ class MainFeed extends React.Component {
                             </div>
                         </div>
                         <div className="portfolio-wrapper">
-                            <PortfolioContainer 
+                            <Portfolio 
                                 price={this.props.price}
                                 tickers={Object.keys(this.props.holdings)}
-                                graphPrices={this.props.graphPrices}
                                 holdings={this.props.holdings}
                             />
                         </div>
@@ -97,4 +101,26 @@ class MainFeed extends React.Component {
     }
 }
 
-export default MainFeed;
+const mapStateToProps = state => ({
+    currentUser: state.entities.users[state.session.id],
+    holdings: state.entities.holdings,
+    cash: state.entities.buyingPower,
+    price: state.entities.price,
+    news: state.entities.news,
+    snapshots: state.entities.snapshots,
+    graphPrices: state.entities.graphPrices
+});
+
+const mapDispatchToProps = dispatch => ({
+    getHoldings: (holding) => dispatch(getHoldings(holding)),
+    receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
+    receiveRealTimePrices: (ticker) => dispatch(receiveRealTimePrices(ticker)),
+    receiveMultipleDays: (ticker) => dispatch(receiveMultipleDays(ticker)),
+    getUserBP: (user) => dispatch(getUserBP(user)),
+    receiveNews: () => dispatch(receiveNews()),
+    clearRealTimePrice: () => dispatch(clearRealTimePrice()),
+    receiveSnapshots: (userId) => dispatch(receiveSnapshots(userId)),
+    clearGraphPrices: () => dispatch(clearGraphPrices())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainFeed);

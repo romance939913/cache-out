@@ -4,6 +4,9 @@ import { LineChart, Line, CartesianGrid, YAxis, XAxis } from 'recharts';
 import Holidays from 'date-holidays';
 import numeral from 'numeral'
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { receiveRealTimePrice } from '../../actions/security_actions';
+import { receiveDay } from '../../actions/graph_actions';
 
 class Portfolio extends React.Component {
     constructor(props) {
@@ -27,9 +30,10 @@ class Portfolio extends React.Component {
                 let percentage;
                 let color;
                 let renderLineChart
-                if (Object.keys(this.props.graphPrices).length !== this.props.tickers.length
-                    || hd.type === 'public'
-                    || hd.type === 'bank') {
+                if (hd.type === 'public' || hd.type === 'bank') {
+                    let lastTradingDay = moment(this.props.graphPrices[ticker][0].date.split(" ")[0])
+                    // console.log(lastTradingDay)
+                    // debugger
                     data = []
                 } else {
                     data = this.props.graphPrices[ticker]
@@ -102,4 +106,15 @@ class Portfolio extends React.Component {
     }
 }
 
-export default Portfolio;
+const mapStateToProps = (state) => ({
+        currentUser: state.entities.users[state.session.id],
+        price: state.entities.price,
+        graphPrices: state.entities.graphPrices
+})
+
+const mapDispatchToProps = dispatch => ({
+    receiveDay: (ticker) => dispatch(receiveDay(ticker)),
+    receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);

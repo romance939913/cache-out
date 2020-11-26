@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip } from 'recharts';
 import moment from 'moment';
 import numeral from 'numeral';
@@ -328,4 +329,17 @@ class GraphMain extends React.Component {
     }
 }
 
-export default GraphMain
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.entities.users[state.session.id],
+        graphPrices: state.entities.graphPrices,
+        price: state.entities.price,
+        indexes: state.entities.indexes,
+        indexPrices: state.entities.indexPrices,
+        holdings: state.entities.holdings,
+        buyingPower: state.entities.buyingPower,
+        snapshots: state.entities.snapshots
+    }
+}
+
+export default connect(mapStateToProps, null)(GraphMain);
