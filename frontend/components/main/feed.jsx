@@ -2,6 +2,7 @@ import React from 'react';
 import GraphMain from './graph_main';
 import Portfolio from './portfolio';
 import RingLoader from "react-spinners/RingLoader";
+import Holidays from 'date-holidays';
 import Navbar from '../main/nav/nav_container'
 import { connect } from 'react-redux';
 import { getHoldings, getUserBP } from '../../actions/holding_actions';
@@ -9,7 +10,6 @@ import { receiveNews, receiveSnapshots, clearGraphPrices, receiveMultipleDays } 
 import { clearRealTimePrice, receiveRealTimePrice, receiveRealTimePrices } from '../../actions/security_actions';
 
 class MainFeed extends React.Component {
-
     componentDidMount() {
         this.props.clearGraphPrices()
         let holding = {
@@ -71,6 +71,13 @@ class MainFeed extends React.Component {
                 )
             }
         }) 
+
+        let holidays = new Holidays('US');
+        let hd = holidays.isHoliday(new Date());
+        let holidayMessage
+        if (!!hd.name) {
+            holidayMessage = `Markets are closed today, Happy ${hd.name}`
+        }
             
         return (
             <div>
@@ -82,6 +89,9 @@ class MainFeed extends React.Component {
                                 tickers={Object.keys(this.props.holdings)} 
                                 price={this.props.price}
                             />
+                            <p className="markets-closed-message">
+                                {holidayMessage}
+                            </p>
                             <h1 className="news-header">Today's Top Stories</h1>
                             <div id="news-container-feed" className="news-container">
                                 {newsArr}

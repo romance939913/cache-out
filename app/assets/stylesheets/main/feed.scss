@@ -114,6 +114,12 @@
     border-bottom: solid 1px var(--border-bottoms);
 }
 
+.markets-closed-message {
+    margin-top: 10px;
+    color: gray;
+    text-align: center;
+}
+
 /* iphones regular size */
 // @media only screen and (device-width : 375px) { 
 //     .portfolio-wrapper {
