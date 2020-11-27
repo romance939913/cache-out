@@ -31,21 +31,16 @@ class Portfolio extends React.Component {
                 let color;
                 let renderLineChart
 
-                data = data.filter(obj => {
-                    let oDate = obj.date.split(" ");
-                    if (day === 6) {
-                        let friday = moment(d).subtract(1, 'day')
-                        return moment(oDate[0]).isSame(friday, 'day')
-                    } else if (day === 0) {
-                        let friday = moment(d).subtract(2, 'day')
-                        return moment(oDate[0]).isSame(friday, 'day')
-                    } else if (hd.type === 'public' || hd.type === 'bank') {
+                if (day === 6 || day === 0 || hd.type === 'public' || hd.type === 'bank') {
+                    data = data.filter(obj => {
                         let lastTradingDay = moment(this.props.graphPrices[ticker][0].date.split(" ")[0])
-                        return moment(oDate[0]).isSame(lastTradingDay, 'day')
-                    } else {
-                        return moment(oDate[0]).isSame(d, 'day')
-                    }
-                })
+                        return moment(obj.date.split(" ")[0]).isSame(lastTradingDay, 'day')
+                    })
+                } else {
+                    data = data.filter(obj => {
+                        return moment(obj.date.split(" ")[0]).isSame(d, 'day')  
+                    })
+                }
 
                 data = data.slice();
                 data = data.reverse();

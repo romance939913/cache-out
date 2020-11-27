@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip } from 'recharts';
+import Holidays from 'date-holidays';
 import moment from 'moment';
 import numeral from 'numeral';
 
@@ -19,7 +20,7 @@ class GraphMain extends React.Component {
     }
 
     componentDidMount() {
-        this.getOnlyNecessaryTimeFrames(this.props.snapshots);
+        this.getOnlyNecessaryTimeFrames();
     }
 
     changeTimeFrames(newFrame) {
@@ -120,8 +121,10 @@ class GraphMain extends React.Component {
         )
     }
 
-    getOnlyNecessaryTimeFrames(snapshots) {
-        if (Object.values(snapshots).length === 0) return
+    getOnlyNecessaryTimeFrames() {
+        let snapshots = this.props.snapshots;
+        if (Object.values(snapshots).length === 0) return;
+
         let timeFrames = Array.from(document.getElementsByClassName("stock-time-frame"));
         let earliestSnap = moment(Object.values(snapshots)[0].created_at);
 
@@ -173,30 +176,21 @@ class GraphMain extends React.Component {
         return newData
     }
 
-    filterGraphPrices(data) {
+    filterGraphPrices() {
         let d = new Date();
         let day = d.getDay();
         let isWeekend = (day === 6) || (day === 0);
-
-        if (JSON.stringify(data) === '{}') return [];
+        let holidays = new Holidays('US');
+        let hd = holidays.isHoliday(new Date());
+        let data = this.props.snapshots
         
-        if (this.state.time === "1d" && !isWeekend) {
-            let data2 = data.filter(obj => moment(obj.created_at).isSame(d, 'day'));
-            // check for pre market
-            if (!data2.length) {
-                let yesterday = moment().subtract(1, 'days');
-                data = data.filter(obj => moment(obj.created_at).isSame(yesterday, 'day')); 
-            } else {
-                data = data2;
-            }
-        } else if (this.state.time === "1d" && isWeekend) {
-            let friday;
-            day === 6 
-                ? friday = moment().subtract(1, 'days')
-                : friday = moment().subtract(2, 'days');
+        if (this.state.time === "1d" && (isWeekend || hd.type === 'public' || hd.type === 'bank')) {
             data = data.filter(obj => {
-                return moment(obj.created_at).isSame(friday, 'day');
-            });
+                let lastTradingDay = moment(this.props.snapshots[this.props.snapshots.length - 1].created_at)
+                return moment(obj.created_at).isSame(lastTradingDay, 'day')
+            })
+        } else if (this.state.time === "1d") {
+            data = data.filter(obj => moment(obj.created_at).isSame(d, 'day'));
         } else if (this.state.time === "1w") {
             data = data.filter(obj => {
                 let t = obj.created_at.split("T");
@@ -240,9 +234,9 @@ class GraphMain extends React.Component {
         if (Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length
             || this.props.buyingPower.length === 0) {
             return null
-            }
+        }
 
-        let data = this.filterGraphPrices(this.props.snapshots);
+        let data = this.filterGraphPrices();
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {

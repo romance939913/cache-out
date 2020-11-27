@@ -29,7 +29,7 @@ class MainFeed extends React.Component {
                         setTimeout(() => {
                             this.props.receiveMultipleDays(ticker)
                             console.log('waiting %3')
-                        }, 500);
+                        }, 1000);
                     } else if (idx % 4 === 0) {
                         setTimeout(() => {
                             this.props.receiveMultipleDays(ticker)
@@ -39,7 +39,7 @@ class MainFeed extends React.Component {
                         setTimeout(() => {
                             this.props.receiveMultipleDays(ticker)
                             console.log('waiting %5')
-                        }, 1000);
+                        }, 500);
                     } else {
                         this.props.receiveMultipleDays(ticker)
                     }
@@ -57,7 +57,8 @@ class MainFeed extends React.Component {
             || Object.keys(this.props.graphPrices).length !== Object.keys(this.props.price).length
             || Object.keys(this.props.graphPrices).length !== Object.keys(this.props.holdings).length
             || this.props.cash.length === 0
-            || this.props.news.length === 0) {
+            || this.props.news.length === 0
+            || JSON.stringify(this.props.snapshots) === '{}') {
             return (
                 <div>
                     <Navbar />
@@ -96,7 +97,7 @@ class MainFeed extends React.Component {
         let holidays = new Holidays('US');
         let hd = holidays.isHoliday(new Date());
         let holidayMessage
-        if (!!hd.name) {
+        if (!!hd.name && (hd.type === 'bank' || hd.type === 'public')) {
             holidayMessage = `Markets are closed today, Happy ${hd.name}`
         }
             
