@@ -22,7 +22,28 @@ class MainFeed extends React.Component {
             .then(holdings => {
                 let arr = Object.keys(holdings.holdings)
                 this.props.receiveRealTimePrices(arr)
-                arr.forEach(ticker => this.props.receiveMultipleDays(ticker))
+                arr.forEach((ticker, idx) => {
+                    // this prevents exceeding the requests per millisecond for FMP API
+                    // delays the request for some stocks by a second or half second
+                    if (idx % 3 === 0) {
+                        setTimeout(() => {
+                            this.props.receiveMultipleDays(ticker)
+                            console.log('waiting %3')
+                        }, 500);
+                    } else if (idx % 4 === 0) {
+                        setTimeout(() => {
+                            this.props.receiveMultipleDays(ticker)
+                            console.log('waiting %4')
+                        }, 750);
+                    } else if (idx % 5 === 0) {
+                        setTimeout(() => {
+                            this.props.receiveMultipleDays(ticker)
+                            console.log('waiting %5')
+                        }, 1000);
+                    } else {
+                        this.props.receiveMultipleDays(ticker)
+                    }
+                })
             })
     }
 
