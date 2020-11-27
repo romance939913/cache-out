@@ -2,6 +2,7 @@ import React from 'react';
 import ShowPageGraph from './show_graph_container';
 import TransactionContainer from './transaction_container';
 import numeral from 'numeral';
+import moment from 'moment';
 import RingLoader from "react-spinners/RingLoader";
 import Navbar from '../main/nav/nav_container'
 
@@ -81,17 +82,21 @@ class ShowPage extends React.Component {
 
     let newsArr = [];
     this.props.news.forEach((ele, idx) => {
-      if (this.props.news[idx].urlToImage) {
+      if (ele.urlToImage) {
+        let timePublished = moment(ele.publishedAt).fromNow()
         newsArr.push(
-          <a key={idx} target="_blank" href={`${this.props.news[idx].url}`}>
+          <a key={idx} target="_blank" href={`${ele.url}`}>
             <div className="news-item-wrapper">
-              <img className="news-item-image" src={`${this.props.news[idx].urlToImage}`} alt="" />
+              <img className="news-item-image" src={`${ele.urlToImage}`} alt="" />
               <div className="news-item-content">
                 <div>
-                  <p className="news-item-website">{this.props.news[idx].source.name}</p>
-                  <p className="news-item-title">{this.props.news[idx].title}</p>
+                  <p className="news-item-title">{ele.title}</p>
+                  <p className="news-item-description">{ele.description}</p>
                 </div>
-                <p className="news-item-description">{this.props.news[idx].description}</p>
+                <div className="news-website-time-wrapper">
+                  <p className="news-website-time">{ele.source.name}</p>
+                  <p className="news-website-time">Published {timePublished}</p>
+                </div>
               </div>
             </div>
           </a>
