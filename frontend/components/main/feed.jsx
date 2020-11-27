@@ -16,6 +16,7 @@ class MainFeed extends React.Component {
     }
 
     componentDidMount() {
+        this.props.clearGraphPrices()
         let holding = {
             user_id: this.props.currentUser.id
         }
@@ -24,8 +25,8 @@ class MainFeed extends React.Component {
         this.props.receiveSnapshots(this.props.currentUser.id)
         this.props.getHoldings(holding)
             .then(holdings => {
-                this.props.receiveRealTimePrices(arr)
                 let arr = Object.keys(holdings.holdings)
+                this.props.receiveRealTimePrices(arr)
                 arr.forEach((ticker, idx) => {
                     // this prevents exceeding the requests per millisecond for FMP API
                     // delays the request for some stocks by a second or half second
@@ -53,6 +54,7 @@ class MainFeed extends React.Component {
 
     componentWillUnmount() {
         this.props.clearRealTimePrice()
+        this.props.clearGraphPrices()
     }
     
     render() {
@@ -147,7 +149,7 @@ const mapStateToProps = state => ({
     price: state.entities.price,
     news: state.entities.news,
     snapshots: state.entities.snapshots,
-    graphPrices: state.entities.portfolioGraphPrices
+    graphPrices: state.entities.graphPrices
 });
 
 const mapDispatchToProps = dispatch => ({

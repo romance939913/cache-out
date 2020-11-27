@@ -1,7 +1,8 @@
 import { RECEIVE_WEEK, 
             RECEIVE_DAY, 
             RECEIVE_HISTORICAL,
-            CLEAR_GRAPH_PRICES } from "../../actions/graph_actions";
+            CLEAR_GRAPH_PRICES, 
+            RECEIVE_DAYS } from "../../actions/graph_actions";
 
 export const graphPricesReducer = (state = [], action) => {
     Object.freeze(state);
@@ -10,6 +11,9 @@ export const graphPricesReducer = (state = [], action) => {
         case RECEIVE_DAY:
             nextState['Day'] = action.prices;
             return nextState;        
+        case RECEIVE_DAYS:
+            nextState[action.prices.ticker] = action.prices.prices;
+            return nextState;
         case RECEIVE_WEEK:
             nextState['Week'] = action.prices;
             return nextState;
