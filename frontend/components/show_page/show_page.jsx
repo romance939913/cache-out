@@ -18,7 +18,6 @@ class ShowPage extends React.Component {
     this.props.receiveRealTimePrice(this.props.ticker);
     this.props.receiveNews();
     this.props.receiveFinancials(this.props.ticker);
-    this.props.clearGraphPrices();
     this.props.receiveDay(`${this.props.ticker}`);
     this.props.receiveWeek(this.props.ticker);
     this.props.receiveHistorical(this.props.ticker);
@@ -55,6 +54,7 @@ class ShowPage extends React.Component {
 
   componentWillUnmount() {
     this.props.clearRealTimePrice();
+    this.props.clearGraphPrices();
   }
 
   render() {

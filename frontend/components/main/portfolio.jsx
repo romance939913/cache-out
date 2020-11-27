@@ -100,7 +100,7 @@ class Portfolio extends React.Component {
 const mapStateToProps = (state) => ({
         currentUser: state.entities.users[state.session.id],
         price: state.entities.price,
-        graphPrices: state.entities.graphPrices
+        graphPrices: state.entities.portfolioGraphPrices
 })
 
 const mapDispatchToProps = dispatch => ({

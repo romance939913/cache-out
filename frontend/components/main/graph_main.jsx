@@ -326,7 +326,7 @@ class GraphMain extends React.Component {
 const mapStateToProps = (state) => {
     return {
         currentUser: state.entities.users[state.session.id],
-        graphPrices: state.entities.graphPrices,
+        graphPrices: state.entities.portfolioGraphPrices,
         price: state.entities.price,
         indexes: state.entities.indexes,
         indexPrices: state.entities.indexPrices,
