@@ -8,6 +8,14 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <meta property="og:title" content="Cache Out" />
+    <meta property='og:image' content="<%= image_url('amzn-screenshot.png') %>"/>
+    <meta property="og:description"
+      content="Cache Out is my own rendition of the popular securities trading app Robinhood. New users can start with up to $10 million in cash and buy or sell shares of over 8,000 companies/various securities on the NYSE/Nasdaq. Make informed decisions with interactive company price graphs and track your portfolio's performance overtime with up to the minute market data.."
+    />
+    <meta property="og:url"
+      content="https://cache-out.herokuapp.com/#/"
+    />
     <script type="text/javascript">
       window.github_pic = "<%= image_url('ghub.png') %>"; 
       window.info_pic = "<%= image_url('infopage.png') %>"; 
