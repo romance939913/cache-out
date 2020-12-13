@@ -6,6 +6,7 @@ import SignupContainer from './session/signup_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import ShowPageContainer from './show_page/show_page_container';
 import MainFeedContainer from './main/feed';
+import { connect } from 'react-redux';
 
 const App = () => (
   <div>
@@ -19,4 +20,8 @@ const App = () => (
   </div>
 );
 
-export default App;
+const mapStateToProps = state => ({
+  loggedin: state.session.id
+})
+
+export default connect(mapStateToProps, null)(App);
