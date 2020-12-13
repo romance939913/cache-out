@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { loginUser, logoutUser } from '../../actions/session_actions';
+import { connect } from 'react-redux';
+
 
 class SplashCover extends React.Component {
   constructor(props) {
@@ -116,4 +119,13 @@ class SplashCover extends React.Component {
   }
 }
 
-export default SplashCover;
+const mapStateToProps = (state) => ({
+  currentUser: state.entities.users[state.session.id]
+});
+
+const mapDispatchToProps = dispatch => ({
+  logoutUser: () => dispatch(logoutUser()),
+  login: (formUser) => dispatch(loginUser(formUser)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SplashCover)

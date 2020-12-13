@@ -2,24 +2,20 @@ import React from 'react';
 import Header from './header'
 import ContentAndFooter from './content_and_footer';
 import SplashCover from './cover';
-import ReactGA from 'react-ga';
+import { connect } from 'react-redux';
 
-ReactGA.initialize('G-3K1ZZJZ07F');
-
-class SplashPage extends React.Component {
-
-    render() {
-        return(
-            <div>
-                <Header />
-                <SplashCover 
-                    login={this.props.login}
-                    logoutUser={this.props.logoutUser} 
-                />
-                <ContentAndFooter />
-            </div>
-        )
-    }
+function SplashPage() {
+  return(
+    <div>
+      <Header />
+      <SplashCover />
+      <ContentAndFooter />
+    </div>
+  )
 }
 
-export default SplashPage;
+const mapStateToProps = (state) => ({
+  currentUser: state.entities.users[state.session.id]
+});
+
+export default connect(mapStateToProps, null)(SplashPage)

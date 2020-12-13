@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import SplashPageContainer from './splash_page/splash_page_container';
+import SplashPage from './splash_page/splash_page';
 import SigninContainer from './session/signin_container';
 import SignupContainer from './session/signup_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
@@ -10,7 +10,7 @@ import MainFeedContainer from './main/feed';
 const App = () => (
   <div>
     <Switch>
-      <AuthRoute exact path="/" component={SplashPageContainer} />
+      <AuthRoute exact path="/" component={SplashPage} />
       <AuthRoute exact path="/signup" component={SignupContainer} />
       <AuthRoute exact path="/signin" component={SigninContainer} />
       <ProtectedRoute exact path="/feed" component={MainFeedContainer} />
