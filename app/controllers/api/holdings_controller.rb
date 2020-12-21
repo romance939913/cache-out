@@ -19,11 +19,10 @@ class Api::HoldingsController < ApplicationController
                 end
             else
                 @holding = Holding.new(holdings_params)
-                if @holding.quantity >= 0
-                    @holding.save
+                if @holding.save
                     render :show
                 else
-                    render json: ["not enough shares"], status: 422
+                    render json: @holding.errors.messages[:quantity], status: 422
                 end
             end
         end
