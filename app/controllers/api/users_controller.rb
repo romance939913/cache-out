@@ -23,11 +23,10 @@ class Api::UsersController < ApplicationController
     elsif @update_record && @update_record.quantity + params[:holding][:quantity].to_i < 0
       render :show
     else  
-      if params[:holding][:buying_power].to_f >= 0
-        @user.update(buying_power: params[:holding][:buying_power].to_f)
+      if @user.update(buying_power: params[:holding][:buying_power].to_f)
         render :show
       else
-        render json: ['not enough cash'], status: 404
+        render json: @user.errors.messages[:buying_power], status: 404
       end
     end
   end
