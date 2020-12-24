@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_20_033424) do
+ActiveRecord::Schema.define(version: 2020_11_14_203337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_033424) do
     t.float "valuation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "day_close", null: false
   end
 
   create_table "snap_shots_tables", force: :cascade do |t|

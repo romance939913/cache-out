@@ -16,11 +16,10 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:holding][:user_id])
-    @user_records = Holding.where(user_id: params[:holding][:user_id])
-    @update_record = @user_records.find_by(ticker: params[:holding][:ticker])
-    if !@update_record && params[:holding][:quantity].to_i < 0
+    @holding = Holding.where(user_id: params[:holding][:user_id]).find_by(ticker: params[:holding][:ticker])
+    if !@holding && params[:holding][:quantity].to_i < 0
       render :show
-    elsif @update_record && @update_record.quantity + params[:holding][:quantity].to_i < 0
+    elsif @holding && @holding.quantity + params[:holding][:quantity].to_i < 0
       render :show
     else  
       if @user.update(buying_power: params[:holding][:buying_power].to_f)
