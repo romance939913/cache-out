@@ -9,13 +9,7 @@ import { signupUser, loginUser, clearSessionErrors, logoutUser } from '../../act
 function Signup(props) {
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
-    {
-      username: '',
-      email: '',
-      password: '',
-      buying_power: ''
-    }
-  );
+    { username: '', email: '', password: '', buying_power: '' });
 
   function handleInput(event) {
     const name = event.target.name;

@@ -1,33 +1,32 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useReducer } from 'react';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { loginUser, clearSessionErrors, logoutUser } from '../../actions/session_actions';
 
 function Signin(props) {
-  const [ username, setUsername ] = useState("");
-  const [ password, setPassword ] = useState("")
+  const [userInput, setUserInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }), 
+    { username: '', password: '' });
 
-  function updatePassword(event) {
-    setPassword(event.currentTarget.value)
-  }
-
-  function updateUsername(event) {
-    setUsername(event.currentTarget.value)
+  const handleInput = event => {
+    const name = event.target.name;
+    const newValue = event.target.value;
+    setUserInput({ [name]: newValue });
   }
 
   function handleDemoSignin() {
     let a = { username: 'demo', password: 'password' };
-    this.props.signin(a)
+    props.signin(a)
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const user = Object.assign({}, this.state);
-    this.props.signin(user);
-    setTimeout(() => { this.props.clearSessionErrors() }, 3000);
+    const user = Object.assign({}, userInput);
+    props.signin(user);
+    setTimeout(() => { props.clearSessionErrors() }, 3000);
   }
 
   function responseGoogle(response) {
@@ -35,8 +34,8 @@ function Signin(props) {
       username: response.profileObj.givenName,
       password: `g$${response.profileObj.googleId}`
     }
-    this.props.signin(user);
-    setTimeout(() => { this.props.clearSessionErrors() }, 3000);
+    props.signin(user);
+    setTimeout(() => { props.clearSessionErrors() }, 3000);
   }
 
   function responseErrorGoogle(response) {
@@ -50,25 +49,13 @@ function Signin(props) {
       username: firstName,
       password: `f$${response.id}`
     };
-    this.props.signin(user);
-    setTimeout(() => { this.props.clearSessionErrors() }, 3000);
+    props.signin(user);
+    setTimeout(() => { props.clearSessionErrors() }, 3000);
 
-  }
-
-  function renderErrors() {
-    return (
-      <ul>
-        {this.props.errors.map((error, i) => (
-          <li className="session-errors" key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
-    );
   }
 
   const errorsArr = [];
-  this.props.errors.map((error, i) => {
+  props.errors.map((error, i) => {
     errorsArr.push(
     <li className="session-errors" key={`error-${i}`}>
       {error}
@@ -86,18 +73,20 @@ function Signin(props) {
             <label className="signin-form-label">username
               <input 
                 className="signin-input-field"
+                name="username"
                 type="text"
-                value={this.state.username}
-                onChange={(e) => updateUsername(e)}
+                value={userInput.username}
+                onChange={(e) => handleInput(e)}
               />
               <br/>
             </label>
             <label className="signin-form-label">Password
               <input 
                 className="signin-input-field"
+                name="password"
                 type="password"
-                value={this.state.password}
-                onChange={(e) => updatePassword(e)}
+                value={userInput.password}
+                onChange={(e) => handleInput(e)}
               />
             </label>
             <div className="signin-links-container">
