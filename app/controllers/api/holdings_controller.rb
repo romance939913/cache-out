@@ -1,7 +1,6 @@
 class Api::HoldingsController < ApplicationController
   def create
-    @user_records = Holding.where(user_id: params[:holding][:user_id])
-    @update_record = @user_records.find_by(ticker: params[:holding][:ticker])
+    @update_record = Holding.where(user_id: params[:holding][:user_id]).find_by(ticker: params[:holding][:ticker])
     if @update_record
       new_amt = @update_record.quantity + params[:holding][:quantity].to_i
       if new_amt > 0
