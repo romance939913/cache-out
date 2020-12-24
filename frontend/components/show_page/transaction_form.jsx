@@ -1,5 +1,16 @@
 import React from 'react';
 import numeral from 'numeral'
+import { connect } from 'react-redux';
+import { receiveProfile } from '../../actions/security_actions';
+import {
+  receiveHolding,
+  getHoldings,
+  updateUser,
+  getHolding,
+  getUserBP,
+  clearErrors,
+  receiveSuccess,
+} from '../../actions/holding_actions';
 
 class TransactionForm extends React.Component {
   constructor(props) {
@@ -177,4 +188,23 @@ class TransactionForm extends React.Component {
   }
 }
 
-export default TransactionForm;
+const mapStateToProps = state => ({
+  profile: state.entities.profile,
+  holdings: state.entities.holdings,
+  price: state.entities.price,
+  cash: state.entities.buyingPower,
+  errors: state.errors.transaction
+});
+
+const mapDispatchToProps = dispatch => ({
+  receiveProfile: (company) => dispatch(receiveProfile(company)),
+  receiveHolding: (holding) => dispatch(receiveHolding(holding)),
+  getHoldings: (holding) => dispatch(getHoldings(holding)),
+  updateUser: (user) => dispatch(updateUser(user)),
+  getHolding: (holding) => dispatch(getHolding(holding)),
+  getUserBP: (user) => dispatch(getUserBP(user)),
+  clearErrors: () => dispatch(clearErrors()),
+  receiveSuccess: () => dispatch(receiveSuccess())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux';
 
 class NavSearchForm extends React.Component {
     constructor(props) {
@@ -86,4 +87,8 @@ class NavSearchForm extends React.Component {
     }
 }
 
-export default NavSearchForm
+const mapStateToProps = state => ({
+    stocks: state.entities.stocks
+})
+
+export default connect(mapStateToProps, null)(NavSearchForm);

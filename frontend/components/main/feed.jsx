@@ -4,7 +4,7 @@ import Portfolio from './portfolio';
 import RingLoader from "react-spinners/RingLoader";
 import Holidays from 'date-holidays';
 import moment from 'moment';
-import Navbar from '../main/nav/nav_container'
+import Navbar from '../main/nav/nav'
 import { connect } from 'react-redux';
 import { getHoldings, getUserBP } from '../../actions/holding_actions';
 import { receiveNews, receiveSnapshots, clearGraphPrices, receiveMultipleDays } from '../../actions/graph_actions';

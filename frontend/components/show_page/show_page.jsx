@@ -1,10 +1,24 @@
+import ShowPageGraph from './show_graph';
+import TransactionForm from './transaction_form';
+import Navbar from '../main/nav/nav'
 import React from 'react';
-import ShowPageGraph from './show_graph_container';
-import TransactionContainer from './transaction_container';
+import { connect } from 'react-redux';
 import numeral from 'numeral';
 import moment from 'moment';
 import RingLoader from "react-spinners/RingLoader";
-import Navbar from '../main/nav/nav_container'
+import {
+  receiveProfile,
+  receiveRealTimePrice,
+  clearRealTimePrice,
+  receiveFinancials
+} from '../../actions/security_actions';
+import {
+  receiveNews,
+  receiveDay,
+  receiveWeek,
+  receiveHistorical,
+  clearGraphPrices
+} from '../../actions/graph_actions';
 
 class ShowPage extends React.Component {
   constructor(props) {
@@ -198,7 +212,7 @@ class ShowPage extends React.Component {
                 </div>
               </div>
               <div className="transaction-box">
-                <TransactionContainer 
+                <TransactionForm 
                   ticker={this.props.ticker}
                   price={this.props.price} 
                   currentUser={this.props.currentUser}
@@ -212,4 +226,27 @@ class ShowPage extends React.Component {
   }
 }
 
-export default ShowPage;
+const mapStateToProps = (state, ownProps) => ({
+  currentUser: state.entities.users[state.session.id],
+  ticker: ownProps.match.params.ticker,
+  profile: state.entities.profile,
+  price: state.entities.price,
+  news: state.entities.news,
+  financials: state.entities.financials,
+  graphPrices: state.entities.graphPrices
+})
+
+const mapDispatchToProps = dispatch => ({
+  receiveProfile: (company) => dispatch(receiveProfile(company)),
+  receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
+  receiveNews: () => dispatch(receiveNews()),
+  clearRealTimePrice: () => dispatch(clearRealTimePrice()),
+  receiveFinancials: (ticker) => dispatch(receiveFinancials(ticker)),
+  receiveDay: (ticker) => dispatch(receiveDay(ticker)),
+  receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
+  receiveHistorical: (ticker) => dispatch(receiveHistorical(ticker)),
+  clearGraphPrices: () => dispatch(clearGraphPrices())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);
+

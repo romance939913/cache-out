@@ -1,6 +1,9 @@
 import React from 'react';
-import NavSearchContainer from './nav_search_container';
+import NavSearch from './nav_search';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../../actions/session_actions';
+import { receiveStocks } from '../../../actions/security_actions';
 
 class MainNav extends React.Component {
   constructor(props) {
@@ -57,7 +60,7 @@ class MainNav extends React.Component {
           </Link>
         </div>
         <div className="nav-search-box">
-          <NavSearchContainer stocks={this.props.stocks} />
+          <NavSearch stocks={this.props.stocks} />
         </div>
         <div className="nav-right">
           <Link to="/feed" className="nav-right-ele">Home</Link>
@@ -69,4 +72,15 @@ class MainNav extends React.Component {
   }
 }
 
-export default MainNav;
+const mapStateToProps = state => ({
+  currentUser: state.entities.users[state.session.id],
+  indexes: state.entities.indexes,
+  stocks: state.entities.stocks
+})
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutUser()),
+  receiveStocks: () => dispatch(receiveStocks()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainNav);

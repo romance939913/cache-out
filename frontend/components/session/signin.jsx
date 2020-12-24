@@ -1,43 +1,36 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { connect } from 'react-redux';
 import { loginUser, clearSessionErrors, logoutUser } from '../../actions/session_actions';
 
-class Signin extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-        username: '',
-        password: ''
-    }
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDemoSignin = this.handleDemoSignin.bind(this);
-    this.responseGoogle = this.responseGoogle.bind(this);
-    this.responseFacebook = this.responseFacebook.bind(this);
-    this.responseErrorGoogle = this.responseErrorGoogle.bind(this);
+function Signin(props) {
+  const [ username, setUsername ] = useState("");
+  const [ password, setPassword ] = useState("")
+
+  function updatePassword(event) {
+    setPassword(event.currentTarget.value)
   }
 
-  update(field) {
-    return e => {
-      this.setState({ [field]: e.currentTarget.value})
-    }
+  function updateUsername(event) {
+    setUsername(event.currentTarget.value)
   }
 
-  handleDemoSignin() {
+  function handleDemoSignin() {
     let a = { username: 'demo', password: 'password' };
     this.props.signin(a)
   }
 
-  handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.signin(user);
     setTimeout(() => { this.props.clearSessionErrors() }, 3000);
   }
 
-  responseGoogle(response) {
+  function responseGoogle(response) {
     const user = {
       username: response.profileObj.givenName,
       password: `g$${response.profileObj.googleId}`
@@ -46,12 +39,12 @@ class Signin extends React.Component {
     setTimeout(() => { this.props.clearSessionErrors() }, 3000);
   }
 
-  responseErrorGoogle(response) {
+  function responseErrorGoogle(response) {
     console.log("google response error");
     console.log(response);
   }
 
-  responseFacebook(response) {
+  function responseFacebook(response) {
     let firstName = response.name.split(" ")[0];
     let user = {
       username: firstName,
@@ -62,7 +55,7 @@ class Signin extends React.Component {
 
   }
 
-  renderErrors() {
+  function renderErrors() {
     return (
       <ul>
         {this.props.errors.map((error, i) => (
@@ -74,95 +67,93 @@ class Signin extends React.Component {
     );
   }
 
-  render() {
-    const errorsArr = [];
-    this.props.errors.map((error, i) => {
-      errorsArr.push(
-      <li className="session-errors" key={`error-${i}`}>
-        {error}
-      </li>)
-    })
+  const errorsArr = [];
+  this.props.errors.map((error, i) => {
+    errorsArr.push(
+    <li className="session-errors" key={`error-${i}`}>
+      {error}
+    </li>)
+  })
 
-    return(
-      <div className="signin-container">
-        <img className="image-signin-bg" src={window.signin_bg_pic} alt=""/>
-        <div className="signin-form">
-          <div className="signin-box" >
-            <form onSubmit={this.handleSubmit}>
-              <h3 className="signin-welcome-header">Welcome to Cache Out</h3>
+  return(
+    <div className="signin-container">
+      <img className="image-signin-bg" src={window.signin_bg_pic} alt=""/>
+      <div className="signin-form">
+        <div className="signin-box" >
+          <form onSubmit={handleSubmit}>
+            <h3 className="signin-welcome-header">Welcome to Cache Out</h3>
+            <br/>
+            <label className="signin-form-label">username
+              <input 
+                className="signin-input-field"
+                type="text"
+                value={this.state.username}
+                onChange={(e) => updateUsername(e)}
+              />
               <br/>
-              <label className="signin-form-label">username
-                <input 
-                  className="signin-input-field"
-                  type="text"
-                  value={this.state.username}
-                  onChange={this.update('username')}
-                />
-                <br/>
-              </label>
-              <label className="signin-form-label">Password
-                <input 
-                  className="signin-input-field"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.update('password')}
-                />
-              </label>
-              <div className="signin-links-container">
-                <Link to="/"><p className="signin-alt-links">Back to splash page</p></Link>
-                <p onClick={this.handleDemoSignin} className="signin-alt-links">Demo User</p>
-              </div>
-              <div className="signin-submit-container">
-                <input type="submit" value="Sign In" className="signin-submit"/>
-              </div>
-            </form>
-            <div className="oauth-signin-container">
-              <GoogleLogin
-                clientId="254946018512-0dqs14at73oms2h69u8ugpjoir67935g.apps.googleusercontent.com"
-                buttonText="Login with Google Credentials"
-                className="google-login-button oauth-signin"
-                onSuccess={this.responseGoogle}
-                onFailure={this.responseErrorGoogle}
-                cookiePolicy={'single_host_origin'}
-                render={renderProps => (
-                  <button
-                    onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}
-                    className="oauth-signin google-signin"
-                  >Google Credentials</button>
-                )}
+            </label>
+            <label className="signin-form-label">Password
+              <input 
+                className="signin-input-field"
+                type="password"
+                value={this.state.password}
+                onChange={(e) => updatePassword(e)}
               />
-              <FacebookLogin
-                appId="310290627021497"
-                autoLoad={false}
-                fields="name,email,picture"
-                callback={this.responseFacebook}
-                render={renderProps => (
-                  <button
-                    className="oauth-signin facebook-signin"
-                    onClick={renderProps.onClick}
-                  >Facebook Credentials</button>
-                )}
-              />
+            </label>
+            <div className="signin-links-container">
+              <Link to="/"><p className="signin-alt-links">Back to splash page</p></Link>
+              <p onClick={handleDemoSignin} className="signin-alt-links">Demo User</p>
             </div>
-            <ul className="signin-errors-arr">
-              <p className="placeholder-yo">yo</p>{errorsArr}
-            </ul>
+            <div className="signin-submit-container">
+              <input type="submit" value="Sign In" className="signin-submit"/>
+            </div>
+          </form>
+          <div className="oauth-signin-container">
+            <GoogleLogin
+              clientId="254946018512-0dqs14at73oms2h69u8ugpjoir67935g.apps.googleusercontent.com"
+              buttonText="Login with Google Credentials"
+              className="google-login-button oauth-signin"
+              onSuccess={responseGoogle}
+              onFailure={responseErrorGoogle}
+              cookiePolicy={'single_host_origin'}
+              render={renderProps => (
+                <button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  className="oauth-signin google-signin"
+                >Google Credentials</button>
+              )}
+            />
+            <FacebookLogin
+              appId="310290627021497"
+              autoLoad={false}
+              fields="name,email,picture"
+              callback={responseFacebook}
+              render={renderProps => (
+                <button
+                  className="oauth-signin facebook-signin"
+                  onClick={renderProps.onClick}
+                >Facebook Credentials</button>
+              )}
+            />
           </div>
+          <ul className="signin-errors-arr">
+            <p className="placeholder-yo">yo</p>{errorsArr}
+          </ul>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 };
 
 const mapStateToProps = state => ({
-    errors: state.errors.session
+  errors: state.errors.session
 })
 
 const mapDispatchToProps = dispatch => ({
-    logoutUser: () => dispatch(logoutUser()),
-    signin: (formUser) => dispatch(loginUser(formUser)),
-    clearSessionErrors: () => dispatch(clearSessionErrors())
+  logoutUser: () => dispatch(logoutUser()),
+  signin: (formUser) => dispatch(loginUser(formUser)),
+  clearSessionErrors: () => dispatch(clearSessionErrors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);

@@ -4,7 +4,7 @@ import SplashPage from './splash_page/splash_page';
 import Signin from './session/signin';
 import Signup from './session/signup';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import ShowPageContainer from './show_page/show_page_container';
+import ShowPage from './show_page/show_page';
 import MainFeedContainer from './main/feed';
 import { connect } from 'react-redux';
 
@@ -15,7 +15,7 @@ const App = () => (
       <AuthRoute exact path="/signup" component={Signup} />
       <AuthRoute exact path="/signin" component={Signin} />
       <ProtectedRoute exact path="/feed" component={MainFeedContainer} />
-      <ProtectedRoute exact path="/show/:ticker" component={ShowPageContainer} />
+      <ProtectedRoute exact path="/show/:ticker" component={ShowPage} />
     </Switch>
   </div>
 );

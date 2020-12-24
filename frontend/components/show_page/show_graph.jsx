@@ -2,6 +2,7 @@ import React from 'react';
 import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip} from 'recharts';
 import moment from 'moment';
 import numeral from 'numeral';
+import { connect } from 'react-redux';
 
 class ShowPageGraph extends React.Component {
     constructor(props) {
@@ -254,4 +255,13 @@ class ShowPageGraph extends React.Component {
     }
 }
 
-export default ShowPageGraph
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.entities.users[state.session.id],
+        profile: state.entities.profile,
+        graphPrices: state.entities.graphPrices,
+        price: state.entities.price
+    }
+}
+
+export default connect(mapStateToProps, null)(ShowPageGraph)
