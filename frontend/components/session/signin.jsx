@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { connect } from 'react-redux';
+import { loginUser, clearSessionErrors, logoutUser } from '../../actions/session_actions';
 
 class Signin extends React.Component {
   constructor(props) {
@@ -153,4 +155,14 @@ class Signin extends React.Component {
   }
 };
 
-export default Signin;
+const mapStateToProps = state => ({
+    errors: state.errors.session
+})
+
+const mapDispatchToProps = dispatch => ({
+    logoutUser: () => dispatch(logoutUser()),
+    signin: (formUser) => dispatch(loginUser(formUser)),
+    clearSessionErrors: () => dispatch(clearSessionErrors())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
