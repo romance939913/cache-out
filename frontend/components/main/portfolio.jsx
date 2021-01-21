@@ -44,6 +44,7 @@ class Portfolio extends React.Component {
 
                 data = data.slice();
                 data = data.reverse();
+                if (!data.length) percentage = "Premarket"
 
                 if (data.slice(-1)[0]) {
                     dayDifference = data.slice(-1)[0].close - data[0].close;

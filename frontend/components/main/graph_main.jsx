@@ -236,7 +236,9 @@ class GraphMain extends React.Component {
             return null
         }
 
+        let premarket
         let data = this.filterGraphPrices();
+        if (!data.lendth) premarket = 'premarket'
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
@@ -318,6 +320,9 @@ class GraphMain extends React.Component {
                     <h2 onClick={() => this.changeTimeFrames("1y")} className="stock-time-frame 1y">1Y</h2>
                     <h2 onClick={() => this.changeTimeFrames("5y")} className="stock-time-frame 5y">All</h2>
                 </ul>
+                <p className="markets-closed-message">
+                    {premarket}
+                </p>
             </div>
         )
     }
