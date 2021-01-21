@@ -182,12 +182,12 @@ class GraphMain extends React.Component {
         let isWeekend = (day === 6) || (day === 0);
         let holidays = new Holidays('US');
         let hd = holidays.isHoliday(new Date());
-        let data = this.props.snapshots
+        let data = this.props.snapshots;
         
         if (this.state.time === "1d" && (isWeekend || hd.type === 'public' || hd.type === 'bank')) {
+            let mostRecentTradingDay = moment(this.props.snapshots[this.props.snapshots.length - 1].created_at)
             data = data.filter(obj => {
-                let lastTradingDay = moment(this.props.snapshots[this.props.snapshots.length - 1].created_at)
-                return moment(obj.created_at).isSame(lastTradingDay, 'day')
+                return moment(obj.created_at).isSame(mostRecentTradingDay, 'day')
             })
         } else if (this.state.time === "1d") {
             data = data.filter(obj => moment(obj.created_at).isSame(d, 'day'));
@@ -237,7 +237,7 @@ class GraphMain extends React.Component {
         }
 
         let data = this.filterGraphPrices();
-        
+
         let premarket
         if (!data.length) premarket = 'premarket'
 

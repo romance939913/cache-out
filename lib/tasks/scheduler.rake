@@ -11,13 +11,12 @@ namespace :scheduler do
     next if today.weekend?
     next if today.bank_holiday?
   
-    time = Time.now
-    timeString = time.to_s
-    timeArr = timeString.split(" ")[1]
-    hour = timeArr.split(":")[0]
-    min = timeArr.split(":")[1]
-    next if hour.to_i < 14
-    next if hour.to_i > 20
+    right_now = Time.now
+    market_open = Time.new(Time.now.year,Time.now.month,Time.now.day,14,20,0, "+00:00")
+    market_close = Time.new(Time.now.year,Time.now.month,Time.now.day,20,50,0, "+00:00")
+
+    next if right_now < market_open
+    next if right_now > market_close
 
     users = User.all
     users.each do |user| 
