@@ -53,7 +53,7 @@ function ShowPageGraph(props) {
         
         diff.textContent = hoverDiff;
         perc.textContent = `(${hoverPerc})`;
-        rtp.innerHTML = e.activePayload[0].value
+        rtp.innerHTML = numeral(e.activePayload[0].value).format('$0,0.00')
         // setPrice(e.activePayload[0].value)
     }
 
@@ -230,8 +230,8 @@ function ShowPageGraph(props) {
     return (
         <div className="graph-wrapper">
             <h3 className="show-company-name">{props.profile.companyName}</h3>
-            {/* <h3 className="show-real-time-price">$<Odometer value={price} /></h3> */}
-            <p className="odometer" id="rtp">1234</p>
+            {/* <h3 className="odometer show-real-time-price">1234</h3> */}
+            <p className="show-real-time-price" id="rtp">{numeral(props.price[props.ticker]).format('$0,0.00')}</p>
             <div className="show-percentage-and-difference">
                 <li className="show-page-difference" id="show-diff">{dayDifference}</li>
                 <li className="show-page-percentage" id="show-perc">{percentage}</li>
