@@ -236,9 +236,10 @@ class GraphMain extends React.Component {
             return null
         }
 
-        let premarket
         let data = this.filterGraphPrices();
-        if (!data.lendth) premarket = 'premarket'
+        
+        let premarket
+        if (!data.length) premarket = 'premarket'
 
         let totalEquity = 0;
         this.props.tickers.forEach((ticker, idx) => {
