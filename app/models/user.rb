@@ -51,17 +51,14 @@ class User < ApplicationRecord
 
   def calculate_total_assets
     return buying_power if holdings.empty?
-    assets = []
+    
     prices = {}
-
     all_holdings = holdings.map { |hold| hold.ticker }.join(",")
     url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{all_holdings}?apikey=#{Rails.application.credentials.stockapi[:api_key]}"
     securities = JSON.parse(open(url).read)
     securities["companiesPriceList"].each { |sec| prices[sec['symbol']] = sec["price"] }
 
-    holdings.each do |hold| 
-      assets << prices[hold.ticker] * hold.quantity
-    end
+    assets = holdings.map { |hold| prices[hold.ticker] * hold.quantity }
 
     assets.sum + buying_power
   end
