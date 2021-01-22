@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'byebug'
 
 class User < ApplicationRecord
   attr_reader :password
@@ -49,13 +50,17 @@ class User < ApplicationRecord
   end
 
   def calculate_total_assets
-    assets = []
     return buying_power if holdings.empty?
+    assets = []
+    prices = {}
 
-    holdings.each do |holding| 
-      url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{holding.ticker}?apikey=#{Rails.application.credentials.stockapi[:api_key]}"
-      security = JSON.parse(open(url).read)
-      assets << security['price'] * holding.quantity
+    all_holdings = holdings.map { |hold| hold.ticker }.join(",")
+    url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{all_holdings}?apikey=#{Rails.application.credentials.stockapi[:api_key]}"
+    securities = JSON.parse(open(url).read)
+    securities["companiesPriceList"].each { |sec| prices[sec['symbol']] = sec["price"] }
+
+    holdings.each do |hold| 
+      assets << prices[hold.ticker] * hold.quantity
     end
 
     assets.sum + buying_power
