@@ -27,7 +27,7 @@ namespace :scheduler do
     puts "done."
   end
 
-  task :remove_snapshot_if_older_than_month_and_not_day_close => :environment do
+  task :delete_month_old_intraday_snapshots => :environment do
     require 'date'
     
     users = User.all
