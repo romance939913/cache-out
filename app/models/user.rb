@@ -26,6 +26,12 @@ class User < ApplicationRecord
     dependent: :destroy
   })
 
+  has_many(:transactions, {
+    foreign_key: :user_id,
+    class_name: :Transaction,
+    dependent: :destroy
+  })
+
   def self.find_by_credentials(username, password) 
     @user = User.find_by(username: username)
     @user && @user.is_password?(password) ? @user : nil

@@ -4,9 +4,9 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show, :update]
     resource :session, only: [:create, :destroy]
     resources :holdings, only: [:index, :show, :create, :update, :destroy]
+    resources :transactions, only: [:index, :create]
     resources :portfolio_snapshots, only: [:index]
     resources :news, only: [:index]
-    resources :stocks, only: [:index]
   end
 
   root to: "static_pages#root"
