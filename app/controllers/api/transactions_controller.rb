@@ -11,7 +11,8 @@ class Api::TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = Transaction.find_by(user_id: params[:transaction][:user_id])
+    @transactions = Transaction.all(transaction_params)
+    debugger
     if @transactions
       render :index
     else

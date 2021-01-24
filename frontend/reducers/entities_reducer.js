@@ -9,6 +9,7 @@ import { cashReducer } from './securities/cash_reducer';
 import { newsReducer } from './securities/news_reducer';
 import { graphSnapshotReducer } from './securities/graph_snapshot_reducer';
 import { financialsReducer } from './securities/financials_reducer';
+import { transactionReducer } from './securities/transaction_reducer';
 
 const entitiesReducer = combineReducers({
     users: usersReducer,
@@ -21,6 +22,7 @@ const entitiesReducer = combineReducers({
     holdings: holdingReducer,
     buyingPower: cashReducer,
     financials: financialsReducer,
+    transactions: transactionReducer,
 });
 
 export default entitiesReducer;

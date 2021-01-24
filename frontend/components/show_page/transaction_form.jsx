@@ -2,6 +2,7 @@ import React from 'react';
 import numeral from 'numeral'
 import { connect } from 'react-redux';
 import { receiveProfile } from '../../actions/security_actions';
+import { getTransactions } from '../../actions/transaction_actions'
 import {
   receiveHolding,
   getHoldings,
@@ -53,6 +54,7 @@ class TransactionForm extends React.Component {
     this.setState({ buySell: value });
     this.changeUnderline(value);
     this.props.clearErrors();
+    this.props.getTransactions(this.props.currentUser.id);
   }
 
   changeUnderline(value) {
@@ -204,7 +206,8 @@ const mapDispatchToProps = dispatch => ({
   getHolding: (holding) => dispatch(getHolding(holding)),
   getUserBP: (user) => dispatch(getUserBP(user)),
   clearErrors: () => dispatch(clearErrors()),
-  receiveSuccess: () => dispatch(receiveSuccess())
+  receiveSuccess: () => dispatch(receiveSuccess()),
+  getTransactions: (creds) => dispatch(getTransactions(creds))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);
