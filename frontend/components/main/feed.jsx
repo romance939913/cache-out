@@ -7,6 +7,7 @@ import moment from 'moment';
 import Navbar from '../main/nav/nav'
 import { connect } from 'react-redux';
 import { getHoldings, getUserBP } from '../../actions/holding_actions';
+import { getAllTransactions } from '../../actions/transaction_actions';
 import { receiveNews, receiveSnapshots, clearGraphPrices, receiveMultipleDays } from '../../actions/graph_actions';
 import { clearRealTimePrice, receiveRealTimePrice, receiveRealTimePrices } from '../../actions/security_actions';
 
@@ -17,13 +18,14 @@ class MainFeed extends React.Component {
 
     componentDidMount() {
         this.props.clearGraphPrices()
-        let holding = {
+        let creds = {
             user_id: this.props.currentUser.id
         }
+        this.props.getAllTransactions(creds)
         this.props.getUserBP(this.props.currentUser.id);
         this.props.receiveNews();
         this.props.receiveSnapshots(this.props.currentUser.id)
-        this.props.getHoldings(holding)
+        this.props.getHoldings(creds)
             .then(holdings => {
                 let arr = Object.keys(holdings.holdings)
                 this.props.receiveRealTimePrices(arr)
@@ -158,6 +160,7 @@ const mapDispatchToProps = dispatch => ({
     receiveRealTimePrices: (ticker) => dispatch(receiveRealTimePrices(ticker)),
     receiveMultipleDays: (ticker) => dispatch(receiveMultipleDays(ticker)),
     getUserBP: (user) => dispatch(getUserBP(user)),
+    getAllTransactions: (creds) => dispatch(getAllTransactions(creds)),
     receiveNews: () => dispatch(receiveNews()),
     clearRealTimePrice: () => dispatch(clearRealTimePrice()),
     receiveSnapshots: (userId) => dispatch(receiveSnapshots(userId)),

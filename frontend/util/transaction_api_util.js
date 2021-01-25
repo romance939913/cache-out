@@ -13,3 +13,11 @@ export const indexTransactions = creds => {
         data: { creds }
     })
 };
+
+export const showTransactions = creds => {
+    return $.ajax({
+        url: `/api/transactions/${creds.user_id}`,
+        method: "GET",
+        data: { creds }
+    })
+};

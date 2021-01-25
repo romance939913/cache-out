@@ -1,6 +1,7 @@
 import {
     createNewTransaction,
-    indexTransactions
+    indexTransactions,
+    showTransactions
 } from "../util/transaction_api_util";
 
 export const RECEIVE_TRANSACTION = "RECEIVE_TRANSACTION";
@@ -20,5 +21,8 @@ const getTheTransactions = (transactions) => ({
 export const receiveTransaction = (transaction) => dispatch => createNewTransaction(transaction)
     .then(res => dispatch(receiveTheTransaction(res)))
 
-export const getTransactions = (creds) => dispatch => indexTransactions(creds)
+export const getAllTransactions = (creds) => dispatch => indexTransactions(creds)
+    .then(res => dispatch(getTheTransactions(res)));
+
+export const getTransactions = (creds) => dispatch => showTransactions(creds)
     .then(res => dispatch(getTheTransactions(res)));
