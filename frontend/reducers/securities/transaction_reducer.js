@@ -5,11 +5,9 @@ export const transactionReducer = (state = [], action) => {
     let nextState = Object.assign({}, state)
     switch (action.type) {
         case GET_TRANSACTIONS:
-            debugger
-            return action;
+            return action.transactions;
         case RECEIVE_TRANSACTION:
-            debugger
-            return action
+            return action.transactions
         default:
             return state;
     }

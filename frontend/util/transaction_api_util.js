@@ -6,10 +6,10 @@ export const createNewTransaction = transaction => (
     })
 );
 
-export const indexTransactions = transaction => {
+export const indexTransactions = creds => {
     return $.ajax({
         url: `/api/transactions/`,
         method: "GET",
-        data: { transaction }
+        data: { creds }
     })
 };

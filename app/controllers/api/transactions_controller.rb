@@ -1,6 +1,4 @@
-class Api::TransactionsController < ApplicationController
-  skip_before_action :verify_authenticity_token  
-
+class Api::TransactionsController < ApplicationController  
   def create
     @transaction = Transaction.new(transaction_params)
     if @transaction.save
@@ -11,8 +9,16 @@ class Api::TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = Transaction.all(transaction_params)
-    debugger
+    @transactions = Transaction.where(user_id: params[:creds][:user_id])
+    if @transactions
+      render :index
+    else
+      render json: []
+    end
+  end
+
+  def show
+    @transactions = Transaction.where(user_id: params[:creds][:user_id]).where(ticker: params[:creds][:ticker])
     if @transactions
       render :index
     else
@@ -22,6 +28,6 @@ class Api::TransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:user_id, :ticker, :quantity, :price)
+    params.require(:creds).permit(:user_id, :ticker, :quantity, :price)
   end
 end

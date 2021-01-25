@@ -42,11 +42,12 @@ class TransactionForm extends React.Component {
   }
 
   componentDidMount() {
-    let holding = {
+    let creds = {
       user_id: this.props.currentUser.id,
       ticker: this.props.ticker
     }
-    this.props.getHolding(holding)
+    this.props.getHolding(creds)
+    this.props.getTransactions(creds);
     this.props.getUserBP(this.props.currentUser.id)
   }
 
@@ -54,7 +55,6 @@ class TransactionForm extends React.Component {
     this.setState({ buySell: value });
     this.changeUnderline(value);
     this.props.clearErrors();
-    this.props.getTransactions(this.props.currentUser.id);
   }
 
   changeUnderline(value) {
