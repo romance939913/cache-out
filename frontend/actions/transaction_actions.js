@@ -18,7 +18,7 @@ const getTheTransactions = (transactions) => ({
 });
 
 
-export const receiveTransaction = (transaction) => dispatch => createNewTransaction(transaction)
+export const createTranasaction = (transaction) => dispatch => createNewTransaction(transaction)
     .then(res => dispatch(receiveTheTransaction(res)))
 
 export const getAllTransactions = (creds) => dispatch => indexTransactions(creds)

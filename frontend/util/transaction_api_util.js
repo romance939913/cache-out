@@ -1,8 +1,8 @@
-export const createNewTransaction = transaction => (
+export const createNewTransaction = creds => (
     $.ajax({
         url: "/api/transactions",
         method: "POST",
-        data: { transaction }
+        data: { creds }
     })
 );
 

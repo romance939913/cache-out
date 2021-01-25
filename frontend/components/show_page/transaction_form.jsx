@@ -2,7 +2,10 @@ import React from 'react';
 import numeral from 'numeral'
 import { connect } from 'react-redux';
 import { receiveProfile } from '../../actions/security_actions';
-import { getTransactions } from '../../actions/transaction_actions'
+import { 
+  getTransactions, 
+  createTranasaction 
+} from '../../actions/transaction_actions'
 import {
   receiveHolding,
   getHoldings,
@@ -86,22 +89,24 @@ class TransactionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const holding = {
+    if (this.state.quantity === '') return;
+    let holding = {
       user_id: this.props.currentUser.id,
       ticker: this.props.ticker,
       quantity: this.state.quantity,
-      cost: this.state.cost
+      cost: this.state.cost,
+      price: this.props.price[this.props.ticker]
     }
-    if (holding.quantity === '') return;
     if (this.state.buySell === 'BUY') {
       holding['buying_power'] = this.props.cash - this.state.cost;
       this.props.updateUser(holding)
         .then(res => {
           this.props.receiveHolding(holding)
             .then((res) => {
-              if (res.holding !== undefined) {
-                this.props.receiveSuccess()
-              }
+              this.props.createTranasaction(holding)
+                .then((res) => {
+                  this.props.receiveSuccess()
+                })
             })
         })
       setTimeout(() => { this.props.clearErrors() }, 3000);
@@ -112,9 +117,10 @@ class TransactionForm extends React.Component {
         .then(res => {
           this.props.receiveHolding(holding)
             .then((res) => {
-              if (res.holding !== undefined) {
-                this.props.receiveSuccess()
-              }
+              this.props.createTranasaction(holding)
+                .then(res => {
+                  this.props.receiveSuccess()
+                })
             })
         })
       setTimeout(() => { this.props.clearErrors() }, 3000);
@@ -207,7 +213,8 @@ const mapDispatchToProps = dispatch => ({
   getUserBP: (user) => dispatch(getUserBP(user)),
   clearErrors: () => dispatch(clearErrors()),
   receiveSuccess: () => dispatch(receiveSuccess()),
-  getTransactions: (creds) => dispatch(getTransactions(creds))
+  getTransactions: (creds) => dispatch(getTransactions(creds)),
+  createTranasaction: (creds) => dispatch(createTranasaction(creds)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionForm);
