@@ -19,6 +19,9 @@ import {
   receiveHistorical,
   clearGraphPrices
 } from '../../actions/graph_actions';
+import {
+  getTransactions
+} from '../../actions/transaction_actions'
 
 class ShowPage extends React.Component {
   constructor(props) {
@@ -28,6 +31,10 @@ class ShowPage extends React.Component {
   }
 
   componentDidMount() {
+    let creds = {
+      user_id: this.props.currentUser.id,
+      ticker: this.props.ticker
+    }
     this.props.receiveProfile(this.props.ticker);
     this.props.receiveRealTimePrice(this.props.ticker);
     this.props.receiveNews();
@@ -36,10 +43,15 @@ class ShowPage extends React.Component {
     this.props.receiveDay(`${this.props.ticker}`);
     this.props.receiveWeek(this.props.ticker);
     this.props.receiveHistorical(this.props.ticker);
+    this.props.getTransactions(creds);
   }
 
   componentDidUpdate(previousProps) {
     if (previousProps.match.params.ticker !== this.props.match.params.ticker) {
+      let creds = {
+        user_id: this.props.currentUser.id,
+        ticker: this.props.ticker
+      }
       this.props.receiveProfile(this.props.ticker);
       this.props.receiveRealTimePrice(this.props.ticker);
       this.props.receiveNews();
@@ -48,6 +60,7 @@ class ShowPage extends React.Component {
       this.props.receiveDay(`${this.props.ticker}`);
       this.props.receiveWeek(this.props.ticker);
       this.props.receiveHistorical(this.props.ticker)
+      this.props.getTransactions(creds);
     }
   }
 
@@ -75,6 +88,7 @@ class ShowPage extends React.Component {
     if (this.props.profile.description === undefined
       || JSON.stringify(this.props.price) === '{}'
       || this.props.news.length === 0
+      || this.props.transactions.length === 0
       || !this.props.graphPrices['Day']
       || !this.props.graphPrices['Week']
       || !this.props.graphPrices['Historical']
@@ -233,7 +247,8 @@ const mapStateToProps = (state, ownProps) => ({
   price: state.entities.price,
   news: state.entities.news,
   financials: state.entities.financials,
-  graphPrices: state.entities.graphPrices
+  graphPrices: state.entities.graphPrices,
+  transactions: state.entities.transactions
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -245,7 +260,8 @@ const mapDispatchToProps = dispatch => ({
   receiveDay: (ticker) => dispatch(receiveDay(ticker)),
   receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
   receiveHistorical: (ticker) => dispatch(receiveHistorical(ticker)),
-  clearGraphPrices: () => dispatch(clearGraphPrices())
+  clearGraphPrices: () => dispatch(clearGraphPrices()),
+  getTransactions: (creds) => dispatch(getTransactions(creds))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);

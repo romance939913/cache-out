@@ -3,7 +3,6 @@ import numeral from 'numeral'
 import { connect } from 'react-redux';
 import { receiveProfile } from '../../actions/security_actions';
 import { 
-  getTransactions, 
   createTranasaction 
 } from '../../actions/transaction_actions'
 import {
@@ -50,7 +49,6 @@ class TransactionForm extends React.Component {
       ticker: this.props.ticker
     }
     this.props.getHolding(creds)
-    this.props.getTransactions(creds);
     this.props.getUserBP(this.props.currentUser.id)
   }
 
