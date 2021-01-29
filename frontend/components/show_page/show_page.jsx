@@ -1,6 +1,7 @@
 import ShowPageGraph from './show_graph';
 import TransactionForm from './transaction_form';
-import Navbar from '../main/nav/nav'
+import Navbar from '../main/nav/nav';
+import ShowFeed from './show_feed';
 import React from 'react';
 import { connect } from 'react-redux';
 import numeral from 'numeral';
@@ -107,30 +108,6 @@ class ShowPage extends React.Component {
         </div>
       )
     } 
-
-    let newsArr = [];
-    this.props.news.forEach((ele, idx) => {
-      if (ele.urlToImage) {
-        let timePublished = moment(ele.publishedAt).fromNow()
-        newsArr.push(
-          <a key={idx} target="_blank" href={`${ele.url}`}>
-            <div className="news-item-wrapper">
-              <img className="news-item-image" src={`${ele.urlToImage}`} alt="" />
-              <div className="news-item-content">
-                <div>
-                  <p className="news-item-title">{ele.title}</p>
-                  <p className="news-item-description">{ele.description}</p>
-                </div>
-                <div className="news-website-time-wrapper">
-                  <p className="news-website-time">{ele.source.name}</p>
-                  <p className="news-website-time">Published {timePublished}</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        )
-      }
-    })
       
     return (
       <div>
@@ -220,10 +197,7 @@ class ShowPage extends React.Component {
                     </div>
                   </div>
                 </ul>
-                <h3 className="news-show-header">News</h3>
-                <div>
-                    {newsArr}
-                </div>
+                <ShowFeed />
               </div>
               <div className="transaction-box">
                 <TransactionForm 

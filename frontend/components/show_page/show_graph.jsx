@@ -3,9 +3,7 @@ import { useState, useEffect } from 'react';
 import { LineChart, Line, CartesianGrid, YAxis, XAxis, Tooltip} from 'recharts';
 import moment from 'moment';
 import numeral from 'numeral';
-import Odometer from 'react-odometerjs';
 import { connect } from 'react-redux';
-import script from './odometer'
 
 function ShowPageGraph(props) {
     const [time, setTime] = useState('1d')
@@ -13,10 +11,10 @@ function ShowPageGraph(props) {
 
     useEffect(() => {
         setTime('1d')
-        const script = document.createElement("script");
+        // const script = document.createElement("script");
         // script.async = true;
-        script.src = "https://raw.githubusercontent.com/HubSpot/odometer/v0.4.6/odometer.min.js";
-        document.head.appendChild(script);
+        // script.src = "https://raw.githubusercontent.com/HubSpot/odometer/v0.4.6/odometer.min.js";
+        // document.head.appendChild(script);
     }, [])
 
     function changeTimeFrameUnderline(timeFrame) {
