@@ -7,6 +7,7 @@ export const transactionReducer = (state = [], action) => {
         case GET_TRANSACTIONS:
             return action.transactions;
         case RECEIVE_TRANSACTION:
+            nextState[action.transaction.id] = action.transaction
             return nextState
         default:
             return state;

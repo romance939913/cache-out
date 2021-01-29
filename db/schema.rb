@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_033442) do
+ActiveRecord::Schema.define(version: 2021_01_21_032423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2021_01_21_033442) do
     t.float "valuation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "day_close", null: false
+  end
+
+  create_table "snap_shots_tables", force: :cascade do |t|
+    t.string "user_id", null: false
+    t.float "portfolio_balance", null: false
+    t.datetime "created_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
