@@ -1,5 +1,4 @@
 require 'open-uri'
-require 'byebug'
 
 class User < ApplicationRecord
   attr_reader :password
