@@ -1,53 +1,90 @@
 import React from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import numeral from 'numeral';
 import moment from 'moment';
 
 function ShowFeed(props) {
-  const newsArr = [];
-  props.news.forEach((ele, idx) => {
-    if (ele.urlToImage) {
-      let timePublished = moment(ele.publishedAt).fromNow()
-      newsArr.push(
-        <a key={idx} target="_blank" href={`${ele.url}`}>
-          <div className="news-item-wrapper">
-            <img className="news-item-image" src={`${ele.urlToImage}`} alt="" />
-            <div className="news-item-content">
-              <div>
-                <p className="news-item-title">{ele.title}</p>
-                <p className="news-item-description">{ele.description}</p>
-              </div>
-              <div className="news-website-time-wrapper">
-                <p className="news-website-time">{ele.source.name}</p>
-                <p className="news-website-time">Published {timePublished}</p>
+  const [ newsOrOrders, toggleFeed ] = useState('news');
+  const [ collapseNews, toggleNews ] = useState(true);
+  const [ collapseOrders, toggleOrders ] = useState(true); 
+
+  function changeFeed(type) {
+    if (type === 'news') {
+      toggleFeed(type)
+    } else {
+      toggleFeed(type)
+    }
+  }
+
+  const contentArr = [];
+
+  if (newsOrOrders === 'news') {
+    props.news.forEach((ele, idx) => {
+      if (ele.urlToImage) {
+        let timePublished = moment(ele.publishedAt).fromNow()
+        contentArr.push(
+          <a key={idx} target="_blank" href={`${ele.url}`}>
+            <div className="news-item-wrapper">
+              <img className="news-item-image" src={`${ele.urlToImage}`} alt="" />
+              <div className="news-item-content">
+                <div>
+                  <p className="news-item-title">{ele.title}</p>
+                  <p className="news-item-description">{ele.description}</p>
+                </div>
+                <div className="news-website-time-wrapper">
+                  <p className="news-website-time">{ele.source.name}</p>
+                  <p className="news-website-time">Published {timePublished}</p>
+                </div>
               </div>
             </div>
+          </a>
+        )
+      }
+    })
+  } else {
+    Object.values(props.transactions).forEach((order, idx) => {
+      let type = '';
+      let amount = '';
+      order.quantity > 0 ? type = 'Market Buy' : type = 'Market Sell';
+      order.quantity === 1 ? amount = 'share' : amount = 'shares';
+      contentArr.push(
+        <div key={idx} className="order-item-wrapper">
+          <div className="order-item-left">
+            <p className="order-item-top order-item-type">{type}</p>
+            <p className="order-item-bottom">{moment(order.created_at).format('LL')}</p>
           </div>
-        </a>
-      )
-    }
-  })
+          <div className="order-item-right">
+            <p className="order-item-top">{numeral(order.price).format('$0.00')}</p>
+            <p className="order-item-bottom">{Math.abs(order.quantity)} {amount}</p>
+          </div>
+        </div>
+      );
+    });
+    contentArr.reverse();
+  }
 
-  // const transactionsArr = Object.values(props.transactions).map((order, idx) => {
-  //   return (
-  //     <div key={idx}>
-  //       <p>{order.price}</p>
-  //       <p>{order.ticker}</p>
-  //       <p>{order.quantity}</p>
-  //       <p>{order.created_at}</p>
-  //     </div>
-  //   )
-  // })
+  // change to componentDidMount + add hide class to element
+  let orderHistory = '';
+  if (Object.values(props.transactions).length > 0) {
+    orderHistory = 'Order History' 
+  }
 
   return (
     <div className="show-page-feed-container">
-      <h3 className="news-show-header">News</h3>
-      <div>
-        {newsArr}
+      <div className="show-feed-headers-container">
+        <h3 
+          className="show-feed-header"
+          onClick={() => changeFeed('news')}
+        >News</h3>
+        <h3 
+          className="show-feed-header"
+          onClick={() => changeFeed('orders')}
+        >{orderHistory}</h3>
       </div>
-      {/* <div>
-        {transactionsArr}
-      </div> */}
+      <div>
+        {contentArr}
+      </div>
     </div>
   );
 }
@@ -58,18 +95,5 @@ const mapStateToProps = (state, ownProps) => ({
     news: state.entities.news,
     transactions: state.entities.transactions
 })
-
-// const mapDispatchToProps = dispatch => ({
-//     receiveProfile: (company) => dispatch(receiveProfile(company)),
-//     receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
-//     receiveNews: () => dispatch(receiveNews()),
-//     clearRealTimePrice: () => dispatch(clearRealTimePrice()),
-//     receiveFinancials: (ticker) => dispatch(receiveFinancials(ticker)),
-//     receiveDay: (ticker) => dispatch(receiveDay(ticker)),
-//     receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
-//     receiveHistorical: (ticker) => dispatch(receiveHistorical(ticker)),
-//     clearGraphPrices: () => dispatch(clearGraphPrices()),
-//     getTransactions: (creds) => dispatch(getTransactions(creds))
-// })
 
 export default connect(mapStateToProps, null)(ShowFeed);
