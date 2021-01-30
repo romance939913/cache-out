@@ -98,7 +98,7 @@ function ShowFeed(props) {
           id="orders-header"
           className="show-feed-header"
           onClick={() => changeFeed('orders')}
-        >Order History</h3>
+        >Transactions</h3>
       </div>
       <div>
         {contentArr}

@@ -24,13 +24,7 @@ function Signup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const user = {
-      username,
-      email,
-      password,
-      buying_power
-    }
-    props.signup(user);
+    props.signup(Object.assign({}, userInput));
     setTimeout(() => { props.clearSessionErrors() }, 3000);
   }
 

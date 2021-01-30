@@ -234,7 +234,11 @@ function GraphMain(props) {
     return null
   }
 
-  let data = filterGraphPrices();
+  let data = [];
+  if (Object.values(props.snapshots).length > 0) {
+    data = filterGraphPrices();
+  }
+  
 
   let totalEquity = 0;
   props.tickers.forEach((ticker, idx) => {
