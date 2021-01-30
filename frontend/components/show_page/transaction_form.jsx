@@ -104,6 +104,8 @@ class TransactionForm extends React.Component {
               this.props.createTranasaction(holding)
                 .then((res) => {
                   this.props.receiveSuccess()
+                  let orders = document.getElementById("orders-header");
+                  orders.classList.remove("hide");
                 })
             })
         })
@@ -118,6 +120,8 @@ class TransactionForm extends React.Component {
               this.props.createTranasaction(holding)
                 .then(res => {
                   this.props.receiveSuccess()
+                  let orders = document.getElementById("orders-header");
+                  orders.classList.remove("hide");
                 })
             })
         })

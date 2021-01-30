@@ -4,14 +4,17 @@
     align-items: center;
     border-bottom: 1px solid var(--border-bottoms);
     width: 800px; 
-    padding-bottom: 15px;
     border-bottom: 1px solid var(--border-bottoms);
 }
 
 .show-feed-header {
     font-size: 25px;
     cursor: pointer;
-    padding: 15px 0 10px 0;
+    padding: 15px 0 20px 0;
+}
+
+.show-feed-header:hover {
+    color: var(--trend-color)
 }
 
 .news-item-wrapper {

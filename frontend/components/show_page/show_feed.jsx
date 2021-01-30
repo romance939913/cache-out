@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import numeral from 'numeral';
 import moment from 'moment';
@@ -9,7 +9,29 @@ function ShowFeed(props) {
   const [ collapseNews, toggleNews ] = useState(true);
   const [ collapseOrders, toggleOrders ] = useState(true); 
 
+  useEffect(() => {
+    if (Object.values(props.transactions).length === 0) {
+      let orders = document.getElementById("orders-header");
+      orders.classList.add("hide")
+    } else {
+      changeUnderlining("news")
+    }
+  }, [])
+
+  function changeUnderlining(selection) {
+    let news = document.getElementById("news-header");
+    let orders = document.getElementById("orders-header");
+    if (selection === 'news') {
+      news.classList.add("selected");
+      orders.classList.remove("selected")
+    } else {
+      news.classList.remove("selected");
+      orders.classList.add("selected")
+    }
+  }
+
   function changeFeed(type) {
+    changeUnderlining(type)
     if (type === 'news') {
       toggleFeed(type)
     } else {
@@ -64,23 +86,19 @@ function ShowFeed(props) {
     contentArr.reverse();
   }
 
-  // change to componentDidMount + add hide class to element
-  let orderHistory = '';
-  if (Object.values(props.transactions).length > 0) {
-    orderHistory = 'Order History' 
-  }
-
   return (
     <div className="show-page-feed-container">
       <div className="show-feed-headers-container">
         <h3 
+          id="news-header"
           className="show-feed-header"
           onClick={() => changeFeed('news')}
         >News</h3>
         <h3 
+          id="orders-header"
           className="show-feed-header"
           onClick={() => changeFeed('orders')}
-        >{orderHistory}</h3>
+        >Order History</h3>
       </div>
       <div>
         {contentArr}
