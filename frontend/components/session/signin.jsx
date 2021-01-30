@@ -9,7 +9,7 @@ import { loginUser, clearSessionErrors, logoutUser } from '../../actions/session
 function Signin(props) {
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }), 
-    { username: '', password: '' });
+    { email: '', password: '' });
 
   const handleInput = event => {
     const name = event.target.name;
@@ -18,7 +18,7 @@ function Signin(props) {
   }
 
   function handleDemoSignin() {
-    let a = { username: 'demo', password: 'password' };
+    let a = { email: 'demo@email.com', password: 'password' };
     props.signin(a)
   }
 
@@ -29,37 +29,27 @@ function Signin(props) {
     setTimeout(() => { props.clearSessionErrors() }, 3000);
   }
 
-  function responseGoogle(response) {
-    const user = {
-      username: response.profileObj.givenName,
-      password: `g$${response.profileObj.googleId}`
-    }
-    props.signin(user);
-    setTimeout(() => { props.clearSessionErrors() }, 3000);
-  }
+  // function responseGoogle(response) {
+  //   const user = {
+  //     username: response.profileObj.givenName,
+  //     password: `g$${response.profileObj.googleId}`
+  //   }
+  //   props.signin(user);
+  //   setTimeout(() => { props.clearSessionErrors() }, 3000);
+  // }
 
-  function responseErrorGoogle(response) {
-    console.log("google response error");
-    console.log(response);
-  }
-
-  function responseFacebook(response) {
-    let firstName = response.name.split(" ")[0];
-    let user = {
-      username: firstName,
-      password: `f$${response.id}`
-    };
-    props.signin(user);
-    setTimeout(() => { props.clearSessionErrors() }, 3000);
-
-  }
+  // function responseErrorGoogle(response) {
+  //   console.log("google response error");
+  //   console.log(response);
+  // }
 
   const errorsArr = [];
   props.errors.map((error, i) => {
     errorsArr.push(
     <li className="session-errors" key={`error-${i}`}>
       {error}
-    </li>)
+    </li>
+    )
   })
 
   return(
@@ -70,12 +60,12 @@ function Signin(props) {
           <form onSubmit={handleSubmit}>
             <h3 className="signin-welcome-header">Welcome to Cache Out</h3>
             <br/>
-            <label className="signin-form-label">username
+            <label className="signin-form-label">email
               <input 
                 className="signin-input-field"
-                name="username"
+                name="email"
                 type="text"
-                value={userInput.username}
+                value={userInput.email}
                 onChange={(e) => handleInput(e)}
               />
               <br/>
@@ -97,7 +87,7 @@ function Signin(props) {
               <input type="submit" value="Sign In" className="signin-submit"/>
             </div>
           </form>
-          <div className="oauth-signin-container">
+          {/* <div className="oauth-signin-container">
             <GoogleLogin
               clientId="254946018512-0dqs14at73oms2h69u8ugpjoir67935g.apps.googleusercontent.com"
               buttonText="Login with Google Credentials"
@@ -113,19 +103,7 @@ function Signin(props) {
                 >Google Credentials</button>
               )}
             />
-            <FacebookLogin
-              appId="310290627021497"
-              autoLoad={false}
-              fields="name,email,picture"
-              callback={responseFacebook}
-              render={renderProps => (
-                <button
-                  className="oauth-signin facebook-signin"
-                  onClick={renderProps.onClick}
-                >Facebook Credentials</button>
-              )}
-            />
-          </div>
+          </div> */}
           <ul className="signin-errors-arr">
             <p className="placeholder-yo">yo</p>{errorsArr}
           </ul>

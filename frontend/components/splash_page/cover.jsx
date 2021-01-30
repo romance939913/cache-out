@@ -7,8 +7,8 @@ function SplashCover(props) {
   const [email, setEmail] = useState("");
 
   const handleDemoSignin = () => {
-    let a = { username: 'demo', password: 'password' };
-    props.login(a)
+    let demoUser = { email: 'demo@email.com', password: 'password' };
+    props.login(demoUser)
   }
 
   const update = (e) => {

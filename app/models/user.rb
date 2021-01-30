@@ -3,6 +3,7 @@ require 'open-uri'
 class User < ApplicationRecord
   attr_reader :password
 
+  validates :email, presence: true
   validates :password_digest, presence: true
   validates :buying_power, presence: true, numericality: { 
     greater_than_or_equal_to: 0, 
@@ -31,8 +32,8 @@ class User < ApplicationRecord
     dependent: :destroy
   })
 
-  def self.find_by_credentials(username, password) 
-    @user = User.find_by(username: username)
+  def self.find_by_credentials(email, password) 
+    @user = User.find_by(email: email)
     @user && @user.is_password?(password) ? @user : nil
   end
 
