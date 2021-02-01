@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import numeral from 'numeral';
@@ -66,20 +67,39 @@ function Feed(props) {
     Object.values(props.transactions).forEach((order, idx) => {
       let type = '';
       let amount = '';
+      let dynamicField = order.ticker;
       order.quantity > 0 ? type = 'Market Buy' : type = 'Market Sell';
       order.quantity === 1 ? amount = 'share' : amount = 'shares';
-      contentArr.push(
-        <div key={idx} className="order-item-wrapper">
-          <div className="order-item-left">
-            <p className="order-item-top order-item-type">{type}</p>
-            <p className="order-item-bottom">{moment(order.created_at).format('LL')}</p>
+      if (props.calledFrom === 'show') {
+        dynamicField = numeral(order.price).format('$0.00');
+        contentArr.push(
+          <div key={idx} className="order-item-wrapper">
+            <div className="order-item-left">
+              <p className="order-item-top order-item-type">{type}</p>
+              <p className="order-item-bottom">{moment(order.created_at).format('LL')}</p>
+            </div>
+            <div className="order-item-right">
+              <p className="order-item-top">{dynamicField}</p>
+              <p className="order-item-bottom">{Math.abs(order.quantity)} {amount}</p>
+            </div>
           </div>
-          <div className="order-item-right">
-            <p className="order-item-top">{numeral(order.price).format('$0.00')}</p>
-            <p className="order-item-bottom">{Math.abs(order.quantity)} {amount}</p>
-          </div>
-        </div>
-      );
+        );
+      } else {
+        contentArr.push(
+          <Link to={`show/${order.ticker}`}>
+            <div key={idx} className="order-item-wrapper">
+              <div className="order-item-left">
+                <p className="order-item-top order-item-type">{type}</p>
+                <p className="order-item-bottom">{moment(order.created_at).format('LL')}</p>
+              </div>
+              <div className="order-item-right">
+                <p className="order-item-top">{dynamicField}</p>
+                <p className="order-item-bottom">{Math.abs(order.quantity)} {amount}</p>
+              </div>
+            </div>
+          </Link>
+        );
+      }
     });
     contentArr.reverse();
   }
