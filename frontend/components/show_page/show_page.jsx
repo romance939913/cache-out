@@ -1,6 +1,6 @@
 import ShowPageGraph from './show_graph';
 import TransactionForm from './transaction_form';
-import Navbar from '../main/nav/nav';
+import Navbar from '../nav/nav';
 import Feed from '../feed';
 import React from 'react';
 import { connect } from 'react-redux';
