@@ -1,7 +1,7 @@
 import ShowPageGraph from './show_graph';
 import TransactionForm from './transaction_form';
 import Navbar from '../main/nav/nav';
-import ShowFeed from './show_feed';
+import Feed from '../feed';
 import React from 'react';
 import { connect } from 'react-redux';
 import numeral from 'numeral';
@@ -38,7 +38,6 @@ class ShowPage extends React.Component {
     }
     this.props.receiveProfile(this.props.ticker);
     this.props.receiveRealTimePrice(this.props.ticker);
-    this.props.receiveNews();
     this.props.receiveFinancials(this.props.ticker);
     this.props.clearGraphPrices();
     this.props.receiveDay(`${this.props.ticker}`);
@@ -55,7 +54,6 @@ class ShowPage extends React.Component {
       }
       this.props.receiveProfile(this.props.ticker);
       this.props.receiveRealTimePrice(this.props.ticker);
-      this.props.receiveNews();
       this.props.clearGraphPrices();
       this.props.receiveFinancials(this.props.ticker);
       this.props.receiveDay(`${this.props.ticker}`);
@@ -197,7 +195,9 @@ class ShowPage extends React.Component {
                     </div>
                   </div>
                 </ul>
-                <ShowFeed />
+                <Feed 
+                  calledFrom={'show'}
+                />
               </div>
               <div className="transaction-box">
                 <TransactionForm 

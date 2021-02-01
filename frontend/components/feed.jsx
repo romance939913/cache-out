@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import numeral from 'numeral';
 import moment from 'moment';
 
-function ShowFeed(props) {
+function Feed(props) {
   const [ newsOrOrders, toggleFeed ] = useState('news');
-  const [ collapseNews, toggleNews ] = useState(true);
-  const [ collapseOrders, toggleOrders ] = useState(true); 
 
   useEffect(() => {
     if (Object.values(props.transactions).length === 0) {
@@ -26,7 +24,7 @@ function ShowFeed(props) {
       orders.classList.remove("selected")
     } else {
       news.classList.remove("selected");
-      orders.classList.add("selected")
+      orders.classList.add("selected");
     }
   }
 
@@ -86,6 +84,11 @@ function ShowFeed(props) {
     contentArr.reverse();
   }
 
+  let secondHeader = 'All Transactions';
+  if (props.calledFrom === 'show') {
+    secondHeader = 'Order History';
+  }
+
   return (
     <div className="show-page-feed-container">
       <div className="show-feed-headers-container">
@@ -98,7 +101,7 @@ function ShowFeed(props) {
           id="orders-header"
           className="show-feed-header"
           onClick={() => changeFeed('orders')}
-        >Transactions</h3>
+        >{secondHeader}</h3>
       </div>
       <div>
         {contentArr}
@@ -107,11 +110,11 @@ function ShowFeed(props) {
   );
 }
 
-const mapStateToProps = (state, ownProps) => ({
-    currentUser: state.entities.users[state.session.id],
-    ticker: state.entities.ticker,
-    news: state.entities.news,
-    transactions: state.entities.transactions
+const mapStateToProps = (state) => ({
+  currentUser: state.entities.users[state.session.id],
+  ticker: state.entities.ticker,
+  news: state.entities.news,
+  transactions: state.entities.transactions
 })
 
-export default connect(mapStateToProps, null)(ShowFeed);
+export default connect(mapStateToProps, null)(Feed);

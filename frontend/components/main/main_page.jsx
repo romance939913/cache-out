@@ -1,6 +1,7 @@
 import React from 'react';
 import GraphMain from './graph_main';
 import Portfolio from './portfolio';
+import Feed from '../feed';
 import RingLoader from "react-spinners/RingLoader";
 import Holidays from 'date-holidays';
 import moment from 'moment';
@@ -65,6 +66,7 @@ class MainFeed extends React.Component {
             || Object.keys(this.props.graphPrices).length !== Object.keys(this.props.holdings).length
             || this.props.cash.length === 0
             || this.props.news.length === 0
+            || this.props.transactions.length === 0
             || JSON.stringify(this.props.snapshots) === '{}') {
             return (
                 <div>
@@ -80,30 +82,6 @@ class MainFeed extends React.Component {
                 </div>
             )
         }
-        
-        let newsArr = [];
-        this.props.news.forEach((ele, idx) => {
-            if (ele.urlToImage) {
-                let timePublished = moment(ele.publishedAt).fromNow()
-                newsArr.push(
-                    <a key={idx} target="_blank" href={`${ele.url}`}>
-                        <div className="news-item-wrapper">
-                            <img  className="news-item-image" src={`${ele.urlToImage}`} alt=""/>
-                            <div className="news-item-content">
-                                <div>
-                                    <p className="news-item-title">{ele.title}</p>
-                                    <p className="news-item-description">{ele.description}</p>
-                                </div>
-                                <div className="news-website-time-wrapper">
-                                    <p className="news-website-time">{ele.source.name}</p>
-                                    <p className="news-website-time">Published {timePublished}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                )
-            }
-        }) 
 
         let holidays = new Holidays('US');
         let hd = holidays.isHoliday(new Date());
@@ -125,10 +103,9 @@ class MainFeed extends React.Component {
                             <p className="markets-closed-message">
                                 {holidayMessage}
                             </p>
-                            <h1 className="news-header">Today's Top Stories</h1>
-                            <div id="news-container-feed" className="news-container">
-                                {newsArr}
-                            </div>
+                            <Feed 
+                                calledFrom={'main'}
+                            />
                         </div>
                         <div className="portfolio-wrapper">
                             <Portfolio 
@@ -151,7 +128,8 @@ const mapStateToProps = state => ({
     price: state.entities.price,
     news: state.entities.news,
     snapshots: state.entities.snapshots,
-    graphPrices: state.entities.graphPrices
+    graphPrices: state.entities.graphPrices,
+    transactions: state.entities.transactions
 });
 
 const mapDispatchToProps = dispatch => ({
