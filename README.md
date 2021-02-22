@@ -25,24 +25,25 @@ In order to render charts that display a user's portfolio performance over time,
 ```rb
 # 'snapshot'
 namespace :scheduler do
-  task :add_portfolio_snapshots_for_day => :environment do
-    puts "Adding day's portfolio snapshots..."
+  task :add_portfolio_snapshot => :environment do
     require 'date'
     require 'us_bank_holidays'
+    require 'time'
+    require 'open-uri'
+
+    puts "Adding day's portfolio snapshots..."
 
     today = Date.today
     next if today.weekend?
     next if today.bank_holiday?
   
-    time = Time.now
-    timeString = time.to_s
-    timeArr = timeString.split(" ")[1]
-    hour = timeArr.split(":")[0]
-    min = timeArr.split(":")[1]
-    next if hour.to_i < 13
-    next if hour.to_i > 19
+    rn = Time.now.getlocal('-05:00')
+    market_open = Time.new(rn.year,rn.month,rn.day,9,20,0, "-05:00")
+    market_close = Time.new(rn.year,rn.month,rn.day,16,00,0, "-05:00")
 
-    
+    next if rn < market_open
+    next if rn > market_close
+
     users = User.all
     users.each do |user| 
       balance = user.calculate_total_assets
@@ -55,14 +56,15 @@ end
 ```
 ```rb
   def calculate_total_assets
-    assets = []
     return buying_power if holdings.empty?
+    
+    prices = {}
+    all_holdings = holdings.map { |hold| hold.ticker }.join(",")
+    url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{all_holdings}?apikey=#{Rails.application.credentials.stockapi[:api_key]}"
+    securities = JSON.parse(open(url).read)
+    securities["companiesPriceList"].each { |sec| prices[sec['symbol']] = sec["price"] }
 
-    holdings.each do |holding| 
-      url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/#{holding.ticker}"
-      security = JSON.parse(open(url).read)
-      assets << security['price'] * holding.quantity
-    end
+    assets = holdings.map { |hold| prices[hold.ticker] * hold.quantity }
 
     assets.sum + buying_power
   end
