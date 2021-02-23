@@ -113,41 +113,37 @@ Aside from this minimizing the data returned from expensive external API calls, 
 
 ### Transaction Validation
 
-No Cheating for my users! Users are only allowed to purchase shares of stock if they have adequate buying power. Additionally, they are only allowed to sell, at max, as many shares as they own. 
+No Cheating for my users! You are only allowed to purchase the amount of shares you can afford with your current buying power. Additionally, you are only allowed to sell at maximum the number of shares you own of that particular security. 
 <br/>
 <br/>
 ![transaction-gif](app/assets/images/transaction.gif) 
 <br/>
 <br/>
-These checks are handled by the holdings controller on the back-end, and descriptive error messages will be rendered to the page if a user attempts to make an invalid transaction. The form will only submit and trigger a refresh of the page upon a valid transaction submitted by the user.
+These checks are handled at the model level of my Rails API, and descriptive error messages will be rendered to the page if a user attempts to make an invalid transaction. The form will only submit and trigger a transaction if all model validations pass and no errors are raised.
 
 ```rb
-    def create
-        if params[:holding][:buying_power].to_f >= 0
-            @user_records = Holding.where(user_id: params[:holding][:user_id])
-            @update_record = @user_records.find_by(ticker: params[:holding][:ticker])
-            if @update_record
-                new_amt = @update_record.quantity + params[:holding][:quantity].to_i
-                if new_amt > 0
-                    @update_record.update(quantity: new_amt)
-                    @holding = @update_record
-                    render :show
-                elsif new_amt == 0
-                    @update_record.destroy
-                else
-                    render json: ["not enough shares"], status: 422
-                end
-            else
-                @holding = Holding.new(holdings_params)
-                if @holding.quantity >= 0
-                    @holding.save
-                    render :show
-                else
-                    render json: ["not enough shares"], status: 422
-                end
-            end
-        end
-    end
+class Holding < ApplicationRecord
+  validates :ticker, :quantity, :user_id, presence: true
+  validates :quantity, numericality: { 
+    greater_than_or_equal_to: 0, 
+    message: "not enough shares" 
+  }
+
+  # more methods ...
+end
+
+class User < ApplicationRecord
+  validates :email, presence: true
+  validates :password_digest, presence: true
+  validates :buying_power, presence: true, numericality: { 
+    greater_than_or_equal_to: 0, 
+    message: "not enough cash" 
+  }
+  validates :username, :session_token, uniqueness: true, presence: true
+  validates :password, length: { minimum: 6, allow_nil: true }
+
+  # many more methods....
+end
 ```
 
 ### Search
