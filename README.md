@@ -82,31 +82,33 @@ Upon visiting a show page, a variety of API calls are made to fetch the necessar
 * [News API](https://newsapi.org/) - 1 API call
 
 #### Dynamic Chart Rendering
-Charts are dynamic and interactive, allowing users to switch between ranges of **1D**, **1W**, **1M**, **3M**, **1Y**, and **5Y** for individual stocks or their overall portfolio. Buttons for each range appear below the chart with click handlers installed, which serve to update the React component's local state with the relevant chunk of data. The `handleFetch` function takes in a range and determines which thunk actions to trigger to fetch the desired data. 
+Charts are dynamic and interactive, allowing users to switch between view ranges of **1D**, **1W**, **1M**, **3M**, **1Y**, and **5Y** for individual securities or their overall portfolio. Buttons for each range appear below the chart with click handlers installed, which serve to update the component's local state with the relevant chunk of data. 
+<br/>
+All of the necessary data is requested when the parent component mounts and child components are not rendered until all the data is present. This makes elegant transitions between pages and graph data rerenders.  
 
 ```js
-    handleFetch(time) {
-        switch (time) {
-            case "1d":
-                this.props.receiveDay(`${this.props.ticker}`);
-                break;
-            case "1w":
-                this.props.receiveWeek(`${this.props.ticker}`);
-                break;
-            case "1m":
-                this.props.receiveHistorical(`${this.props.ticker}`);
-                break;
-            case "3m":
-                this.props.receiveHistorical(`${this.props.ticker}`);
-                break;
-            case "1y":
-                this.props.receiveHistorical(`${this.props.ticker}`);
-                break;
-            case "5y":
-                this.props.receiveHistorical(`${this.props.ticker}`);
-                break;
-        }
+class ShowPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = this.props.profile;
+    this.showFinancials = this.showFinancials.bind(this);
+  }
+
+  componentDidMount() {
+    let creds = {
+      user_id: this.props.currentUser.id,
+      ticker: this.props.ticker
     }
+    this.props.receiveProfile(this.props.ticker);
+    this.props.receiveRealTimePrice(this.props.ticker);
+    this.props.receiveFinancials(this.props.ticker);
+    this.props.receiveDay(`${this.props.ticker}`);
+    this.props.receiveWeek(this.props.ticker);
+    this.props.receiveHistorical(this.props.ticker);
+    this.props.getTransactions(creds);
+  }
+
+  // many more class methods... 
 ```
 
 Aside from this minimizing the data returned from expensive external API calls, this switch method helps organize the applications Redux state into a single "graphPrices" slice. If other front end developers were to work on this app with me, it would be very easy to navigate.
