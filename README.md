@@ -10,7 +10,8 @@ Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 * Interactive charts displaying a stock's price fluctuation as well as the user's portfolio balance fluctuation over time
 * Ability to simulate real stock-market trades by buying and selling shares at the most recent market price
 * Ability to search stocks by both their ticker symbol and Company name
-* Relevant news displayed for the general market on home page, and for specific stock on the stock's show page
+* Relevant news displayed for the general market on home page
+* A log of the user's overall and security-specific transaction history to see how well certain investments aged
 
 ## Portfolio Page
 Once a User logs in, they are directed to the portfolio page, which displays a chart showing their portfolio valuation over time and total current assets (total cash + shares held * their current price) above. A list of their holdings is displayed on the right, and below the graph is a financial news feed for the day. 
@@ -109,6 +110,7 @@ class ShowPage extends React.Component {
   }
 
   // many more class methods... 
+}
 ```
 
 Aside from this minimizing the data returned from expensive external API calls, this switch method helps organize the applications Redux state into a single "graphPrices" slice. If other front end developers were to work on this app with me, it would be very easy to navigate.
