@@ -105,24 +105,19 @@ These checks are handled at the model level of my Rails API, and descriptive err
 
 ```rb
 class Holding < ApplicationRecord
-  validates :ticker, :quantity, :user_id, presence: true
   validates :quantity, numericality: { 
     greater_than_or_equal_to: 0, 
     message: "not enough shares" 
   }
 
-  # more methods ...
+  # many more methods ...
 end
 
 class User < ApplicationRecord
-  validates :email, presence: true
-  validates :password_digest, presence: true
   validates :buying_power, presence: true, numericality: { 
     greater_than_or_equal_to: 0, 
     message: "not enough cash" 
   }
-  validates :username, :session_token, uniqueness: true, presence: true
-  validates :password, length: { minimum: 6, allow_nil: true }
 
   # many more methods....
 end
