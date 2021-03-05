@@ -85,6 +85,7 @@ Upon visiting a show page, a variety of API calls are made to fetch the necessar
   * Company Profile (symbol, company name, CEO, industry, etc.)
   * Real Time asset price which continually updates
   * Intraday Price Data (5 minutes historical prices with volume)
+  * Company Financials
 * [News API](https://newsapi.org/) - 1 API call
 
 #### Dynamic Chart Rendering
