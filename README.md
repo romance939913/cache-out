@@ -56,6 +56,7 @@ namespace :scheduler do
 end
 ```
 ```rb
+class User < ApplicationRecord
   def calculate_total_assets
     return buying_power if holdings.empty?
     
@@ -69,6 +70,9 @@ end
 
     assets.sum + buying_power
   end
+
+  # many more methods....
+end
 ```
 ### Show Page
 An Security show page contains current and historical price information data, general company information, relevant news, and allows users to purchase and sell shares of the stock at the most recent market price. 
