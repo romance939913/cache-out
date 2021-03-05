@@ -75,7 +75,7 @@ class User < ApplicationRecord
   # many more methods....
 end
 ```
-### Show Page
+## Show Page
 An Security show page contains current and historical price information data, general company information, relevant news, and allows users to purchase and sell shares of the stock at the most recent market price. 
 
 #### Fetching Security Data
@@ -93,7 +93,7 @@ Charts are dynamic and interactive, allowing users to switch between view ranges
 <br/>
 All of the necessary data is requested when the parent component mounts. Child components do not render until all the data is present. This makes for elegant transitions between pages and graph data rerenders.  
 
-### Transaction Validation
+#### Transaction Validation
 
 No Cheating for my users! You are only allowed to purchase the amount of shares you can afford with your current buying power. Additionally, you are only allowed to sell at maximum the number of shares you own of that particular security. 
 <br/>
