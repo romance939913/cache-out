@@ -23,7 +23,7 @@ Once a User logs in, they are directed to the portfolio page, which displays a c
 <br/>
 <br/>
 #### Portfolio Snapshots
-In order to render the main chart, 'snapshots' of the users total portfolio balance are taken throughout the day using Rails Rake tasks (a utility function called at the command line). **add_portfolio_snapshot** This function is called every 10 minutes by a service called Heroku scheduler for every single user. **calculate_total_assets** calculates Portfolio balance by multiplying the quantity of shares owned of a particular security by its current price, and doing that for every single holding + cash. Together, these functions construct the data necessary to show a portfolio performance over time for all users. See below:
+In order to render the main chart, "snapshots" of the users total portfolio balance are taken throughout the day using Rails Rake tasks (a utility function called at the command line). **add_portfolio_snapshot** This function is called every 10 minutes by a service called Heroku scheduler and create a new "snapshot" for every user. **calculate_total_assets** calculates Portfolio balance by multiplying the quantity of shares owned of a particular security by its current price, and doing that for every single holding + cash. Together, these functions construct the data necessary to show a portfolio performance over time for all users. See below:
 
 ```rb
 namespace :scheduler do
