@@ -4,7 +4,7 @@ Cache Out is my own rendition of the popular securities trading app Robinhood. N
 
 Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 
-****** Core functionality of this app will stop working on 2/24/2021 because I'm terminating FMP API services as well as Heroku scheduler ******
+***** Core functionality of this app will stop working on 2/24/2021 because I'm terminating Heroku scheduler and FMP API services *****
 
 ## Features
 * Secure frontend to backend user authentication using the gem BCrypt
