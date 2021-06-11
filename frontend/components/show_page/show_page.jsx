@@ -106,7 +106,14 @@ class ShowPage extends React.Component {
         </div>
       )
     } 
-      
+
+    let exchangeVar = null;
+    if (this.props.profile.exchange === 'NEW YORK STOCK EXCHANGE, INC.'){
+      exchangeVar = 'NYSE'
+    } else {
+      exchangeVar = 'Nasdaq'
+    }
+
     return (
       <div>
         <Navbar />
@@ -147,7 +154,7 @@ class ShowPage extends React.Component {
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Exchange</h2>
-                      <li>${this.props.profile.exchange}</li>
+                      <li>${exchangeVar}</li>
                     </div>
                     <div className="show-page-attr-item">
                       <h2>Location</h2>
@@ -175,7 +182,7 @@ class ShowPage extends React.Component {
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>EPS</h2>
-                      <li>${this.props.financials.eps}</li>
+                      <li>{numeral(this.props.financials.eps).format('$0.00')}</li>
                     </div>
                     <div className="show-page-attr-item financials hide">
                       <h2>Net Income</h2>
