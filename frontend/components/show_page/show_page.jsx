@@ -5,12 +5,10 @@ import Feed from '../feed';
 import React from 'react';
 import { connect } from 'react-redux';
 import numeral from 'numeral';
-import moment from 'moment';
 import RingLoader from "react-spinners/RingLoader";
 import {
   receiveProfile,
   receiveRealTimePrice,
-  clearRealTimePrice,
   receiveFinancials
 } from '../../actions/security_actions';
 import {
@@ -77,10 +75,6 @@ class ShowPage extends React.Component {
       })
       toggleFinancials.innerText = "show more"
     }
-  }
-
-  componentWillUnmount() {
-    this.props.clearRealTimePrice();
   }
 
   render() {
@@ -236,7 +230,6 @@ const mapDispatchToProps = dispatch => ({
   receiveProfile: (company) => dispatch(receiveProfile(company)),
   receiveRealTimePrice: (ticker) => dispatch(receiveRealTimePrice(ticker)),
   receiveNews: () => dispatch(receiveNews()),
-  clearRealTimePrice: () => dispatch(clearRealTimePrice()),
   receiveFinancials: (ticker) => dispatch(receiveFinancials(ticker)),
   receiveDay: (ticker) => dispatch(receiveDay(ticker)),
   receiveWeek: (ticker) => dispatch(receiveWeek(ticker)),
