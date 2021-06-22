@@ -1,34 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
 
-class NavSearchForm extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      query: ''
-    }
-    this.handleClearForm = this.handleClearForm.bind(this);
-    this.update = this.update.bind(this);
-    this.filterSuggestions = this.filterSuggestions.bind(this);
-  }
-    
-  handleClearForm() {
-    this.setState({ query: ''});
+function NavSearch(props) {    
+  const [ query, setQuery ] = useState("");
+
+  function handleClearForm() {
+    setQuery('');
   }
 
-  update(field) {
-    return e => {
-      this.setState({ 
-        [field]: e.currentTarget.value,
-      })
-    }
+  function updateQuery(e) {
+    setQuery(e.currentTarget.value)
   }
 
-  filterSuggestions() {
+  function filterSuggestions() {
     let suggestions = [];
-    let companies = Object.values(this.props.stocks);
-    let userInput = this.state.query.toUpperCase();
+    let companies = Object.values(props.stocks);
+    let userInput = query.toUpperCase();
 
     if (userInput.length > 0) {
       companies.forEach((ticker, idx) => {
@@ -39,7 +27,7 @@ class NavSearchForm extends React.Component {
               <Link
                 to={`/show/${ticker.symbol}`}
                 className="suggestion-item-link"
-                onClick={this.handleClearForm}>
+                onClick={handleClearForm}>
                 <div className="suggestion-item">
                   <p className="suggestion-ticker">{ticker.symbol}</p>
                   <p>{ticker.name}</p>
@@ -50,16 +38,18 @@ class NavSearchForm extends React.Component {
         }
       })
     }
+
     suggestions = suggestions.slice(0, 6)
-    if (this.props.stocks[userInput]) {
+    
+    if (props.stocks[userInput]) {
       suggestions[0] =
         (<div key={10000}>
-          <Link to={`/show/${this.props.stocks[userInput].symbol}`}
+          <Link to={`/show/${props.stocks[userInput].symbol}`}
             className="suggestion-item-link"
-            onClick={this.handleClearForm}>
+            onClick={handleClearForm}>
             <li className="suggestion-item">
-              <p className="suggestion-ticker">{this.props.stocks[userInput].symbol}</p>
-              <p>{this.props.stocks[userInput].name}</p>
+              <p className="suggestion-ticker">{props.stocks[userInput].symbol}</p>
+              <p>{props.stocks[userInput].name}</p>
             </li>
           </Link>
         </div>)
@@ -67,28 +57,26 @@ class NavSearchForm extends React.Component {
     return suggestions;
   }
 
-  render() {
-    let suggestions = this.filterSuggestions();
+  let suggestions = filterSuggestions();
 
-    return (
-      <form className="search-form">
-        <input 
-          className="search-field"
-          type="search"
-          placeholder="Search"
-          value={this.state.query}
-          onChange={this.update("query")}
-        />
-        <ul className="suggestion-box">
-          {suggestions}
-        </ul>
-      </form>
-    );
-  }
+  return (
+    <form className="search-form">
+      <input 
+        className="search-field"
+        type="search"
+        placeholder="Search"
+        value={query}
+        onChange={updateQuery}
+      />
+      <ul className="suggestion-box">
+        {suggestions}
+      </ul>
+    </form>
+  );
 }
 
 const mapStateToProps = state => ({
   stocks: state.entities.stocks
 })
 
-export default connect(mapStateToProps, null)(NavSearchForm);
+export default connect(mapStateToProps, null)(NavSearch);
