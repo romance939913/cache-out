@@ -98,7 +98,7 @@ function ContentAndFooter() {
           <a target="_blank" href="https://angel.co/u/brennan-romance">
             <img className="info-icon" src={window.angellist_pic} alt="" />
           </a>
-          <a target="_blank" href="http://www.brennanromance.com">
+          <a target="_blank" href="https://romance939913.github.io/personal-site/">
             <img className="info-icon" src={window.info_pic} alt="" />
           </a>
         </div>

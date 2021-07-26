@@ -18,10 +18,10 @@ const Header = () => (
           <p className="nav-social-links">Linkedin</p>
         </a>
         <a target="_blank" href="https://github.com/romance939913/">
-          <p className="nav-social-links">Github profile</p>
+          <p className="nav-social-links">GitHub</p>
         </a>
-        <a target="_blank" href="https://angel.co/u/brennan-romance">
-          <p className="nav-social-links">AngelList</p>
+        <a target="_blank" href="https://romance939913.github.io/personal-site/">
+          <p className="nav-social-links">Personal Site</p>
         </a>
       </div>
       <div className="splash-navigation-bar-right-side">
