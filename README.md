@@ -4,6 +4,8 @@ Cache Out is my own rendition of the popular securities trading app Robinhood. N
 
 Here's a link to the [live site](https://cache-out.herokuapp.com/#/)
 
+******* Live site will stop working on 12/19/2021. Discontinuing Stock Market API (FMP) support *******
+
 ## Features
 * Secure frontend to backend user authentication using the gem BCrypt
 * Real-time and historical price data of all stocks traded on the NASDAQ and NYSE exchanges
