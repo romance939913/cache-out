@@ -1,13 +1,13 @@
 export const fetchNasdaq = () => (
     $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/search?query=&limit=&exchange=NASDAQ&apikey=${window.stockapikey}`,
+        url: `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=${window.stockapikey}`,
         method: "GET"
     })
 )
 
-export const fetchNYSE = () => (
+export const fetchSNP = () => (
     $.ajax({
-        url: `https://financialmodelingprep.com/api/v3/search?query=&limit=&exchange=nyse&apikey=${window.stockapikey}`,
+        url: `https://financialmodelingprep.com/api/v3/sp500_constituent?apikey=${window.stockapikey}`,
         method: "GET"
     })
 );
