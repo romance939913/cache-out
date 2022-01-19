@@ -11,9 +11,9 @@ namespace :scheduler do
     next if today.weekend?
     next if today.bank_holiday?
   
-    rn = Time.now.getlocal('-04:00')
-    market_open = Time.new(rn.year,rn.month,rn.day,9,20,0, "-04:00")
-    market_close = Time.new(rn.year,rn.month,rn.day,16,00,0, "-04:00")
+    rn = Time.now.getlocal('-05:00')
+    market_open = Time.new(rn.year,rn.month,rn.day,9,20,0, "-05:00")
+    market_close = Time.new(rn.year,rn.month,rn.day,16,00,0, "-05:00")
 
     next if rn < market_open
     next if rn > market_close
